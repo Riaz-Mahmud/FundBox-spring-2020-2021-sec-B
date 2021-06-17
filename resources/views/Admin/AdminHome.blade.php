@@ -4,7 +4,7 @@
 
 <body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
-    @include('Layout.OrgMenu')
+    @include('Layout.AdminMenu')
 
     <!-- BEGIN: Content-->
     <div class="app-content content">

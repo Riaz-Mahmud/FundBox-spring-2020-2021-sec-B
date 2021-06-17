@@ -17,13 +17,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('/createAdmin', function () {
-    return view('Admin.createAdmin');
+Route::get('/admin/dashboard', function () {
+    return view('Admin.AdminHome')
+            ->with('title', 'Home Admin')
+            ->with('date', date('d-M-Y'));
 });
 
-Route::get('/adminEvent', function () {
-    return view('Admin.adminEvent');
+Route::get('/admin/createAdmin', function () {
+    return view('Admin.createAdmin')->with('title', 'Create Admin | Admin');
+});
+
+Route::get('/admin/manageAdmin', function () {
+    return view('Admin.ManageAdmin')->with('title', 'Create Admin | Admin');
+});
+
+Route::get('/admin/adminEvent', function () {
+    return view('Admin.adminEvent')->with('title', 'Create Admin Event | Admin');
 });
 Route::get('/orgEvent', function () {
     return view('Admin.createOrgEvent');

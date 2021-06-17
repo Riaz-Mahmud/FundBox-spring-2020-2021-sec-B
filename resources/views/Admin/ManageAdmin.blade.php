@@ -4,7 +4,7 @@
 
 <body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
-    @include('Layout.OrgMenu')
+    @include('Layout.AdminMenu')
 
     <!-- BEGIN: Content-->
     <div class="app-content content">
@@ -56,8 +56,7 @@
                                                     <th style="width:5%;">SN</th>
                                                     <th>Image</th>
                                                     <th>Name</th>
-                                                    <th>Amount</th>
-                                                    <th>Details</th>
+                                                    <th>Email</th>
                                                     <th>Status</th>
                                                     <th>Options</th>
                                                 </tr>
@@ -71,15 +70,35 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <b>Event Name</b>
+                                                        <b>Admin Name</b>
                                                     </td>
                                                     <td>
-                                                        10000.0 tk
+                                                        admin@mail.com
+                                                    </td>
+                                                    <td class="text-center" style="width: 5%">
+                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
+                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch" value="0" onclick="statusUpdate()">
+                                                            <label class="custom-control-label" for=""></label>
+                                                        </div>
                                                     </td>
                                                     <td>
-                                                        Event Details
+                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateEvent()">Edit</button>
+                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Delete</button>
                                                     </td>
-                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>
+                                                        <div class="osahan-slider-item" style="background-color:#fff;">
+                                                            <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <b>Admin Name</b>
+                                                    </td>
+                                                    <td>
+                                                        admin@mail.com
+                                                    </td>
                                                     <td class="text-center" style="width: 5%">
                                                         <div class="custom-control custom-switch custom-control-inline mb-1">
                                                             <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch" value="0" onclick="statusUpdate()">
