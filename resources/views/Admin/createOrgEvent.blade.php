@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script> --}}
+
 </head>
 <body>
-  {{-- Navbar --}}
-<nav class="navbar navbar-expand-lg navbar-light p-3 mb-2 bg-success text-white">
+    <nav class="navbar navbar-expand-lg navbar-light p-3 mb-2 bg-success text-white">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">FundBox</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,41 +38,36 @@
   </div>
 </nav>
 
+<h1 class="container p-3 mb-2 bg-secondary text-white">Create Event for Organisation</h1>
     <div class="container">
-<form class="row g-3">
-  <div class="col-md-6">
-    <label for="adminName" class="form-label">Name</label>
-    <input type="text" class="form-control" id="adminName">
+        <form action="">
+    <div class="mb-3">
+  <label for="eventName" class="form-label">Event Name</label>
+  <input type="text" class="form-control" id="inputEventName" >
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Event description</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+</div>
+<label for="customRange1" class="form-label">Upload Image</label>
+<div class="input-group mb-3">
+    
+  <input type="file" class="form-control" id="inputGroupFile02">
+  <label class="input-group-text" for="inputGroupFile02">Upload</label>
+</div>
+<div class="row g-3">
+  <div class="col">
+      
+    <input type="text" class="form-control" placeholder="Starting Date" aria-label="Starting Date">
   </div>
-  <div class="col-md-6">
-    <label for="adminEmail" class="form-label">Email</label>
-    <input type="email" class="form-control" id="adminEmail">
+  <div class="col">
+    <input type="text" class="form-control" placeholder="Ending Date" aria-label="Ending Date">
   </div>
-  <div class="col-12">
-    <label for="adminPassword" class="form-label">Password</label>
-    <input type="password" class="form-control" id="adminPassword">
-  </div>
-  <div class="col-12">
-    <label for="adminConfirm" class="form-label">Confirm Password</label>
-    <input type="password" class="form-control" id="adminConfirm" >
-  </div>
-  <div class="col-md-6">
-    <label for="inputContact" class="form-label">Contact</label>
-    <input type="text" class="form-control" id="inputContact">
-  </div>
-  <div class="col-12">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Check me out
-      </label>
-    </div>
-  </div>
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">Create Admin</button>
-  </div>
+</div>
+<label for="customRange1" class="form-label">Target Donation</label>
+<input type="range" class="form-range" id="customRange1">
+<button type="button" class="btn btn-success btn-lg">Create Event</button>
 </form>
 </div>
-
 </body>
 </html>

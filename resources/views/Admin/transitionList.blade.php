@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script> --}}
+
 </head>
 <body>
-  {{-- Navbar --}}
-<nav class="navbar navbar-expand-lg navbar-light p-3 mb-2 bg-success text-white">
+    <nav class="navbar navbar-expand-lg navbar-light p-3 mb-2 bg-success text-white">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">FundBox</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,41 +38,46 @@
   </div>
 </nav>
 
-    <div class="container">
-<form class="row g-3">
-  <div class="col-md-6">
-    <label for="adminName" class="form-label">Name</label>
-    <input type="text" class="form-control" id="adminName">
-  </div>
-  <div class="col-md-6">
-    <label for="adminEmail" class="form-label">Email</label>
-    <input type="email" class="form-control" id="adminEmail">
-  </div>
-  <div class="col-12">
-    <label for="adminPassword" class="form-label">Password</label>
-    <input type="password" class="form-control" id="adminPassword">
-  </div>
-  <div class="col-12">
-    <label for="adminConfirm" class="form-label">Confirm Password</label>
-    <input type="password" class="form-control" id="adminConfirm" >
-  </div>
-  <div class="col-md-6">
-    <label for="inputContact" class="form-label">Contact</label>
-    <input type="text" class="form-control" id="inputContact">
-  </div>
-  <div class="col-12">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Check me out
-      </label>
-    </div>
-  </div>
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">Create Admin</button>
-  </div>
-</form>
-</div>
+
+
+    <table class="table table-success table-striped">
+   <thead>
+      <tr>
+        <th>Events</th>
+        <th>Organisation</th>
+        <th>Donated </th>
+        <th>Donated amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Event 1</td>
+        <td>ORG 1</td>
+        <td>723</td>
+        <td>13566$</td>
+      </tr>
+      <tr>
+        <td>Event 2</td>
+        <td>ORG 2</td>
+        <td>256</td>
+        <td>5000$</td>
+    </tr>
+      <tr>
+        <td>Event 3</td>
+        <td>ORG 3</td>
+        <td>290</td>
+        <td>9056$</td>
+      </tr>
+            <tr>
+        <td>Event 4</td>
+        <td>ORG 4</td>
+        <td>123</td>
+        <td>6980$</td>
+      </tr>
+    </tbody>
+</table>
+</table>
+
 
 </body>
 </html>
