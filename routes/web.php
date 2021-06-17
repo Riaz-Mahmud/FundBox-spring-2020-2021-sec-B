@@ -31,3 +31,13 @@ Route::get('/org/dashboard', function () {
             ->with('title', 'Home Organization')
             ->with('date', date('d-M-Y'));
 });
+
+Route::get('/org/createEvent', function () {
+    return view('Organization.CreateEvent')
+            ->with('title', 'Create Event | Organization');
+});
+
+Route::get('/org/manageEvent', function () {
+    return view('Organization.ManageEvent')
+            ->with('title', 'Manage Event | Organization');
+});

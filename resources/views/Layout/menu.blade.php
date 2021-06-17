@@ -92,15 +92,15 @@
 
             <li class=" navigation-header"><span>Event</span></li>
             
-            <li class="nav-item ">
-                <a class="nav-hover" href="#">
+            <li class="nav-item @if(url('/org/createEvent') == Request::url()) active @endif">
+                <a class="nav-hover" href="{{ url('/org/createEvent') }}">
                     <i class="bx bxs-city mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Create Event</span>
                 </a>
             </li>
 
-            <li class="nav-item ">
-                <a class="nav-hover" href="#">
+            <li class="nav-item @if(url('/org/manageEvent') == Request::url()) active @endif">
+                <a class="nav-hover" href="/org/manageEvent">
                     <i class="bx bxs-city mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Manage Event</span>
                 </a>
