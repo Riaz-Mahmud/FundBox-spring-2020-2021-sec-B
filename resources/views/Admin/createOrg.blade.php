@@ -44,53 +44,47 @@
                         @endif
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Create New Admin</h4>
+                                <h1 class="container p-3 mb-2 bg-secondary text-white">Create Organisation</h1>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
                                     <form action="#" enctype="multipart/form-data" method="POST">
                                         @csrf
                                         <div class="row">
-                                            <h1 class="container p-3 mb-2 bg-secondary text-white">Block Organisation</h1>
-  
-    <table class="table table-success table-striped">
-   <thead>
-      <tr>
-        <th>Events</th>
-        <th>Organisation</th>
-        <th>Donated </th>
-        <th>Donated amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Event 1</td>
-        <td>ORG 1</td>
-        <td>723</td>
-        <td>13566$</td>
-      </tr>
-      <tr>
-        <td>Event 2</td>
-        <td>ORG 2</td>
-        <td>256</td>
-        <td>5000$</td>
-    </tr>
-      <tr>
-        <td>Event 3</td>
-        <td>ORG 3</td>
-        <td>290</td>
-        <td>9056$</td>
-      </tr>
-            <tr>
-        <td>Event 4</td>
-        <td>ORG 4</td>
-        <td>123</td>
-        <td>6980$</td>
-      </tr>
-    </tbody>
-</table>
-</table>
+                                            <div class="col-12 col-sm-12 col-lg-12">
+                                                <input type="text" class="form-control" name="org_name" placeholder="Organisation Name" required>
+                                            </div>
+                                            
+                                             <div class="col-12 col-sm-12" style="margin-top:10px">
+                                                <fieldset class="form-group">
+                                                    <textarea class="form-control" name="org_details" id="basicTextarea" rows="3" placeholder="Details" required></textarea>
+                                                </fieldset>
+                                            </div>
 
+                                            <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px;">
+                                                <fieldset class="form-group">
+                                                    <select name="org_type" class="form-control" id="basicSelect" required>
+                                                        <option disabled selected>Select Type</option>
+                                                        <option value="1">Blood donation</option>
+                                                        <option value="2">Medical</option>
+                                                        <option value="2">Social</option>
+                                                        
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                        
+                                            <div class="col-12 col-sm-12">
+                                                <fieldset class="form-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="org_image">
+                                                        <label class="custom-file-label" for="inputGroupFile02">Choose Organisation image</label>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                            
+                                            <div class="col-12 col-sm-12" style="margin-top: 10px">
+                                                <button type="submit" class="btn btn-block btn-success glow">Add</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

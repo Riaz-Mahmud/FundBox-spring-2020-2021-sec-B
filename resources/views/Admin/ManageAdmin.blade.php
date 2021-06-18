@@ -64,7 +64,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>1</td>
-                                                    <td>
+                                                    <td> 
                                                         <div class="osahan-slider-item" style="background-color:#fff;">
                                                             <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
                                                         </div>
