@@ -51,18 +51,29 @@
                                     <form action="#" enctype="multipart/form-data" method="POST">
                                         @csrf
                                         <div class="row">
-                                            <div class="col-12 col-sm-12 col-lg-6">
-                                                <input type="text" class="form-control" name="admin_name" placeholder="Name" required>
-                                            </div>
-                                            <div class="col-12 col-sm-12 col-lg-6">
-                                                <input type="text" class="form-control" name="admin_email" placeholder="email" required>
+                                            <div class="col-12 col-sm-12 col-lg-12">
+                                                <input type="text" class="form-control" name="Admin_name" placeholder="Name" required>
                                             </div>
 
-                                            <div class="col-12 col-sm-12 col-lg-6" style="margin-top: 10px">
-                                                <input type="password" class="form-control" name="admin_name" placeholder="Password" required>
+                                            <div class="col-12 col-sm-12 col-lg-12" style="margin-top:10px">
+                                                <input type="number" class="form-control" name="Admin_email" placeholder="Email" required>
                                             </div>
-                                            <div class="col-12 col-sm-12 col-lg-6" style="margin-top: 10px">
-                                                <input type="password" class="form-control" name="admin_email" placeholder="Confirm Password" required>
+
+                                           <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px">
+                                                <input type="password" class="form-control" name="Admin_password" placeholder="Password" required>
+                                            </div>
+
+                                            <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px">
+                                                <input type="password" class="form-control" name="Admin_confirmPassword" placeholder="Confirm Password" required>
+                                            </div>
+
+                                            <div class="col-12 col-sm-12"  style="margin-top:10px">
+                                                <fieldset class="form-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="promo_image">
+                                                        <label class="custom-file-label" for="inputGroupFile02">Choose Event image</label>
+                                                    </div>
+                                                </fieldset>
                                             </div>
                                             
                                             <div class="col-12 col-sm-12" style="margin-top: 10px">

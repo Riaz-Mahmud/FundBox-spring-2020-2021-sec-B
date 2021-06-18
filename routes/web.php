@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+// **************************ADMIN*******************************
 Route::get('/admin/dashboard', function () {
     return view('Admin.AdminHome')
             ->with('title', 'Home Admin')
@@ -34,13 +34,20 @@ Route::get('/admin/manageAdmin', function () {
 Route::get('/admin/adminEvent', function () {
     return view('Admin.adminEvent')->with('title', 'Create Admin Event | Admin');
 });
+Route::get('/admin/createOrgEvent', function () {
+    return view('Admin.createOrgEvent')->with('title', 'Create Organisation Event | Admin');
+});
+
+Route::get('/admin/manageEvent', function () {
+    return view('Admin.manageEvent')->with('title', 'Manage All Event | Admin');
+});
+
+// **************************ORGANISATION*******************************
+
 Route::get('/orgEvent', function () {
     return view('Admin.createOrgEvent');
 });
 
-Route::get('/verifyEvent',function(){
-    return view('Admin.verifyEvent');
-});
 
 Route::get('/blockOrg',function(){
     return view('Admin.blockOrg');
@@ -71,3 +78,6 @@ Route::get('/org/manageEvent', function () {
             ->with('title', 'Manage Event | Organization');
 });
 
+Route::get('/test',function(){
+    return view('Admin.Test');
+});

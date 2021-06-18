@@ -106,14 +106,27 @@
                 </a>
             </li>
             
-            <li class=" navigation-header"><span>Refund</span></li>
-            <li class="nav-item">
-                <a href="#">
+            <li class=" navigation-header"><span>Event</span></li>
+            <li class="nav-item @if(url('/admin/adminEvent') == Request::url()) active @endif">
+                <a class="nav-hover" href="/admin/adminEvent">
                     <i class="bx bxs-bar-chart-alt-2 mr-50"></i>
-                    <span class="menu-title" data-i18n="Category Manager">Manage Refund</span>
+                    <span class="menu-title" data-i18n="Category Manager">Create Event for Admin</span>
                 </a>
             </li>
-
+                        <li class="nav-item @if(url('/admin/createOrgEvent') == Request::url()) active @endif">
+                <a class="nav-hover" href="/admin/createOrgEvent">
+                    <i class="bx bxs-bar-chart-alt-2 mr-50"></i>
+                    <span class="menu-title" data-i18n="Category Manager">Create organisation Event</span>
+                </a>
+ 
+           </li>  
+           
+           <li class="nav-item">
+                <a href="#">
+                    <i class="bx bxs-bar-chart-alt-2 mr-50"></i>
+                    <span class="menu-title" data-i18n="Category Manager">Manage Events</span>
+                </a>
+            </li>
             <li class=" navigation-header"><span>Volunteer Event</span></li>
             <li class="nav-item ">
                 <a class="nav-hover" href="#">
