@@ -56,7 +56,7 @@
                                                     <th style="width:5%;">SN</th>
                                                     <th>Image</th>
                                                     <th>Name</th>
-                                                    <th>Email</th>
+                                                    <th>Event Type</th>
                                                     <th>Status</th>
                                                     <th>Options</th>
                                                 </tr>
@@ -64,16 +64,16 @@
                                             <tbody>
                                                 <tr>
                                                     <td>1</td>
-                                                    <td> 
+                                                    <td>
                                                         <div class="osahan-slider-item" style="background-color:#fff;">
                                                             <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <b>Admin Name</b>
+                                                        <b>Event Name 1</b>
                                                     </td>
                                                     <td>
-                                                        admin@mail.com
+                                                        Blood Donation
                                                     </td>
                                                     <td class="text-center" style="width: 5%">
                                                         <div class="custom-control custom-switch custom-control-inline mb-1">
@@ -94,10 +94,10 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <b>Admin Name</b>
+                                                        <b>Event Name 2</b>
                                                     </td>
                                                     <td>
-                                                        admin@mail.com
+                                                        Medical
                                                     </td>
                                                     <td class="text-center" style="width: 5%">
                                                         <div class="custom-control custom-switch custom-control-inline mb-1">
@@ -107,6 +107,31 @@
                                                     </td>
                                                     <td>
                                                         <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateEvent()">Edit</button>
+                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Delete</button>
+                                                    </td>
+                                                </tr>
+
+                                                 <tr>
+                                                    <td>2</td>
+                                                    <td>
+                                                        <div class="osahan-slider-item" style="background-color:#fff;">
+                                                            <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <b>Event Name 3</b>
+                                                    </td>
+                                                    <td>
+                                                        Soical
+                                                    </td>
+                                                    <td class="text-center" style="width: 5%">
+                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
+                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch" value="0" onclick="statusUpdate()">
+                                                            <label class="custom-control-label" for=""></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateEvent()">Details</button>
                                                         <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Delete</button>
                                                     </td>
                                                 </tr>

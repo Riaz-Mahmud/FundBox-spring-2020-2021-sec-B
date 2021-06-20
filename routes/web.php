@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+// **************************ADMIN*******************************
+Route::get('/test',function(){
+    return view('Admin.Test')->with('title', 'TEST | Admin');
+});
 
 Route::get('/admin/dashboard', function () {
     return view('Admin.AdminHome')
@@ -23,6 +27,9 @@ Route::get('/admin/dashboard', function () {
             ->with('date', date('d-M-Y'));
 });
 
+Route::get('/admin/blockOrg',function(){
+    return view('Admin.blockOrg')->with('title', 'Block Organisation | Admin');
+});
 Route::get('/admin/createAdmin', function () {
     return view('Admin.createAdmin')->with('title', 'Create Admin | Admin');
 });
@@ -34,17 +41,33 @@ Route::get('/admin/manageAdmin', function () {
 Route::get('/admin/adminEvent', function () {
     return view('Admin.adminEvent')->with('title', 'Create Admin Event | Admin');
 });
-Route::get('/orgEvent', function () {
-    return view('Admin.createOrgEvent');
+Route::get('/admin/createOrgEvent', function () {
+    return view('Admin.createOrgEvent')->with('title', 'Create Organisation Event | Admin');
 });
 
-Route::get('/verifyEvent',function(){
-    return view('Admin.verifyEvent');
+Route::get('/admin/manageEvent', function () {
+    return view('Admin.manageEvent')->with('title', 'Manage All Event | Admin');
 });
 
-Route::get('/blockOrg',function(){
-    return view('Admin.blockOrg');
+Route::get('/admin/createOrg', function () {
+    return view('Admin.createOrg')->with('title', 'Create Organisation | Admin');
 });
+Route::get('/admin/createVolunteerEvent', function () {
+    return view('Admin.createVolunteerEvent')->with('title', 'Create Volunteer Event | Admin');
+});
+
+Route::get('/admin/manageVolEvent', function () {
+    return view('Admin.manageVolEvent')->with('title', 'Manage Volunteer Event | Admin');
+});
+Route::get('/admin/transitionList', function () {
+    return view('Admin.transitionList')->with('title', 'Transition List | Admin');
+});
+Route::get('/admin/volunteerList', function () {
+    return view('Admin.volunteerList')->with('title', 'Volunteer List | Admin');
+});
+// **************************ORGANISATION*******************************
+
+
 Route::get('/transitionList',function(){
     return view('Admin.transitionList');
 });
@@ -70,4 +93,5 @@ Route::get('/org/manageEvent', function () {
     return view('Organization.ManageEvent')
             ->with('title', 'Manage Event | Organization');
 });
+
 
