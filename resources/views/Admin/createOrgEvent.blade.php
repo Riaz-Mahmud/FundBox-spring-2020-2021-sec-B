@@ -1,73 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+@extends('Layout.app')
 
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light p-3 mb-2 bg-success text-white">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">FundBox</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-  <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light" type="submit">Search</button>
-      </form>
+@section('body')
+
+<body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+
+    @include('Layout.AdminMenu')
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- users list start -->
+                <section class="users-list-wrapper">
+                    <div class="users-list-filter">
+                        @if(session()->has('error') && !session()->get('error'))
+                        <div class="alert alert-success alert-dismissible mb-2" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <div class="d-flex align-items-center">
+                                <i class="bx bx-like"></i>
+                                <span>
+                                    {{ session()->get('message') }}
+                                </span>
+                            </div>
+                        </div>
+                        @endif
+                        @if(session()->has('error') && session()->get('error'))
+                        <div class="alert alert-danger alert-dismissible mb-2" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <div class="d-flex align-items-center">
+                                <i class="bx bx-error"></i>
+                                <span>
+                                    {{ session()->get('message') }}
+                                </span>
+                            </div>
+                        </div>
+                        @endif
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Create New Event For Organisation</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <form action="#" enctype="multipart/form-data" method="POST">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-lg-12">
+                                                <input type="text" class="form-control" name="event_name" placeholder="Event Name" required>
+                                            </div>
+                                            
+                                             <div class="col-12 col-sm-12" style="margin-top:10px">
+                                                <fieldset class="form-group">
+                                                    <textarea class="form-control" name="event_details" id="basicTextarea" rows="3" placeholder="Details" required></textarea>
+                                                </fieldset>
+                                            </div>
+
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-1" style="margin-top:10px">
+                                                <fieldset class="form-group position-relative has-icon-left">
+                                                    <input type="datetime-local" name="start_date"  class="form-control" id="#" placeholder="Start Date" autocomplete="off" required>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px">
+                                                <input type="number" class="form-control" name="event_amount" placeholder="Amount" required>
+                                            </div>
+                                           
+                                            <div class="col-12 col-sm-12">
+                                                <fieldset class="form-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="promo_image">
+                                                        <label class="custom-file-label" for="inputGroupFile02">Choose Event image</label>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                            
+                                            <div class="col-12 col-sm-12" style="margin-top: 10px">
+                                                <button type="submit" class="btn btn-block btn-success glow">Add</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- users list ends -->
+            </div>
+        </div>
     </div>
-  </div>
-</nav>
+    <!-- END: Content-->
 
-<h1 class="container p-3 mb-2 bg-secondary text-white">Create Event for Organisation</h1>
-    <div class="container">
-        <form action="">
-    <div class="mb-3">
-  <label for="eventName" class="form-label">Event Name</label>
-  <input type="text" class="form-control" id="inputEventName" >
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Event description</label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-</div>
-<label for="customRange1" class="form-label">Upload Image</label>
-<div class="input-group mb-3">
-    
-  <input type="file" class="form-control" id="inputGroupFile02">
-  <label class="input-group-text" for="inputGroupFile02">Upload</label>
-</div>
-<div class="row g-3">
-  <div class="col">
-      
-    <input type="text" class="form-control" placeholder="Starting Date" aria-label="Starting Date">
-  </div>
-  <div class="col">
-    <input type="text" class="form-control" placeholder="Ending Date" aria-label="Ending Date">
-  </div>
-</div>
-<label for="customRange1" class="form-label">Target Donation</label>
-<input type="range" class="form-range" id="customRange1">
-<button type="button" class="btn btn-success btn-lg">Create Event</button>
-</form>
-</div>
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    @include('Layout.footer')
+
+    @include('Layout.scripts')
+
 </body>
-</html>
+@endsection
