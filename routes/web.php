@@ -14,7 +14,42 @@ use Illuminate\Support\Facades\Route;
 */ 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Home.index')
+    ->with('title', 'Home');
+
+});
+Route::get('/about', function () {
+    return view('Home.about')
+            ->with('title', 'About Us');
+});
+
+Route::get('/contact', function () {
+    return view('Home.contact')
+            ->with('title', 'Contact Us');
+});
+Route::get('/about', function () {
+    return view('Home.about')
+            ->with('title', 'About Us');
+});
+Route::get('/FAQ', function () {
+    return view('Home.faq')
+            ->with('title', 'FAQ');
+});
+Route::get('/Ourteam/Organization', function () {
+    return view('Home.Organization')
+            ->with('title', 'Organization');
+});
+Route::get('/Ourteam/Volunteers', function () {
+    return view('Home.Volunteers')
+            ->with('title', 'Volunteers');
+});
+Route::get('/SignIn', function () {
+    return view('Home.SignIn')
+            ->with('title', 'Account');
+});
+Route::get('/SignUp', function () {
+    return view('Home.SignUp')
+            ->with('title', 'Account');
 });
 // **************************ADMIN*******************************
 Route::get('/test',function(){
