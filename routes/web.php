@@ -71,3 +71,62 @@ Route::get('/org/manageEvent', function () {
             ->with('title', 'Manage Event | Organization');
 });
 
+
+//user route starting:
+
+Route::get('/user/dashboard',function(){
+    return view('User/Home') ->with('title', 'Home User');
+});
+
+Route::get('/user/registration',function(){
+    return view('User/Registration')->with('title', 'Registration');
+});
+
+Route::get('/user/review',function(){
+    return view('User/Review')->with('title', 'Review');
+});
+
+Route::get('/user/organizationList',function(){
+    return view('User/OrganizationList')->with('title', 'Organization List');
+});
+
+Route::get('/user/report',function(){
+    return view('User/Report')->with('title', 'Report');
+});
+
+Route::get('/user/donation',function(){
+    return view('User/Donation')->with('title', 'Donation');
+});
+
+Route::get('/user/transitionDetails',function(){
+    return view('User/TransitionDetails')->with('title', 'Transition Details');
+});
+
+Route::get('/user/organizationDetails',function(){
+    return view('User/OrganizationDetails')->with('title', 'Organization Details');
+});
+
+Route::get('/user/categoryList',function(){
+    return view('User/CategoryList')->with('title', 'Category List');
+});
+
+Route::get('/user/events',function(){
+    return view('User/Events')->with('title', 'Events');
+});
+
+Route::get('/user/volunteerEventList',function(){
+    return view('User/VolunteerEventList')->with('title', 'Volunteer Event List');
+});
+
+
+Route::get('/user/applyVolunteerEvent',function(){
+    return view('User/ApplyVolunteerEvent')->with('title', 'Apply for Volunteer Event');
+});
+
+Route::get('/user/yourAppliedVolunteerEvents',function(){
+    return view('User/YourAppliedVolunteerEvents')->with('title', 'Your Applied Volunteer Events');
+});
+
+
+//user route finish
+
