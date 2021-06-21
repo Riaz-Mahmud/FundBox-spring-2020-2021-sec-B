@@ -40,8 +40,8 @@
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <div class="user-nav d-sm-flex d-none">
-                                <span class="user-name">GR_MANAGER_NAME</span>
-                                <span class="user-status text-muted">GR_MANAGER_EMAIL</span>
+                                <span class="user-name">NAME</span>
+                                <span class="user-status text-muted">EMAIL</span>
                             </div>
                             <span>
                                 <img class="round" src="{{ url('/images/avatar/avatar.png') }}" alt="avatar" height="40" width="40">
@@ -84,7 +84,7 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
             
             <li class="nav-item">
-                <a class="nav-hover" href="#">
+                <a class="nav-hover" href="{{ url('/org/dashboard') }}">
                     <i class="bx bx-desktop mr-50"></i>
                     <span class="menu-title">Dashboard</span>
                 </a>
@@ -106,8 +106,8 @@
                 </a>
             </li>
 
-            <li class="nav-item ">
-                <a class="nav-hover" href="#">
+            <li class="nav-item @if(url('/org/transEventList') == Request::url()) active @endif">
+                <a class="nav-hover" href="/org/transEventList">
                     <i class="bx bxs-city mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Transition List</span>
                 </a>
@@ -116,8 +116,8 @@
             <li class=" navigation-header"><span>Refund</span></li>
             
 
-            <li class="nav-item">
-                <a href="#">
+            <li class="nav-item ">
+                <a class="nav-hover" href="#">
                     <i class="bx bxs-bar-chart-alt-2 mr-50"></i>
                     <span class="menu-title" data-i18n="Category Manager">Manage Refund</span>
                 </a>
@@ -125,22 +125,23 @@
 
             <li class=" navigation-header"><span>Volunteer Event</span></li>
     
-            <li class="nav-item ">
-                <a class="nav-hover" href="#">
+            
+            <li class="nav-item @if(url('/org/createVolunteerEvent') == Request::url()) active @endif">
+                <a href="/org/createVolunteerEvent">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Create Volunteer Event</span>
                 </a>
             </li>
             
-            <li class="nav-item ">
-                <a class="nav-hover" href="#">
+            <li class="nav-item @if(url('/org/manageVolunteerEvent') == Request::url()) active @endif">
+                <a class="nav-hover" href="/org/manageVolunteerEvent">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Manage Volunteer Event</span>
                 </a>
             </li>
 
-            <li class="nav-item ">
-                <a class="nav-hover" href="#">
+            <li class="nav-item @if(url('/org/volunteerList') == Request::url()) active @endif">
+                <a class="nav-hover" href="/org/volunteerList">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Volunteer List</span>
                 </a>
@@ -149,8 +150,8 @@
 
             <li class=" navigation-header"><span>Account</span></li>
     
-            <li class="nav-item ">
-                <a class="nav-hover" href="#">
+            <li class="nav-item @if(url('/org/manageAccount') == Request::url()) active @endif">
+                <a class="nav-hover" href="/org/manageAccount">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Manage Account</span>
                 </a>

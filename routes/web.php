@@ -104,7 +104,8 @@ Route::get('/admin/volunteerList', function () {
 
 
 Route::get('/transitionList',function(){
-    return view('Admin.transitionList');
+    return view('Admin.transitionList')
+    ->with('title', 'Transition List');
 });
 
 Route::get('/login', function () {
@@ -129,6 +130,35 @@ Route::get('/org/manageEvent', function () {
             ->with('title', 'Manage Event | Organization');
 });
 
+Route::get('/org/transEventList', function () {
+    return view('Organization.TransitionEventList')
+            ->with('title', 'Transition Event List| Organization');
+});
+
+Route::get('/org/transList', function () {
+    return view('Organization.TransitionList')
+            ->with('title', 'Transition List| Organization');
+});
+
+Route::get('/org/createVolunteerEvent', function () {
+    return view('Organization.CreateVolunteerEvent')
+            ->with('title', 'Create Volunteer Event | Organization');
+});
+
+Route::get('/org/manageVolunteerEvent', function () {
+    return view('Organization.ManageVolunteerEvent')
+            ->with('title', 'Manage Volunteer Event | Organization');
+});
+
+Route::get('/org/volunteerList', function () {
+    return view('Organization.VolunteerList')
+            ->with('title', 'Manage Volunteer Event | Organization');
+});
+
+Route::get('/org/manageAccount', function () {
+    return view('Organization.ManageAccount')
+            ->with('title', 'Manage Account | Organization');
+});
 
 
 //user route starting:
