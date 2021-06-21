@@ -18,9 +18,9 @@ Route::get('/', function () {
     ->with('title', 'Home');
 
 });
-Route::get('/about', function () {
-    return view('Home.about')
-            ->with('title', 'About Us');
+Route::get('/events', function () {
+    return view('Home.events')
+            ->with('title', 'Events');
 });
 
 Route::get('/contact', function () {
@@ -165,10 +165,6 @@ Route::get('/org/manageAccount', function () {
 
 Route::get('/user/dashboard',function(){
     return view('User/Home') ->with('title', 'Home User');
-});
-
-Route::get('/user/registration',function(){
-    return view('User/Registration')->with('title', 'Registration');
 });
 
 Route::get('/user/review',function(){

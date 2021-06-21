@@ -74,7 +74,7 @@
                         <li><a href="/Ourteam/Volunteers" class="nav-link">Our Volunteers</a></li>
                       </ul>
                   </li>
-                  <li><a href="/about" class="nav-link">Events</a></li>
+                  <li><a href="/events" class="nav-link">Events</a></li>
                   <li><a href="/about" class="nav-link">About Us</a></li>
                   <li><a href="/contact" class="nav-link">Contact</a></li>
                   <li><a href="/FAQ" class="nav-link">FAQ</a></li>
