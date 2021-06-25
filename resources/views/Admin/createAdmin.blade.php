@@ -52,30 +52,45 @@
                                         @csrf
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-lg-12">
-                                                <input type="text" class="form-control" name="Admin_name" placeholder="Name" required>
+                                                <input type="text" class="form-control" name="admin_name" placeholder="Full Name" required>
                                             </div>
-
-                                            <div class="col-12 col-sm-12 col-lg-12" style="margin-top:10px">
-                                                <input type="email" class="form-control" name="Admin_email" placeholder="Email" required>
+                                            <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px">
+                                                <input type="text" class="form-control" name="username" placeholder="Username" required>
+                                            </div>
+                                        
+                                            <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px">
+                                                <input type="email" class="form-control" name="admin_email" placeholder="Email" required>
                                             </div>
 
                                            <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px">
-                                                <input type="password" class="form-control" name="Admin_password" placeholder="Password" required>
+                                                <input type="password" class="form-control" name="admin_password" placeholder="Password" required>
                                             </div>
 
                                             <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px">
-                                                <input type="password" class="form-control" name="Admin_confirmPassword" placeholder="Confirm Password" required>
+                                                <input type="password" class="form-control" name="admin_confirm_assword" placeholder="Confirm Password" required>
                                             </div>
-
+                                            <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px">
+                                                <input type="number" class="form-control" name="admin_phone" placeholder="Phone number" required>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px;">
+                                                <fieldset class="form-group">
+                                                    <select name="status" class="form-control" id="basicSelect" required>
+                                                        <option disabled selected>Select Admin Status</option>
+                                                        <option value="1">Active</option>
+                                                        <option value="0">Deactivate</option>
+                                                        
+                                                    </select>
+                                                </fieldset>
+                                            </div>
                                             <div class="col-12 col-sm-12"  style="margin-top:10px">
                                                 <fieldset class="form-group">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="promo_image">
-                                                        <label class="custom-file-label" for="inputGroupFile02">Choose Event image</label>
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="admin_image" required>
+                                                        <label class="custom-file-label" for="inputGroupFile02">Choose Admin image</label>
                                                     </div>
                                                 </fieldset>
                                             </div>
-                                            
+
                                             <div class="col-12 col-sm-12" style="margin-top: 10px">
                                                 <button type="submit" class="btn btn-block btn-success glow">Add</button>
                                             </div>
