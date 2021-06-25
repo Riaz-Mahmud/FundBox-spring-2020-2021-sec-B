@@ -68,10 +68,12 @@ Route::get('/admin/blockOrg',function(){
 Route::get('/admin/createAdmin', function () {
     return view('Admin.createAdmin')->with('title', 'Create Admin | Admin');
 });
+Route::post('/admin/createAdmin','Admin\UserController@CreateAdmin');
 
-Route::get('/admin/manageAdmin', function () {
-    return view('Admin.ManageAdmin')->with('title', 'Create Admin | Admin');
-});
+Route::get('/admin/manageAdmin','Admin\UserController@ManageAdmin');
+Route::post('/admin/manageAdmin/updateStatus', 'Admin\UserController@UpdateStatus');
+Route::post('/admin/manageAdmin/updateUserInfo', 'Admin\UserController@UpdateUserInfo');
+
 
 Route::get('/admin/adminEvent', function () {
     return view('Admin.adminEvent')->with('title', 'Create Admin Event | Admin');
