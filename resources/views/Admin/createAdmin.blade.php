@@ -56,7 +56,7 @@
                                             </div>
 
                                             <div class="col-12 col-sm-12 col-lg-12" style="margin-top:10px">
-                                                <input type="number" class="form-control" name="Admin_email" placeholder="Email" required>
+                                                <input type="email" class="form-control" name="Admin_email" placeholder="Email" required>
                                             </div>
 
                                            <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px">
