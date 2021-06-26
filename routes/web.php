@@ -62,9 +62,7 @@ Route::get('/admin/dashboard', function () {
             ->with('date', date('d-M-Y'));
 });
 
-Route::get('/admin/blockOrg',function(){
-    return view('Admin.blockOrg')->with('title', 'Block Organisation | Admin');
-});
+
 Route::get('/admin/createAdmin', function () {
     return view('Admin.createAdmin')->with('title', 'Create Admin | Admin');
 });
@@ -73,6 +71,17 @@ Route::post('/admin/createAdmin','Admin\UserController@CreateAdmin');
 Route::get('/admin/manageAdmin','Admin\UserController@ManageAdmin');
 Route::post('/admin/manageAdmin/updateStatus', 'Admin\UserController@UpdateStatus');
 Route::post('/admin/manageAdmin/updateUserInfo', 'Admin\UserController@UpdateUserInfo');
+Route::post('/admin/manageAdmin/deleteAdmin', 'Admin\UserController@DeleteAdmin');
+Route::post('/admin/manageAdmin/makeSuperAdmin', 'Admin\UserController@MakeSuperAdmin');
+
+Route::get('/admin/createOrg','Admin\OrganizationController@ShowCreatePage');
+Route::post('/admin/createOrg','Admin\OrganizationController@CreateOrganisation');
+Route::get('/admin/manageOrg','Admin\OrganizationController@ManageOrg');
+Route::post('/admin/manageOrg/updateStatus', 'Admin\OrganizationController@UpdateStatus');
+Route::post('/admin/manageOrg/updateInfo', 'Admin\OrganizationController@UpdateInfo');
+Route::post('/admin/manageOrg/addOrgUser', 'Admin\OrganizationController@AddOrgUser');
+Route::post('/admin/manageOrg/delete', 'Admin\OrganizationController@Delete');
+Route::post('/admin/manageOrg/updateImage', 'Admin\OrganizationController@UpdateImage');
 
 
 Route::get('/admin/adminEvent', function () {
@@ -86,9 +95,8 @@ Route::get('/admin/manageEvent', function () {
     return view('Admin.manageEvent')->with('title', 'Manage All Event | Admin');
 });
 
-Route::get('/admin/createOrg', function () {
-    return view('Admin.createOrg')->with('title', 'Create Organisation | Admin');
-});
+
+
 Route::get('/admin/createVolunteerEvent', function () {
     return view('Admin.createVolunteerEvent')->with('title', 'Create Volunteer Event | Admin');
 });

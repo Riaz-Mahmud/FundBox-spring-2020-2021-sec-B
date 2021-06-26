@@ -115,10 +115,10 @@
                 </a>
             </li>
 
-                <li class="nav-item @if(url('/admin/blockOrg') == Request::url()) active @endif">
-                <a class="nav-hover" href="/admin/blockOrg">
+                <li class="nav-item @if(url('/admin/manageOrg') == Request::url()) active @endif">
+                <a class="nav-hover" href="/admin/manageOrg">
                     <i class="bx bx-planet mr-50"></i>
-                    <span class="menu-title" data-i18n="City Manager">Block Organisation</span>
+                    <span class="menu-title" data-i18n="City Manager">Manage Organisation</span>
                 </a>
             </li>
             <li class=" navigation-header"><span>Event</span></li>

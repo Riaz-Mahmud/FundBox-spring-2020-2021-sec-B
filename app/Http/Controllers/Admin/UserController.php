@@ -148,13 +148,7 @@ class UserController extends Controller
             
         } else {
             $user_id = $request->input('editUser_id');
-
-            $user_info=DB::table('userinfos')
-            ->where('id',$user_id)
-            ->first();
-
-            $old_image= $user_info->image;
-
+            
             $data=array();
             $data['name']=$request->input('editName');
             $data['email']=$request->input('editEmail');
@@ -167,15 +161,80 @@ class UserController extends Controller
 
                             
             if ($update) {
-                if(file_exists($old_image)){
-                    unlink($old_image);
-                }
                 return redirect()->back()->with([
                     'error' => false,
                     'message' => 'Edit successfully.'
                 ]);
             } else {
                 return redirect()->back()->with([
+                    'error' => true,
+                    'message' => 'Something went wrong.'
+                ]);
+            }
+        }
+        
+    }
+
+    public function DeleteAdmin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'adminId' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Required data missing.'
+            ]);
+        } else {
+            $user_id = $request->input('adminId');
+
+            $removed=DB::table('userinfos')->where('id', $user_id)->delete();
+
+            if ($removed) {
+                return response()->json([
+                    'error' => false,
+                    'message' => 'Delete successfully.'
+                ]);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Something went wrong.'
+                ]);
+            }
+        }
+
+    }
+
+    public function MakeSuperAdmin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'value' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Required data missing.'
+            ]);
+        } else {
+            $user_id = $request->input('user_id');
+            
+            $data=array();
+            $data['is_super_admin']=$request->input('value');
+
+            $update= DB::table('userinfos')
+                            ->where('id',$user_id)
+                            ->update($data);
+
+            if ($update) {
+                return response()->json([
+                    'error' => false,
+                    'message' => 'Update successfully.'
+                ]);
+            } else {
+                return response()->json([
                     'error' => true,
                     'message' => 'Something went wrong.'
                 ]);
