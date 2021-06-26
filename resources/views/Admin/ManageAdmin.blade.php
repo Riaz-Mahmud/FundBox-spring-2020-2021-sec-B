@@ -107,7 +107,7 @@
                                                     @endif
                                                     <td>
                                                         <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateUser('{{ $admin->id }}', '{{ $admin->name }}', '{{ $admin->email }}', '{{ $admin->phone }}')">Edit</button>
-                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Delete</button>
+                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteAdmin('{{ $admin->id }}')">Delete</button>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -235,7 +235,7 @@
             });
         }
 
-        function deleteEvent() {
+        function deleteAdmin(adminId) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -253,11 +253,10 @@
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                        url: "#",
+                        url: "{{ url('/admin/manageAdmin/deleteAdmin') }}",
                         type: "POST",
                         data: {
-                            promo_id: promo_id,
-                            promo_status: status
+                            adminId: adminId
                         },
                         success: function(result) {
                             if (!result.error) {

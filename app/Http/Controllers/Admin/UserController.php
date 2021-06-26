@@ -183,5 +183,36 @@ class UserController extends Controller
         }
         
     }
+
+    public function DeleteAdmin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'adminId' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Required data missing.'
+            ]);
+        } else {
+            $user_id = $request->input('adminId');
+
+            $removed=DB::table('userinfos')->where('id', $user_id)->delete();
+
+            if ($removed) {
+                return response()->json([
+                    'error' => false,
+                    'message' => 'Update successfully.'
+                ]);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Something went wrong.'
+                ]);
+            }
+        }
+
+    }
     
 }

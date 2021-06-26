@@ -73,6 +73,7 @@ Route::post('/admin/createAdmin','Admin\UserController@CreateAdmin');
 Route::get('/admin/manageAdmin','Admin\UserController@ManageAdmin');
 Route::post('/admin/manageAdmin/updateStatus', 'Admin\UserController@UpdateStatus');
 Route::post('/admin/manageAdmin/updateUserInfo', 'Admin\UserController@UpdateUserInfo');
+Route::post('/admin/manageAdmin/deleteAdmin', 'Admin\UserController@DeleteAdmin');
 
 
 Route::get('/admin/adminEvent', function () {
