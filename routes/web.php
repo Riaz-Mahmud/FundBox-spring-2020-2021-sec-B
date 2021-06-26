@@ -231,6 +231,46 @@ Route::get('/sp/allAdvertise', function () {
     return view('Sponsor.ListofAdvertise')
             ->with('title', 'All Advertise | Sponsor');
 });
+Route::get('/sp/payment', function () {
+    return view('Sponsor.ListofAdvertise')
+            ->with('title', 'All Advertise | Sponsor');
+});
+Route::get('/sp/transactionList', function () {
+    return view('Sponsor.TransactionList')
+            ->with('title', 'All Advertise | Sponsor');
+});
+Route::get('/sp/siteTraffic', function () {
+    return view('Sponsor.SiteTraffic')
+            ->with('title', 'All Advertise | Sponsor');
+});
+Route::get('/sp/applyOrg', function () {
+    return view('Sponsor.OrgList')
+            ->with('title', 'All Advertise | Sponsor');
+});
+Route::get('/sp/sponsoredOrgList', function () {
+    return view('Sponsor.SponsoredorgList')
+            ->with('title', 'All Advertise | Sponsor');
+});
+Route::get('/sp/pendingOrgList', function () {
+    return view('Sponsor.PendingOrgList')
+            ->with('title', 'All Advertise | Sponsor');
+});
+Route::get('/sp/updateSponsorship', function () {
+    return view('Sponsor.UpdateSponsorship')
+            ->with('title', 'All Advertise | Sponsor');
+});
+Route::get('/sp/updateOrgSponsorship', function () {
+    return view('Sponsor.UpdateOrgSponsorship')
+            ->with('title', 'All Advertise | Sponsor');
+});
+Route::get('/sp/allEvents', function () {
+    return view('Sponsor.AllEvents')
+            ->with('title', 'All Advertise | Sponsor');
+});
+Route::get('/sp/sponsoredEvents', function () {
+    return view('Sponsor.SoponoredEvents')
+            ->with('title', 'All Advertise | Sponsor');
+});
 
 
 //Sponsor route end

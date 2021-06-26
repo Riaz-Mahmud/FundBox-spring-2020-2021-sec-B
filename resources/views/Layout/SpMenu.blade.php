@@ -108,71 +108,54 @@
             </li>
 <!-- Advertise section End -->
 
-<!-- Organisation section Start -->
-               <li class=" navigation-header"><span>Organisation</span></li>
+<!-- Sponsored section Start -->
+            <li class=" navigation-header"><span>Sponsorship</span></li>
 
-                 <li class="nav-item @if(url('/admin/createOrg') == Request::url()) active @endif">
-                <a class="nav-hover" href="/admin/createOrg">
+            <li class="nav-item @if(url('/sp/updateSponsorship') == Request::url()) active @endif">
+                <a class="nav-hover" href="/sp/updateSponsorship">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Update Sponsorship</span>
+                </a>
+            </li>
+            <li class="nav-item @if(url('/sp/sponsoredEvents') == Request::url()) active @endif">
+                <a class="nav-hover" href="/sp/sponsoredEvents">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Sponsored Events</span>
+                </a>
+            </li>
+            <li class="nav-item @if(url('/sp/allEvents') == Request::url()) active @endif">
+                <a class="nav-hover" href="/sp/allEvents">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Ongoing Events</span>
+                </a>
+            </li>
+<!-- Sponsored section End -->
+
+<!-- Organisation section Start -->
+               <li class=" navigation-header"><span>Organisation Sponsorship</span></li>
+
+                 <li class="nav-item @if(url('/sp/applyOrg') == Request::url()) active @endif">
+                <a class="nav-hover" href="/sp/applyOrg">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Apply in Organisation</span>
                 </a>
             </li>
 
-                <li class="nav-item @if(url('/admin/blockOrg') == Request::url()) active @endif">
-                <a class="nav-hover" href="/admin/blockOrg">
+            <li class="nav-item @if(url('/sp/sponsoredOrgList') == Request::url()) active @endif">
+                <a class="nav-hover" href="/sp/sponsoredOrgList">
                     <i class="bx bx-planet mr-50"></i>
-                    <span class="menu-title" data-i18n="City Manager">All Organisation</span>
+                    <span class="menu-title" data-i18n="City Manager">All Sponsored Organisation</span>
+                </a>
+            </li>
+            <li class="nav-item @if(url('/sp/pendingOrgList') == Request::url()) active @endif">
+                <a class="nav-hover" href="/sp/pendingOrgList">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Pending Request</span>
                 </a>
             </li>
 <!-- Organisation section End -->
 
-            <li class=" navigation-header"><span>Event</span></li>
-            <li class="nav-item @if(url('/admin/adminEvent') == Request::url()) active @endif">
-                <a class="nav-hover" href="/admin/adminEvent">
-                    <i class="bx bxs-bar-chart-alt-2 mr-50"></i>
-                    <span class="menu-title" data-i18n="Category Manager">Create Event for Admin</span>
-                </a>
-            </li>
-            <li class="nav-item @if(url('/admin/createOrgEvent') == Request::url()) active @endif">
-                <a class="nav-hover" href="/admin/createOrgEvent">
-                    <i class="bx bxs-bar-chart-alt-2 mr-50"></i>
-                    <span class="menu-title" data-i18n="Category Manager">Create organisation Event</span>
-                </a>
- 
-           </li>  
-           
-           <li class="nav-item @if(url('/admin/manageEvent') == Request::url()) active @endif">
-                <a class="nav-hover" href="/admin/manageEvent">
-                    <i class="bx bxs-bar-chart-alt-2 mr-50"></i>
-                    <span class="menu-title" data-i18n="Category Manager">Manage Events</span>
-                </a>
-            </li>
-             <li class="nav-item @if(url('/admin/transitionList') == Request::url()) active @endif">
-                <a class="nav-hover" href="/admin/transitionList">
-                    <i class="bx bxs-bar-chart-alt-2 mr-50"></i>
-                    <span class="menu-title" data-i18n="Category Manager">Transition List</span>
-                </a>
-            </li>
-            <li class=" navigation-header"><span>Volunteer Event</span></li>
-            <li class="nav-item @if(url('/admin/createVolunteerEvent') == Request::url()) active @endif">
-                <a class="nav-hover" href="/admin/createVolunteerEvent">
-                    <i class="bx bx-planet mr-50"></i>
-                    <span class="menu-title" data-i18n="City Manager">Create Volunteer Event</span>
-                </a>
-            </li>
-            <li class="nav-item @if(url('/admin/manageVolEvent') == Request::url()) active @endif">
-                <a class="nav-hover" href="/admin/manageVolEvent">
-                    <i class="bx bx-planet mr-50"></i>
-                    <span class="menu-title" data-i18n="City Manager">Manage Volunteer Event</span>
-                </a>
-            </li>
-             <li class="nav-item @if(url('/admin/volunteerList') == Request::url()) active @endif">
-                <a class="nav-hover" href="/admin/volunteerList">
-                    <i class="bx bx-planet mr-50"></i>
-                    <span class="menu-title" data-i18n="City Manager">Volunteer List</span>
-                </a>
-            </li>
-        
+<!-- Account section Start -->
 
             <li class=" navigation-header"><span>Account</span></li>
             <li class="nav-item ">
@@ -181,6 +164,25 @@
                     <span class="menu-title" data-i18n="City Manager">Manage Account</span>
                 </a>
             </li>
+            <li class="nav-item @if(url('/sp/transactionList') == Request::url()) active @endif">
+                <a class="nav-hover" href="/sp/transactionList">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Transaction List</span>
+                </a>
+            </li>
+            <li class="nav-item @if(url('/sp/payment') == Request::url()) active @endif">
+                <a class="nav-hover" href="/sp/payment">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Payment</span>
+                </a>
+            </li>
+            <li class="nav-item @if(url('/sp/siteTraffic') == Request::url()) active @endif">
+                <a class="nav-hover" href="/sp/siteTraffic">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Site Traffic</span>
+                </a>
+            </li>
+<!-- Account section Start -->
         </ul>
     </div>
 </div>
