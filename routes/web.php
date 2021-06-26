@@ -213,5 +213,24 @@ Route::get('/user/yourAppliedVolunteerEvents',function(){
 });
 
 
-//user route finish
+//user route finishgit
 
+//Sponsor route start
+
+Route::get('/sp/dashboard', function () {
+    return view('Sponsor.sponsorHome')
+            ->with('title', 'Home | Sponsor');
+});
+
+Route::get('/sp/addAdvertise', function () {
+    return view('Sponsor.addAdvertise')
+            ->with('title', 'Advertise Add | Sponsor');
+});
+
+Route::get('/sp/allAdvertise', function () {
+    return view('Sponsor.ListofAdvertise')
+            ->with('title', 'All Advertise | Sponsor');
+});
+
+
+//Sponsor route end
