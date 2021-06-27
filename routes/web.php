@@ -83,13 +83,18 @@ Route::post('/admin/manageOrg/addOrgUser', 'Admin\OrganizationController@AddOrgU
 Route::post('/admin/manageOrg/delete', 'Admin\OrganizationController@Delete');
 Route::post('/admin/manageOrg/updateImage', 'Admin\OrganizationController@UpdateImage');
 
+Route::get('/admin/eventCategory','Admin\CategoryController@Index');
+Route::post('/admin/eventCategory','Admin\CategoryController@CreateCategory');
+Route::post('/admin/eventCategory/updateStatus','Admin\CategoryController@UpdateStatus');
+Route::post('/admin/eventCategory/delete','Admin\CategoryController@Delete');
 
-Route::get('/admin/adminEvent', function () {
-    return view('Admin.adminEvent')->with('title', 'Create Admin Event | Admin');
-});
-Route::get('/admin/createOrgEvent', function () {
-    return view('Admin.createOrgEvent')->with('title', 'Create Organisation Event | Admin');
-});
+Route::get('/admin/createAdminEvent','Admin\EventController@Index');
+Route::post('/admin/createAdminEvent','Admin\EventController@CreateAdminEvent');
+Route::get('/admin/createOrgEvent','Admin\EventController@EventOrgIndex');
+Route::post('/admin/createOrgEvent','Admin\EventController@CreateOrgEvent');
+Route::get('/admin/createVolunteerEvent','Admin\EventController@VolunteerIndex');
+Route::post('/admin/createVolunteerEvent','Admin\EventController@CreateVolunteerIndex');
+
 
 Route::get('/admin/manageEvent', function () {
     return view('Admin.manageEvent')->with('title', 'Manage All Event | Admin');
@@ -97,9 +102,7 @@ Route::get('/admin/manageEvent', function () {
 
 
 
-Route::get('/admin/createVolunteerEvent', function () {
-    return view('Admin.createVolunteerEvent')->with('title', 'Create Volunteer Event | Admin');
-});
+
 
 Route::get('/admin/manageVolEvent', function () {
     return view('Admin.manageVolEvent')->with('title', 'Manage Volunteer Event | Admin');

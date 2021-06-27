@@ -173,7 +173,7 @@
                             <label class="col-sm-1 control-label">: </label>
                             <div class="col-sm-8">
                                 <fieldset class="form-group">
-                                    <select name="user_id" class="form-control" id="basicSelect" >
+                                    <select name="user_id" class="form-control" id="basicSelect" required>
                                         <option disabled selected>Select User</option>
                                         @foreach($allUsers as $key => $user)
                                         <option value="{{ $user->id }}">{{ $user->name }} - {{ $user->username }} </option>

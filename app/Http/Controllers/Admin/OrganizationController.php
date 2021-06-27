@@ -87,7 +87,7 @@ class OrganizationController extends Controller
         ->get();
 
         return view('Admin.ManageOrg')
-        ->with('title', 'Block Organisation | Admin')
+        ->with('title', 'Manage Organisation | Admin')
         ->with('allOrgs', $allOrgs)
         ->with('allUsers', $allUsers);
 
@@ -127,7 +127,6 @@ class OrganizationController extends Controller
                 ]);
             }
         }
-        
     }
 
     public function UpdateInfo(Request $request)
@@ -183,9 +182,9 @@ class OrganizationController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
+            return redirect()->back()->with([
                 'error' => true,
-                'message' => 'Required data missing.'
+                'message' => 'Please Select User'
             ]);
         } else {
             $org_id = $request->input('edit_orgid');
