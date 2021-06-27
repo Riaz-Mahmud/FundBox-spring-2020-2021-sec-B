@@ -125,15 +125,15 @@
 
             <li class=" navigation-header"><span>Volunteer Event</span></li>
     
-            <li class="nav-item ">
-                <a class="nav-hover" href="#">
+            <li class="nav-item @if(url('/org/createVolunteerEvent') == Request::url()) active @endif">
+                <a class="nav-hover" href="/org/createVolunteerEvent">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Create Volunteer Event</span>
                 </a>
             </li>
-            
-            <li class="nav-item ">
-                <a class="nav-hover" href="#">
+           
+            <li class="nav-item @if(url(' /org/ManageVolunteerEvent') == Request::url()) active @endif">
+                <a class="nav-hover" href=" /org/ManageVolunteerEvent">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Manage Volunteer Event</span>
                 </a>

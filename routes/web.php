@@ -118,25 +118,35 @@ Route::get('/org/dashboard', function () {
             ->with('title', 'Home Organization')
             ->with('date', date('d-M-Y'));
 });
-
-Route::get('/org/createEvent', function () {
-    return view('Organization.CreateEvent')
-            ->with('title', 'Create Event | Organization');
-});
-
-Route::Post('/org/createEvent', 'OrganizationHomeController@create');
-
 Route::get('/org/manageEvent', function () {
     return view('Organization.ManageEvent')
             ->with('title', 'Manage Event | Organization');
 });
 
+//*****************CREATE EVENTS******************* */
+Route::get('/org/createEvent', function () {
+    return view('Organization.CreateEvent')
+            ->with('title', 'Create Event | Organization');
+});
+Route::Post('/org/createEvent', 'OrganizationHomeController@create');
+//*****************EVENT LIST******************* */
 Route::get('/org/EventList', 'OrganizationHomeController@index')->name('org.eventList');
+//*****************EDIT EVENTS******************* */
 Route::get('/org/edit/{id}', 'OrganizationHomeController@edit');
 Route::Post('/org/edit/{id}', 'OrganizationHomeController@update');
-
+//*****************DELETE EVENTS******************* */
 Route::get('/org/delete/{id}', 'OrganizationHomeController@delete');
 Route::get('/org/destroy/{id}', 'OrganizationHomeController@destroy');
+//*****************CREATE VOLUNTEER EVENTS******************* */
+Route::get('/org/createVolunteerEvent', function () {
+    return view('Organization.CreateVolunteerEvent')
+            ->with('title', 'Create Volunteer Event | Organization');
+});
+Route::Post('/org/createVolunteerEvent', 'OrganizationHomeController@createVolunteerEvent');
+//*****************EDIT  Volunteer EVENTS******************* */
+Route::get('/org/ManageVolunteerEvent', 'OrganizationHomeController@indexVolunteer')->name('org.volunteereventList');
+
+
 
 
 //user route starting:
