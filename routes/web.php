@@ -124,61 +124,38 @@ Route::group(['middleware'=>['sess']] , function(){
 
     Route::group(['middleware'=>['org']] , function(){
 
-        Route::get('/transitionList',function(){
-            return view('Admin.transitionList')
-            ->with('title', 'Transition List');
-        });
+            Route::get('/org/dashboard', function () {
+              return view('Organization.Home')
+                ->with('title', 'Home Organization')
+                ->with('date', date('d-M-Y'));
+            });
+            Route::get('/org/manageEvent', function () {
+                return view('Organization.ManageEvent')
+                        ->with('title', 'Manage Event | Organization');
+            });
 
-        Route::get('/login', function () {
-            return view('Signin')
-                            ->with('id', 0)
-                            ->with('title', 'Sign In');
-        });
-
-        Route::get('/org/dashboard', function () {
-            return view('Organization.Home')
-                    ->with('title', 'Home Organization')
-                    ->with('date', date('d-M-Y'));
-        });
-
-        Route::get('/org/createEvent', function () {
-            return view('Organization.CreateEvent')
-                    ->with('title', 'Create Event | Organization');
-        });
-
-        Route::get('/org/manageEvent', function () {
-            return view('Organization.ManageEvent')
-                    ->with('title', 'Manage Event | Organization');
-        });
-
-        Route::get('/org/transEventList', function () {
-            return view('Organization.TransitionEventList')
-                    ->with('title', 'Transition Event List| Organization');
-        });
-
-        Route::get('/org/transList', function () {
-            return view('Organization.TransitionList')
-                    ->with('title', 'Transition List| Organization');
-        });
-
-        Route::get('/org/createVolunteerEvent', function () {
-            return view('Organization.CreateVolunteerEvent')
-                    ->with('title', 'Create Volunteer Event | Organization');
-        });
-
-        Route::get('/org/manageVolunteerEvent', function () {
-            return view('Organization.ManageVolunteerEvent')
-                    ->with('title', 'Manage Volunteer Event | Organization');
-        });
-
-        Route::get('/org/volunteerList', function () {
-            return view('Organization.VolunteerList')
-                    ->with('title', 'Manage Volunteer Event | Organization');
-        });
-
-        Route::get('/org/manageAccount', function () {
-            return view('Organization.ManageAccount')
-                    ->with('title', 'Manage Account | Organization');
+            //*****************CREATE EVENTS******************* */
+            Route::get('/org/createEvent', function () {
+                return view('Organization.CreateEvent')
+                        ->with('title', 'Create Event | Organization');
+            });
+            Route::Post('/org/createEvent', 'OrganizationHomeController@create');
+            //*****************EVENT LIST******************* */
+            Route::get('/org/EventList', 'OrganizationHomeController@index')->name('org.eventList');
+            //*****************EDIT EVENTS******************* */
+            Route::get('/org/edit/{id}', 'OrganizationHomeController@edit');
+            Route::Post('/org/edit/{id}', 'OrganizationHomeController@update');
+            //*****************DELETE EVENTS******************* */
+            Route::get('/org/delete/{id}', 'OrganizationHomeController@delete');
+            Route::get('/org/destroy/{id}', 'OrganizationHomeController@destroy');
+            //*****************CREATE VOLUNTEER EVENTS******************* */
+            Route::get('/org/createVolunteerEvent', function () {
+                return view('Organization.CreateVolunteerEvent')
+                        ->with('title', 'Create Volunteer Event | Organization');
+            });
+            Route::Post('/org/createVolunteerEvent', 'OrganizationHomeController@createVolunteerEvent');
+            //*****************EDIT  Volunteer EVENTS******************* */
+            Route::get('/org/ManageVolunteerEvent', 'OrganizationHomeController@indexVolunteer')->name('org.volunteereventList');
         });
     });
 
@@ -191,11 +168,6 @@ Route::group(['middleware'=>['sess']] , function(){
     // **************************USER START*******************************
 
     // **************************USER END*******************************
-
-
-
-});
-
 
 
 //user route starting:

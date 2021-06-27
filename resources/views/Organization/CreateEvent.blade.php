@@ -42,9 +42,10 @@
                             </div>
                         </div>
                         @endif
+
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Create New Evnet</h4>
+                                <h4 class="card-title">Create New Event</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
@@ -57,27 +58,44 @@
                                             
                                             <div class="col-12 col-sm-12 col-lg-6 mb-1" style="margin-top:10px">
                                                 <fieldset class="form-group position-relative has-icon-left">
-                                                    <input type="datetime-local" name="start_date"  class="form-control" id="#" placeholder="Start Date" autocomplete="off" required>
+                                                    <label for="">End Date</label>
+                                                    <input type="datetime-local" name="event_end_date"  class="form-control" id="#" placeholder="End Date" autocomplete="off" required>
                                                 </fieldset>
                                             </div>
                                             <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px">
+                                                <label for="">          </label>
                                                 <input type="number" class="form-control" name="event_amount" placeholder="Amount" required>
                                             </div>
-                                            <div class="col-12 col-sm-12">
+                                            <div class="col-12 col-sm-12" style="margin-top:10px">
                                                 <fieldset class="form-group">
                                                     <textarea class="form-control" name="event_details" id="basicTextarea" rows="3" placeholder="Details" required></textarea>
                                                 </fieldset>
                                             </div>
-                                            <div class="col-12 col-sm-12">
+                                            <div class="col-12 col-sm-12"style="margin-top:10px">
                                                 <fieldset class="form-group">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="promo_image">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="event_image">
                                                         <label class="custom-file-label" for="inputGroupFile02">Choose Event image</label>
                                                     </div>
                                                 </fieldset>
                                             </div>
+                                             <div class="col-12 col-sm-6" style="margin-top:10px">
+                                                <fieldset class="form-group">
+                                                    <input type="text" class="form-control" name="event_Category" placeholder="Category" required>
+                                                </fieldset>
+                                            </div>
+                                             <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px;">
+                                                <fieldset class="form-group">
+                                                    <select name="event_type" class="form-control" id="event_type" required>
+                                                        <option disabled selected>Select Event Type</option>
+                                                        <option value="1">Regular</option>
+                                                        <option value="0">Volunteer</option>
+                                                        
+                                                    </select>
+                                                </fieldset>
+                                            </div>
                                             
-                                            <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px;">
+                                            {{-- <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px;">
                                                 <fieldset class="form-group">
                                                     <select name="promo_status" class="form-control" id="basicSelect" required>
                                                         <option disabled selected>Select Status</option>
@@ -86,7 +104,7 @@
                                                         
                                                     </select>
                                                 </fieldset>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-12 col-sm-12" style="margin-top: 10px">
                                                 <button type="submit" class="btn btn-block btn-success glow">Add</button>
                                             </div>
@@ -112,3 +130,7 @@
 
 </body>
 @endsection
+
+
+
+

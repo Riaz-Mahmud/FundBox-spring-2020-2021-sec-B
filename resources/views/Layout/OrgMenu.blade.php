@@ -106,10 +106,10 @@
                 </a>
             </li>
 
-            <li class="nav-item @if(url('/org/transEventList') == Request::url()) active @endif">
-                <a class="nav-hover" href="/org/transEventList">
+            <li class="nav-item @if(url('/org/EventList') == Request::url()) active @endif">
+                <a class="nav-hover" href="/org/EventList">
                     <i class="bx bxs-city mr-50"></i>
-                    <span class="menu-title" data-i18n="City Manager">Transition List</span>
+                    <span class="menu-title" data-i18n="City Manager">Events List</span>
                 </a>
             </li>
             
@@ -125,16 +125,15 @@
 
             <li class=" navigation-header"><span>Volunteer Event</span></li>
     
-            
             <li class="nav-item @if(url('/org/createVolunteerEvent') == Request::url()) active @endif">
-                <a href="/org/createVolunteerEvent">
+                <a class="nav-hover" href="/org/createVolunteerEvent">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Create Volunteer Event</span>
                 </a>
             </li>
-            
-            <li class="nav-item @if(url('/org/manageVolunteerEvent') == Request::url()) active @endif">
-                <a class="nav-hover" href="/org/manageVolunteerEvent">
+           
+            <li class="nav-item @if(url(' /org/ManageVolunteerEvent') == Request::url()) active @endif">
+                <a class="nav-hover" href=" /org/ManageVolunteerEvent">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Manage Volunteer Event</span>
                 </a>
