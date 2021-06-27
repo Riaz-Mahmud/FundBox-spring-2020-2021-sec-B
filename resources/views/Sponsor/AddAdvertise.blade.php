@@ -4,7 +4,7 @@
 
 <body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
-    @include('Layout.AdminMenu')
+    @include('Layout.SpMenu')
 
     <!-- BEGIN: Content-->
     <div class="app-content content">
@@ -44,61 +44,40 @@
                         @endif
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title"></h4>
+                                <h4 class="card-title">Add Advertise</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
                                     <form action="#" enctype="multipart/form-data" method="POST">
                                         @csrf
                                         <div class="row">
-                                            <h1 class="container p-3 mb-2 bg-secondary text-white">Block Organisation</h1>
-  
-<table class="table table-striped">
-  <thead>
-      <tr>
-        <th>SN</th>
-        <th>Image</th>
-        <th>Organisation</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td> 1</td>
-         <td>
-            <div class="osahan-slider-item" style="background-color:#fff;">
-                 <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-               </div>
-          </td>
-        <td>ORG 1</td>
-        <td><a href="#" class="btn btn-success "  >Listed</a></td>
-      </tr>
-      <tr>
-        <td> 2</td>
-         <td>
-            <div class="osahan-slider-item" style="background-color:#fff;">
-                 <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-               </div>
-          </td>
-        <td>ORG 2</td>
-        <td><a href="#" class="btn btn-success "  >Listed</a></td>
-      </tr>
-      <tr>
-        <td> 3</td>
-         <td>
-            <div class="osahan-slider-item" style="background-color:#fff;">
-                 <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-               </div>
-          </td>
-        <td>ORG 3</td>
-        <td><a href="#" class="btn btn-success "  >Listed</a></td>
-      </tr>
-    </tbody>
-</table>
-<div class="card-footer">
-    
-  </div>
+                                            <div class="col-12 col-sm-12 col-lg-12">
+                                                <input type="text" class="form-control" name="advertise_title" placeholder="Title" required>
+                                            </div>
+                                            
+                                             <div class="col-12 col-sm-12" style="margin-top:10px">
+                                                <fieldset class="form-group">
+                                                    <textarea class="form-control" name="advertise_description" id="basicTextarea" rows="3" placeholder="Description" required></textarea>
+                                                </fieldset>
+                                            </div>
 
+                                            <div class="col-12 col-sm-12 col-lg-12 mb-1" style="margin-top:10px">
+                                                <fieldset class="form-group position-relative has-icon-left">
+                                                    <input type="datetime-local" name="start_date"  class="form-control" id="#" placeholder="Start Date" autocomplete="off" required>
+                                                </fieldset>
+                                            </div> 
+                                            <div class="col-12 col-sm-12">
+                                                <fieldset class="form-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="promo_image">
+                                                        <label class="custom-file-label" for="inputGroupFile02">Choose Advertise Banner</label>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                            
+                                            <div class="col-12 col-sm-12" style="margin-top: 10px">
+                                                <button type="submit" class="btn btn-block btn-success glow">Add</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -114,10 +93,10 @@
 
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
+   
 
     @include('Layout.footer')
 
     @include('Layout.scripts')
-
 </body>
 @endsection

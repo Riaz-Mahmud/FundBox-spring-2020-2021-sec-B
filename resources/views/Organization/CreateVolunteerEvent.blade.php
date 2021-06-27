@@ -76,6 +76,7 @@
                                                     </div>
                                                 </fieldset>
                                             </div>
+
                                              <div class="col-12 col-sm-6" style="margin-top:10px">
                                                 <fieldset class="form-group">
                                                     <input type="text" class="form-control" name="event_venue" placeholder="Venue" required>
@@ -102,6 +103,7 @@
                                                     </select>
                                                 </fieldset>
                                             </div> --}}
+
                                             <div class="col-12 col-sm-12" style="margin-top: 10px">
                                                 <button type="submit" class="btn btn-block btn-success glow">Add</button>
                                             </div>

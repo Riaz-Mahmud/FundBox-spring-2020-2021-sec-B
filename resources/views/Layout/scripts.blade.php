@@ -35,7 +35,7 @@
 <script src="{{ asset('/js/scripts/pages/access-control.min.js') }}"></script>
 <script src="{{ asset('/js/scripts/pages/restaurant-manager.min.js') }}"></script>
 <script src="{{ asset('/js/scripts/pages/menu-manager.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('/js/scripts/extensions/drag-drop.min.js') }}"></script>
 <script src="{{ asset('/js/scripts/pages/feature-manager.min.js') }}"></script>
 <script src="{{ asset('/js/scripts/pages/old-user-manager.min.js') }}"></script>
