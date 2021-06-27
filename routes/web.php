@@ -242,7 +242,7 @@ Route::get('/sp/allAdvertise', function () {
             ->with('title', 'All Advertise | Sponsor');
 });
 Route::get('/sp/payment', function () {
-    return view('Sponsor.ListofAdvertise')
+    return view('Sponsor.Payment')
             ->with('title', 'Payment | Sponsor');
 });
 Route::get('/sp/transactionList', function () {
@@ -280,6 +280,10 @@ Route::get('/sp/allEvents', function () {
 Route::get('/sp/sponsoredEvents', function () {
     return view('Sponsor.SoponoredEvents')
             ->with('title', 'Sponsored Events | Sponsor');
+});
+Route::get('/sp/manageAccount', function () {
+    return view('Sponsor.ManageAccount')
+            ->with('title', 'Manage Account | Sponsor');
 });
 
 
