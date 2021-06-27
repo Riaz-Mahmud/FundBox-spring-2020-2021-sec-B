@@ -124,11 +124,19 @@ Route::get('/org/createEvent', function () {
             ->with('title', 'Create Event | Organization');
 });
 
+Route::Post('/org/createEvent', 'OrganizationHomeController@create');
+
 Route::get('/org/manageEvent', function () {
     return view('Organization.ManageEvent')
             ->with('title', 'Manage Event | Organization');
 });
 
+Route::get('/org/EventList', 'OrganizationHomeController@index')->name('org.eventList');
+Route::get('/org/edit/{id}', 'OrganizationHomeController@edit');
+Route::Post('/org/edit/{id}', 'OrganizationHomeController@update');
+
+Route::get('/org/delete/{id}', 'OrganizationHomeController@delete');
+Route::get('/org/destroy/{id}', 'OrganizationHomeController@destroy');
 
 
 //user route starting:

@@ -106,10 +106,10 @@
                 </a>
             </li>
 
-            <li class="nav-item ">
-                <a class="nav-hover" href="#">
+            <li class="nav-item @if(url('/org/EventList') == Request::url()) active @endif">
+                <a class="nav-hover" href="/org/EventList">
                     <i class="bx bxs-city mr-50"></i>
-                    <span class="menu-title" data-i18n="City Manager">Transition List</span>
+                    <span class="menu-title" data-i18n="City Manager">Events List</span>
                 </a>
             </li>
             

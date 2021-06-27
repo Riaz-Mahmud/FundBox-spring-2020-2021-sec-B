@@ -51,49 +51,26 @@
                                 <div class="card-body">
                                     <form action="#" enctype="multipart/form-data" method="POST">
                                         @csrf
-                                        <div class="row">
-                                            <div class="col-12 col-sm-12 col-lg-12">
-                                                <input type="text" class="form-control" name="event_name" placeholder="Event Name" required>
-                                            </div>
-                                            
-                                            <div class="col-12 col-sm-12 col-lg-6 mb-1" style="margin-top:10px">
-                                                <fieldset class="form-group position-relative has-icon-left">
-                                                    <label for="">End Date</label>
-                                                    <input type="datetime-local" name="event_end_date"  class="form-control" id="#" placeholder="End Date" autocomplete="off" required>
-                                                </fieldset>
-                                            </div>
-                                            <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px">
-                                                <label for="">          </label>
-                                                <input type="number" class="form-control" name="event_amount" placeholder="Amount" required>
-                                            </div>
-                                            <div class="col-12 col-sm-12" style="margin-top:10px">
-                                                <fieldset class="form-group">
-                                                    <textarea class="form-control" name="event_details" id="basicTextarea" rows="3" placeholder="Details" required></textarea>
-                                                </fieldset>
-                                            </div>
-                                            <div class="col-12 col-sm-12"style="margin-top:10px">
-                                                <fieldset class="form-group">
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="event_image">
-                                                        <label class="custom-file-label" for="inputGroupFile02">Choose Event image</label>
-                                                    </div>
-                                                </fieldset>
-                                            </div>
-                                             <div class="col-12 col-sm-6" style="margin-top:10px">
-                                                <fieldset class="form-group">
-                                                    <input type="text" class="form-control" name="event_Category" placeholder="Category" required>
-                                                </fieldset>
-                                            </div>
-                                             <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px;">
-                                                <fieldset class="form-group">
-                                                    <select name="event_type" class="form-control" id="event_type" required>
-                                                        <option disabled selected>Select Event Type</option>
-                                                        <option value="1">Regular</option>
-                                                        <option value="0">Volunteer</option>
-                                                        
-                                                    </select>
-                                                </fieldset>
-                                            </div>
+                                        
+                                            <table>
+		<tr>
+			<td>Event Name</td>
+			<td><input type="text" name="event_name" ></td>
+		</tr>
+		<tr>
+			<td>End Date</td>
+			<td> <input type="datetime-local" name="event_end_date"  class="form-control" id="#" placeholder="End Date" autocomplete="off" required></td>
+		</tr>
+		<tr>
+			<td>Event Details</td>
+			<td> <textarea class="form-control" name="event_details" id="basicTextarea" rows="3" placeholder="Details" required></textarea></td>
+		</tr>
+		<tr>
+			<td>Type</td>
+			<td><input type="text" name="type" ></td>
+		</tr>
+		
+	</table>
                                             
                                             {{-- <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px;">
                                                 <fieldset class="form-group">
