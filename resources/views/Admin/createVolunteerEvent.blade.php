@@ -43,7 +43,6 @@
                         </div>
                         @endif
                         <div class="card">
-                            <img src="{{asset('/images/pages/giphy.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-thumbnail mx-auto shadow-sm rounded" alt="...">
                             <div class="card-header">
                                 <h4 class="card-title">Create Volunteer Event</h4>
                             </div>
@@ -53,33 +52,51 @@
                                         @csrf
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-lg-12">
-                                                <input type="text" class="form-control" name="vevent_name" placeholder="Event Name" required>
+                                                <input type="text" class="form-control" name="event_name" placeholder="Event Name" required>
                                             </div>
                                             
                                              <div class="col-12 col-sm-12" style="margin-top:10px">
                                                 <fieldset class="form-group">
-                                                    <textarea class="form-control" name="vevent_details" id="basicTextarea" rows="3" placeholder="Details" required></textarea>
+                                                    <textarea class="form-control" name="event_details" id="basicTextarea" rows="3" placeholder="Details" required></textarea>
                                                 </fieldset>
                                             </div>
 
-                                            <div class="col-12 col-sm-12 col-lg-6 mb-1" style="margin-top:10px">
-                                                <fieldset class="form-group position-relative has-icon-left">
-                                                    <input type="datetime-local" name="start_date"  class="form-control" id="#" placeholder="Start Date" autocomplete="off" required>
+                                            <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px;">
+                                                <fieldset class="form-group">
+                                                    <select name="event_category" class="form-control" id="basicSelect" required>
+                                                        <option disabled selected>Select Event Category</option>
+                                                        @foreach($allCategory as $category)
+                                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                                        @endforeach                                                        
+                                                    </select>
                                                 </fieldset>
                                             </div>
+
                                             <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px">
-                                                <input type="number" class="form-control" name="vevent_Time" placeholder="Time" required>
+                                                <input type="text" class="form-control" name="event_vanue" placeholder="Vanue" required>
                                             </div>
-                                            <div class="col-12 col-sm-12 col-lg-12" style="margin-top:10px">
-                                                <input type="number" class="form-control" name="vevent_recuiredVol" placeholder="Recuired Volunteer" required>
+                                            <div class="col-12 col-sm-12 col-lg-6 mb-1" style="margin-top:10px">
+                                                <fieldset class="form-group position-relative has-icon-left">
+                                                    <input type="datetime-local" name="date"  class="form-control" id="#" placeholder="Target Date" autocomplete="off" required>
+                                                </fieldset>
                                             </div>
-                                           <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px">
-                                                <input type="number" class="form-control" name="vevent_venue" placeholder="Venue" required>
+
+                                            <div class="col-12 col-sm-12 col-lg-6" style="margin-top:10px">
+                                                <input type="number" class="form-control" name="event_phone" placeholder="Number" required>
                                             </div>
-                                            <div class="col-12 col-sm-12" style="margin-top:10px">
+                                            <div class="col-12 col-sm-12 col-lg-6" >
+                                                <fieldset class="form-group">
+                                                    <select name="status" class="form-control" id="basicSelect" required>
+                                                        <option disabled selected>Select Status</option>
+                                                        <option value="1">Active</option>
+                                                        <option value="0">Deactivate</option>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
                                                 <fieldset class="form-group">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="promo_image">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="image" required>
                                                         <label class="custom-file-label" for="inputGroupFile02">Choose Event image</label>
                                                     </div>
                                                 </fieldset>

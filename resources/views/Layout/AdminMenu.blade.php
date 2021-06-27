@@ -132,37 +132,37 @@
             <li class=" navigation-header"><span>Event</span></li>
             <li class="nav-item has-sub">
                 <a href="#">
-                    <i class="bx bxs-city mr-50"></i>
+                    <i class="bx bxs-package mr-50"></i>
                     <span class="menu-title" data-i18n="Area Coverage">Event</span>
                 </a>
                 <ul class="menu-content">
-                    <li class="nav-item @if(url('/admin/adminEvent') == Request::url()) active @endif">
-                        <a class="nav-hover" href="/admin/adminEvent">
-                            <i class="bx bxs-bar-chart-alt-2 mr-50"></i>
-                            <span class="menu-title" data-i18n="Category Manager">Create Event for Admin</span>
+                    <li class="nav-item @if(url('/admin/createAdminEvent') == Request::url()) active @endif">
+                        <a class="nav-hover" href="/admin/createAdminEvent">
+                            <i class="bx bxs-navigation mr-50"></i>
+                            <span class="menu-title" data-i18n="Category Manager">Create Admin Event</span>
                         </a>
                     </li>
                     <li class="nav-item @if(url('/admin/createOrgEvent') == Request::url()) active @endif">
                         <a class="nav-hover" href="/admin/createOrgEvent">
-                            <i class="bx bxs-bar-chart-alt-2 mr-50"></i>
+                            <i class="bx bxs-navigation mr-50"></i>
                             <span class="menu-title" data-i18n="Category Manager">Create organisation Event</span>
                         </a>
                     </li>
                     <li class="nav-item @if(url('/admin/createVolunteerEvent') == Request::url()) active @endif">
                         <a class="nav-hover" href="/admin/createVolunteerEvent">
-                            <i class="bx bx-planet mr-50"></i>
+                            <i class="bx bxs-navigation mr-50"></i>
                             <span class="menu-title" data-i18n="City Manager">Create Volunteer Event</span>
                         </a>
                     </li>
                     <li class="nav-item @if(url('/admin/manageEvent') == Request::url()) active @endif">
                         <a class="nav-hover" href="/admin/manageEvent">
-                            <i class="bx bxs-bar-chart-alt-2 mr-50"></i>
+                            <i class="bx bxs-navigation mr-50"></i>
                             <span class="menu-title" data-i18n="Category Manager">Manage Events</span>
                         </a>
                     </li>
                     <li class="nav-item @if(url('/admin/manageVolEvent') == Request::url()) active @endif">
                         <a class="nav-hover" href="/admin/manageVolEvent">
-                            <i class="bx bx-planet mr-50"></i>
+                            <i class="bx bxs-navigation mr-50"></i>
                             <span class="menu-title" data-i18n="City Manager">Manage Volunteer Event</span>
                         </a>
                     </li>
