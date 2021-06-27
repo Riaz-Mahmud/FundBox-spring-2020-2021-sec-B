@@ -83,6 +83,11 @@ Route::post('/admin/manageOrg/addOrgUser', 'Admin\OrganizationController@AddOrgU
 Route::post('/admin/manageOrg/delete', 'Admin\OrganizationController@Delete');
 Route::post('/admin/manageOrg/updateImage', 'Admin\OrganizationController@UpdateImage');
 
+Route::get('/admin/eventCategory','Admin\CategoryController@Index');
+Route::post('/admin/eventCategory','Admin\CategoryController@CreateCategory');
+Route::post('/admin/eventCategory/updateStatus','Admin\CategoryController@UpdateStatus');
+Route::post('/admin/eventCategory/delete','Admin\CategoryController@Delete');
+
 
 Route::get('/admin/adminEvent', function () {
     return view('Admin.adminEvent')->with('title', 'Create Admin Event | Admin');
