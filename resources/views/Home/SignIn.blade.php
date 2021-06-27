@@ -8,36 +8,48 @@
     <link rel="stylesheet" href="{{ asset('/css/pages/signin&signup.css') }}"><!--Header-->
 </head>
 <body>
-<div class="container" id="container">
-	<div class="form-container sign-up-container">
-		<form action="#">
-			<h1>Create Account</h1>
-			<div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+<div class="card-content">
+    <div class="card-body">
+		<div class="alert alert-success alert-dismissible mb-2" role="alert">
+			<div class="d-flex align-items-center">
+				<i class="bx bx-like"></i>
+				<b style="color: red;">
+					{{ session()->get('message') }}
+				</b>
 			</div>
+		</div>
+	</div>
+</div>
+<br>
+<div class="container" id="container">
+	
+	<div class="form-container sign-up-container">
+		<form action="/SignUp" method="POST">
+		@csrf
+			<h1>Create Account</h1>
 			<span>or use your email for registration</span>
-			<input type="text" placeholder="Name" />
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<button>Sign Up</button>
+			<input type="text" name="signup_name" placeholder="Full Name" required/>
+			<input type="text" name="signup_username" placeholder="Username" required/>
+			<input type="email" name="signup_email" placeholder="Email" required/>
+			<input type="number" name="signup_phone" placeholder="Phone" required/>
+			<input type="password" name="signup_password" placeholder="Password" required/>
+			<input type="password" name="signup_con_password" placeholder="Confirm Password" required/>
+
+			<button type="submit">Sign Up</button>
 		</form>
 	</div>
 	<div class="form-container sign-in-container">
-		<form action="#">
+		<form action="/SignIn" method="POST">
+		@csrf
 			<h1>Sign in</h1>
-			<div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div>
 			<span>or use your account</span>
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
+			<input type="email" name="login_email" placeholder="Email" required/>
+			<input type="password" name="login_password" placeholder="Password" required/>
+
 			<a href="#">Forgot your password?</a>
-			<button>Sign In</button>
-		</form>
+			<button type="submit">Sign In</button>
+			
+		</form>	
 	</div>
 	<div class="overlay-container">
 		<div class="overlay">
