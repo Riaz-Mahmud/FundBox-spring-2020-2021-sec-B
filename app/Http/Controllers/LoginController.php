@@ -71,6 +71,7 @@ class LoginController extends Controller
                     $request->session()->put('full_name', $user->name);
                     $request->session()->put('user_type', $user->type);
                     $request->session()->put('user_email', $user->email);
+                    $request->session()->put('user_image', $user->image);
 
                     if($user->type == 1){
                         return redirect('/admin/dashboard');

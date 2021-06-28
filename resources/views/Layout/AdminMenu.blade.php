@@ -40,11 +40,15 @@
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <div class="user-nav d-sm-flex d-none">
-                                <span class="user-name">GR_MANAGER_NAME</span>
-                                <span class="user-status text-muted">GR_MANAGER_EMAIL</span>
+                                <span class="user-name">{{session()->get('full_name')}}</span>
+                                <span class="user-status text-muted">{{session()->get('user_email')}}</span>
                             </div>
                             <span>
+                            @if(session()->has('user_image'))
+                                <img class="round" src="{{ url(session()->get('user_image')) }}" alt="avatar" height="40" width="40">
+                            @else
                                 <img class="round" src="{{ url('/images/avatar/avatar.png') }}" alt="avatar" height="40" width="40">
+                            @endif
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right pb-0">
@@ -57,7 +61,7 @@
                             <a class="dropdown-item" href="#">
                                 <i class="bx bx-message mr-50"></i> Chats</a>
                             <div class="dropdown-divider mb-0"></div>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="/logout">
                                 <i class="bx bx-power-off mr-50"></i> Logout</a>
                         </div>
                     </li>
