@@ -102,10 +102,10 @@
                 </a>
             </li>
 
-            <li class="nav-item @if(url('/user/organizationDetails') == Request::url()) active @endif">
-                <a class="nav-hover" href="{{ url('/user/organizationDetails') }}">
+            <li class="nav-item @if(url('/user/followedOrganization') == Request::url()) active @endif">
+                <a class="nav-hover" href="/user/followedOrganization">
                     <i class="bx bxs-city mr-50"></i>
-                    <span class="menu-title" data-i18n="City Manager">organizationDetails</span>
+                    <span class="menu-title" data-i18n="City Manager">Followed Organization</span>
                 </a>
             </li>
             
