@@ -40,8 +40,8 @@
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <div class="user-nav d-sm-flex d-none">
-                                <span class="user-name">NAME</span>
-                                <span class="user-status text-muted">EMAIL</span>
+                                <span class="user-name">{{session()->get('org_name')}}</span>
+                                <span class="user-status text-muted">{{session()->get('org_phone')}}</span>
                             </div>
                             <span>
                                 <img class="round" src="{{ url('/images/avatar/avatar.png') }}" alt="avatar" height="40" width="40">
@@ -146,7 +146,21 @@
                 </a>
             </li>
         
-
+            <li class=" navigation-header"><span>Sponsor</span></li>
+    
+            <li class="nav-item @if(url('/org/SponsorRequest') == Request::url()) active @endif">
+                <a class="nav-hover" href="/org/SponsorRequest">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Sponsor Requests</span>
+                </a>
+            </li>
+            <li class="nav-item @if(url('/org/SponsorList') == Request::url()) active @endif">
+                <a class="nav-hover" href="/org/SponsorList">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Sponsor List</span>
+                </a>
+            </li>
+            
             <li class=" navigation-header"><span>Account</span></li>
     
             <li class="nav-item @if(url('/org/manageAccount') == Request::url()) active @endif">

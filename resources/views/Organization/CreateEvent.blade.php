@@ -66,6 +66,10 @@
                                                 <label for="">          </label>
                                                 <input type="number" class="form-control" name="event_amount" placeholder="Amount" required>
                                             </div>
+                                            <div class="col-12 col-sm-12 col-lg-12" >
+                                            <label for="">  </label>
+                                                <input type="text" class="form-control" name="contact" placeholder="Contact" required>
+                                            </div>
                                             <div class="col-12 col-sm-12" style="margin-top:10px">
                                                 <fieldset class="form-group">
                                                     <textarea class="form-control" name="event_details" id="basicTextarea" rows="3" placeholder="Details" required></textarea>

@@ -124,11 +124,9 @@ Route::group(['middleware'=>['sess']] , function(){
 
     Route::group(['middleware'=>['org']] , function(){
 
-            Route::get('/org/dashboard', function () {
-              return view('Organization.Home')
-                ->with('title', 'Home Organization')
-                ->with('date', date('d-M-Y'));
-            });
+            Route::get('/org/dashboard','Org\HomeController@Index');
+
+
             Route::get('/org/manageEvent', function () {
                 return view('Organization.ManageEvent')
                         ->with('title', 'Manage Event | Organization');
@@ -139,23 +137,29 @@ Route::group(['middleware'=>['sess']] , function(){
                 return view('Organization.CreateEvent')
                         ->with('title', 'Create Event | Organization');
             });
-            Route::Post('/org/createEvent', 'OrganizationHomeController@create');
+            Route::Post('/org/createEvent', 'Org\OrganizationHomeController@create');
             //*****************EVENT LIST******************* */
-            Route::get('/org/EventList', 'OrganizationHomeController@index')->name('org.eventList');
+            Route::get('/org/EventList', 'Org\OrganizationHomeController@index')->name('org.eventList');
             //*****************EDIT EVENTS******************* */
-            Route::get('/org/edit/{id}', 'OrganizationHomeController@edit');
-            Route::Post('/org/edit/{id}', 'OrganizationHomeController@update');
+            Route::get('/org/edit/{id}/{type}', 'Org\OrganizationHomeController@edit');
+            Route::Post('/org/edit/{id}/{type}', 'Org\OrganizationHomeController@update');
             //*****************DELETE EVENTS******************* */
-            Route::get('/org/delete/{id}', 'OrganizationHomeController@delete');
-            Route::get('/org/destroy/{id}', 'OrganizationHomeController@destroy');
+            Route::get('/org/delete/{id}/{type}', 'Org\OrganizationHomeController@delete');
+            Route::get('/org/destroy/{id}/{type}', 'Org\OrganizationHomeController@destroy');
             //*****************CREATE VOLUNTEER EVENTS******************* */
             Route::get('/org/createVolunteerEvent', function () {
                 return view('Organization.CreateVolunteerEvent')
                         ->with('title', 'Create Volunteer Event | Organization');
             });
-            Route::Post('/org/createVolunteerEvent', 'OrganizationHomeController@createVolunteerEvent');
+            Route::Post('/org/createVolunteerEvent', 'Org\OrganizationHomeController@createVolunteerEvent');
             //*****************EDIT  Volunteer EVENTS******************* */
-            Route::get('/org/ManageVolunteerEvent', 'OrganizationHomeController@indexVolunteer')->name('org.volunteereventList');
+            Route::get('/org/ManageVolunteerEvent', 'Org\OrganizationHomeController@indexVolunteer')->name('org.volunteereventList');
+
+            Route::get('/org/SponsorRequest','Org\OrganizationHomeController@reqsponsor' )->name('org.req');
+             Route::get('/org/SponsorRequest/{id}','Org\OrganizationHomeController@approvesponsor' )->name('org.approve');
+             Route::get('/org/SponsorList','Org\OrganizationHomeController@sponsorlist' )->name('org.sponsor');
+             Route::get('/org/SponsorList/{id}','Org\OrganizationHomeController@cancelDeal' )->name('org.cancedeal');
+
         });
     });
 
