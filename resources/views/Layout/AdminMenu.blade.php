@@ -74,7 +74,7 @@
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto">
                 <a class="navbar-brand" href="#">
-                    <img src="{{ url('/images/logo/dummyLogo.png') }}" width="100%" height="70px"  />
+                    <img src="{{ url('/images/logo/dummyLogo.png') }}" width="80%" height="100px"  />
                 </a>
             </li>
         </ul>
