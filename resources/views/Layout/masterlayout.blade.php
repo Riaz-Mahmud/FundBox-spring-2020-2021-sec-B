@@ -15,6 +15,20 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet"><!--Footer-->
     <link rel="stylesheet" href="{{ asset('/Pages/Home/Footer/css/ionicons.min.css') }}"><!--Footer-->
     <link rel="stylesheet" href="{{ asset('/Pages/Home/Footer/css/style.css') }}"><!--Footer-->
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/60da32e465b7290ac6385f6c/1f9a5djrb';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
   </head>
   <body>
 @section('header')
