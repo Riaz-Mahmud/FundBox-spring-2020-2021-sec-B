@@ -91,6 +91,7 @@ Route::group(['middleware'=>['sess']] , function(){
         Route::post('/admin/eventCategory','Admin\CategoryController@CreateCategory');
         Route::post('/admin/eventCategory/updateStatus','Admin\CategoryController@UpdateStatus');
         Route::post('/admin/eventCategory/delete','Admin\CategoryController@Delete');
+        Route::post('/admin/eventCategory/update','Admin\CategoryController@Update');
 
         Route::get('/admin/createAdminEvent','Admin\EventController@Index');
         Route::post('/admin/createAdminEvent','Admin\EventController@CreateAdminEvent');
