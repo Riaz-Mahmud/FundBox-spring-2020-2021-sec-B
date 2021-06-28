@@ -154,11 +154,32 @@
                             <span class="menu-title" data-i18n="City Manager">Create Volunteer Event</span>
                         </a>
                     </li>
-                    <li class="nav-item @if(url('/admin/manageEvent') == Request::url()) active @endif">
-                        <a class="nav-hover" href="/admin/manageEvent">
-                            <i class="bx bxs-navigation mr-50"></i>
-                            <span class="menu-title" data-i18n="Category Manager">Manage Events</span>
+                    
+                    <li class="nav-item has-sub">
+                        <a href="#">
+                            <i class="bx bxs-package mr-50"></i>
+                            <span class="menu-title" data-i18n="Area Coverage">Manage Events</span>
                         </a>
+                        <ul class="menu-content">
+                            <li class="nav-item @if(url('/admin/manageAdminEvent') == Request::url()) active @endif">
+                                <a class="nav-hover" href="/admin/manageAdminEvent">
+                                    <i class="bx bxs-navigation mr-50"></i>
+                                    <span class="menu-title" data-i18n="Category Manager">Admin</span>
+                                </a>
+                            </li>
+                            <li class="nav-item @if(url('/admin/managePendingEvent') == Request::url()) active @endif">
+                                <a class="nav-hover" href="/admin/manageEvent">
+                                    <i class="bx bxs-navigation mr-50"></i>
+                                    <span class="menu-title" data-i18n="Category Manager">Pending</span>
+                                </a>
+                            </li>
+                            <li class="nav-item @if(url('/admin/manageAcceptedEvent') == Request::url()) active @endif">
+                                <a class="nav-hover" href="/admin/manageEvent">
+                                    <i class="bx bxs-navigation mr-50"></i>
+                                    <span class="menu-title" data-i18n="Category Manager">Accepted</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item @if(url('/admin/manageVolEvent') == Request::url()) active @endif">
                         <a class="nav-hover" href="/admin/manageVolEvent">

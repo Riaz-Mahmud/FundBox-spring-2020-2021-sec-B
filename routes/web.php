@@ -92,6 +92,7 @@ Route::group(['middleware'=>['sess']] , function(){
         Route::post('/admin/eventCategory/updateStatus','Admin\CategoryController@UpdateStatus');
         Route::post('/admin/eventCategory/delete','Admin\CategoryController@Delete');
         Route::post('/admin/eventCategory/update','Admin\CategoryController@Update');
+        Route::get('/admin/manageAdminEvent','Admin\CategoryController@Index');
 
         Route::get('/admin/createAdminEvent','Admin\EventController@Index');
         Route::post('/admin/createAdminEvent','Admin\EventController@CreateAdminEvent');
@@ -101,9 +102,9 @@ Route::group(['middleware'=>['sess']] , function(){
         Route::post('/admin/createVolunteerEvent','Admin\EventController@CreateVolunteerIndex');
 
 
-        Route::get('/admin/manageEvent', function () {
-            return view('Admin.manageEvent')->with('title', 'Manage All Event | Admin');
-        });
+        // Route::get('/admin/manageEvent', function () {
+        //     return view('Admin.manageEvent')->with('title', 'Manage All Event | Admin');
+        // });
 
 
 
@@ -158,8 +159,8 @@ Route::group(['middleware'=>['sess']] , function(){
             Route::Post('/org/createVolunteerEvent', 'OrganizationHomeController@createVolunteerEvent');
             //*****************EDIT  Volunteer EVENTS******************* */
             Route::get('/org/ManageVolunteerEvent', 'OrganizationHomeController@indexVolunteer')->name('org.volunteereventList');
-        });
     });
+});
 
     // **************************ORGANISATION END*******************************
 
