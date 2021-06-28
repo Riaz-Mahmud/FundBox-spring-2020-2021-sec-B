@@ -21,27 +21,27 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Volunteer Event Serial No.</th>
-                                <th>Volunteer Event Name</th>
+                                <th>Event Id</th>
+                                <th>Organization User Id</th>
                                 <th>Organization Name</th>
+                                <th>Phone</th>
+                                <th>Status</th>
                                 <th>   </th>
                             </tr>
                             </thead>
                             <tbody>
+                            
+                            @foreach ($volunteerEventList as $volunteerEvent)
                             <tr>
-                                <td>1</td>
-                                <td>ABC</td>
-                                <td>A organization</td>
-                                <td><a href="/user/applyVolunteerEvent" class="btn btn-success">Apply</a></td>
+                                <td>{{$volunteerEvent['eventId']}}</td>
+                                <td>{{$volunteerEvent['user_id']}}</td>
+                                <td>{{$volunteerEvent['user_name']}}</td>
+                                <td>{{$volunteerEvent['phone']}}</td>
+                                <td>{{$volunteerEvent['status']}}</td>
+                                <td><a href="/user/organizationDetails" class="btn btn-success">Details</a></td>
                             
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>DEF</td>
-                                <td>B organization</td>
-                                <td><a href="/user/applyVolunteerEvent" class="btn btn-success">Apply</a></td>
-                                
-                            </tr>
+                            @endforeach
                             
                             </tbody>
                         </table>
