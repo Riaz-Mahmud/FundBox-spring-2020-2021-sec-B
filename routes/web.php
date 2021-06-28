@@ -120,6 +120,9 @@ Route::group(['middleware'=>['sess']] , function(){
         Route::get('/admin/volunteerList','Admin\EventController@VolunteerList');
         Route::get('/admin/transitionList','Admin\EventController@TransitionList');
 
+        Route::get('/admin/reports','Admin\ReportController@Index');
+        Route::post('/admin/reports','Admin\ReportController@AddReply');
+
 
         Route::get('/admin/manageVolEvent', function () {
             return view('Admin.manageVolEvent')->with('title', 'Manage Volunteer Event | Admin');
