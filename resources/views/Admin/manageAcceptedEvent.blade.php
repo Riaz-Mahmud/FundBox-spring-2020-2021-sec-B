@@ -261,7 +261,7 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "{{ url('/admin/manageAdminEvent/updateStatus') }}",
+                url: "{{ url('/admin/manageAcceptedEvent/updateStatus') }}",
                 type: "POST",
                 data: {
                     id: id,

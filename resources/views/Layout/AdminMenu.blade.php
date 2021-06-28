@@ -106,21 +106,27 @@
                     <span class="menu-title" data-i18n="City Manager">Manage Admin</span>
                 </a>
             </li>
-               <li class=" navigation-header"><span>Organisation</span></li>
-
-                 <li class="nav-item @if(url('/admin/createOrg') == Request::url()) active @endif">
-                    <a class="nav-hover" href="/admin/createOrg">
-                        <i class="bx bx-planet mr-50"></i>
-                        <span class="menu-title" data-i18n="City Manager">Create Organisation</span>
-                    </a>
-                </li>
-
-                <li class="nav-item @if(url('/admin/manageOrg') == Request::url()) active @endif">
+            
+            <li class=" navigation-header"><span>Organisation</span></li>
+            <li class="nav-item @if(url('/admin/createOrg') == Request::url()) active @endif">
+                <a class="nav-hover" href="/admin/createOrg">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Create Organisation</span>
+                </a>
+            </li>
+            <li class="nav-item @if(url('/admin/pendingOrg') == Request::url()) active @endif">
+                <a class="nav-hover" href="/admin/pendingOrg">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Pending Organisation</span>
+                </a>
+            </li>
+            <li class="nav-item @if(url('/admin/manageOrg') == Request::url()) active @endif">
                 <a class="nav-hover" href="/admin/manageOrg">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Manage Organisation</span>
                 </a>
             </li>
+
             <li class=" navigation-header"><span>Category</span></li>
             <li class="nav-item @if(url('/admin/eventCategory') == Request::url()) active @endif">
                 <a class="nav-hover" href="/admin/eventCategory">
@@ -168,24 +174,18 @@
                                 </a>
                             </li>
                             <li class="nav-item @if(url('/admin/managePendingEvent') == Request::url()) active @endif">
-                                <a class="nav-hover" href="/admin/manageEvent">
+                                <a class="nav-hover" href="/admin/managePendingEvent">
                                     <i class="bx bxs-navigation mr-50"></i>
                                     <span class="menu-title" data-i18n="Category Manager">Pending</span>
                                 </a>
                             </li>
                             <li class="nav-item @if(url('/admin/manageAcceptedEvent') == Request::url()) active @endif">
-                                <a class="nav-hover" href="/admin/manageEvent">
+                                <a class="nav-hover" href="/admin/manageAcceptedEvent">
                                     <i class="bx bxs-navigation mr-50"></i>
                                     <span class="menu-title" data-i18n="Category Manager">Accepted</span>
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    <li class="nav-item @if(url('/admin/manageVolEvent') == Request::url()) active @endif">
-                        <a class="nav-hover" href="/admin/manageVolEvent">
-                            <i class="bx bxs-navigation mr-50"></i>
-                            <span class="menu-title" data-i18n="City Manager">Manage Volunteer Event</span>
-                        </a>
                     </li>
                 </ul>
                 

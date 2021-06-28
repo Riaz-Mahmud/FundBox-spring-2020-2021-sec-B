@@ -51,46 +51,54 @@
                                     <form action="#" enctype="multipart/form-data" method="POST">
                                         @csrf
                                         <div class="row">
-                                            <h1 class="container p-3 mb-2 bg-secondary text-white">Transition List</h1>
-  
-    <table class="table table-success table-striped">
-   <thead>
-      <tr>
-        <th>Events</th>
-        <th>Organisation</th>
-        <th>Donated </th>
-        <th>Donated amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Event 1</td>
-        <td>ORG 1</td>
-        <td>723</td>
-        <td>13566$</td>
-      </tr>
-      <tr>
-        <td>Event 2</td>
-        <td>ORG 2</td>
-        <td>256</td>
-        <td>5000$</td>
-    </tr>
-      <tr>
-        <td>Event 3</td>
-        <td>ORG 3</td>
-        <td>290</td>
-        <td>9056$</td>
-      </tr>
-            <tr>
-        <td>Event 4</td>
-        <td>ORG 4</td>
-        <td>123</td>
-        <td>6980$</td>
-      </tr>
-    </tbody>
-</table>
-</table>
+                                            <h1 class="container p-3 mb-2 bg-secondary text-white">All Transition List</h1>
+                                            <h5 class="">{{$eventName}}</h5>
 
+                                            <table class="table table-success table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>SL</th>
+                                                        <th>Event Name</th>
+                                                        <th>User Name</th>
+                                                        <th>Amount</th>
+                                                        <th>Others</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($allTransitions as $key => $trans)
+                                                    <tr>
+                                                        <td>{{$key+1}}</td>
+                                                        <td>
+                                                            {{$trans->event_name}}
+                                                        </td>
+                                                        <td>{{$trans->name}}</td>
+                                                        <td>{{$trans->amount}}</td>
+                                                        <td>
+                                                            @if($trans->visibleType == 1)
+                                                                <small> <b>Visible Type: </b> Show</small><br>
+                                                            @elseif($trans->visibleType == 2)
+                                                                <small> <b>Visible Type: </b> Hide</small><br>
+                                                            @endif
+                                                            <small> <b>Date: </b> {{ date("d M, Y",strtotime($trans->created_at))}}</small><br>
+                                                        </td>
+                                                        <td>
+                                                            @if($trans->status == 1)
+                                                                <small> <b>Active</b></small><br>
+                                                            @elseif($trans->status == 2)
+                                                                <small> <b> Refund </b></small><br>
+                                                            @elseif($trans->status == 0)
+                                                                <small> <b> Cancel </b></small><br>
+                                                            @endif
+                                                        </td>
+                                                        
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                                <div class="col-md-12 col-12 overflow-auto">
+                                                    {!! $allTransitions->links() !!}
+                                                </div>
+                                            </table>
                                         </div>
                                     </form>
                                 </div>

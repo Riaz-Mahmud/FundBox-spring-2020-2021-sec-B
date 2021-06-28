@@ -81,7 +81,8 @@
                                                                 <img src="https://i.gifer.com/VuKc.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
                                                             </div>
                                                         @endif
-                                                        <form action="{{ url('/admin/manageOrg/updateImage') }}" method="POST" enctype="multipart/form-data">
+                                                        @if($orgs->status != "3")
+                                                            <form action="{{ url('/admin/manageOrg/updateImage') }}" method="POST" enctype="multipart/form-data">
                                                                 @csrf
                                                                 <input type="text" name="orgEdiImageId" value="{{ $orgs->id }}" hidden>
                                                                 <div class="row" style="margin-top: 10px">
@@ -97,7 +98,8 @@
                                                                         <button type="submit" class="btn btn-success glow">Save</button>
                                                                     </div>
                                                                 </div>
-                                                        </form>
+                                                            </form>
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         <b>{{ $orgs->name }}</b> <br>
@@ -112,7 +114,14 @@
                                                     <b>Phone: </b> {{ $orgs->phone }}</small> <br>
                                                     <b>Address: </b> {{ $orgs->address }}</small>
                                                     </td>
-                                                    @if($orgs->status != "2")
+                                                    @if($orgs->status == "2" || $orgs->status == "3")
+                                                        <td class="text-center" style="width: 5%">
+                                                            <div class="custom-control custom-switch custom-control-inline mb-1">
+                                                                <input type="checkbox" class="custom-control-input">
+                                                                <label class="custom-control-label"></label>
+                                                            </div>
+                                                        </td>
+                                                    @else
                                                         @if($orgs->status == "1")
                                                         <td class="text-center" style="width: 5%">
                                                             <div class="custom-control custom-switch custom-control-inline mb-1">
@@ -128,22 +137,21 @@
                                                             </div>
                                                         </td>
                                                         @endif
-                                                    @else
-                                                        <td class="text-center" style="width: 5%">
-                                                            <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                                <input type="checkbox" class="custom-control-input">
-                                                                <label class="custom-control-label"></label>
-                                                            </div>
-                                                        </td>
                                                     @endif
                                                     <td>
-                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateUser('{{ $orgs->id }}', '{{ $orgs->name }}', '{{ $orgs->phone }}', '{{ $orgs->address }}', '{{ $orgs->details }}')">Edit</button>
-                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteOrg('{{ $orgs->id }}')">Delete</button>
-                                                        @if($orgs->status == "1")
-                                                        <button type="submit" id="blockBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="blockOrg('{{ $orgs->id }}',2)">Block</button>
-                                                        @elseif($orgs->status == "2")
-                                                        <button type="submit" id="blockBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="blockOrg('{{ $orgs->id }}',1)">UnBlock</button>
+                                                        @if($orgs->status == "3")
+                                                            <a href="{{URL::to('/admin/pendingOrg/accept/'.base64_encode($orgs->id)) }}" class="btn btn-info glow" style="margin-top: 3px" >Accept</a>
+                                                            <a href="{{URL::to('/admin/pendingOrg/delete/'.base64_encode($orgs->id)) }}" class="btn btn-danger glow" style="margin-top: 3px" >Delete</a>
+                                                        @else
+                                                            <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateUser('{{ $orgs->id }}', '{{ $orgs->name }}', '{{ $orgs->phone }}', '{{ $orgs->address }}', '{{ $orgs->details }}')">Edit</button>
+                                                            <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteOrg('{{ $orgs->id }}')">Delete</button>
+                                                            @if($orgs->status == "1" || $orgs->status == "0")
+                                                                <button type="submit" id="blockBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="blockOrg('{{ $orgs->id }}',2)">Block</button>
+                                                            @elseif($orgs->status == "2")
+                                                                <button type="submit" id="blockBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="blockOrg('{{ $orgs->id }}',1)">UnBlock</button>
+                                                            @endif
                                                         @endif
+                                                        
                                                     </td>
                                                 </tr>
                                                 @endforeach
