@@ -13,26 +13,28 @@
                 <section id="widgets-Statistics">
                     <div class="row">
                         <div class="col-12 mt-1 mb-2">
-                            <h4>CategoryList</h4>
+                            <h4>Followed Organition</h4>
                             <hr>
                         </div>
                     </div>
 
-                        <table class="table table-striped">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Name</th>
+                                
+                                <th>Organization Id </th>
                                 <th>Status</th>
+                                <th>  </th>
+                            
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($categoryList as $category)
+                            @foreach ($followedOrganizations as $followedOrganization)
                             <tr>
-                                <td>{{$category['id']}}</td>
-                                <td>{{$category['name']}}</td>
-                                <td>{{$category['status']}}</td>
-                                
+                                <td>{{$followedOrganization['org_id']}}</td>
+                                <td>{{$followedOrganization['status']}}</td>
+                                <td><a href="/user/unfollowedOrganization/{{$followedOrganization['id']}}" class="btn btn-success">Unfollow</a></td>
+                            
                             </tr>
                             @endforeach
                             </tbody>
