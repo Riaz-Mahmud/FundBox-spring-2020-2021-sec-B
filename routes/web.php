@@ -86,13 +86,15 @@ Route::group(['middleware'=>['sess']] , function(){
         Route::post('/admin/manageOrg/delete', 'Admin\OrganizationController@Delete');
         Route::post('/admin/manageOrg/updateImage', 'Admin\OrganizationController@UpdateImage');
         Route::post('/admin/manageOrg/block', 'Admin\OrganizationController@BlockOrg');
+        Route::get('/admin/pendingOrg','Admin\OrganizationController@PendingOrg');
+        Route::get('/admin/pendingOrg/accept/{id}','Admin\OrganizationController@PendingOrgAccept');
+        Route::get('/admin/pendingOrg/delete/{id}','Admin\OrganizationController@PendingOrgDelete');
 
         Route::get('/admin/eventCategory','Admin\CategoryController@Index');
         Route::post('/admin/eventCategory','Admin\CategoryController@CreateCategory');
         Route::post('/admin/eventCategory/updateStatus','Admin\CategoryController@UpdateStatus');
         Route::post('/admin/eventCategory/delete','Admin\CategoryController@Delete');
         Route::post('/admin/eventCategory/update','Admin\CategoryController@Update');
-        Route::get('/admin/manageAdminEvent','Admin\CategoryController@Index');
 
         Route::get('/admin/createAdminEvent','Admin\EventController@Index');
         Route::post('/admin/createAdminEvent','Admin\EventController@CreateAdminEvent');
@@ -100,24 +102,27 @@ Route::group(['middleware'=>['sess']] , function(){
         Route::post('/admin/createOrgEvent','Admin\EventController@CreateOrgEvent');
         Route::get('/admin/createVolunteerEvent','Admin\EventController@VolunteerIndex');
         Route::post('/admin/createVolunteerEvent','Admin\EventController@CreateVolunteerIndex');
+        //admin Event
+        Route::get('/admin/manageAdminEvent','Admin\EventController@ManageAdminEvent');
+        Route::post('/admin/manageAdminEvent/updateStatus','Admin\EventController@ManageAdminEventUpdateStatus');
+        Route::post('/admin/manageAdminEvent/delete','Admin\EventController@ManageAdminEventDelete');
+        //Pending Event
+        Route::get('/admin/managePendingEvent','Admin\EventController@ManagePendingEvent');
+        Route::post('/admin/managePendingEvent/accept','Admin\EventController@ManagePendingEventAccept');
+        Route::post('/admin/managePendingEvent/delete','Admin\EventController@ManagePendingEventDelete');
 
+        //accepted event
+        Route::get('/admin/manageAcceptedEvent','Admin\EventController@ManageAcceptedEvent');
+        Route::post('/admin/manageAcceptedEvent/updateStatus','Admin\EventController@ManageAcceptedEventUpdateStatus');
+        Route::get('/admin/manageAcceptedEvent/fundResponse/{id}','Admin\EventController@ManageAcceptedEventFundResponse');
+        Route::get('/admin/manageAcceptedEvent/volunteerResponse/{id}','Admin\EventController@ManageAcceptedEventVolunteerResponse');
 
-        // Route::get('/admin/manageEvent', function () {
-        //     return view('Admin.manageEvent')->with('title', 'Manage All Event | Admin');
-        // });
-
-
-
+        Route::get('/admin/volunteerList','Admin\EventController@VolunteerList');
+        Route::get('/admin/transitionList','Admin\EventController@TransitionList');
 
 
         Route::get('/admin/manageVolEvent', function () {
             return view('Admin.manageVolEvent')->with('title', 'Manage Volunteer Event | Admin');
-        });
-        Route::get('/admin/transitionList', function () {
-            return view('Admin.transitionList')->with('title', 'Transition List | Admin');
-        });
-        Route::get('/admin/volunteerList', function () {
-            return view('Admin.volunteerList')->with('title', 'Volunteer List | Admin');
         });
 
     });
