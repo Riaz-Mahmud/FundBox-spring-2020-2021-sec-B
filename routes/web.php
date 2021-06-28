@@ -85,6 +85,7 @@ Route::group(['middleware'=>['sess']] , function(){
         Route::post('/admin/manageOrg/addOrgUser', 'Admin\OrganizationController@AddOrgUser');
         Route::post('/admin/manageOrg/delete', 'Admin\OrganizationController@Delete');
         Route::post('/admin/manageOrg/updateImage', 'Admin\OrganizationController@UpdateImage');
+        Route::post('/admin/manageOrg/block', 'Admin\OrganizationController@BlockOrg');
 
         Route::get('/admin/eventCategory','Admin\CategoryController@Index');
         Route::post('/admin/eventCategory','Admin\CategoryController@CreateCategory');

@@ -302,4 +302,40 @@ class OrganizationController extends Controller
             }
         }
     }
+
+    public function BlockOrg(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'orgId' => 'required',
+            'value' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Required data missing.'
+            ]);
+        } else {
+            $id = $request->input('orgId');
+            
+            $data=array();
+            $data['status']=$request->input('value');
+
+            $update= DB::table('organizations')
+                            ->where('id',$id)
+                            ->update($data);
+
+            if ($update) {
+                return response()->json([
+                    'error' => false,
+                    'message' => 'Block successfully.'
+                ]);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Something went wrong.'
+                ]);
+            }
+        }
+    }
 }

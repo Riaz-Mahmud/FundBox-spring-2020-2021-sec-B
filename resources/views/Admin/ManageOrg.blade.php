@@ -112,24 +112,38 @@
                                                     <b>Phone: </b> {{ $orgs->phone }}</small> <br>
                                                     <b>Address: </b> {{ $orgs->address }}</small>
                                                     </td>
-                                                    @if($orgs->status == "1")
-                                                    <td class="text-center" style="width: 5%">
-                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch{{ $key }}" value="0" onclick="statusUpdate('{{ $orgs->id }}', '{{ $key }}')">
-                                                            <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
-                                                        </div>
-                                                    </td>
+                                                    @if($orgs->status != "2")
+                                                        @if($orgs->status == "1")
+                                                        <td class="text-center" style="width: 5%">
+                                                            <div class="custom-control custom-switch custom-control-inline mb-1">
+                                                                <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch{{ $key }}" value="0" onclick="statusUpdate('{{ $orgs->id }}', '{{ $key }}')">
+                                                                <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
+                                                            </div>
+                                                        </td>
+                                                        @else
+                                                        <td class="text-center" style="width: 5%">
+                                                            <div class="custom-control custom-switch custom-control-inline mb-1">
+                                                                <input type="checkbox" class="custom-control-input" id="statusSwitch{{ $key }}" value="1" onclick="statusUpdate('{{ $orgs->id }}', '{{ $key }}')">
+                                                                <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
+                                                            </div>
+                                                        </td>
+                                                        @endif
                                                     @else
-                                                    <td class="text-center" style="width: 5%">
-                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" id="statusSwitch{{ $key }}" value="1" onclick="statusUpdate('{{ $orgs->id }}', '{{ $key }}')">
-                                                            <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
-                                                        </div>
-                                                    </td>
+                                                        <td class="text-center" style="width: 5%">
+                                                            <div class="custom-control custom-switch custom-control-inline mb-1">
+                                                                <input type="checkbox" class="custom-control-input">
+                                                                <label class="custom-control-label"></label>
+                                                            </div>
+                                                        </td>
                                                     @endif
                                                     <td>
                                                         <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateUser('{{ $orgs->id }}', '{{ $orgs->name }}', '{{ $orgs->phone }}', '{{ $orgs->address }}', '{{ $orgs->details }}')">Edit</button>
                                                         <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteOrg('{{ $orgs->id }}')">Delete</button>
+                                                        @if($orgs->status == "1")
+                                                        <button type="submit" id="blockBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="blockOrg('{{ $orgs->id }}',2)">Block</button>
+                                                        @elseif($orgs->status == "2")
+                                                        <button type="submit" id="blockBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="blockOrg('{{ $orgs->id }}',1)">UnBlock</button>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -318,6 +332,58 @@
                     }
                 }
             });
+        }
+        
+        function blockOrg(orgId,value) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You will be able to revert this!",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Do it!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    
+                    document.getElementById('blockBtn').innerText = 'Loading..';
+                    var status = "0";
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "{{ url('/admin/manageOrg/block') }}",
+                        type: "POST",
+                        data: {
+                            orgId: orgId,
+                            value: value
+                        },
+                        success: function(result) {
+                            if (!result.error) {
+                                document.getElementById('blockBtn').innerText = 'Done';
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: result.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                location.reload();
+                            } else {
+                                document.getElementById('blockBtn').innerText = 'Error';
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'danger',
+                                    title: result.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                location.reload();
+                            }
+                        }
+                    });
+                }
+            })
         }
 
         function deleteOrg(orgId) {
