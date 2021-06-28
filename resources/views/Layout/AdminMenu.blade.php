@@ -202,7 +202,14 @@
                     <span class="menu-title" data-i18n="Category Manager">Transition List</span>
                 </a>
             </li>             
-        
+
+            <li class=" navigation-header"><span>Report</span></li>
+            <li class="nav-item @if(url('/admin/reports') == Request::url()) active @endif">
+                <a class="nav-hover" href="/admin/reports">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Manage Reports</span>
+                </a>
+            </li>
 
             <li class=" navigation-header"><span>Account</span></li>
             <li class="nav-item ">
