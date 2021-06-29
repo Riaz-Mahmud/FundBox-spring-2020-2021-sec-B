@@ -205,7 +205,22 @@
                     <i class="bx bxs-bar-chart-alt-2 mr-50"></i>
                     <span class="menu-title" data-i18n="Category Manager">Transition List</span>
                 </a>
-            </li>             
+            </li>   
+
+            
+            <li class=" navigation-header"><span>Sponsoor</span></li>
+            <li class="nav-item @if(url('/admin/sponsor') == Request::url()) active @endif">
+                <a class="nav-hover" href="/admin/sponsor">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Pending Request</span>
+                </a>
+            </li>
+            <li class="nav-item @if(url('/admin/sponsorManage') == Request::url()) active @endif">
+                <a class="nav-hover" href="/admin/sponsorManage">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Manage Sponsor</span>
+                </a>
+            </li>          
 
             <li class=" navigation-header"><span>Report</span></li>
             <li class="nav-item @if(url('/admin/reports') == Request::url()) active @endif">

@@ -123,6 +123,15 @@ Route::group(['middleware'=>['sess']] , function(){
         Route::get('/admin/reports','Admin\ReportController@Index');
         Route::post('/admin/reports','Admin\ReportController@AddReply');
 
+        //SponsorAdmin
+        Route::get('/admin/sponsor','Admin\SponsorController@Index');
+        Route::post('/admin/sponsor/accept','Admin\SponsorController@Accept');
+        Route::post('/admin/sponsor/delete','Admin\SponsorController@Delete');
+
+        Route::get('/admin/sponsorManage','Admin\SponsorController@ManageIndex');
+        Route::post('/admin/sponsorManage/updateStauts','Admin\SponsorController@ManageUpdateStatus');
+        Route::post('/admin/sponsorManage/delete','Admin\SponsorController@ManageDelete');
+
 
         Route::get('/admin/manageVolEvent', function () {
             return view('Admin.manageVolEvent')->with('title', 'Manage Volunteer Event | Admin');

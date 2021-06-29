@@ -55,86 +55,66 @@
                                                 <tr>
                                                     <th style="width:5%;">SN</th>
                                                     <th>Image</th>
-                                                    <th>Name</th>
-                                                    <th>Info</th>
+                                                    <th style="width:30%;">Name</th>
+                                                    <th style="width:30%;">Others</th>
                                                     <th>Status</th>
                                                     <th>Options</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($allAdmins as $key => $admin)
+                                            @foreach($allSponsor as $key => $sponsor)
                                                 <tr>
-                                                    <td>{{ $key+1 }}</td>
-                                                    <td> 
-                                                        @if($admin->image)
-                                                            <?php if (file_exists("../public".$admin->image)){ ?>
-                                                                <div class="osahan-slider-item" style="background-color:#fff;">
-                                                                    <img src="{{asset($admin->image)}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                                </div>
-                                                                <?php } else{ ?>
-                                                                <div class="osahan-slider-item" style="background-color:#fff;">
-                                                                    <img src="https://i.gifer.com/B0eS.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                                </div>
-                                                            <?php } ?>
-                                                        @else
+                                                    <td>{{1+$key}}</td>
+                                                    <td>
+                                                    @if($sponsor->image)
+                                                        <?php if (file_exists("../public".$sponsor->image)){ ?>
                                                             <div class="osahan-slider-item" style="background-color:#fff;">
-                                                                <img src="https://i.gifer.com/VuKc.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                                <img src="{{asset($sponsor->image)}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
                                                             </div>
-                                                        @endif
+                                                            <?php } else{ ?>
+                                                            <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                <img src="https://i.gifer.com/B0eS.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                            </div>
+                                                        <?php } ?>
+                                                    @else
+                                                        <div class="osahan-slider-item" style="background-color:#fff;">
+                                                            <img src="https://i.gifer.com/VuKc.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                        </div>
+                                                    @endif
                                                     </td>
                                                     <td>
-                                                        <b>{{ $admin->name }}</b> <br>
-                                                        <small> <b>username: </b> {{ $admin->username }}</small>
-                                                        <br>
-                                                        @if(session()->get('admin_is_super_admin')==1)
-                                                            @if($admin->is_super_admin == 1 )
-                                                            <a class="nav-hover" href="#">
-                                                                <span class="menu-title" data-toggle="modal" data-target="#addUserModal" data-i18n="City Manager" onclick="makeSuperAdmin('{{ $admin->id }}','0')"> <b> Remove Super Admin </b></span>
-                                                            </a>
-                                                            @elseif($admin->is_super_admin == 0 )
-                                                            <a class="nav-hover" href="#">
-                                                                <span class="menu-title" data-toggle="modal" data-target="#addUserModal" data-i18n="City Manager" onclick="makeSuperAdmin('{{ $admin->id }}','1')"> <b> Make Super Admin </b></span>
-                                                            </a>
-                                                            @endif
-                                                        @endif
+                                                        <b>{{$sponsor->name}}</b><br>
+                                                        <small> <b>username: </b> {{ $sponsor->username }}</small><br>
                                                     </td>
                                                     <td>
-                                                    <b>Email: </b> {{ $admin->email }}</small> <br>
-                                                    <b>Phone: </b> {{ $admin->phone }}</small>
+                                                        <small> <b>Contact: </b> {{ $sponsor->phone }}</small><br>
+                                                        <small> <b>Email: </b> {{ $sponsor->email }}</small><br>
                                                     </td>
-                                                    @if(session()->get('admin_is_super_admin')==1)
-                                                    @if($admin->status == "1")
+                                                    @if($sponsor->status == "1")
                                                     <td class="text-center" style="width: 5%">
                                                         <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch{{ $key }}" value="0" onclick="statusUpdate('{{ $admin->id }}', '{{ $key }}')">
+                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch{{ $key }}" value="0" onclick="statusUpdate('{{ $sponsor->id }}', '{{ $key }}')">
                                                             <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
                                                         </div>
                                                     </td>
                                                     @else
                                                     <td class="text-center" style="width: 5%">
                                                         <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" id="statusSwitch{{ $key }}" value="1" onclick="statusUpdate('{{ $admin->id }}', '{{ $key }}')">
+                                                            <input type="checkbox" class="custom-control-input" id="statusSwitch{{ $key }}" value="1" onclick="statusUpdate('{{ $sponsor->id }}', '{{ $key }}')">
                                                             <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
                                                         </div>
                                                     </td>
                                                     @endif
-                                                    @else
-                                                    <td class="text-center" style="width: 5%">
-                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" >
-                                                            <label class="custom-control-label" ></label>
-                                                        </div>
-                                                    </td>
-                                                    @endif
                                                     <td>
-                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateUser('{{ $admin->id }}', '{{ $admin->name }}', '{{ $admin->email }}', '{{ $admin->phone }}')">Edit</button>
-                                                        @if(session()->get('admin_is_super_admin')==1)
-                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteAdmin('{{ $admin->id }}')">Delete</button>
-                                                        @endif
+                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteSponsor('{{ $sponsor->id }}')">Delete</button>
+                                                        
                                                     </td>
                                                 </tr>
-                                                @endforeach
+                                            @endforeach
                                             </tbody>
+                                            <div class="col-md-12 col-12 overflow-auto">
+                                                {!! $allSponsor->links() !!}
+                                            </div>
                                         </table>
                                     </div>
                                     <!-- datatable ends -->
@@ -151,7 +131,7 @@
     <div class="modal fade" id="updateModal" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="{{ url('/admin/manageAdmin/updateUserInfo') }}" enctype="multipart/form-data" method="POST">
+                <form class="form-horizontal" id="editBrandForm" action="#" method="POST">
                 @csrf
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -161,32 +141,75 @@
                         <div class="form-group row">
                             <!-- <label class="col-sm-3 control-label">ID: </label> -->
                             <div class="col-sm-8">
-                                <input type="hidden" class="form-control" id="editUser_id" placeholder="ID" name="editUser_id" required>
+                                <input type="hidden" class="form-control" id="editPromo_id" placeholder="ID" name="editPromo_id" required>
                             </div>
                         </div> 
                         <!-- /form-group-->
                         <div class="row">
-                            <label for="editName" class="col-sm-3 control-label">Name </label>
+                            <label for="editPromoCode" class="col-sm-3 control-label">Code: </label>
                             <label class="col-sm-1 control-label">: </label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="editName" placeholder="Name" name="editName" required>
+                                <input type="text" class="form-control" id="editPromoCode" placeholder="Code" name="editPromoCode" required>
                             </div>
                         </div> <!-- /form-group-->
                         <div class="row" style="margin-top:5px">
-                            <label for="editEmail" class="col-sm-3 control-label">Email </label>
+                            <label for="editPromoCount" class="col-sm-3 control-label">Count: </label>
                             <label class="col-sm-1 control-label">: </label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="editEmail" placeholder="Email" name="editEmail" required>
+                                <input type="text" class="form-control" id="editPromoCount" placeholder="Count" name="editPromoCount" required>
                             </div>
                         </div> <!-- /form-group-->
                         <div class="row" style="margin-top:5px">
-                            <label for="editPhone" class="col-sm-3 control-label">Phone </label>
+                            <label for="editStartDate" class="col-sm-3 control-label">Start: </label>
                             <label class="col-sm-1 control-label">: </label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" id="editPhone" name="editPhone" placeholder="Number" required>
+                                <input type="datetime-local" class="form-control" id="editStartDate" name="editStartDate" autocomplete="off" required>
                             </div>
                         </div>
-                        
+                        <div class="row" style="margin-top:5px">
+                            <label for="editEndDate" class="col-sm-3 control-label">End: </label>
+                            <label class="col-sm-1 control-label">: </label>
+                            <div class="col-sm-8">
+                                <input type="datetime-local" class="form-control" id="editEndDate" placeholder="End Date" name="editEndDate" autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:5px">
+                            <label for="editPromoCon" class="col-sm-3 control-label">Conditions: </label>
+                            <label class="col-sm-1 control-label">: </label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="editPromoCon" id="editPromoCon" rows="3" placeholder="Conditions" required></textarea>
+                                <!-- <input type="text" class="form-control" id="editPromoCon" placeholder="Conditions" name="editPromoCon" required> -->
+                            </div>
+                        </div> <!-- /form-group-->
+                        <div class="row" style="margin-top:5px">
+                            <label for="editAmount" class="col-sm-3 control-label">Discount Amount</label>
+                            <label class="col-sm-1 control-label">: </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="editAmount" placeholder="Discount Amount" name="editAmount" required>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:5px">
+                            <label for="editMinAmount" class="col-sm-3 control-label">Minimum Purchase Amount</label>
+                            <label class="col-sm-1 control-label">: </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="editMinAmount" placeholder="Minimum Purchase Amount" name="editMinAmount" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="edit_promo_type" class="col-sm-3 control-label">Promo type</label>
+                            <label class="col-sm-1 control-label">: </label>
+                            <div class="col-sm-8">
+                                <fieldset class="form-group">
+                                    <select name="edit_promo_type" class="form-control" id="edit_promo_type" required>
+                                        <option disabled selected>Select Promo discount type</option>
+                                        <option value="1">Flat</option>
+                                        <option value="2">Percentage</option>
+                                                            
+                                    </select>
+                                </fieldset>
+                            </div>
+                            
+                        </div>
                     </div>
                     <div class="modal-footer editBrandFooter">
                         <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
@@ -211,49 +234,7 @@
 
     <script>
 
-        function updateUser(userId, userName, email,phone) {
-            $('#editUser_id').val(userId)
-            $('#editName').val(userName)
-            $('#editEmail').val(email)
-            $('#editPhone').val(phone)
-        }
-
-        function makeSuperAdmin(user_id,value) {
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: "{{ url('/admin/manageAdmin/makeSuperAdmin') }}",
-                type: "POST",
-                data: {
-                    user_id: user_id,
-                    value: value
-                },
-                success: function(result) {
-                    if (!result.error) {
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: result.message,
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                        location.reload();
-                    } else {
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'danger',
-                            title: result.message,
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                        location.reload();
-                    }
-                }
-            });
-        }
-
-        function statusUpdate(user_id, item) {
+        function statusUpdate(id, item) {
             var status = "";
             if ($("#statusSwitch" + item).val() == "1") {
                 status = "1";
@@ -266,11 +247,11 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "{{ url('/admin/manageAdmin/updateStatus') }}",
+                url: "{{ url('/admin/sponsorManage/updateStauts') }}",
                 type: "POST",
                 data: {
-                    user_id: user_id,
-                    user_status: status
+                    id: id,
+                    status: status
                 },
                 success: function(result) {
                     if (!result.error) {
@@ -294,7 +275,7 @@
             });
         }
 
-        function deleteAdmin(adminId) {
+        function deleteSponsor(id) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -312,10 +293,10 @@
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                        url: "{{ url('/admin/manageAdmin/deleteAdmin') }}",
+                        url: "{{ url('/admin/sponsorManage/delete') }}",
                         type: "POST",
                         data: {
-                            adminId: adminId
+                            id: id
                         },
                         success: function(result) {
                             if (!result.error) {
