@@ -141,7 +141,8 @@
 <div class="event">
     <div class="container" style="height:200px; text-align: center; margin-top:100px;">
         <h2>Ready to Join us?</h2>
-        <button type="button" class="btn btn-success">Join with Us</button>
+        <a type="button" href="{{URL::to('/joinOrg')}}" class="btn btn-success">Join as Organization</a>
+        <a type="button" href="{{URL::to('/joinSponsor')}}" class="btn btn-success">Join as Sponsor</a>
     </div>
 </div>
 @endsection
