@@ -82,7 +82,7 @@
                                                     </div>
                                                 @endif</td>
                                                     <td>
-                                                        <b>{{$Req->name}}</b>
+                                                        <b>{{$Req->sponsor_Id}}</b>
                                                     </td>
                                                     <td>
                                                         <b>{{$Req->title}}</b>
@@ -91,7 +91,7 @@
                                                         <b>{{$Req->amount}}</b>
                                                     </td>
                                                     <td>
-                                                        <a href ="{{route('org.approve',$Req->id)}}" class="btn btn-success" type="submit">Approve</a>
+                                                        <a href ="{{route('org.renew',$Req->id)}}" class="btn btn-primary" type="submit">Renew Deal</a>
                                                     </td>
                                                     
                                                     

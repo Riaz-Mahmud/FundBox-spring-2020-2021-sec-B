@@ -82,7 +82,7 @@
                                                     </div>
                                                 @endif</td>
                                                     <td>
-                                                        <b>{{$Req->sponsor_Id}}</b>
+                                                        <b>{{$Req->name}}</b>
                                                     </td>
                                                     <td>
                                                         <b>{{$Req->title}}</b>

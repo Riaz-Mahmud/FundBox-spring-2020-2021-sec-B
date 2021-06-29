@@ -154,22 +154,29 @@ Route::group(['middleware'=>['sess']] , function(){
             //*****************DELETE EVENTS******************* */
             Route::get('/org/delete/{id}/{type}', 'Org\OrganizationHomeController@delete');
             Route::get('/org/destroy/{id}/{type}', 'Org\OrganizationHomeController@destroy');
+
+            //***************** EVENT Transactions******************* */
+            Route::get('/org/eventTransaction', 'Org\OrganizationHomeController@eventTransaction');
             //*****************CREATE VOLUNTEER EVENTS******************* */
             Route::get('/org/createVolunteerEvent', function () {
                 return view('Organization.CreateVolunteerEvent')
                         ->with('title', 'Create Volunteer Event | Organization');
             });
+            //*****************Volunteer List */
+             Route::get('/org/volunteerlist', 'Org\OrganizationHomeController@VolunteerList');
             Route::Post('/org/createVolunteerEvent', 'Org\OrganizationHomeController@createVolunteerEvent');
             //*****************EDIT  Volunteer EVENTS******************* */
             Route::get('/org/ManageVolunteerEvent', 'Org\OrganizationHomeController@indexVolunteer')->name('org.volunteereventList');
 
             Route::get('/org/SponsorRequest','Org\OrganizationHomeController@reqsponsor' )->name('org.req');
-             Route::get('/org/SponsorRequest/{id}','Org\OrganizationHomeController@approvesponsor' )->name('org.approve');
-             Route::get('/org/SponsorList','Org\OrganizationHomeController@sponsorlist' )->name('org.sponsor');
-             Route::get('/org/SponsorList/{id}','Org\OrganizationHomeController@cancelDeal' )->name('org.cancedeal');
-
-       
-            Route::get('/org/ManageVolunteerEvent', 'OrganizationHomeController@indexVolunteer')->name('org.volunteereventList');
+            Route::get('/org/SponsorRequest/{id}','Org\OrganizationHomeController@approvesponsor' )->name('org.approve');
+            Route::get('/org/SponsorList','Org\OrganizationHomeController@sponsorlist' )->name('org.sponsor');
+            Route::get('/org/SponsorList/{id}','Org\OrganizationHomeController@cancelDeal' )->name('org.cancedeal');
+            Route::get('/org/RenewSponsor','Org\OrganizationHomeController@renewsponsor' )->name('org.renewsponsorlist');
+            Route::get('/org/RenewSponsor/{id}','Org\OrganizationHomeController@renew' )->name('org.renew');
+            Route::get('/org/SponsorTransaction','Org\OrganizationHomeController@sponsorTransaction' )->name('org.sponsorTransaction');
+            
+            
     });
 });
 

@@ -191,10 +191,14 @@ public function createVolunteerEvent(Request $req){
 }
 
 public function reqsponsor(Request $req){
+    // $srequest = DB::table('spo_to_org_proposals')
+    //                     ->where('org_Id',$req->session()->get('org_id'))
+    //                     ->where('status','2')->get();
     $srequest = DB::table('spo_to_org_proposals')
-                        ->where('org_Id',$req->session()->get('org_id'))
-                        ->where('status','2')->get();
-
+    ->leftJoin('sponsors','spo_to_org_proposals.sponsor_id','=' , 'sponsors.id')
+    ->select('spo_to_org_proposals.*', 'sponsors.name')
+    ->where('org_Id',$req->session()->get('org_id'))
+    ->where('spo_to_org_proposals.status','2')->get();
     return view('Organization.SponsorRequest')
             ->with('Requests',$srequest)
             ->with('title', 'Sponsor Requests | Organization');
@@ -208,8 +212,10 @@ public function approvesponsor(Request $req,$id){
 }
 public function sponsorlist(Request $req){
     $srequest = DB::table('spo_to_org_proposals')
-                        ->where('org_Id',$req->session()->get('org_id'))
-                        ->where('status','0')->get();
+    ->leftJoin('sponsors','spo_to_org_proposals.sponsor_id','=' , 'sponsors.id')
+    ->select('spo_to_org_proposals.*', 'sponsors.name')
+    ->where('org_Id',$req->session()->get('org_id'))
+    ->where('spo_to_org_proposals.status','0')->get();
      return view('Organization.SponsorList')
              ->with('Requests',$srequest)
             ->with('title', 'SponsorList | Organization');
@@ -223,4 +229,58 @@ public function cancelDeal(Request $req,$id){
     return redirect()->route('org.sponsor'); 
 
 }
+public function renewsponsor(Request $req){
+    $srequest = DB::table('spo_to_org_proposals')
+                        ->where('org_Id',$req->session()->get('org_id'))
+                        ->where('status','1')->get();
+
+    return view('Organization.RenewSponsor')
+            ->with('Requests',$srequest)
+            ->with('title', 'Sponsor Requests | Organization');
+}
+
+public function renew(Request $req,$id){
+    $srequest = spo_to_org_proposal::find($id);
+    $srequest->status = '0';
+    $srequest->save();
+    return redirect()->route('org.renewsponsorlist'); 
+
+}
+
+
+public function sponsorTransaction(Request $req){
+    // $transaction = DB::table('sponsor_trans_lists')
+    //                     ->where('org_Id',$req->session()->get('org_id'))
+    //                     ->where('status','0')->get();
+    $transaction = DB::table('sponsor_trans_lists')
+    ->leftJoin('sponsors','sponsor_trans_lists.sponsor_id','=' , 'sponsors.id')
+    ->select('sponsor_trans_lists.*', 'sponsors.name')
+    ->where('org_Id',$req->session()->get('org_id'))
+    ->get();                    
+    
+
+    return view('Organization.sponsortransaction')
+             ->with('Transaction',$transaction)
+            ->with('title', 'Sponsor Transactions | Organization');
+
+}
+public function VolunteerList(Request $req){
+     $vol = DB::table('event_volunteers')
+                        ->where('org_Id',$req->session()->get('org_id'))
+                        ->where('status','1')->get();
+    
+    return view('Organization.VolunteerList')
+                ->with('vol',$vol)
+                ->with('title', ' Volunteer List | Organization');
+}
+public function eventTransaction(Request $req){
+     $transaction = DB::table('event_trans_lists')
+                        ->where('org_Id',$req->session()->get('org_id'))
+                        ->where('status','1')->get();
+    
+    return view('Organization.TransitionEventList')
+                ->with('Transaction',$transaction)
+                ->with('title', ' Event Transactions | Organization');
+}
+
 }

@@ -54,45 +54,26 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width:5%;">Id</th>
-                                                    <th>Image</th>
+                                                    
                                                     <th>Sponsor Name</th>
-                                                    <th>Title</th>
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($Requests as $Req)
+                                                @foreach ($Transaction as $trans)
                                                     
                                                
                                                 <tr>
-                                                    <td>{{$Req->id}}</td>
-                                                    <td> @if($Req->sponsorLogo)
-                                                            <?php if (file_exists("../public".$Req->sponsorLogo)){ ?>
-                                                            <div class="osahan-slider-item" style="background-color:#fff;">
-                                                                <img src="{{asset($Req->sponsorLogo)}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                            </div>
-                                                            <?php } else{ ?>
-                                                            <div class="osahan-slider-item" style="background-color:#fff;">
-                                                            <img src="https://i.gifer.com/B0eS.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                                </div>
-                                                        <?php } ?>
-                                                    @else
-                                                    <div class="osahan-slider-item" style="background-color:#fff;">
-                                                    <img src="https://i.gifer.com/VuKc.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                    </div>
-                                                @endif</td>
+                                                    <td>{{$trans->id}}</td>
+                                                    
                                                     <td>
-                                                        <b>{{$Req->name}}</b>
+                                                        <b>{{$trans->name}}</b>
                                                     </td>
+                            
                                                     <td>
-                                                        <b>{{$Req->title}}</b>
+                                                        <b>{{$trans->amount}}</b>
                                                     </td>
-                                                    <td>
-                                                        <b>{{$Req->amount}}</b>
-                                                    </td>
-                                                    <td>
-                                                        <a href ="{{route('org.approve',$Req->id)}}" class="btn btn-success" type="submit">Approve</a>
-                                                    </td>
+                                                    
                                                     
                                                     
                                                 </tr>
