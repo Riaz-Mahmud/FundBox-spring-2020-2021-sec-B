@@ -54,42 +54,32 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width:5%;">SN</th>
-                                                    <th>Name</th>
-                                                    <th>Event</th>
-                                                    <th>Option</th>
+                                                    <th>Event Name</th>
+                                                    <th>User Name</th>
+                                                    <th>Phone</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    
-                                                    <td>
-                                                        <b>User 1</b>
-                                                    </td>
-                                                    <td>
-                                                        <b>Event name</b>
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit"  class="btn btn-info glow" >Edit</button>
-                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px">Delete</button>
-
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    
-                                                    <td>
-                                                        <b>User 2</b>
-                                                    </td>
-                                                    <td>
-                                                        <b>Event name</b>
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit"  class="btn btn-info glow" >Edit</button>
-                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px">Delete</button>
-
-                                                    </td>
-                                                </tr>
+                                    @foreach ($vol as $Req)
+                                        
+                                    
+                                    <tr>
+                                        <td>{{$Req->id}}</td>
+                                        
+                                        <td>
+                                            <b>{{$Req->eventId}}</b>
+                                        </td>
+                                        <td>
+                                            <b>{{$Req->user_name}}</b>
+                                        </td>
+                                        <td>
+                                            <b>{{$Req->phone}}</b>
+                                        </td>
+                                        
+                                        
+                                        
+                                    </tr>
+                                        @endforeach
                                             </tbody>
                                         </table>
                                     </div>

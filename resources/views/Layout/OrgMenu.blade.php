@@ -112,7 +112,12 @@
                     <span class="menu-title" data-i18n="City Manager">Events List</span>
                 </a>
             </li>
-            
+             <li class="nav-item @if(url('/org/eventTransaction') == Request::url()) active @endif">
+                <a class="nav-hover" href="/org/eventTransaction">
+                    <i class="bx bxs-city mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Events Transaction List</span>
+                </a>
+            </li>
             <li class=" navigation-header"><span>Refund</span></li>
             
 
@@ -139,8 +144,8 @@
                 </a>
             </li>
 
-            <li class="nav-item @if(url('/org/volunteerList') == Request::url()) active @endif">
-                <a class="nav-hover" href="/org/volunteerList">
+            <li class="nav-item @if(url('/org/volunteerlist') == Request::url()) active @endif">
+                <a class="nav-hover" href="/org/volunteerlist">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Volunteer List</span>
                 </a>
@@ -161,6 +166,18 @@
                 </a>
             </li>
             
+             <li class="nav-item @if(url('/org/RenewSponsor') == Request::url()) active @endif">
+                <a class="nav-hover" href="/org/RenewSponsor">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Renew Sponsor </span>
+                </a>
+            </li>
+            <li class="nav-item @if(url('/org/SponsorTransaction') == Request::url()) active @endif">
+                <a class="nav-hover" href="/org/SponsorTransaction">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager"> Sponsor Transactions</span>
+                </a>
+            </li>
             <li class=" navigation-header"><span>Account</span></li>
     
             <li class="nav-item @if(url('/org/manageAccount') == Request::url()) active @endif">
