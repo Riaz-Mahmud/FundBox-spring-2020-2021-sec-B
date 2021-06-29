@@ -23,6 +23,7 @@ class HomeController extends Controller
         ->first();
 
         if($org){
+            
             $request->session()->put('org_name', $org->name);
             $request->session()->put('org_id', $org->id);
             $request->session()->put('org_image', $org->image);

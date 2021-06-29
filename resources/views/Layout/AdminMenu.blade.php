@@ -54,12 +54,6 @@
                         <div class="dropdown-menu dropdown-menu-right pb-0">
                             <a class="dropdown-item" href="#">
                                 <i class="bx bx-user mr-50"></i> Edit Profile</a>
-                            <a class="dropdown-item" href="#">
-                                <i class="bx bx-envelope mr-50"></i> My Inbox</a>
-                            <a class="dropdown-item" href="#">
-                                <i class="bx bx-check-square mr-50"></i> Task</a>
-                            <a class="dropdown-item" href="#">
-                                <i class="bx bx-message mr-50"></i> Chats</a>
                             <div class="dropdown-divider mb-0"></div>
                             <a class="dropdown-item" href="/logout">
                                 <i class="bx bx-power-off mr-50"></i> Logout</a>
@@ -77,7 +71,7 @@
     <div class="navbar-header mb-3">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/">
                     <img src="{{ url('/images/logo/dummyLogo.png') }}" width="80%" height="100px"  />
                 </a>
             </li>
@@ -219,6 +213,12 @@
                 <a class="nav-hover" href="/admin/sponsorManage">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Manage Sponsor</span>
+                </a>
+            </li>
+            <li class="nav-item @if(url('/admin/sponsorBanner') == Request::url()) active @endif">
+                <a class="nav-hover" href="/admin/sponsorBanner">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Sponsor Banner</span>
                 </a>
             </li>          
 

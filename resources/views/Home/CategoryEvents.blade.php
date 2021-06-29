@@ -9,10 +9,9 @@
     <div class="container">
         <div class="row" style="padding-bottom:30px;">
             <div class="col-12" >
-                <h2 class="text-center" style="margin:30px 0px;">All Events</h2>
+                <h2 class="text-center" style="margin:30px 0px;">Fund Events</h2>
                 <div class="row">
                 @foreach($allEvents as $key => $events)
-                <a href="{{ URL::to('/EventDetails/'.base64_encode($events->id)) }}" class="text-dark">
                     <div class="col-4">
                         <div class="card" style="width: 20rem;margin-top:10px;">
                             @if($events->image)
@@ -35,7 +34,6 @@
                             </div>
                         </div>
                     </div>
-                    </a>
                     @endforeach
                     <div class="col-md-12 col-12 overflow-auto">
                         {!! $allEvents->links() !!}
@@ -53,7 +51,6 @@
                 <h2 class="text-center" style="margin:30px 0px;">Volunteer Events</h2>
                 <div class="row">
                 @foreach($volEvents as $key => $vEvents)
-                <a href="{{ URL::to('/EventDetails/'.base64_encode($vEvents->id)) }}" class="text-dark">
                     <div class="col-4">
                         <div class="card" style="width: 20rem;margin-top:10px;">
                             @if($vEvents->image)
@@ -72,7 +69,6 @@
                             </div>
                         </div>
                     </div>
-                    </a>
                     @endforeach
                 </div>
             </div>

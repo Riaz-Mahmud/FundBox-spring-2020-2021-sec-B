@@ -54,28 +54,31 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width:5%;">SN</th>
-                                                    <th>Image</th>
-                                                    <th>Name</th>
-                                                    <th>Options</th>
+                                                    <th>Event Name</th>
+                                                    <th>User Name</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>
-                                                        <div class="osahan-slider-item" style="background-color:#fff;">
-                                                            <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <b>Event Name</b>
-                                                    </td>
-                                                    <td>
-                                                        <a href="/org/transList" style="margin-top: 5px;">
-                                                                <button type="submit" class="btn btn-info glow">View List</button>
-                                                        </a>
-                                                    </td>
-                                                </tr>
+                                        @foreach ($Transaction as $Req)
+                                                    
+                                        
+                                        <tr>
+                                            <td>{{$Req->id}}</td>
+                                            
+                                            <td>
+                                                <b>{{$Req->eventId}}</b>
+                                            </td>
+                                            <td>
+                                                <b>{{$Req->user_id}}</b>
+                                            </td>
+                                            <td>
+                                                <b>{{$Req->amount}}</b>
+                                            </td>
+                                            
+                                            
+                                            
+                                        </tr>
+                                                 @endforeach
                                             </tbody>
                                         </table>
                                     </div>
