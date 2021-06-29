@@ -30,7 +30,7 @@ class HomeController extends Controller
 
         $allCategory = DB::table('event_categorys')->where('status',1)->inRandomOrder()->get();
 
-        $banner = DB::table('sponsor_banners')->where('status',1)->first();
+        $banner = DB::table('sponsor_banners')->where('status',1)->inRandomOrder()->first();
 
         $totalMoneyCollect = DB::table('event_trans_lists')->where('status',1)->sum('amount');
         $totalEvents = DB::table('events')->where('status', 1)->get();

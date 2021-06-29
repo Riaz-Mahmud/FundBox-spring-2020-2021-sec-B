@@ -42,15 +42,7 @@ Route::group(['middleware'=>['sess']] , function(){
 
     Route::group(['middleware'=>['admin']] , function(){
 
-        Route::get('/test',function(){
-            return view('Admin.Test')->with('title', 'TEST | Admin');
-        });
-
-        Route::get('/admin/dashboard', function () {
-            return view('Admin.AdminHome')
-                    ->with('title', 'Home Admin')
-                    ->with('date', date('d-M-Y'));
-        });
+        Route::get('/admin/dashboard','Admin\HomeController@Index');
 
 
         Route::get('/admin/createAdmin', function () {
@@ -118,6 +110,11 @@ Route::group(['middleware'=>['sess']] , function(){
         Route::get('/admin/sponsorManage','Admin\SponsorController@ManageIndex');
         Route::post('/admin/sponsorManage/updateStauts','Admin\SponsorController@ManageUpdateStatus');
         Route::post('/admin/sponsorManage/delete','Admin\SponsorController@ManageDelete');
+
+        Route::get('/admin/sponsorBanner','Admin\SponsorController@BannerIndex');
+        Route::post('/admin/sponsorBanner/updateStatus','Admin\SponsorController@BannerIndexStatusUpdate');
+        Route::post('/admin/sponsorBanner/accept','Admin\SponsorController@BannerAccept');
+        Route::post('/admin/sponsorBanner/delete','Admin\SponsorController@BannerDelete');
 
 
         Route::get('/admin/manageVolEvent', function () {
