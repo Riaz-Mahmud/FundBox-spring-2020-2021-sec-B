@@ -25,7 +25,7 @@ class LoginController extends Controller
             }elseif($request->session()->get('user_type') == 3){
                 return redirect('/sp/dashboard');
             }elseif($request->session()->get('user_type') == 4){
-                return redirect('/user/dashboard');
+                return redirect('/');
             }else{
                 return view('Home.SignIn')
                 ->with('title', 'Login');

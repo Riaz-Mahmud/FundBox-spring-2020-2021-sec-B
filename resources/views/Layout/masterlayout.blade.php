@@ -94,8 +94,24 @@
                   <!-- <li><a href="/about" class="nav-link">About Us</a></li> -->
                   <li><a href="/contact" class="nav-link">Contact</a></li>
                   <li><a href="/FAQ" class="nav-link">FAQ</a></li>
+
+                  
                   @if(session()->has('username'))
-                  <li><a href="/logout" class="nav-link">Sign Out</a></li>
+                    <li class="has-children">
+                      <a href="#about-section" class="nav-link">Profile</a>
+                        <ul class="dropdown arrow-top">
+                          @if(session()->get('user_type')==1)
+                            <li><a href="/admin/dashboard" class="nav-link">Dashboard</a></li>
+                          @elseif(session()->get('user_type')==2)
+                            <li><a href="/org/dashboard" class="nav-link">Dashboard</a></li>
+                          @elseif(session()->get('user_type')==3)
+                            <li><a href="/sp/dashboard" class="nav-link">Dashboard</a></li>
+                          @elseif(session()->get('user_type')==4)
+                            <li><a href="/user/dashboard" class="nav-link">Dashboard</a></li>
+                          @endif
+                          <li><a href="/logout" class="nav-link">Sign Out</a></li>              
+                        </ul>
+                    </li>
                   @else
                   <li><a href="/SignIn" class="nav-link">Sign in</a></li>
                   @endif
