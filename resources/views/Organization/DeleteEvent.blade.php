@@ -81,7 +81,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a href="/org/destroy/{{$Event->id}}"> Delete </a>
+        <a href="/org/destroy/{{$Event->id}}/{{$Event->eventType}}"> Delete </a>
       </div>
     </div>
   </div>

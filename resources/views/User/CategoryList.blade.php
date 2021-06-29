@@ -21,25 +21,20 @@
                         <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Category Serial No.</th>
-                                <th>Category</th>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Status</th>
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach ($categoryList as $category)
                             <tr>
-                                <td>1</td>
-                                <td>A Category</td>  
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>B Category</td>
+                                <td>{{$category['id']}}</td>
+                                <td>{{$category['name']}}</td>
+                                <td>{{$category['status']}}</td>
                                 
                             </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>C Category</td>
-                                
-                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
                 </section>

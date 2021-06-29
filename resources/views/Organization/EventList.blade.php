@@ -84,8 +84,8 @@
                                                     <td>{{$user->targetMoney}}$</td>
                                                     <td>{{$user->eventType}}</td>
                                                     <td> <button type="submit" data-toggle="modal" data-target="#detailseModal" class="btn btn-info glow" onclick="viewDetiils('{{ $user->event_name }}', '{{ $user->details }}')">Details</button></td>
-                                                    <td><a href="/org/edit/{{$user->id}}"> Edit </a></td>
-                                                    <td><a href="/org/delete/{{$user->id}}"> Delete </a></td>
+                                                    <td><a href="/org/edit/{{$user->id}}/{{$user->eventType}}"> Edit </a></td>
+                                                    <td><a href="/org/delete/{{$user->id}}/{{$user->eventType}}"> Delete </a></td>
                                             </tr>
                                             @endforeach
                                         </tbody>

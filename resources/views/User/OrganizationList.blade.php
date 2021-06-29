@@ -13,7 +13,7 @@
                 <section id="widgets-Statistics">
                     <div class="row">
                         <div class="col-12 mt-1 mb-2">
-                            <h4>Transition Details</h4>
+                            <h4>Organization List</h4>
                             <hr>
                         </div>
                     </div>
@@ -21,30 +21,27 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Organization Serial No.</th>
-                                <th>Organization Name</th>
+                                <th>User Id</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>Status</th>
                                 <th>Details</th>
+                                
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach ($organizationList as $organization)
                             <tr>
-                                <td>1</td>
-                                <td>A organization</td>
-                                <td><a href="/user/organizationDetails" class="btn btn-success">Details</a></td>
+                                <td>{{$organization['user_id']}}</td>
+                                <td>{{$organization['name']}}</td>
+                                <td>{{$organization['phone']}}</td>
+                                <td>{{$organization['address']}}</td>
+                                <td>{{$organization['status']}}</td>
+                                <td><a href="/user/organizationDetails/{{$organization['id']}}" class="btn btn-success">Details</a></td>
                             
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>B organization</td>
-                                <td><a href="/user/organizationDetails" class="btn btn-success">Details</a></td>
-                                
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>C organization</td>
-                                <td><a href="/user/organizationDetails" class="btn btn-success">Details</a></td>
-                            
-                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
                 </section>

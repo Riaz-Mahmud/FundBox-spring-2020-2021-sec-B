@@ -86,20 +86,23 @@
                                                         <b>{{ $admin->name }}</b> <br>
                                                         <small> <b>username: </b> {{ $admin->username }}</small>
                                                         <br>
-                                                        @if($admin->is_super_admin == 1 )
-                                                        <a class="nav-hover" href="#">
-                                                            <span class="menu-title" data-toggle="modal" data-target="#addUserModal" data-i18n="City Manager" onclick="makeSuperAdmin('{{ $admin->id }}','0')"> <b> Remove Super Admin </b></span>
-                                                        </a>
-                                                        @elseif($admin->is_super_admin == 0 )
-                                                        <a class="nav-hover" href="#">
-                                                            <span class="menu-title" data-toggle="modal" data-target="#addUserModal" data-i18n="City Manager" onclick="makeSuperAdmin('{{ $admin->id }}','1')"> <b> Make Super Admin </b></span>
-                                                        </a>
+                                                        @if(session()->get('admin_is_super_admin')==1)
+                                                            @if($admin->is_super_admin == 1 )
+                                                            <a class="nav-hover" href="#">
+                                                                <span class="menu-title" data-toggle="modal" data-target="#addUserModal" data-i18n="City Manager" onclick="makeSuperAdmin('{{ $admin->id }}','0')"> <b> Remove Super Admin </b></span>
+                                                            </a>
+                                                            @elseif($admin->is_super_admin == 0 )
+                                                            <a class="nav-hover" href="#">
+                                                                <span class="menu-title" data-toggle="modal" data-target="#addUserModal" data-i18n="City Manager" onclick="makeSuperAdmin('{{ $admin->id }}','1')"> <b> Make Super Admin </b></span>
+                                                            </a>
+                                                            @endif
                                                         @endif
                                                     </td>
                                                     <td>
                                                     <b>Email: </b> {{ $admin->email }}</small> <br>
                                                     <b>Phone: </b> {{ $admin->phone }}</small>
                                                     </td>
+                                                    @if(session()->get('admin_is_super_admin')==1)
                                                     @if($admin->status == "1")
                                                     <td class="text-center" style="width: 5%">
                                                         <div class="custom-control custom-switch custom-control-inline mb-1">
@@ -115,9 +118,19 @@
                                                         </div>
                                                     </td>
                                                     @endif
+                                                    @else
+                                                    <td class="text-center" style="width: 5%">
+                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
+                                                            <input type="checkbox" class="custom-control-input" >
+                                                            <label class="custom-control-label" ></label>
+                                                        </div>
+                                                    </td>
+                                                    @endif
                                                     <td>
                                                         <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateUser('{{ $admin->id }}', '{{ $admin->name }}', '{{ $admin->email }}', '{{ $admin->phone }}')">Edit</button>
+                                                        @if(session()->get('admin_is_super_admin')==1)
                                                         <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteAdmin('{{ $admin->id }}')">Delete</button>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                                 @endforeach

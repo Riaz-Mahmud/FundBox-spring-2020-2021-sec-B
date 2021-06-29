@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Org;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use App\Event;
+use App\spo_to_org_proposal;
+
 class OrganizationHomeController extends Controller
 {
     public function index(){
@@ -16,9 +18,10 @@ class OrganizationHomeController extends Controller
             ->with('title', 'Event List | Organization')
             ->with('EventList',$Events);
            
-}
+    }
+    
     public function indexVolunteer(){
-        $VolEvents = DB::table('events')->where('eventType','0')->get();
+        $VolEvents = DB::table('events')->where('eventType','2')->get();
         return view('Organization.ManageVolunteerEvent')
                 ->with('title','Volunteer Events | Organization')
                 ->with('EventList',$VolEvents);
@@ -30,7 +33,8 @@ class OrganizationHomeController extends Controller
         'event_details' =>'required',
         'event_Category' =>'required',
         'event_type' =>'required',
-        'event_image' =>'required'
+        'event_image' =>'required',
+        'contact'=>'required|min:11|max:15'
         
         ]);
         if($validator->fails()) {
@@ -61,6 +65,9 @@ class OrganizationHomeController extends Controller
             $data['eventCategory']=$req->event_Category;
             $data['image']=$imageData;
             $data['eventType']='1';
+            $data['contact'] =$req->contact;
+            $data['orgId'] = $req->session()->get('org_id');
+
             
 
             $insert_event = DB::table('events')->insert($data);
@@ -81,18 +88,28 @@ class OrganizationHomeController extends Controller
         
            
 }
-public function edit(){
-    return view('Organization.EditEvent')->with('title', 'Event List | Organization');
+public function edit($id,$type){
+    return view('Organization.EditEvent')
+    ->with('type', $type)
+    ->with('title', 'Event List | Organization');
     
 }
-public function update(Request $req, $id){
+public function update(Request $req, $id,$type){
     $Event = Event::find($id);
     $Event->event_name = $req->event_name;
     $Event->targetDate = $req->event_end_date;
     $Event->details = $req->event_details;
-    $Event->eventType = $req->type;
+    $Event->targetMoney = $req->event_amount;
+    $Event->venue = $req->event_venue;
     $Event->save();
-    return redirect()->route('org.eventList');
+    if($type==1){
+        return redirect()->route('org.eventList');
+    }else{
+        return redirect()->route('org.volunteereventList');
+        
+        
+    }
+    
     
 }
 Public function delete($id)
@@ -102,9 +119,15 @@ Public function delete($id)
     ->with('title', 'Delete Event | Organization')
     ->with('Event',$Event);
 }
-Public function destroy($id){
+Public function destroy($id,$type){
     Event::destroy($id);
-    return redirect()->route('org.eventList');
+   if($type==1){
+        return redirect()->route('org.eventList');
+    }else{
+        return redirect()->route('org.volunteereventList');
+        
+        
+    }
 }
 
 public function createVolunteerEvent(Request $req){
@@ -113,8 +136,8 @@ public function createVolunteerEvent(Request $req){
         'event_details' =>'required',
         'event_type' =>'required',
         'event_image' =>'required',
-        'event_venue' => 'required'
-        
+        'event_venue' => 'required',
+        'contact'=>'required|min:11|max:15'
         
         ]);
         if($validator->fails()) {
@@ -134,17 +157,18 @@ public function createVolunteerEvent(Request $req){
             $image_url=$upload_path.$image_full_name;
             $success=$image->move($upload_path,$image_full_name);
             $imageData='/images/event/'.$image_full_name;
-
-
+           
 
             $data=array();
             $data['event_name']=$req->event_name;
             $data['targetDate']=$req->event_end_date;
             $data['details']=$req->event_details;
             $data['image']=$imageData;
-            $data['eventType']='0';
+            $data['eventType']='2';
             $data['eventCategory']= 'volunteer';
-            
+            $data['contact'] =$req->contact;
+            $data['orgId'] = '1';
+
 
 
             $insert_event = DB::table('events')->insert($data);
@@ -166,4 +190,37 @@ public function createVolunteerEvent(Request $req){
            
 }
 
+public function reqsponsor(Request $req){
+    $srequest = DB::table('spo_to_org_proposals')
+                        ->where('org_Id',$req->session()->get('org_id'))
+                        ->where('status','2')->get();
+
+    return view('Organization.SponsorRequest')
+            ->with('Requests',$srequest)
+            ->with('title', 'Sponsor Requests | Organization');
+}
+public function approvesponsor(Request $req,$id){
+    $srequest = spo_to_org_proposal::find($id);
+    $srequest->status = '0';
+    $srequest->save();
+    return redirect()->route('org.req'); 
+
+}
+public function sponsorlist(Request $req){
+    $srequest = DB::table('spo_to_org_proposals')
+                        ->where('org_Id',$req->session()->get('org_id'))
+                        ->where('status','0')->get();
+     return view('Organization.SponsorList')
+             ->with('Requests',$srequest)
+            ->with('title', 'SponsorList | Organization');
+
+}
+
+public function cancelDeal(Request $req,$id){
+    $srequest = spo_to_org_proposal::find($id);
+    $srequest->status = '1';
+    $srequest->save();
+    return redirect()->route('org.sponsor'); 
+
+}
 }

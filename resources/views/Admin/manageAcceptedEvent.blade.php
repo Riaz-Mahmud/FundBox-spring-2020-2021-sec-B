@@ -55,87 +55,80 @@
                                                 <tr>
                                                     <th style="width:5%;">SN</th>
                                                     <th>Image</th>
-                                                    <th>Name</th>
-                                                    <th>Event Type</th>
+                                                    <th style="width:30%;">Name</th>
+                                                    <th style="width:30%;">Others</th>
                                                     <th>Status</th>
                                                     <th>Options</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            @foreach($allEvents as $key => $event)
                                                 <tr>
-                                                    <td>1</td>
+                                                    <td>{{1+$key}}</td>
                                                     <td>
+                                                    @if($event->image)
+                                                        <?php if (file_exists("../public".$event->image)){ ?>
+                                                            <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                <img src="{{asset($event->image)}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                            </div>
+                                                            <?php } else{ ?>
+                                                            <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                <img src="https://i.gifer.com/B0eS.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                            </div>
+                                                        <?php } ?>
+                                                    @else
                                                         <div class="osahan-slider-item" style="background-color:#fff;">
-                                                            <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                            <img src="https://i.gifer.com/VuKc.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
                                                         </div>
+                                                    @endif
                                                     </td>
                                                     <td>
-                                                        <b>Event Name 1</b>
+                                                        <b>{{$event->event_name}}</b><br>
+                                                        <small> <b>Details: </b> {{ $event->details }}</small><br>
                                                     </td>
                                                     <td>
-                                                        Blood Donation
+                                                        <small> <b>Contact: </b> {{ $event->contact }}</small><br>
+                                                        <small> <b>Category: </b> {{ $event->eventCategory }}</small><br>
+                                                        @if($event->eventType == 2)
+                                                            <small> <b>Event Type: </b> Volunteer</small><br>
+                                                            <small> <b>Vanue: </b> {{ $event->venue }}</small><br>
+                                                        @elseif($event->eventType == 1)
+                                                            <small> <b>Event Type: </b> FundCollect</small><br>
+                                                            <small> <b>Target Money: </b> {{ $event->targetMoney }}</small><br>
+                                                        @endif
+                                                        <small> <b>Target Date: </b> {{ $event->targetDate }}</small><br>
+                                                        <small> <b>Reach: </b> {{ $event->visitor }}</small><br>
                                                     </td>
+                                                    @if($event->status == "1")
                                                     <td class="text-center" style="width: 5%">
                                                         <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch" value="0" onclick="statusUpdate()">
-                                                            <label class="custom-control-label" for=""></label>
+                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch{{ $key }}" value="0" onclick="statusUpdate('{{ $event->id }}', '{{ $key }}')">
+                                                            <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
                                                         </div>
                                                     </td>
+                                                    @else
+                                                    <td class="text-center" style="width: 5%">
+                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
+                                                            <input type="checkbox" class="custom-control-input" id="statusSwitch{{ $key }}" value="1" onclick="statusUpdate('{{ $event->id }}', '{{ $key }}')">
+                                                            <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
+                                                        </div>
+                                                    </td>
+                                                    @endif
                                                     <td>
                                                         <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateEvent()">Edit</button>
-                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Delete</button>
+                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent('{{ $event->id }}')">Delete</button>
+                                                        @if($event->eventType == 1)
+                                                            <a href="{{URL::to('/admin/manageAcceptedEvent/fundResponse/'.base64_encode($event->id)) }}" class="btn btn-info glow" style="margin-top: 3px" >Response</a>
+                                                        @else
+                                                            <a href="{{URL::to('/admin/manageAcceptedEvent/volunteerResponse/'.base64_encode($event->id)) }}" class="btn btn-info glow" style="margin-top: 3px" >Response</a>
+                                                        @endif
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>
-                                                        <div class="osahan-slider-item" style="background-color:#fff;">
-                                                            <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <b>Event Name 2</b>
-                                                    </td>
-                                                    <td>
-                                                        Medical
-                                                    </td>
-                                                    <td class="text-center" style="width: 5%">
-                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch" value="0" onclick="statusUpdate()">
-                                                            <label class="custom-control-label" for=""></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateEvent()">Edit</button>
-                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Delete</button>
-                                                    </td>
-                                                </tr>
-
-                                                 <tr>
-                                                    <td>2</td>
-                                                    <td>
-                                                        <div class="osahan-slider-item" style="background-color:#fff;">
-                                                            <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <b>Event Name 3</b>
-                                                    </td>
-                                                    <td>
-                                                        Soical
-                                                    </td>
-                                                    <td class="text-center" style="width: 5%">
-                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch" value="0" onclick="statusUpdate()">
-                                                            <label class="custom-control-label" for=""></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateEvent()">Details</button>
-                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Delete</button>
-                                                    </td>
-                                                </tr>
+                                            @endforeach
                                             </tbody>
+                                            <div class="col-md-12 col-12 overflow-auto">
+                                                {!! $allEvents->links() !!}
+                                            </div>
                                         </table>
                                     </div>
                                     <!-- datatable ends -->
@@ -253,11 +246,9 @@
 
     @include('Layout.scripts')
 
-    <script>  
-        function updateEvent() {
-        }
+    <script>
 
-        function statusUpdate("code", 1) {
+        function statusUpdate(id, item) {
             var status = "";
             if ($("#statusSwitch" + item).val() == "1") {
                 status = "1";
@@ -270,11 +261,11 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "#",
+                url: "{{ url('/admin/manageAcceptedEvent/updateStatus') }}",
                 type: "POST",
                 data: {
-                    promo_id: promo_id,
-                    promo_status: status
+                    id: id,
+                    status: status
                 },
                 success: function(result) {
                     if (!result.error) {
@@ -298,7 +289,7 @@
             });
         }
 
-        function deleteEvent() {
+        function deleteEvent(id) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -316,11 +307,10 @@
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                        url: "#",
+                        url: "{{ url('/admin/manageAdminEvent/delete') }}",
                         type: "POST",
                         data: {
-                            promo_id: promo_id,
-                            promo_status: status
+                            id: id
                         },
                         success: function(result) {
                             if (!result.error) {
