@@ -55,7 +55,7 @@
                                             <table>
 		<tr>
 			<td>Event Name</td>
-			<td><input type="text" name="event_name" ></td>
+			<td><input type="text" name="event_name" placeholder="Event Name"></td>
 		</tr>
 		<tr>
 			<td>End Date</td>
@@ -66,9 +66,14 @@
 			<td> <textarea class="form-control" name="event_details" id="basicTextarea" rows="3" placeholder="Details" required></textarea></td>
 		</tr>
 		<tr>
-			<td>Type</td>
-			<td><input type="text" name="type" ></td>
-		</tr>
+            @if($type==1)
+			<td>Amount</td>
+			<td><input type="text" name="event_amount"  placeholder="amount"></td>
+            @else
+            <td>Venue</td>
+			<td><input type="text" name="event_venue"  placeholder="venue"></td>
+            @endif
+        </tr>
 		
 	</table>
                                             

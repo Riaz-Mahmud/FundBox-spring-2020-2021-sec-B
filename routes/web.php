@@ -86,6 +86,9 @@ Route::group(['middleware'=>['sess']] , function(){
         Route::post('/admin/manageOrg/delete', 'Admin\OrganizationController@Delete');
         Route::post('/admin/manageOrg/updateImage', 'Admin\OrganizationController@UpdateImage');
         Route::post('/admin/manageOrg/block', 'Admin\OrganizationController@BlockOrg');
+        Route::get('/admin/pendingOrg','Admin\OrganizationController@PendingOrg');
+        Route::get('/admin/pendingOrg/accept/{id}','Admin\OrganizationController@PendingOrgAccept');
+        Route::get('/admin/pendingOrg/delete/{id}','Admin\OrganizationController@PendingOrgDelete');
 
         Route::get('/admin/eventCategory','Admin\CategoryController@Index');
         Route::post('/admin/eventCategory','Admin\CategoryController@CreateCategory');
@@ -99,24 +102,39 @@ Route::group(['middleware'=>['sess']] , function(){
         Route::post('/admin/createOrgEvent','Admin\EventController@CreateOrgEvent');
         Route::get('/admin/createVolunteerEvent','Admin\EventController@VolunteerIndex');
         Route::post('/admin/createVolunteerEvent','Admin\EventController@CreateVolunteerIndex');
+        //admin Event
+        Route::get('/admin/manageAdminEvent','Admin\EventController@ManageAdminEvent');
+        Route::post('/admin/manageAdminEvent/updateStatus','Admin\EventController@ManageAdminEventUpdateStatus');
+        Route::post('/admin/manageAdminEvent/delete','Admin\EventController@ManageAdminEventDelete');
+        //Pending Event
+        Route::get('/admin/managePendingEvent','Admin\EventController@ManagePendingEvent');
+        Route::post('/admin/managePendingEvent/accept','Admin\EventController@ManagePendingEventAccept');
+        Route::post('/admin/managePendingEvent/delete','Admin\EventController@ManagePendingEventDelete');
 
+        //accepted event
+        Route::get('/admin/manageAcceptedEvent','Admin\EventController@ManageAcceptedEvent');
+        Route::post('/admin/manageAcceptedEvent/updateStatus','Admin\EventController@ManageAcceptedEventUpdateStatus');
+        Route::get('/admin/manageAcceptedEvent/fundResponse/{id}','Admin\EventController@ManageAcceptedEventFundResponse');
+        Route::get('/admin/manageAcceptedEvent/volunteerResponse/{id}','Admin\EventController@ManageAcceptedEventVolunteerResponse');
 
-        Route::get('/admin/manageEvent', function () {
-            return view('Admin.manageEvent')->with('title', 'Manage All Event | Admin');
-        });
+        Route::get('/admin/volunteerList','Admin\EventController@VolunteerList');
+        Route::get('/admin/transitionList','Admin\EventController@TransitionList');
 
+        Route::get('/admin/reports','Admin\ReportController@Index');
+        Route::post('/admin/reports','Admin\ReportController@AddReply');
 
+        //SponsorAdmin
+        Route::get('/admin/sponsor','Admin\SponsorController@Index');
+        Route::post('/admin/sponsor/accept','Admin\SponsorController@Accept');
+        Route::post('/admin/sponsor/delete','Admin\SponsorController@Delete');
 
+        Route::get('/admin/sponsorManage','Admin\SponsorController@ManageIndex');
+        Route::post('/admin/sponsorManage/updateStauts','Admin\SponsorController@ManageUpdateStatus');
+        Route::post('/admin/sponsorManage/delete','Admin\SponsorController@ManageDelete');
 
 
         Route::get('/admin/manageVolEvent', function () {
             return view('Admin.manageVolEvent')->with('title', 'Manage Volunteer Event | Admin');
-        });
-        Route::get('/admin/transitionList', function () {
-            return view('Admin.transitionList')->with('title', 'Transition List | Admin');
-        });
-        Route::get('/admin/volunteerList', function () {
-            return view('Admin.volunteerList')->with('title', 'Volunteer List | Admin');
         });
 
     });
@@ -126,11 +144,9 @@ Route::group(['middleware'=>['sess']] , function(){
 
     Route::group(['middleware'=>['org']] , function(){
 
-            Route::get('/org/dashboard', function () {
-              return view('Organization.Home')
-                ->with('title', 'Home Organization')
-                ->with('date', date('d-M-Y'));
-            });
+            Route::get('/org/dashboard','Org\HomeController@Index');
+
+
             Route::get('/org/manageEvent', function () {
                 return view('Organization.ManageEvent')
                         ->with('title', 'Manage Event | Organization');
@@ -141,24 +157,34 @@ Route::group(['middleware'=>['sess']] , function(){
                 return view('Organization.CreateEvent')
                         ->with('title', 'Create Event | Organization');
             });
-            Route::Post('/org/createEvent', 'OrganizationHomeController@create');
+            Route::Post('/org/createEvent', 'Org\OrganizationHomeController@create');
             //*****************EVENT LIST******************* */
-            Route::get('/org/EventList', 'OrganizationHomeController@index')->name('org.eventList');
+            Route::get('/org/EventList', 'Org\OrganizationHomeController@index')->name('org.eventList');
             //*****************EDIT EVENTS******************* */
-            Route::get('/org/edit/{id}', 'OrganizationHomeController@edit');
-            Route::Post('/org/edit/{id}', 'OrganizationHomeController@update');
+            Route::get('/org/edit/{id}/{type}', 'Org\OrganizationHomeController@edit');
+            Route::Post('/org/edit/{id}/{type}', 'Org\OrganizationHomeController@update');
             //*****************DELETE EVENTS******************* */
-            Route::get('/org/delete/{id}', 'OrganizationHomeController@delete');
-            Route::get('/org/destroy/{id}', 'OrganizationHomeController@destroy');
+            Route::get('/org/delete/{id}/{type}', 'Org\OrganizationHomeController@delete');
+            Route::get('/org/destroy/{id}/{type}', 'Org\OrganizationHomeController@destroy');
             //*****************CREATE VOLUNTEER EVENTS******************* */
             Route::get('/org/createVolunteerEvent', function () {
                 return view('Organization.CreateVolunteerEvent')
                         ->with('title', 'Create Volunteer Event | Organization');
             });
-            Route::Post('/org/createVolunteerEvent', 'OrganizationHomeController@createVolunteerEvent');
+            Route::Post('/org/createVolunteerEvent', 'Org\OrganizationHomeController@createVolunteerEvent');
             //*****************EDIT  Volunteer EVENTS******************* */
+            Route::get('/org/ManageVolunteerEvent', 'Org\OrganizationHomeController@indexVolunteer')->name('org.volunteereventList');
+
+            Route::get('/org/SponsorRequest','Org\OrganizationHomeController@reqsponsor' )->name('org.req');
+             Route::get('/org/SponsorRequest/{id}','Org\OrganizationHomeController@approvesponsor' )->name('org.approve');
+             Route::get('/org/SponsorList','Org\OrganizationHomeController@sponsorlist' )->name('org.sponsor');
+             Route::get('/org/SponsorList/{id}','Org\OrganizationHomeController@cancelDeal' )->name('org.cancedeal');
+
+       
             Route::get('/org/ManageVolunteerEvent', 'OrganizationHomeController@indexVolunteer')->name('org.volunteereventList');
-        });
+
+    });
+});
 
 
             // **************************SPONSOR START*******************************
@@ -306,3 +332,15 @@ Route::get('/user/unfollowedOrganization/{id}','User\OrganizationController@unfo
     // **************************USER END*******************************
 
 
+// SSLCOMMERZ Start
+Route::get('/example1', 'RouteController@exampleEasyCheckout');
+Route::get('/example2', 'RouteController@exampleHostedCheckout');
+
+Route::post('/pay', 'RouteController@index');
+Route::post('/pay-via-ajax', 'RouteController@payViaAjax');
+Route::post('/success', 'RouteController@success');
+Route::post('/fail', 'RouteController@fail');
+Route::post('/cancel', 'RouteController@cancel');
+Route::post('/ipn', 'RouteController@ipn');
+
+//SSLCOMMERZ END

@@ -24,7 +24,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Blood Donation</h5>
                                 <p class="card-text">A blood donation occurs when a person voluntarily has blood drawn and used for transfusions and/or made into biopharmaceutical medications by a process called fractionation</p>
-                                <a href="#" class="btn btn-primary">Join Now</a>
+                                <a href="#" class="btn btn-primary">Donate Now</a>
                             </div>
                         </div>
                     </div>
