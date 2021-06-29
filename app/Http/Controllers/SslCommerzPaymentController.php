@@ -5,13 +5,24 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
+use App\Http\Requests;
+use Session;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class SslCommerzPaymentController extends Controller
 {
 
-    public function exampleEasyCheckout()
+    public function exampleEasyCheckout($id)
     {
-        return view('exampleEasycheckout');
+        $eventId = base64_decode($id);
+        $Event = DB::table('events')
+        ->where('id', $eventId)->first();
+        dd($Event);
+        return view('exampleEasycheckout')
+        ->with('Event', $Event);
     }
 
     public function exampleHostedCheckout()

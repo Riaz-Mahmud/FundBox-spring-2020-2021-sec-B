@@ -13,32 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */ 
 
-Route::get('/', function () {
-    return view('Home.index')
-    ->with('title', 'Home');
+Route::get('/','User\HomeController@Index');
 
-});
-Route::get('/events', function () {
-    return view('Home.events')
-            ->with('title', 'Events');
-});
+Route::get('/events','User\HomeController@Events');
+Route::get('/Ourteam/Organization','User\HomeController@Organization');
+Route::get('/contact','User\HomeController@contact');
+Route::get('/FAQ','User\HomeController@FAQ');
+Route::get('/about','User\HomeController@about');
+Route::get('/category/{id}','User\HomeController@CategoryEvent');
 
-Route::get('/contact', function () {
-    return view('Home.contact')
-            ->with('title', 'Contact Us');
-});
-Route::get('/about', function () {
-    return view('Home.about')
-            ->with('title', 'About Us');
-});
-Route::get('/FAQ', function () {
-    return view('Home.faq')
-            ->with('title', 'FAQ');
-});
-Route::get('/Ourteam/Organization', function () {
-    return view('Home.Organization')
-            ->with('title', 'Organization');
-});
+Route::get('/EventDetails/{id}','User\HomeController@EventDetails');
+
+
 Route::get('/Ourteam/Volunteers', function () {
     return view('Home.Volunteers')
             ->with('title', 'Volunteers');
@@ -48,6 +34,7 @@ Route::post('/SignIn','LoginController@Login');
 Route::get('/SignIn','LoginController@LoginIndex');
 Route::get('/logout','LoginController@logout');
 Route::post('/SignUp','LoginController@CreateNewUser');
+Route::get('/payDone/{id}','LoginController@PayDone');
 
 // **************************ADMIN*******************************
 
@@ -334,7 +321,7 @@ Route::get('/user/unfollowedOrganization/{id}','User\OrganizationController@unfo
 
 // SSLCOMMERZ Start
 Route::get('/example1', 'RouteController@exampleEasyCheckout');
-Route::get('/example2', 'RouteController@exampleHostedCheckout');
+Route::get('/example2/{id}/{orgId}', 'RouteController@exampleHostedCheckout');
 
 Route::post('/pay', 'RouteController@index');
 Route::post('/pay-via-ajax', 'RouteController@payViaAjax');
