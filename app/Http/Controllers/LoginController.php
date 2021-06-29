@@ -25,7 +25,7 @@ class LoginController extends Controller
             }elseif($request->session()->get('user_type') == 3){
                 return redirect('/sp/dashboard');
             }elseif($request->session()->get('user_type') == 4){
-                return redirect('/user/dashboard');
+                return redirect('/');
             }else{
                 return view('Home.SignIn')
                 ->with('title', 'Login');
@@ -71,6 +71,8 @@ class LoginController extends Controller
                     $request->session()->put('full_name', $user->name);
                     $request->session()->put('user_type', $user->type);
                     $request->session()->put('user_email', $user->email);
+                    $request->session()->put('user_image', $user->image);
+                    $request->session()->put('admin_is_super_admin', $user->is_super_admin);
 
                     if($user->type == 1){
                         return redirect('/admin/dashboard');
@@ -79,7 +81,7 @@ class LoginController extends Controller
                     }elseif($user->type == 3){
                         return redirect('/sp/dashboard');
                     }elseif($user->type == 4){
-                        return redirect('/user/dashboard');
+                        return redirect('/');
                     }else{
                         return redirect()->back()->with([
                             'error' => true,
@@ -100,6 +102,27 @@ class LoginController extends Controller
                 ]);
             }
         }
+    }
+
+    public function PayDone(Request $request,$id)
+    {
+
+    
+        $user=DB::table('userinfos')
+        ->where('id',$id)
+        ->first();
+
+        $request->session()->put('user_id', $user->id);
+        $request->session()->put('username', $user->username);
+        $request->session()->put('full_name', $user->name);
+        $request->session()->put('user_type', $user->type);
+        $request->session()->put('user_email', $user->email);
+        $request->session()->put('user_image', $user->image);
+        $request->session()->put('admin_is_super_admin', $user->is_super_admin);
+
+        
+        return redirect('/');
+                
     }
 
     public function logout(Request $request)

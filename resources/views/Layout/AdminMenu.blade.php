@@ -40,11 +40,15 @@
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <div class="user-nav d-sm-flex d-none">
-                                <span class="user-name">GR_MANAGER_NAME</span>
-                                <span class="user-status text-muted">GR_MANAGER_EMAIL</span>
+                                <span class="user-name">{{session()->get('full_name')}}</span>
+                                <span class="user-status text-muted">{{session()->get('user_email')}}</span>
                             </div>
                             <span>
+                            @if(session()->has('user_image'))
+                                <img class="round" src="{{ url(session()->get('user_image')) }}" alt="avatar" height="40" width="40">
+                            @else
                                 <img class="round" src="{{ url('/images/avatar/avatar.png') }}" alt="avatar" height="40" width="40">
+                            @endif
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right pb-0">
@@ -57,7 +61,7 @@
                             <a class="dropdown-item" href="#">
                                 <i class="bx bx-message mr-50"></i> Chats</a>
                             <div class="dropdown-divider mb-0"></div>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="/logout">
                                 <i class="bx bx-power-off mr-50"></i> Logout</a>
                         </div>
                     </li>
@@ -74,7 +78,7 @@
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto">
                 <a class="navbar-brand" href="#">
-                    <img src="{{ url('/images/logo/dummyLogo.png') }}" width="100%" height="70px"  />
+                    <img src="{{ url('/images/logo/dummyLogo.png') }}" width="80%" height="100px"  />
                 </a>
             </li>
         </ul>
@@ -201,8 +205,30 @@
                     <i class="bx bxs-bar-chart-alt-2 mr-50"></i>
                     <span class="menu-title" data-i18n="Category Manager">Transition List</span>
                 </a>
-            </li>             
-        
+            </li>   
+
+            
+            <li class=" navigation-header"><span>Sponsoor</span></li>
+            <li class="nav-item @if(url('/admin/sponsor') == Request::url()) active @endif">
+                <a class="nav-hover" href="/admin/sponsor">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Pending Request</span>
+                </a>
+            </li>
+            <li class="nav-item @if(url('/admin/sponsorManage') == Request::url()) active @endif">
+                <a class="nav-hover" href="/admin/sponsorManage">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Manage Sponsor</span>
+                </a>
+            </li>          
+
+            <li class=" navigation-header"><span>Report</span></li>
+            <li class="nav-item @if(url('/admin/reports') == Request::url()) active @endif">
+                <a class="nav-hover" href="/admin/reports">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Manage Reports</span>
+                </a>
+            </li>
 
             <li class=" navigation-header"><span>Account</span></li>
             <li class="nav-item ">

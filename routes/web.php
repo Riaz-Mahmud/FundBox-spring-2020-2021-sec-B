@@ -13,32 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */ 
 
-Route::get('/', function () {
-    return view('Home.index')
-    ->with('title', 'Home');
+Route::get('/','User\HomeController@Index');
 
-});
-Route::get('/events', function () {
-    return view('Home.events')
-            ->with('title', 'Events');
-});
+Route::get('/events','User\HomeController@Events');
+Route::get('/Ourteam/Organization','User\HomeController@Organization');
+Route::get('/contact','User\HomeController@contact');
+Route::get('/FAQ','User\HomeController@FAQ');
+Route::get('/about','User\HomeController@about');
+Route::get('/category/{id}','User\HomeController@CategoryEvent');
 
-Route::get('/contact', function () {
-    return view('Home.contact')
-            ->with('title', 'Contact Us');
-});
-Route::get('/about', function () {
-    return view('Home.about')
-            ->with('title', 'About Us');
-});
-Route::get('/FAQ', function () {
-    return view('Home.faq')
-            ->with('title', 'FAQ');
-});
-Route::get('/Ourteam/Organization', function () {
-    return view('Home.Organization')
-            ->with('title', 'Organization');
-});
+Route::get('/EventDetails/{id}','User\HomeController@EventDetails');
+
+
 Route::get('/Ourteam/Volunteers', function () {
     return view('Home.Volunteers')
             ->with('title', 'Volunteers');
@@ -48,6 +34,7 @@ Route::post('/SignIn','LoginController@Login');
 Route::get('/SignIn','LoginController@LoginIndex');
 Route::get('/logout','LoginController@logout');
 Route::post('/SignUp','LoginController@CreateNewUser');
+Route::get('/payDone/{id}','LoginController@PayDone');
 
 // **************************ADMIN*******************************
 
@@ -120,6 +107,18 @@ Route::group(['middleware'=>['sess']] , function(){
         Route::get('/admin/volunteerList','Admin\EventController@VolunteerList');
         Route::get('/admin/transitionList','Admin\EventController@TransitionList');
 
+        Route::get('/admin/reports','Admin\ReportController@Index');
+        Route::post('/admin/reports','Admin\ReportController@AddReply');
+
+        //SponsorAdmin
+        Route::get('/admin/sponsor','Admin\SponsorController@Index');
+        Route::post('/admin/sponsor/accept','Admin\SponsorController@Accept');
+        Route::post('/admin/sponsor/delete','Admin\SponsorController@Delete');
+
+        Route::get('/admin/sponsorManage','Admin\SponsorController@ManageIndex');
+        Route::post('/admin/sponsorManage/updateStauts','Admin\SponsorController@ManageUpdateStatus');
+        Route::post('/admin/sponsorManage/delete','Admin\SponsorController@ManageDelete');
+
 
         Route::get('/admin/manageVolEvent', function () {
             return view('Admin.manageVolEvent')->with('title', 'Manage Volunteer Event | Admin');
@@ -177,14 +176,83 @@ Route::group(['middleware'=>['sess']] , function(){
             Route::get('/org/SponsorTransaction','Org\OrganizationHomeController@sponsorTransaction' )->name('org.sponsorTransaction');
             
             
+            Route::get('/org/ManageVolunteerEvent', 'OrganizationHomeController@indexVolunteer')->name('org.volunteereventList');
+
     });
 });
 
+
+            // **************************SPONSOR START*******************************
+            //Sponsor route start
+            Route::group(['middleware'=>['sponsor']] , function(){
+
+                // Route::post('/allAdvertise','Sponsor\AdvertiseController@CreateAdvertise');
+                Route::get('/sp/allAdvertise','Sponsor\AdvertiseController@Show');
+
+                Route::get('/sp/dashboard', function () {
+                    return view('Sponsor.sponsorHome')
+                            ->with('title', 'Home | Sponsor')
+                            ->with('date', date('d-M-Y'));
+                });
+    
+                Route::get('/sp/addAdvertise', function () {
+                    return view('Sponsor.addAdvertise')
+                            ->with('title', 'Advertise Add | Sponsor');
+                });
+    
+            
+                Route::get('/sp/payment', function () {
+                    return view('Sponsor.Payment')
+                            ->with('title', 'Payment | Sponsor');
+                });
+                Route::get('/sp/transactionList', function () {
+                    return view('Sponsor.TransactionList')
+                            ->with('title', 'Transaction List | Sponsor');
+                });
+                Route::get('/sp/siteTraffic', function () {
+                    return view('Sponsor.SiteTraffic')
+                            ->with('title', 'Site Traffic | Sponsor');
+                });
+                Route::get('/sp/applyOrg', function () {
+                    return view('Sponsor.OrgList')
+                            ->with('title', 'Apply Org | Sponsor');
+                });
+                Route::get('/sp/sponsoredOrgList', function () {
+                    return view('Sponsor.SponsoredorgList')
+                            ->with('title', 'Sponsored Org List | Sponsor');
+                });
+                Route::get('/sp/pendingOrgList', function () {
+                    return view('Sponsor.PendingOrgList')
+                            ->with('title', 'Pending Org Request | Sponsor');
+                });
+                Route::get('/sp/updateSponsorship', function () {
+                    return view('Sponsor.UpdateSponsorship')
+                            ->with('title', 'Update | Sponsor');
+                });
+                Route::get('/sp/updateOrgSponsorship', function () {
+                    return view('Sponsor.UpdateOrgSponsorship')
+                            ->with('title', 'Update | Sponsor');
+                });
+                Route::get('/sp/allEvents', function () {
+                    return view('Sponsor.AllEvents')
+                            ->with('title', 'All Events | Sponsor');
+                });
+                Route::get('/sp/sponsoredEvents', function () {
+                    return view('Sponsor.SoponoredEvents')
+                            ->with('title', 'Sponsored Events | Sponsor');
+                });
+                Route::get('/sp/manageAccount', function () {
+                    return view('Sponsor.ManageAccount')
+                            ->with('title', 'Manage Account | Sponsor');
+                });
+    
+    
+                //Sponsor route end
+            });
+    
+        // **************************SPONSOR END*******************************
+
     // **************************ORGANISATION END*******************************
-
-    // **************************SPONSOR START*******************************
-
-    // **************************SPONSOR END*******************************
 
     // **************************USER START*******************************
 
@@ -258,71 +326,15 @@ Route::get('/user/unfollowedOrganization/{id}','User\OrganizationController@unfo
     // **************************USER END*******************************
 
 
+// SSLCOMMERZ Start
+Route::get('/example1', 'RouteController@exampleEasyCheckout');
+Route::get('/example2/{id}/{orgId}', 'RouteController@exampleHostedCheckout');
 
+Route::post('/pay', 'RouteController@index');
+Route::post('/pay-via-ajax', 'RouteController@payViaAjax');
+Route::post('/success', 'RouteController@success');
+Route::post('/fail', 'RouteController@fail');
+Route::post('/cancel', 'RouteController@cancel');
+Route::post('/ipn', 'RouteController@ipn');
 
-//Sponsor route start
-
-Route::get('/sp/dashboard', function () {
-    return view('Sponsor.sponsorHome')
-            ->with('title', 'Home | Sponsor')
-            ->with('date', date('d-M-Y'));
-});
-
-Route::get('/sp/addAdvertise', function () {
-    return view('Sponsor.addAdvertise')
-            ->with('title', 'Advertise Add | Sponsor');
-});
-
-Route::get('/sp/allAdvertise', function () {
-    return view('Sponsor.ListofAdvertise')
-            ->with('title', 'All Advertise | Sponsor');
-});
-Route::get('/sp/payment', function () {
-    return view('Sponsor.Payment')
-            ->with('title', 'Payment | Sponsor');
-});
-Route::get('/sp/transactionList', function () {
-    return view('Sponsor.TransactionList')
-            ->with('title', 'Transaction List | Sponsor');
-});
-Route::get('/sp/siteTraffic', function () {
-    return view('Sponsor.SiteTraffic')
-            ->with('title', 'Site Traffic | Sponsor');
-});
-Route::get('/sp/applyOrg', function () {
-    return view('Sponsor.OrgList')
-            ->with('title', 'Apply Org | Sponsor');
-});
-Route::get('/sp/sponsoredOrgList', function () {
-    return view('Sponsor.SponsoredorgList')
-            ->with('title', 'Sponsored Org List | Sponsor');
-});
-Route::get('/sp/pendingOrgList', function () {
-    return view('Sponsor.PendingOrgList')
-            ->with('title', 'Pending Org Request | Sponsor');
-});
-Route::get('/sp/updateSponsorship', function () {
-    return view('Sponsor.UpdateSponsorship')
-            ->with('title', 'Update | Sponsor');
-});
-Route::get('/sp/updateOrgSponsorship', function () {
-    return view('Sponsor.UpdateOrgSponsorship')
-            ->with('title', 'Update | Sponsor');
-});
-Route::get('/sp/allEvents', function () {
-    return view('Sponsor.AllEvents')
-            ->with('title', 'All Events | Sponsor');
-});
-Route::get('/sp/sponsoredEvents', function () {
-    return view('Sponsor.SoponoredEvents')
-            ->with('title', 'Sponsored Events | Sponsor');
-});
-Route::get('/sp/manageAccount', function () {
-    return view('Sponsor.ManageAccount')
-            ->with('title', 'Manage Account | Sponsor');
-});
-
-
-//Sponsor route end
-
-
+//SSLCOMMERZ END
