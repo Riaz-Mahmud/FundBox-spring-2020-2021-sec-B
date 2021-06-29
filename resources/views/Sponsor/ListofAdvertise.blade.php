@@ -7,7 +7,6 @@
     @include('Layout.SpMenu')
 
     <!-- BEGIN: Content-->
-    <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
@@ -58,29 +57,37 @@
                                                     <th>Image</th>
                                                     <th>Advertise Title</th>
                                                     <th>Post Date</th>
-                                                    <th>End Date</th>
                                                     <th>Status</th>
                                                     <th>Options</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            @foreach($allAdvertise as $key => $advertise)
                                                 <tr>
-                                                    <td>1</td>
+                                                    <td>{{$key+1}}</td>
                                                     <td>
-                                                        <div class="osahan-slider-item" style="background-color:#fff;">
-                                                            <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                        </div>
+                                                        @if($advertise->image)
+                                                            <?php if (file_exists("../public".$advertise->image)){ ?>
+                                                                    <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                        <img src="{{asset($advertise->image)}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                                    </div>
+                                                            <?php } else{ ?>
+                                                                    <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                        <img src="https://i.gifer.com/B0eS.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                                    </div>
+                                                            <?php } ?>
+                                                        @else
+                                                            <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                <img src="https://i.gifer.com/VuKc.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                            </div>
+                                                        @endif
                                                     </td>
                                                     <td>
-                                                        <b>Title-1</b>
+                                                        <b>{{ $advertise->title }}</b>
                                                     </td>
                                                     <td>
-                                                        21-June-2021
-                                                    </td>
-                                                    <td>
-                                                        21-July-2021
-                                                    </td>
-                                                    
+                                                        {{ date("d M, Y",strtotime($advertise->created_at))}}
+                                                    </td>                         
                                                     <td class="text-center" style="width: 5%">
                                                         <div class="custom-control custom-switch custom-control-inline mb-1">
                                                             <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch" value="0" onclick="statusUpdate()">
@@ -89,37 +96,11 @@
                                                     </td>
                                                     <td>
                                                         <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateEvent()">Edit</button>
-                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Delete</button>
+                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" onclick="deleteEvent()">Delete</button>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>2</td>
-                                                    <td>
-                                                        <div class="osahan-slider-item" style="background-color:#fff;">
-                                                            <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <b>Title-2</b>
-                                                    </td>
-                                                    <td>
-                                                        11-June-2021
-                                                    </td>
-                                                    <td>
-                                                        20-June-2021
-                                                    </td>
-                                                    
-                                                    <td class="text-center" style="width: 5%">
-                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch" value="0" onclick="statusUpdate()">
-                                                            <label class="custom-control-label" for=""></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateEvent()">Edit</button>
-                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Delete</button>
-                                                    </td>
-                                                </tr>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                     </div>
