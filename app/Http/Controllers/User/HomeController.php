@@ -16,12 +16,16 @@ class HomeController extends Controller
     public function Index(Request $request){
 
         $ip = $this->getIp();
-        $checkIp=DB::table('sitetraficip')->where('user_ip',$ip)->get();          
+        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $getLastCount = DB::table('sitealltrafic')->first();
+        $data=array();
+        $data['count']=$getLastCount->count+1;
+        DB::table('sitealltrafic')->where('id', $getLastCount->id)->update($data);
         if(count($checkIp)==0){
-            $data=array();
-            $data['user_ip']=$ip;
+            $data1=array();
+            $data1['user_ip']=$ip;
             
-            DB::table('sitetraficip')->insert($data);
+            DB::table('site_unique_traficIp')->insert($data1);
         }
 
         $allCategory = DB::table('event_categorys')->where('status',1)->get();
@@ -38,25 +42,138 @@ class HomeController extends Controller
 
     }
 
+    public function contact(Request $request){
+
+        $ip = $this->getIp();
+        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $getLastCount = DB::table('sitealltrafic')->first();
+        $data=array();
+        $data['count']=$getLastCount->count+1;
+        DB::table('sitealltrafic')->where('id', $getLastCount->id)->update($data);
+        if(count($checkIp)==0){
+            $data1=array();
+            $data1['user_ip']=$ip;
+            
+            DB::table('site_unique_traficIp')->insert($data1);
+        }
+
+        $allCategory = DB::table('event_categorys')->where('status',1)->get();
+        
+
+        return view('Home.contact')
+            ->with('title', 'Contact Us')
+            ->with('allCategory', $allCategory);
+
+    }
+
+    public function FAQ(Request $request){
+
+        $ip = $this->getIp();
+        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $getLastCount = DB::table('sitealltrafic')->first();
+        $data=array();
+        $data['count']=$getLastCount->count+1;
+        DB::table('sitealltrafic')->where('id', $getLastCount->id)->update($data);
+        if(count($checkIp)==0){
+            $data1=array();
+            $data1['user_ip']=$ip;
+            
+            DB::table('site_unique_traficIp')->insert($data1);
+        }
+
+        $allCategory = DB::table('event_categorys')->where('status',1)->get();
+        
+
+        return view('Home.faq')
+            ->with('title', 'faq')
+            ->with('allCategory', $allCategory);
+
+    }
+
+    public function about(Request $request){
+
+        $ip = $this->getIp();
+        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $getLastCount = DB::table('sitealltrafic')->first();
+        $data=array();
+        $data['count']=$getLastCount->count+1;
+        DB::table('sitealltrafic')->where('id', $getLastCount->id)->update($data);
+        if(count($checkIp)==0){
+            $data1=array();
+            $data1['user_ip']=$ip;
+            
+            DB::table('site_unique_traficIp')->insert($data1);
+        }
+
+        $allCategory = DB::table('event_categorys')->where('status',1)->get();
+        
+
+        return view('Home.about')
+            ->with('title', 'About Us')
+            ->with('allCategory', $allCategory);
+
+    }
+
+    public function EventDetails(Request $request,$id){
+
+        $ip = $this->getIp();
+        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $getLastCount = DB::table('sitealltrafic')->first();
+        $data=array();
+        $data['count']=$getLastCount->count+1;
+        DB::table('sitealltrafic')->where('id', $getLastCount->id)->update($data);
+        if(count($checkIp)==0){
+            $data1=array();
+            $data1['user_ip']=$ip;
+            
+            DB::table('site_unique_traficIp')->insert($data1);
+        }
+        $id = base64_decode($id);
+        $allCategory = DB::table('event_categorys')->where('status',1)->get();
+        
+        $Events = DB::table('events')
+        ->where('id', $id)->first();
+
+        return view('Home.EventDetails')
+            ->with('title', 'EventDetails Us')
+            ->with('allCategory', $allCategory)
+            ->with('Events', $Events);
+
+    }
+
     public function Events(Request $request){
 
         $ip = $this->getIp();
-        $checkIp=DB::table('sitetraficip')->where('user_ip',$ip)->get();          
+        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $getLastCount = DB::table('sitealltrafic')->first();
+        $data=array();
+        $data['count']=$getLastCount->count+1;
+        DB::table('sitealltrafic')->where('id', $getLastCount->id)->update($data);
         if(count($checkIp)==0){
-            $data=array();
-            $data['user_ip']=$ip;
+            $data1=array();
+            $data1['user_ip']=$ip;
             
-            DB::table('sitetraficip')->insert($data);
+            DB::table('site_unique_traficIp')->insert($data1);
         }
 
         $allCategory = DB::table('event_categorys')->where('status',1)->get();
 
         $allEvents = DB::table('events')
-        // ->leftJoin('events', 'event_volunteers.eventId', '=', 'events.id')
         ->where('status', 1)
+        ->where('eventType',1)
         ->where('eventType',1)
         ->inRandomOrder()
         ->paginate(9);
+
+        // $allEvents = DB::table('events')
+        // ->leftJoin('event_trans_lists', 'events.id', '=', 'event_trans_lists.eventId')
+        // ->select('events.*', 'event_trans_lists.*')
+        // ->where('events.status', 1)
+        // ->where('events.eventType',1)
+        // ->inRandomOrder()
+        // ->paginate(9);
+
+        // dd( $allEvents);
         $volEvents = DB::table('events')
         // ->leftJoin('events', 'event_volunteers.eventId', '=', 'events.id')
         ->where('status', 1)
@@ -72,15 +189,60 @@ class HomeController extends Controller
 
     }
 
+    public function CategoryEvent(Request $request,$cat_id){
+
+        $ip = $this->getIp();
+        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $getLastCount = DB::table('sitealltrafic')->first();
+        $data=array();
+        $data['count']=$getLastCount->count+1;
+        DB::table('sitealltrafic')->where('id', $getLastCount->id)->update($data);
+        if(count($checkIp)==0){
+            $data1=array();
+            $data1['user_ip']=$ip;
+            
+            DB::table('site_unique_traficIp')->insert($data1);
+        }
+
+        $cat_id = base64_decode($cat_id);
+
+        $allCategory = DB::table('event_categorys')->where('status',1)->get();
+
+        $allEvents = DB::table('events')
+        ->where('eventType',1)
+        ->where('eventCategory',$cat_id)
+        ->where('status', 1)
+        ->inRandomOrder()
+        ->paginate(9);
+
+        $volEvents = DB::table('events')
+        ->where('status', 1)
+        ->where('eventType',2)
+        ->where('eventCategory',$cat_id)
+        ->inRandomOrder()
+        ->get();
+
+        return view('Home.CategoryEvents')
+            ->with('title', 'Category Event')
+            ->with('allCategory', $allCategory)
+            ->with('allEvents', $allEvents)
+            ->with('volEvents', $volEvents);
+
+    }
+
     public function Organization(Request $request){
 
         $ip = $this->getIp();
-        $checkIp=DB::table('sitetraficip')->where('user_ip',$ip)->get();          
+        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $getLastCount = DB::table('sitealltrafic')->first();
+        $data=array();
+        $data['count']=$getLastCount->count+1;
+        DB::table('sitealltrafic')->where('id', $getLastCount->id)->update($data);
         if(count($checkIp)==0){
-            $data=array();
-            $data['user_ip']=$ip;
+            $data1=array();
+            $data1['user_ip']=$ip;
             
-            DB::table('sitetraficip')->insert($data);
+            DB::table('site_unique_traficIp')->insert($data1);
         }
 
         $allCategory = DB::table('event_categorys')->where('status',1)->get();

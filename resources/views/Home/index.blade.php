@@ -33,7 +33,7 @@
                             <div class="card-body">
                                 <h5 class="card-title" style="height: 80px;overflow: hidden;text-overflow: ellipsis;">{{$feaEvent->event_name}}</h5>
                                 <p class="card-text" style="height: 80px;width: 200px;overflow: hidden;text-overflow: ellipsis;">{{$feaEvent->details}}</p>
-                                <a href="#" class="btn btn-primary">Donate Now</a>
+                                <a href="{{ URL::to('/example2/'.base64_encode($feaEvent->id).'/'.base64_encode($feaEvent->orgId)) }}" class="btn btn-primary">Donate Now</a>
                             </div>
                         </div>
                     </div>

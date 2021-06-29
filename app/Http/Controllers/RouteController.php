@@ -4,17 +4,30 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
+use App\Http\Requests;
+use Session;
 
 class RouteController extends Controller
 {
     public function exampleEasyCheckout()
     {
+        
         return view('exampleEasycheckout');
+        
     }
 
-    public function exampleHostedCheckout()
+    public function exampleHostedCheckout(Request $request,$id,$orgId)
     {
-        return view('exampleHosted');
+        $userid= $request->session()->get('user_id');
+        $eventId = base64_decode($id);
+        $orgId = base64_decode($orgId);
+        $Event = DB::table('events')
+        ->where('id', $eventId)->first();
+
+        return view('exampleHosted')
+        ->with('Event', $Event)
+        ->with('orgId', $orgId)
+        ->with('userid',$userid);
     }
 
     public function index(Request $request)
@@ -22,12 +35,12 @@ class RouteController extends Controller
         # Here you have to receive all the order data to initate the payment.
         # Let's say, your oder transaction informations are saving in a table called "orders"
         # In "orders" table, order unique identity is "transaction_id". "status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
-
         $post_data = array();
-        $post_data['total_amount'] = '10'; # You cant not pay less than 10
+        $post_data['total_amount'] = $request->customer_amount; # You cant not pay less than 10
         $post_data['currency'] = "BDT";
         $post_data['tran_id'] = uniqid(); // tran_id must be unique
 
+        
         # CUSTOMER INFORMATION
         $post_data['cus_name'] = 'Customer Name';
         $post_data['cus_email'] = 'customer@mail.com';
@@ -56,10 +69,10 @@ class RouteController extends Controller
         $post_data['product_profile'] = "physical-goods";
 
         # OPTIONAL PARAMETERS
-        $post_data['value_a'] = "ref001";
-        $post_data['value_b'] = "ref002";
-        $post_data['value_c'] = "ref003";
-        $post_data['value_d'] = "ref004";
+        $post_data['value_a'] = $request->eventId;
+        $post_data['value_b'] = $request->customer_privacy;
+        $post_data['value_c'] = $request->userId;
+        $post_data['value_d'] = $request->orgId;
 
         #Before  going to initiate the payment order status need to insert or update as Pending.
         $update_product = DB::table('orders')
@@ -159,6 +172,25 @@ class RouteController extends Controller
 
     public function success(Request $request)
     {
+        // dd($request->session()->get('user_id'));
+        $user_data = array();
+        $user_data['eventId'] = $request->value_a;
+        $user_data['user_id'] = $request->value_c;
+        $user_data['amount'] = $request->amount;
+        $user_data['visibleType'] = $request->value_b;
+        $user_data['org_id'] = $request->value_d;
+        if($request->card_type == "BKASH-BKash"){
+            $user_data['paymentType'] ='1';
+        }elseif($request->card_type == "NAGAD-Nagad"){
+            $user_data['paymentType'] ='2';
+        }elseif($request->card_type == "DBBLMOBILEB-Dbbl Mobile Banking"){
+            $user_data['paymentType'] ='3';
+        }
+        $user_data['status'] = '1';
+
+        // dd($request->all());
+        $insert_user = DB::table('event_trans_lists')->insert($user_data);
+
         echo "Transaction is Successful";
 
         $tran_id = $request->input('tran_id');
@@ -186,7 +218,8 @@ class RouteController extends Controller
                     ->update(['status' => 'Processing']);
 
                 echo "<br >Transaction is successfully Completed";
-                return redirect('/');
+                return redirect('/payDone/'.$request->value_c);
+                
             } else {
                 /*
                 That means IPN did not work or IPN URL was not set in your merchant panel and Transation validation failed.
@@ -201,6 +234,7 @@ class RouteController extends Controller
             /*
              That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
              */
+
             echo "Transaction is successfully Completed";
         } else {
             #That means something wrong happened. You can redirect customer to your product page.
