@@ -53,6 +53,7 @@
                 <h2 class="text-center" style="margin:30px 0px;">Volunteer Events</h2>
                 <div class="row">
                 @foreach($volEvents as $key => $vEvents)
+                <a href="{{ URL::to('/EventDetails/'.base64_encode($vEvents->id)) }}" class="text-dark">
                     <div class="col-4">
                         <div class="card" style="width: 20rem;margin-top:10px;">
                             @if($vEvents->image)
@@ -71,6 +72,7 @@
                             </div>
                         </div>
                     </div>
+                    </a>
                     @endforeach
                 </div>
             </div>

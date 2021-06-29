@@ -77,7 +77,7 @@
     <div class="navbar-header mb-3">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/">
                     <img src="{{ url('/images/logo/dummyLogo.png') }}" width="80%" height="100px"  />
                 </a>
             </li>
