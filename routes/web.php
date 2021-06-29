@@ -13,15 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */ 
 
-Route::get('/', function () {
-    return view('Home.index')
-    ->with('title', 'Home');
+Route::get('/','User\HomeController@Index');
 
-});
-Route::get('/events', function () {
-    return view('Home.events')
-            ->with('title', 'Events');
-});
+Route::get('/events','User\HomeController@Events');
+Route::get('/Ourteam/Organization','User\HomeController@Organization');
+
 
 Route::get('/contact', function () {
     return view('Home.contact')
@@ -35,10 +31,7 @@ Route::get('/FAQ', function () {
     return view('Home.faq')
             ->with('title', 'FAQ');
 });
-Route::get('/Ourteam/Organization', function () {
-    return view('Home.Organization')
-            ->with('title', 'Organization');
-});
+
 Route::get('/Ourteam/Volunteers', function () {
     return view('Home.Volunteers')
             ->with('title', 'Volunteers');

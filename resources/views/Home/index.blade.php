@@ -18,36 +18,27 @@
             <div class="col-12" >
                 <h2 class="text-center" style="margin:30px 0px;">Feature Events</h2>
                 <div class="row">
+                @foreach($featureEvents as $key => $feaEvent)
                     <div class="col-4">
                         <div class="card" style="width: 20rem;">
-                            <img class="card-img-top" style="height:13.4rem;" src="../../../images/pages/unnamed.jpg" alt="Card image cap">
+                            @if($feaEvent->image)
+                            <?php if (file_exists("../public".$feaEvent->image)){ ?>
+                                <img class="card-img-top" style="height:13.4rem;" src="{{asset($feaEvent->image)}}" alt="Card image cap">
+                            <?php } else{ ?>
+                                <img class="card-img-top" style="height:13.4rem;" src="{{asset('/B0eS.gif')}}" alt="Card image cap">
+                            <?php } ?>
+                            @else
+                            <img class="card-img-top" style="height:13.4rem;" src="{{asset('/B0eS.gif')}}" alt="Card image cap">
+                            @endif
                             <div class="card-body">
-                                <h5 class="card-title">Blood Donation</h5>
-                                <p class="card-text">A blood donation occurs when a person voluntarily has blood drawn and used for transfusions and/or made into biopharmaceutical medications by a process called fractionation</p>
+                                <h5 class="card-title" style="height: 80px;overflow: hidden;text-overflow: ellipsis;">{{$feaEvent->event_name}}</h5>
+                                <p class="card-text" style="height: 80px;width: 200px;overflow: hidden;text-overflow: ellipsis;">{{$feaEvent->details}}</p>
                                 <a href="#" class="btn btn-primary">Donate Now</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
-                        <div class="card" style="width: 20rem;">
-                            <img class="card-img-top" style="height:13.4rem;" src="../../../images/pages/Article-Key-Image-453431968-800x420.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Tree Plantation</h5>
-                                <p class="card-text">A blood donation occurs when a person voluntarily has blood drawn and used for transfusions and/or made into biopharmaceutical medications by a process called fractionation</p>
-                                <a href="#" class="btn btn-primary">Join Now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="card" style="width: 20rem;">
-                            <img class="card-img-top" style="height:13.4rem;" src="../../../images/pages/dc-Cover-s2snl09nju40r1s1d4o2ced504-20170728024517.Medi.jpeg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Education for everyone</h5>
-                                <p class="card-text">A blood donation occurs when a person voluntarily has blood drawn and used for transfusions and/or made into biopharmaceutical medications by a process called fractionation</p>
-                                <a href="#" class="btn btn-primary">Join Now</a>
-                            </div>
-                        </div>
-                    </div>
+                @endforeach
+                    
                 </div>
             </div>
         </div>
