@@ -175,8 +175,6 @@ Route::group(['middleware'=>['sess']] , function(){
             Route::get('/org/RenewSponsor/{id}','Org\OrganizationHomeController@renew' )->name('org.renew');
             Route::get('/org/SponsorTransaction','Org\OrganizationHomeController@sponsorTransaction' )->name('org.sponsorTransaction');
             
-            
-            Route::get('/org/ManageVolunteerEvent', 'OrganizationHomeController@indexVolunteer')->name('org.volunteereventList');
 
     });
 });
