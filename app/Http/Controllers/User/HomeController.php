@@ -28,7 +28,14 @@ class HomeController extends Controller
             DB::table('site_unique_traficIp')->insert($data1);
         }
 
-        $allCategory = DB::table('event_categorys')->where('status',1)->get();
+        $allCategory = DB::table('event_categorys')->where('status',1)->inRandomOrder()->get();
+
+        $banner = DB::table('sponsor_banners')->where('status',1)->first();
+
+        $totalMoneyCollect = DB::table('event_trans_lists')->where('status',1)->sum('amount');
+        $totalEvents = DB::table('events')->where('status', 1)->get();
+        $totalVolunteers = DB::table('event_volunteers')->where('status', 1)->get();
+
         $featureEvents = DB::table('events')
         ->where('status', 1)
         ->where('is_feature',1)
@@ -38,7 +45,11 @@ class HomeController extends Controller
         return view('Home.index')
             ->with('title', 'Home')
             ->with('allCategory', $allCategory)
-            ->with('featureEvents', $featureEvents);
+            ->with('featureEvents', $featureEvents)
+            ->with('banner', $banner)
+            ->with('totalMoneyCollect', $totalMoneyCollect)
+            ->with('totalEvents', count($totalEvents))
+            ->with('totalVolunteers', count($totalVolunteers));
 
     }
 
@@ -134,10 +145,35 @@ class HomeController extends Controller
         $Events = DB::table('events')
         ->where('id', $id)->first();
 
+        $data1=array();
+        $data1['visitor']=$Events->visitor+1;
+        DB::table('events')->where('id', $id)->update($data1);
+
+        $trnsList = DB::table('event_trans_lists')
+        ->leftJoin('events', 'event_trans_lists.eventId', '=', 'events.id')
+        ->leftJoin('userinfos', 'event_trans_lists.user_id', '=', 'userinfos.id')
+        ->select('event_trans_lists.*', 'events.event_name','userinfos.name')
+        ->where('eventId', $id)->orderBy('id','DESC')->get();
+
+        $volunteersList = DB::table('event_volunteers')
+        ->leftJoin('events', 'event_volunteers.eventId', '=', 'events.id')
+        ->select('event_volunteers.*', 'events.event_name')
+        ->where('eventId', $id)->orderBy('event_volunteers.id','DESC')->get();
+        
+        $totalCollect = DB::table('event_trans_lists')
+        ->where('eventId', $id)->sum('amount');
+
+        $totalVApply= DB::table('event_volunteers')
+        ->where('eventId', $id)->get();
+
         return view('Home.EventDetails')
             ->with('title', 'EventDetails Us')
             ->with('allCategory', $allCategory)
-            ->with('Events', $Events);
+            ->with('trnsList', $trnsList)
+            ->with('volunteersList', $volunteersList)
+            ->with('totalCollect', $totalCollect)
+            ->with('Events', $Events)
+            ->with('totalVApply', count($totalVApply));
 
     }
 

@@ -51,17 +51,39 @@
         <h6 class="text-center" style="margin-bottom:30px;">We have the strongest community</h6>
         <div class="row">
             <div class="col-4" style="text-align: center;">
-                <h2><b>86</b></h2>
+                <h2><b>{{$totalVolunteers}}</b></h2>
                 <h3>Volunteers</h3>
             </div>
             <div class="col-4" style="text-align: center;">
-                <h2><b>47</b></h2>
+                <h2><b>{{$totalEvents}}</b></h2>
                 <h3>Events</h3>
             </div>
             <div class="col-4" style="text-align: center;">
-                <h2><b>1.2M ৳</b></h2>
+                <h2><b>{{$totalMoneyCollect}} ৳</b></h2>
                 <h3>Total Donation</h3>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="event" style="background-color:fff; margin: auto;width: 100%;">
+    <div >
+        <div class="col-12">
+        @if($banner->image)
+            <?php if (file_exists("../public".$banner->image)){ ?>
+                <div class="osahan-slider-item">
+                    <img src="{{asset($banner->image)}}" style="height:300px;box-shadow:none !important;object-fit:contain; display: block;margin-left: auto;margin-right: auto;width: 50%;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                </div>
+            <?php } else{ ?>
+                <div class="osahan-slider-item">
+                    <img src="{{asset('/B0eS.gif')}}" style="height:300px;box-shadow:none !important;object-fit:contain; display: block;margin-left: auto;margin-right: auto;width: 50%;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                </div>
+            <?php } ?>
+        @else
+            <div class="osahan-slider-item" >
+                <img src="{{asset('/B0eS.gif')}}" style="height:300px;box-shadow:none !important;object-fit:contain; display: block;margin-left: auto;margin-right: auto;width: 50%;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+            </div>
+        @endif
         </div>
     </div>
 </div>
@@ -116,7 +138,7 @@
         </div>
     </div>
 </div>
-<div class="event"">
+<div class="event">
     <div class="container" style="height:200px; text-align: center; margin-top:100px;">
         <h2>Ready to Join us?</h2>
         <button type="button" class="btn btn-success">Join with Us</button>

@@ -440,6 +440,7 @@ class EventController extends Controller
         $allVolunteers = DB::table('event_volunteers')
         ->leftJoin('events', 'event_volunteers.eventId', '=', 'events.id')
         ->select('event_volunteers.*', 'events.event_name')
+        ->orderBy('id','DESC')
         ->paginate(10);
 
         return view('Admin.volunteerList')
@@ -455,6 +456,7 @@ class EventController extends Controller
         ->leftJoin('events', 'event_trans_lists.eventId', '=', 'events.id')
         ->leftJoin('userinfos', 'event_trans_lists.user_id', '=', 'userinfos.id')
         ->select('event_trans_lists.*', 'events.event_name','userinfos.name')
+        ->orderBy('id','DESC')
         ->paginate(10);
 
 
