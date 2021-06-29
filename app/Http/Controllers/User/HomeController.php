@@ -77,6 +77,30 @@ class HomeController extends Controller
 
     }
 
+    public function joinOrg(Request $request){
+
+        $ip = $this->getIp();
+        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $getLastCount = DB::table('sitealltrafic')->first();
+        $data=array();
+        $data['count']=$getLastCount->count+1;
+        DB::table('sitealltrafic')->where('id', $getLastCount->id)->update($data);
+        if(count($checkIp)==0){
+            $data1=array();
+            $data1['user_ip']=$ip;
+            
+            DB::table('site_unique_traficIp')->insert($data1);
+        }
+
+        $allCategory = DB::table('event_categorys')->where('status',1)->get();
+        
+
+        return view('Home.JoinOrg')
+            ->with('title', 'Join As Organization')
+            ->with('allCategory', $allCategory);
+
+    }
+
     public function FAQ(Request $request){
 
         $ip = $this->getIp();
@@ -290,8 +314,148 @@ class HomeController extends Controller
             ->with('title', 'Organization')
             ->with('allCategory', $allCategory)
             ->with('allOrg', $allOrg);
+    }
 
+    public function ApplyForOrgAccount(Request $request){
 
+        $validator = Validator::make($request->all(), [
+            'org_name' => 'required|min:3|max:30',
+            'customer_phone' => 'required|min:11|max:15',
+            'image' => 'required',
+            'customer_Address' => 'required',
+            'customer_details' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with([
+                'error' => true,
+                'message' => 'Required data missing.'
+            ]);
+        }else{
+
+            $image = $request->file('image');
+            $image_name=$image->getClientOriginalName();
+            $image_ext=$image->getClientOriginalExtension();
+            $image_new_name =strtoupper(Str::random(6));
+            $image_full_name=$image_new_name.'.'.$image_ext;
+            $upload_path='images/organisation/';
+            $image_url=$upload_path.$image_full_name;
+            $success=$image->move($upload_path,$image_full_name);
+            $imageData='/images/organisation/'.$image_full_name;
+
+            
+            $data=array();
+            $data['user_id']=$request->session()->get('user_id');
+            $data['name']=$request->org_name;
+            $data['phone']=$request->customer_phone;
+            $data['image']=$imageData;
+            $data['address']=$request->customer_Address;
+            $data['details']=$request->customer_details;
+            $data['status']='3';
+
+            $insert = DB::table('organizations')->insert($data);
+
+            if($insert){
+                return redirect()->back()->with([
+                    'error' => false,
+                    'message' => 'Request Send Successfully'
+                ]);
+            }else{
+                return redirect()->back()->with([
+                    'error' => true,
+                    'message' => 'Something going wrong'
+                ]);
+            }
+        }
+    }
+
+    public function joinSponsor(Request $request){
+
+        $ip = $this->getIp();
+        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $getLastCount = DB::table('sitealltrafic')->first();
+        $data=array();
+        $data['count']=$getLastCount->count+1;
+        DB::table('sitealltrafic')->where('id', $getLastCount->id)->update($data);
+        if(count($checkIp)==0){
+            $data1=array();
+            $data1['user_ip']=$ip;
+            
+            DB::table('site_unique_traficIp')->insert($data1);
+        }
+
+        $allCategory = DB::table('event_categorys')->where('status',1)->get();
+        
+
+        return view('Home.JoinSponsor')
+            ->with('title', 'Join As Sponsor')
+            ->with('allCategory', $allCategory);
+
+    }
+
+    public function ApplyForSponsor(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'spo_name' => 'required|min:3|max:30',
+            'startdate' => 'required',
+            'image' => 'required',
+            'endDate' => 'required',
+            'customer_Amount' => 'required',
+            'customer_details' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with([
+                'error' => true,
+                'message' => 'Required data missing.'
+            ]);
+        }else{
+
+            $image = $request->file('image');
+            $image_name=$image->getClientOriginalName();
+            $image_ext=$image->getClientOriginalExtension();
+            $image_new_name =strtoupper(Str::random(6));
+            $image_full_name=$image_new_name.'.'.$image_ext;
+            $upload_path='images/sponsor/';
+            $image_url=$upload_path.$image_full_name;
+            $success=$image->move($upload_path,$image_full_name);
+            $imageData='/images/sponsor/'.$image_full_name;
+
+            
+            $data=array();
+            $data['user_id']=$request->session()->get('user_id');
+            $data['title']=$request->spo_name;
+            $data['details']=$request->customer_details;
+            $data['image']=$imageData;
+            $data['startDate']=$request->startdate;
+            $data['endDate']=$request->endDate;
+            $data['amount']=$request->customer_Amount;
+            $data['status']='1';
+
+            $id = $request->session()->get('user_id');
+            
+            $data1=array();
+            $data1['status']='2';
+            $data1['type']='3';
+
+            $update= DB::table('userinfos')
+                            ->where('id',$id)
+                            ->update($data1);
+
+            $insert = DB::table('sponsors')->insert($data);
+
+            if($insert){
+                return redirect()->back()->with([
+                    'error' => false,
+                    'message' => 'Request Send Successfully'
+                ]);
+            }else{
+                return redirect()->back()->with([
+                    'error' => true,
+                    'message' => 'Something going wrong'
+                ]);
+            }
+        }
     }
 
     public function getIp(){
