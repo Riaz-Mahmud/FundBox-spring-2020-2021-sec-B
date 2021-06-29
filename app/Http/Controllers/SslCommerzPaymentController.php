@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use DB;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
 
-class RouteController extends Controller
+class SslCommerzPaymentController extends Controller
 {
+
     public function exampleEasyCheckout()
     {
         return view('exampleEasycheckout');
@@ -186,7 +188,6 @@ class RouteController extends Controller
                     ->update(['status' => 'Processing']);
 
                 echo "<br >Transaction is successfully Completed";
-                return redirect('/');
             } else {
                 /*
                 That means IPN did not work or IPN URL was not set in your merchant panel and Transation validation failed.

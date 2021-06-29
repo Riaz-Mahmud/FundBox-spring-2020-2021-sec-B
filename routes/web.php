@@ -322,3 +322,15 @@ Route::get('/sp/manageAccount', function () {
 //Sponsor route end
 
 
+// SSLCOMMERZ Start
+Route::get('/example1', 'RouteController@exampleEasyCheckout');
+Route::get('/example2', 'RouteController@exampleHostedCheckout');
+
+Route::post('/pay', 'RouteController@index');
+Route::post('/pay-via-ajax', 'RouteController@payViaAjax');
+Route::post('/success', 'RouteController@success');
+Route::post('/fail', 'RouteController@fail');
+Route::post('/cancel', 'RouteController@cancel');
+Route::post('/ipn', 'RouteController@ipn');
+
+//SSLCOMMERZ END
