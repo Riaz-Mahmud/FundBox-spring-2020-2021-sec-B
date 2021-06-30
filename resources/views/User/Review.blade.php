@@ -18,12 +18,18 @@
                         </div>
                     </div>
 
-                    <form>
+                    <form method ="post" action ="/user/review">
+
+                    @csrf
+
+                  
+                            <input type="hidden" class="form-control"  name="e" value="{{$event_id}}">
+                      
+                        <br>
                         <div class="form-floating">
-                            <textarea class="form-control" placeholder="Write your review here..." id="floatingTextarea2" style="height: 100px"></textarea>
+                            <textarea class="form-control" placeholder="Write your review here..." id="floatingTextarea2" name="review" style="height: 100px"></textarea>
 
                         </div>
-                        <br>
 
                         <div class="col-12">
                             <button type="submit" class="btn btn-outline-success">Submit</button>

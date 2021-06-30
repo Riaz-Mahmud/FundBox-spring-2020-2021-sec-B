@@ -18,33 +18,28 @@
                         </div>
                     </div>
 
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Event Id</th>
-                                <th>Organization User Id</th>
-                                <th>Organization Name</th>
-                                <th>Phone</th>
-                                <th>Status</th>
-                                <th>   </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            
-                            @foreach ($volunteerEventList as $volunteerEvent)
-                            <tr>
-                                <td>{{$volunteerEvent['eventId']}}</td>
-                                <td>{{$volunteerEvent['user_id']}}</td>
-                                <td>{{$volunteerEvent['user_name']}}</td>
-                                <td>{{$volunteerEvent['phone']}}</td>
-                                <td>{{$volunteerEvent['status']}}</td>
-                                <td><a href="/user/organizationDetails" class="btn btn-success">Details</a></td>
-                            
-                            </tr>
-                            @endforeach
-                            
-                            </tbody>
-                        </table>
+                <div class="row">
+                    @foreach ($volunteerEventList as $volunteerEvent)
+                   
+                        <div class="col-lg-3 col-sm-6 col-12 dashboard-users-danger">
+                            <div class="card text-center">
+                                <div class="card-content">
+                                <img src="{{$volunteerEvent['image']}}" class="card-img-top" alt="...">
+                                    <div class="card-body py-1">
+                                        <div class="badge-circle badge-circle-lg badge-circle-light-warning mx-auto mb-50">
+                                            <i class="bx bx-receipt font-medium-5"></i>
+                                        </div>
+                                        <h5 class="card-title">{{$volunteerEvent['event_name']}}</h5>
+                                        <p class="card-text">{{$volunteerEvent['details']}}</p>
+                                        
+                                        <a href="{{route('User.applyVolunteerEvent')}}" class="btn btn-primary">Apply</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   
+                    @endforeach
+                </div> 
                 </section>
             </div>
         </div>

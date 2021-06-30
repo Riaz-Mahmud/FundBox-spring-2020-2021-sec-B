@@ -17,27 +17,39 @@
                             <hr>
                         </div>
                     </div>
+                    
 
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Volunteer Event Serial No.</th>
-                                <th>Volunteer Event Name </th>
-                                <th>Organization Name</th>
-                                <th>Applied Date</th>
+                                <th>Event Id</th>
+                                <th>Event Name</th>
+                                <th>Event Details</th>
+                                <th>Organization Id</th>
+                                <th>Status</th>
+                                <th>Date</th> 
                                 <th> </th>
                             
                             </tr>
                             </thead>
                             <tbody>
+
+
+
+                            @foreach ($volunteerEvents as $volunteerEvent)
+
+                           
                             <tr>
-                                <td>1</td>
-                                <td>ABC</td>
-                                <td>A organization</td>
-                                <td>01-01-2021</td>
-                                <td><button type="submit" class="btn btn-outline-success" >Cancle Application</button></td>
-                            
+                                <td>{{$volunteerEvent->id}}</td>
+                                <td>{{$volunteerEvent->event_name}}</td>
+                                <td>{{$volunteerEvent->details}}</td>
+                                <td>{{$volunteerEvent->orgId}}</td>
+                                <td>{{$volunteerEvent->status}}</td>
+                                <td>{{$volunteerEvent->created_at}}</td>
+                                <td><a href="/user/cancleVolunteerEvent/{{$volunteerEvent->id}}" class="btn btn-primary">Cancel</a></td>
                             </tr>
+                        
+                            @endforeach
                             </tbody>
                         </table>
                 </section>
