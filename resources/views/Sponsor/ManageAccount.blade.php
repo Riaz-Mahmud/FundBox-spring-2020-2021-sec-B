@@ -44,6 +44,7 @@
                         @endif
                         
                     </div>
+                    {{$userInfo}}
                     <div class="restaurant-list-table">
                         <div class="card">
                             <div class="card-content">
@@ -88,8 +89,7 @@
                                                 <button type="submit" class="btn btn-block btn-success glow">Update Profile</button>
                                             </div>
                                             <div class="col-12 col-sm-12" style="margin-top: 10px">
-                                            <button type="submit" class="btn btn-block btn-danger glow">Delete Account</button>
-
+                                            <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteSponsorship('{{ $userId->id }}')">Delete</button>
                                             </div>
                                         </div>
                                     </form>                                
@@ -115,5 +115,59 @@
     @include('Layout.footer')
 
     @include('Layout.scripts')
+    <script>
+        function deleteAccount(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    
+                    document.getElementById('deleteBtn').innerText = 'Loading..';
+                    var status = "0";
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "{{ url('/sp/manageAccount/delete') }}",
+                        type: "POST",
+                        data: {
+                            id: id
+                        },
+                        success: function(result) {
+                            if (!result.error) {
+                                document.getElementById('deleteBtn').innerText = 'Done';
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: result.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                //location.reload();
+                                return redirect()->to('/');
+                            } else {
+                                document.getElementById('deleteBtn').innerText = 'Error';
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'danger',
+                                    title: result.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                location.reload();
+                            }
+                        }
+                    });
+                }
+            })
+    }
+    </script>
+
 </body>
 @endsection

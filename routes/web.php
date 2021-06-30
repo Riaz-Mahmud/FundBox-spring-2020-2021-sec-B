@@ -179,66 +179,68 @@ Route::group(['middleware'=>['sess']] , function(){
 
             // **************************SPONSOR START*******************************
             //Sponsor route start
-            Route::group(['middleware'=>['sponsor']] , function(){
+            Route::group(['prefix' => 'sp','middleware'=>['sponsor']] , function(){
 
                 // Route::post('/allAdvertise','Sponsor\AdvertiseController@CreateAdvertise');
-                Route::get('/sp/allAdvertise','Sponsor\AdvertiseController@Show');
+                Route::get('/allAdvertise','Sponsor\AdvertiseController@Show');
 
-                Route::get('/sp/dashboard', function () {
+                Route::get('/dashboard', function () {
                     return view('Sponsor.sponsorHome')
                             ->with('title', 'Home | Sponsor')
                             ->with('date', date('d-M-Y'));
                 });
     
-                Route::get('/sp/addAdvertise', function () {
+                Route::get('/addAdvertise', function () {
                     return view('Sponsor.addAdvertise')
                             ->with('title', 'Advertise Add | Sponsor');
                 });
+                Route::post('/addAdvertise','Sponsor\AdvertiseController@CreateAdd');
+                Route::post('/addAdvertise/updateAddInfo', 'Sponsor\AdvertiseController@UpdateAddInfo');
+                Route::post('/addAdvertise/updateStatus','Sponsor\AdvertiseController@UpdateStatus');
+                Route::post('/addAdvertise/delete','Sponsor\AdvertiseController@AddvetiseDelete');
+                Route::post('/manageAccount/delete','Sponsor\AccountController@deleteAccount');
+                Route::get('/manageAccount','Sponsor\AccountController@accountPageShow');
     
             
-                Route::get('/sp/payment', function () {
+                Route::get('/payment', function () {
                     return view('Sponsor.Payment')
                             ->with('title', 'Payment | Sponsor');
                 });
-                Route::get('/sp/transactionList', function () {
+                Route::get('/transactionList', function () {
                     return view('Sponsor.TransactionList')
                             ->with('title', 'Transaction List | Sponsor');
                 });
-                Route::get('/sp/siteTraffic', function () {
+                Route::get('/siteTraffic', function () {
                     return view('Sponsor.SiteTraffic')
                             ->with('title', 'Site Traffic | Sponsor');
                 });
-                Route::get('/sp/applyOrg', function () {
+                Route::get('/applyOrg', function () {
                     return view('Sponsor.OrgList')
                             ->with('title', 'Apply Org | Sponsor');
                 });
-                Route::get('/sp/sponsoredOrgList', function () {
+                Route::get('/sponsoredOrgList', function () {
                     return view('Sponsor.SponsoredorgList')
                             ->with('title', 'Sponsored Org List | Sponsor');
                 });
-                Route::get('/sp/pendingOrgList', function () {
+                Route::get('/pendingOrgList', function () {
                     return view('Sponsor.PendingOrgList')
                             ->with('title', 'Pending Org Request | Sponsor');
                 });
-                Route::get('/sp/updateSponsorship', function () {
+                Route::get('/updateSponsorship', function () {
                     return view('Sponsor.UpdateSponsorship')
                             ->with('title', 'Update | Sponsor');
                 });
-                Route::get('/sp/updateOrgSponsorship', function () {
+                Route::get('/updateOrgSponsorship', function () {
                     return view('Sponsor.UpdateOrgSponsorship')
                             ->with('title', 'Update | Sponsor');
                 });
-                Route::get('/sp/allEvents', function () {
+                Route::get('/allEvents', function () {
                     return view('Sponsor.AllEvents')
                             ->with('title', 'All Events | Sponsor');
                 });
-                Route::get('/sp/sponsoredEvents', function () {
+                Route::get('/sponsoredEvents', function () {
                     return view('Sponsor.SoponoredEvents')
                             ->with('title', 'Sponsored Events | Sponsor');
-                });
-                Route::get('/sp/manageAccount', function () {
-                    return view('Sponsor.ManageAccount')
-                            ->with('title', 'Manage Account | Sponsor');
                 });
     
     
