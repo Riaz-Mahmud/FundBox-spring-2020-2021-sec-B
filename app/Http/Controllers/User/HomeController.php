@@ -42,10 +42,17 @@ class HomeController extends Controller
         ->inRandomOrder()
         ->limit(3)->get();
 
+        $ongoingEvents = DB::table('events')
+        ->where('status', 1)
+        ->where('is_feature',0)
+        ->inRandomOrder()
+        ->limit(3)->get();
+
         return view('Home.index')
             ->with('title', 'Home')
             ->with('allCategory', $allCategory)
             ->with('featureEvents', $featureEvents)
+            ->with('ongoingEvents', $ongoingEvents)
             ->with('banner', $banner)
             ->with('totalMoneyCollect', $totalMoneyCollect)
             ->with('totalEvents', count($totalEvents))
