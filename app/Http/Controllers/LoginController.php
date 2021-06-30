@@ -129,7 +129,7 @@ class LoginController extends Controller
     {
         $request->session()->flush();
 
-        return redirect('/SignIn');
+        return redirect('/');
     }
 
     public function CreateNewUser(Request $request)
