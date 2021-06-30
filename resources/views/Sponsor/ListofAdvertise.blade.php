@@ -59,7 +59,7 @@
                                                     <th>Post Date</th>
                                                     <th>Status</th>
                                                     <th>Options</th>
-                                                </tr>
+                                                </tr> 
                                             </thead>
                                             <tbody>
                                             @foreach($allAdvertise as $key => $advertise)
