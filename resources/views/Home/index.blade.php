@@ -36,7 +36,7 @@
                                 @if(session()->has('username'))
                                 <a href="{{ URL::to('/example2/'.base64_encode($feaEvent->id).'/'.base64_encode($feaEvent->orgId)) }}" class="btn btn-primary">Donate Now</a>
                                 @else
-                                <a href="{{ URL::to('/SignIn') }}" class="btn btn-primary">Donate Now</a>
+                                <a class="btn btn-primary loginAlert" aria-hidden="true" onclick="" style="color: white;">Donate Now</a>
                                 @endif
                             </div>
                         </div>
@@ -49,9 +49,9 @@
     </div>
 </div>
 
-<div class="status">
+<div class="status" style="background-color:#F2F4F4;">
     <div class="container" style="padding-bottom:30px;">
-        <h2 class="text-center" style="margin-top:30px;">We will save the world</h2>
+        <h2 class="text-center" >We will save the world</h2>
         <h6 class="text-center" style="margin-bottom:30px;">We have the strongest community</h6>
         <div class="row">
             <div class="col-4" style="text-align: center;">
@@ -70,28 +70,30 @@
     </div>
 </div>
 
-<div class="event" style="background-color:#F2F4F4; margin: auto;width: 100%;">
-    <div >
-        <div class="col-12">
-        @if($banner->image)
-            <?php if (file_exists("../public".$banner->image)){ ?>
-                <div class="osahan-slider-item">
-                    <img src="{{asset($banner->image)}}" style="height:300px;box-shadow:none !important;object-fit:contain; display: block;margin-left: auto;margin-right: auto;width: 50%;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+
+<div class="event" style="background-color:#ffffff;">
+    <div class="container" style="padding-bottom:30px;">
+        <div class="recommend-sli pb-0 mb-0 slick-slider">
+            <!-- <div class="promo-slider"> -->
+                @foreach($banners as $banner)
+                <div class="osahan-slider-item mx-2">
+                    @if($banner->image)
+                        <?php if (file_exists("../public".$banner->image)){ ?>
+                            <img style="width: 50%; background-color: #ffffff" src="{{asset($banner->image)}}" class="img-fluid mx-auto rounded promo-slider" alt="Responsive image">
+                        <?php } else{ ?>
+                            <img style="width: 50%; background-color: #ffffff;object-fit:contain;" src="{{asset('/B0eS.gif')}}" class="img-fluid mx-auto rounded promo-slider" alt="Responsive image">
+                        <?php } ?>
+                    @else
+                        <img style="width: 50%; background-color: #ffffff;object-fit:contain;" src="{{asset('/B0eS.gif')}}" class="img-fluid mx-auto rounded promo-slider" alt="Responsive image">
+                    @endif
                 </div>
-            <?php } else{ ?>
-                <div class="osahan-slider-item">
-                    <img src="{{asset('/B0eS.gif')}}" style="height:300px;box-shadow:none !important;object-fit:contain; display: block;margin-left: auto;margin-right: auto;width: 50%;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                </div>
-            <?php } ?>
-        @else
-            <div class="osahan-slider-item" >
-                <img src="{{asset('/B0eS.gif')}}" style="height:300px;box-shadow:none !important;object-fit:contain; display: block;margin-left: auto;margin-right: auto;width: 50%;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-            </div>
-        @endif
+                @endforeach
+            <!-- </div> -->
         </div>
     </div>
 </div>
-<div class="event" >
+
+<div class="event" style="background-color:#F2F4F4;">
     <div class="container">
         <div class="row" style="padding-bottom:30px;">
             <div class="col-12" >
@@ -115,7 +117,7 @@
                                 @if(session()->has('username'))
                                 <a href="{{ URL::to('/example2/'.base64_encode($ongEvents->id).'/'.base64_encode($ongEvents->orgId)) }}" class="btn btn-primary">Donate Now</a>
                                 @else
-                                <a href="{{ URL::to('/SignIn') }}" class="btn btn-primary">Donate Now</a>
+                                <a class="btn btn-primary loginAlert" aria-hidden="true" onclick="" style="color: white;">Donate Now</a>
                                 @endif
                                 <!-- <h5 class="card-title">Save Nuhash</h5>
                                 <p class="card-text">A blood donation occurs when a person voluntarily has blood drawn and used for transfusions and/or made into biopharmaceutical medications by a process called fractionation</p>
@@ -132,16 +134,18 @@
         </div>
     </div>
 </div>
-<div class="event" style="background-color:#F2F4F4;">
+<div class="event" >
     <div class="container" style="height:200px; text-align: center; margin-top:100px;">
         <h2 style="margin-top:20px;">Ready to Join us?</h2>
         @if(session()->has('username'))
         <a type="button" href="{{URL::to('/joinOrg')}}" class="btn btn-success">Join as Organization</a>
         <a type="button" href="{{URL::to('/joinSponsor')}}" class="btn btn-success">Join as Sponsor</a>
         @else
-        <a type="button" href="{{URL::to('/SignIn')}}" class="btn btn-success">Join as Organization</a>
-        <a type="button" href="{{URL::to('/SignIn')}}" class="btn btn-success">Join as Sponsor</a>
+        <a type="button" style="color: white;" class="btn btn-success loginAlert" aria-hidden="true" onclick=""></i> Join as Organization</a>
+        <a type="button" style="color: white;" class="btn btn-success loginAlert" aria-hidden="true" onclick="">Join as Sponsor</a>
         @endif
     </div>
 </div>
+
+
 @endsection

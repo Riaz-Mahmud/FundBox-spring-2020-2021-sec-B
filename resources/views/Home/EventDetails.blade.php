@@ -40,10 +40,19 @@
                         <p class="font-weight-bold mb-2">Info</p>
                         <p class="text-muted small mb-0"><b>Contact: {{$Events->contact}}</b></p>
                         <p class="text-muted small mb-0"><b>Target Date: {{ date("d M, Y",strtotime($Events->targetDate))}}</b></p><br>
-                        @if($Events->eventType == "1")
-                        <a href="{{ URL::to('/example2/'.base64_encode($Events->id).'/'.base64_encode($Events->orgId)) }}" class="btn btn-primary">Donate Now</a>
-                        @elseif($Events->eventType == "2")
-                        <a href="#" class="btn btn-primary">Apply Now</a>
+                        
+                        @if(session()->has('username'))
+                            @if($Events->eventType == "1")
+                                <a href="{{ URL::to('/example2/'.base64_encode($Events->id).'/'.base64_encode($Events->orgId)) }}" class="btn btn-primary">Donate Now</a>
+                            @elseif($Events->eventType == "2")
+                                <a href="#" class="btn btn-primary">Apply Now</a>
+                            @endif
+                        @else
+                            @if($Events->eventType == "1")
+                                <a href="#" class="btn btn-primary loginAlert" aria-hidden="true" onclick="" >Donate Now</a>
+                            @elseif($Events->eventType == "2")
+                                <a href="#" class="btn btn-primary loginAlert" aria-hidden="true" onclick="" >Apply Now</a>
+                            @endif
                         @endif
                     </div>
                     </div>

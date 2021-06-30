@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="{{ asset('/css/pages/signin&signup.css') }}"><!--Header-->
 </head>
 <body>
+
+<nav aria-label="breadcrumb" class="breadcrumb">
+	<div class="">
+		<a href="{{URL::to('/')}}" class="text-success">Back Home</a></li>
+	</div>
+</nav>
 <div class="card-content">
     <div class="card-body">
 		<div class="alert alert-success alert-dismissible mb-2" role="alert">
@@ -21,6 +27,7 @@
 	</div>
 </div>
 <br>
+
 <div class="container" id="container">
 	
 	<div class="form-container sign-up-container">
@@ -38,7 +45,9 @@
 			<button type="submit">Sign Up</button>
 		</form>
 	</div>
+	
 	<div class="form-container sign-in-container">
+		
 		<form action="/SignIn" method="POST">
 		@csrf
 			<h1>Sign in</h1>
@@ -51,6 +60,7 @@
 			
 		</form>	
 	</div>
+	
 	<div class="overlay-container">
 		<div class="overlay">
 			<div class="overlay-panel overlay-left">
@@ -65,6 +75,8 @@
 			</div>
 		</div>
 	</div>
+
+	
 </div>
 <script>
 	const signUpButton = document.getElementById('signUp');
