@@ -28,9 +28,9 @@ class HomeController extends Controller
             DB::table('site_unique_traficIp')->insert($data1);
         }
 
-        $allCategory = DB::table('event_categorys')->where('status',1)->inRandomOrder()->get();
+        $allCategory = DB::table('event_categorys')->where('status',1)->get();
 
-        $banner = DB::table('sponsor_banners')->where('status',1)->inRandomOrder()->first();
+        $banners = DB::table('sponsor_banners')->where('status',1)->inRandomOrder()->get();
 
         $totalMoneyCollect = DB::table('event_trans_lists')->where('status',1)->sum('amount');
         $totalEvents = DB::table('events')->where('status', 1)->get();
@@ -53,7 +53,7 @@ class HomeController extends Controller
             ->with('allCategory', $allCategory)
             ->with('featureEvents', $featureEvents)
             ->with('ongoingEvents', $ongoingEvents)
-            ->with('banner', $banner)
+            ->with('banners', $banners)
             ->with('totalMoneyCollect', $totalMoneyCollect)
             ->with('totalEvents', count($totalEvents))
             ->with('totalVolunteers', count($totalVolunteers));

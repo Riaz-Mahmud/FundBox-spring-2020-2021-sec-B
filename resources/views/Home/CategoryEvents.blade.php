@@ -30,7 +30,11 @@
                                     <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
                                 </div> -->
                                 <h6 style="margin-top:10px;">Need ৳ {{$events->targetMoney}}</h6>
+                                @if(session()->has('username'))
                                 <a href="{{ URL::to('/example2/'.base64_encode($events->id).'/'.base64_encode($events->orgId)) }}" class="btn btn-primary">Donate Now</a>
+                                @else
+                                <a href="#" class="btn btn-primary loginAlert" aria-hidden="true" onclick="" style="color: white;">Donate Now</a>
+                                @endif
                             </div>
                         </div>
                     </div>
