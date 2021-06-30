@@ -48,6 +48,17 @@
                         <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
+                                    <div class="col-12 col-sm-12 col-lg-3" style="margin-left: auto;">
+                                        <fieldset class="form-group">
+                                            Download List
+                                            <select name="forma" onchange="location = this.value;">
+                                                <option selected disable>Select Option</option>
+                                                <option value="/admin/userExport">Excel</option>
+                                                <option value="/admin/userCSVExport">PDF</option>
+                                                <option value="/admin/userPDFExport">CSV</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
                                     <!-- datatable start -->
                                     <div class="table-responsive">
                                         <table id="seven-item-datatable" class="table">

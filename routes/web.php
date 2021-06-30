@@ -116,6 +116,13 @@ Route::group(['middleware'=>['sess']] , function(){
         Route::post('/admin/sponsorBanner/accept','Admin\SponsorController@BannerAccept');
         Route::post('/admin/sponsorBanner/delete','Admin\SponsorController@BannerDelete');
 
+        Route::get('/admin/userExport', 'Admin\UsersController@export');
+        Route::get('/admin/userCSVExport', 'Admin\UsersController@CSVexport');
+        Route::get('/admin/userPDFExport', 'Admin\UsersController@PDFExport');
+        Route::get('/admin/eventExvelExport', 'Admin\UsersController@EventExvelExport');
+        Route::get('/admin/eventPDFExport', 'Admin\UsersController@EventCSVExport');
+        Route::get('/admin/eventCSVExport', 'Admin\UsersController@EventPDFExport');
+
 
         Route::get('/admin/manageVolEvent', function () {
             return view('Admin.manageVolEvent')->with('title', 'Manage Volunteer Event | Admin');
