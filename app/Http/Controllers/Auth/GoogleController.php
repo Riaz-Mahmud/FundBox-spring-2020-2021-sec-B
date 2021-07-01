@@ -19,11 +19,12 @@ class GoogleController extends Controller
      */
     public function redirectToGoogle()
     {
-        try {
-            return Socialite::driver('google')->redirect();
-        } catch (InvalidStateException $e) {
-            return Socialite::driver('google')->stateless()->redirect();
-        }
+        // try {
+        //     return Socialite::driver('google')->redirect();
+        // } catch (InvalidStateException $e) {
+        //     return Socialite::driver('google')->stateless()->redirect();
+        // }
+        return Socialite::driver('google')->redirect();
         
     }
       
@@ -35,12 +36,9 @@ class GoogleController extends Controller
     public function handleGoogleCallback(Request $request)
     {
         try {
-                
-            try {
-                $user = Socialite::driver('google')->user();
-            } catch (InvalidStateException $e) {
-                $user = Socialite::driver('google')->stateless()->user();
-            }
+            
+            $user = Socialite::driver('google')->stateless()->user();
+
 
             $finduser = User::where('google_id', $user->id)->first();
      
