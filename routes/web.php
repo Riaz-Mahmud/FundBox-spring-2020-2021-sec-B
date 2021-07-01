@@ -369,8 +369,5 @@ Auth::routes();
 Route::get('/home', 'User\HomeController@Index')->name('home');
 Route::get('auth/google', 'Auth\GoogleController@redirectToGoogle');
 Route::get('auth/google/callback', 'Auth\GoogleController@handleGoogleCallback');
-// Route::get('/login','LoginController@LoginIndex');
-// Route::get('/register','LoginController@LoginIndex');
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/login','LoginController@LoginIndex');
+Route::get('/register','LoginController@LoginIndex');

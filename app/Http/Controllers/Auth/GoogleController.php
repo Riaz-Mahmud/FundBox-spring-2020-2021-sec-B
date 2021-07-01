@@ -47,7 +47,6 @@ class GoogleController extends Controller
             if($finduser){
      
                 Auth::login($finduser);
-                dd($newUser);
                 $request->session()->put('user_id', $finduser->id);
                 $request->session()->put('username', $finduser->username);
                 $request->session()->put('full_name', $finduser->name);
