@@ -13,7 +13,7 @@
                 <section id="widgets-Statistics">
                     <div class="row">
                         <div class="col-12 mt-1 mb-2">
-                            <h4>Transition Details</h4>
+                            <h4>Replies of your Reports</h4>
                             <hr>
                         </div>
                     </div>
@@ -22,28 +22,24 @@
                         <thead>
                             <tr>
                                 <th>Event Id</th>
-                                <th>Amount</th>
-                                <th>Visible Type</th>
-                                <th>Payment Type</th>
-                                <th>Status</th>
+                                <th>Details</th>
+                                <th>Reply</th>
                                 <th>Date</th>
-                            
+                                
                             </tr>
                             </thead>
                             <tbody>
 
 
 
-                            @foreach ($transitionList as $transition)
+                            @foreach ($Reports as $Report)
 
-                            @if($transition->user_id == $user_id)
+                            @if($Report->user_id == $user_id)
                             <tr>
-                                <td>{{$transition->eventId}}</td>
-                                <td>{{$transition->amount}}</td>
-                                <td>{{$transition->visibleType}}</td>
-                                <td>{{$transition->paymentType}}</td>
-                                <td>{{$transition->status}}</td>
-                                <td>{{$transition->created_at}}</td>
+                                <td>{{$Report->event_id}}</td>
+                                <td>{{$Report->details}}</td>
+                                <td>{{$Report->reply}}</td>
+                                <td>{{$Report->created_at}}</td>
                                 
                             </tr>
                             @endif 

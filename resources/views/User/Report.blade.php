@@ -18,38 +18,22 @@
                         </div>
                     </div>
 
-                    <form>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Delivery Problem
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Payment Problem
-                            </label>
-                        </div>
+                    <form method ="post" action ="/user/report">
 
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Others
-                            </label>
-                        </div>
+                        @csrf
+
+
+                                <input type="hidden" class="form-control"  name="e" value="{{$event_id}}">
                         
+                            <br>
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Write details here..." id="floatingTextarea2" name="report" style="height: 100px"></textarea>
 
-                            <br><br>
-                        <div class="form-floating" >
-                            
-                            <textarea class="form-control" placeholder="Write details here..." id="floatingTextarea2" style="height: 100px"></textarea>
-                           
-                        </div>
-                    
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-outline-success">Done</button>
-                        </div>
+                            </div>
+
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-outline-success">Done</button>
+                            </div>
                     </form>
                 </section>
             </div>

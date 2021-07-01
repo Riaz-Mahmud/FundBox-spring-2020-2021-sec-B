@@ -260,72 +260,93 @@ Route::group(['middleware'=>['sess']] , function(){
 
     // **************************USER START*******************************
 
+    Route::group(['middleware'=>['user']] , function(){
 
-Route::get('/user/dashboard',function(){
-    return view('User/Home') ->with('title', 'Home User');
-});
+        // Route::get('/user/dashboard',function(){
+        //     return view('User/Home') ->with('title', 'Home User');
+        // });
+        
+        Route::get('/user/registration',function(){
+            return view('User/Registration')->with('title', 'Registration');
+        });
+        
+        // Route::get('/user/review',function(){
+        //     return view('User/Review')->with('title', 'Review');
+        // });
+        
+        // Route::get('/user/organizationList',function(){
+        //     return view('User/OrganizationList')->with('title', 'Organization List');
+        // });
+        
+        // Route::get('/user/report',function(){
+        //     return view('User/Report')->with('title', 'Report');
+        // });
+        
+        Route::get('/user/donation',function(){
+            return view('User/Donation')->with('title', 'Donation');
+        });
+        
+        // Route::get('/user/transitionDetails',function(){
+        //     return view('User/TransitionDetails')->with('title', 'Transition Details');
+        // });
+        
+        
+        // Route::get('/user/organizationDetails',function(){
+        //     return view('User/OrganizationDetails')->with('title', 'Organization Details');
+        // });
+        
+        // Route::get('/user/categoryList',function(){
+        //     return view('User/CategoryList')->with('title', 'Category List');
+        // });
+        
+        // Route::get('/user/events',function(){
+        //     return view('User/Events')->with('title', 'Events');
+        // });
+        
+        // Route::get('/user/volunteerEventList',function(){
+        //     return view('User/VolunteerEventList')->with('title', 'Volunteer Event List');
+        // });
+        
+        
+        // Route::get('/user/applyVolunteerEvent',function(){
+        //     return view('User/ApplyVolunteerEvent')->with('title', 'Apply for Volunteer Event');
+        // });
+        
+        Route::get('/user/yourAppliedVolunteerEvents',function(){
+            return view('User/YourAppliedVolunteerEvents')->with('title', 'Your Applied Volunteer Events');
+        });
+        
+        
+        Route::get('/user/dashboard','User\UserController@dashboard')->name('User.dashboard');                                                                            
+        Route::get('/user/organizationList','User\OrganizationController@organizationList')->name('Organization.organizationList');                                                                            
+        Route::get('/user/categoryList','User\CategoryController@categoryList')->name('Category.categoryList');                                                                            
+        Route::get('/user/volunteerEventList','User\EventController@volunteerEventList')->name('Event.volunteerEventList');                                                                                                                                           
+        Route::get('/user/organizationDetails/{id}','User\OrganizationController@organizationDetails')->name('Organization.organizationDetails');                                                                            
+        Route::get('/user/organizationEvents/{id}','User\OrganizationController@organizationEvents')->name('Organization.organizationEvents');                                                                            
+        Route::get('/user/organizationFollow/{id}','User\OrganizationController@organizationFollow')->name('Organization.organizationFollow');                                                                            
+        Route::get('/user/followedOrganization','User\OrganizationController@followedOrganization')->name('Organization.followedOrganization');                                                                            
+        Route::get('/user/unfollowedOrganization/{id}','User\OrganizationController@unfollowedOrganization')->name('Organization.unfollowedOrganization');                                                                            
+        Route::get('/user/transitionDetails','User\UserController@transitionDetails')->name('User.transitionDetails');  
+        Route::get('/user/report/{id}','User\UserController@report')->name('User.report');  
+        Route::get('/user/reportReply','User\UserController@reportReply')->name('User.reportReply');  
+        Route::post('/user/report','User\UserController@reportPost')->name('User.reportPost');  
+        Route::get('/user/events','User\EventController@events')->name('Event.events');  
+        Route::post('/user/events/{id}','User\EventController@categoryBasedEvents'); 
+        Route::post('/user/search','User\EventController@search'); 
+        Route::get('/user/review/{id}','User\UserController@review')->name('User.review');  
+        Route::post('/user/review','User\UserController@reviewPost');
+        Route::get('/user/applyVolunteerEvent','User\UserController@applyVolunteerEvent')->name('User.applyVolunteerEvent');  
+        Route::get('/user/yourAppliedVolunteerEvents','User\UserController@yourAppliedVolunteerEvents')->name('User.yourAppliedVolunteerEvents');  
+        Route::get('/user/cancleVolunteerEvent/{id}','User\UserController@cancleVolunteerEvent')->name('User.cancleVolunteerEvent');  
+        Route::post('/user/CategoryWiseEvent','User\EventController@CategoryWiseEvent')->name('User.CategoryWiseEvent');  
+        
 
-Route::get('/user/registration',function(){
-    return view('User/Registration')->with('title', 'Registration');
-});
-
-Route::get('/user/review',function(){
-    return view('User/Review')->with('title', 'Review');
-});
-
-// Route::get('/user/organizationList',function(){
-//     return view('User/OrganizationList')->with('title', 'Organization List');
-// });
-
-Route::get('/user/report',function(){
-    return view('User/Report')->with('title', 'Report');
-});
-
-Route::get('/user/donation',function(){
-    return view('User/Donation')->with('title', 'Donation');
-});
-
-Route::get('/user/transitionDetails',function(){
-    return view('User/TransitionDetails')->with('title', 'Transition Details');
-});
 
 
-// Route::get('/user/organizationDetails',function(){
-//     return view('User/OrganizationDetails')->with('title', 'Organization Details');
-// });
-
-// Route::get('/user/categoryList',function(){
-//     return view('User/CategoryList')->with('title', 'Category List');
-// });
-
-Route::get('/user/events',function(){
-    return view('User/Events')->with('title', 'Events');
-});
-
-// Route::get('/user/volunteerEventList',function(){
-//     return view('User/VolunteerEventList')->with('title', 'Volunteer Event List');
-// });
 
 
-Route::get('/user/applyVolunteerEvent',function(){
-    return view('User/ApplyVolunteerEvent')->with('title', 'Apply for Volunteer Event');
-});
 
-Route::get('/user/yourAppliedVolunteerEvents',function(){
-    return view('User/YourAppliedVolunteerEvents')->with('title', 'Your Applied Volunteer Events');
-});
-
-//Route::get('/user/transitionDetails','User\UserController@transitionDetails')->name('User.transitionDetails');  
-Route::get('/user/organizationList','User\OrganizationController@organizationList')->name('Organization.organizationList');                                                                            
-Route::get('/user/categoryList','User\CategoryController@categoryList')->name('Category.categoryList');                                                                            
-Route::get('/user/volunteerEventList','User\EventController@volunteerEventList')->name('Event.volunteerEventList');                                                                                                                                           
-Route::get('/user/organizationDetails/{id}','User\OrganizationController@organizationDetails')->name('Organization.organizationDetails');                                                                            
-Route::get('/user/organizationEvents/{id}','User\OrganizationController@organizationEvents')->name('Organization.organizationEvents');                                                                            
-Route::get('/user/organizationFollow/{id}','User\OrganizationController@organizationFollow')->name('Organization.organizationFollow');                                                                            
-Route::get('/user/followedOrganization','User\OrganizationController@followedOrganization')->name('Organization.followedOrganization');                                                                            
-Route::get('/user/unfollowedOrganization/{id}','User\OrganizationController@unfollowedOrganization')->name('Organization.unfollowedOrganization');                                                                            
-
-
+    });
 
     // **************************USER END*******************************
 
