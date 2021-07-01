@@ -20,7 +20,6 @@ class AdvertiseController extends Controller
         ->get();
         // $allAdvertise = "test";
         // dd($allAdvertise);
-
         return view('Sponsor.ListofAdvertise')
         ->with('title', 'All Advertise | Sponsor')
        ->with('allAdvertise', $allAdvertise);

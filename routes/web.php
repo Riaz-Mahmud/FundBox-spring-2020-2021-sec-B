@@ -207,7 +207,6 @@ Route::group(['middleware'=>['sess']] , function(){
                 Route::post('/addAdvertise/delete','Sponsor\AdvertiseController@AddvetiseDelete');
                 Route::post('/manageAccount/delete','Sponsor\AccountController@deleteAccount');
                 Route::get('/manageAccount','Sponsor\AccountController@accountPageShow');
-    
             
                 Route::get('/payment', function () {
                     return view('Sponsor.Payment')

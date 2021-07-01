@@ -44,14 +44,14 @@
                         @endif
                         
                     </div>
-                    {{$userInfo}}
+                    @foreach($userInfo as $key => $userId)
                     <div class="restaurant-list-table">
                         <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
                                     <!-- datatable start -->
                                     <div class="">
-                                    <form action="{{ url('/serverMaintenance/update') }}" enctype="multipart/form-data" method="POST">
+                                    <form action="#" enctype="multipart/form-data" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-lg-12">
@@ -89,7 +89,7 @@
                                                 <button type="submit" class="btn btn-block btn-success glow">Update Profile</button>
                                             </div>
                                             <div class="col-12 col-sm-12" style="margin-top: 10px">
-                                            <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteSponsorship('{{ $userId->id }}')">Delete</button>
+                                            <button type="submit" id="deleteBtn" class="btn btn-block btn-danger glow" style="margin-top: 3px"  onclick="deleteAccount('{{$userId}}')">Delete</button>
                                             </div>
                                         </div>
                                     </form>                                
@@ -100,6 +100,7 @@
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </section>
                 <!-- users list ends -->
             </div>
@@ -116,7 +117,7 @@
 
     @include('Layout.scripts')
     <script>
-        function deleteAccount(id) {
+        function deleteAccount() {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
