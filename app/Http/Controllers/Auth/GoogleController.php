@@ -19,7 +19,11 @@ class GoogleController extends Controller
      */
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        try {
+            return Socialite::driver('google')->redirect();
+        } catch (InvalidStateException $e) {
+            return Socialite::driver('google')->stateless()->redirect();
+        }
         
     }
       
