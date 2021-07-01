@@ -52,7 +52,7 @@
                                         <fieldset class="form-group">
                                             Download List
                                             <select name="forma" onchange="location = this.value;">
-                                                <option selected disable>Select Option</option>
+                                                <option selected disable value="">Select Option</option>
                                                 <option value="/admin/eventExvelExport">Excel</option>
                                                 <option value="/admin/eventPDFExport">PDF</option>
                                                 <option value="/admin/eventCSVExport">CSV</option>
