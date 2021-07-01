@@ -19,6 +19,7 @@
                 <h2 class="text-center" style="margin:30px 0px;">Feature Events</h2>
                 <div class="row">
                 @foreach($featureEvents as $key => $feaEvent)
+                <a href="{{ URL::to('/EventDetails/'.base64_encode($feaEvent->id)) }}" class="text-dark">
                     <div class="col-4">
                         <div class="card" style="width: 20rem;">
                             @if($feaEvent->image)
@@ -41,6 +42,7 @@
                             </div>
                         </div>
                     </div>
+                    </a>
                 @endforeach
                     
                 </div>
@@ -100,6 +102,7 @@
                 <h2 class="text-center" style="margin:30px 0px;">Ongoing Events</h2>
                 <div class="row">
                 @foreach($ongoingEvents as $key => $ongEvents)
+                <a href="{{ URL::to('/EventDetails/'.base64_encode($ongEvents->id)) }}" class="text-dark">
                     <div class="col-4">
                         <div class="card" style="width: 20rem;">
                             @if($ongEvents->image)
@@ -128,6 +131,7 @@
                             </div>
                         </div>
                     </div>
+                    </a>
                 @endforeach
                 </div>
             </div>
