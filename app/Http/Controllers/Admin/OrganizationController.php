@@ -81,7 +81,13 @@ class OrganizationController extends Controller
 
     public function ManageOrg(Request $request){
 
-        $allOrgs = DB::table('organizations')->orderBy('id','DESC')->paginate(10);
+        $allOrgs = DB::table('organizations')
+        ->where('status',0)
+        ->orWhere('status',1)
+        ->orWhere('status',2)
+        ->orderBy('id','DESC')
+        ->paginate(10);
+
         $allUsers = DB::table('userinfos')
         ->where('type', 4)
         ->get();
@@ -300,6 +306,102 @@ class OrganizationController extends Controller
                     'message' => 'Something going wrong'
                 ]);
             }
+        }
+    }
+
+    public function BlockOrg(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'orgId' => 'required',
+            'value' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Required data missing.'
+            ]);
+        } else {
+            $id = $request->input('orgId');
+            
+            $data=array();
+            $data['status']=$request->input('value');
+
+            $update= DB::table('organizations')
+                            ->where('id',$id)
+                            ->update($data);
+
+            if ($update) {
+                return response()->json([
+                    'error' => false,
+                    'message' => 'Block successfully.'
+                ]);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Something went wrong.'
+                ]);
+            }
+        }
+    }
+
+    public function PendingOrg(Request $request){
+
+        $allOrgs = DB::table('organizations')
+        ->where('status',3)
+        ->orderBy('id','DESC')
+        ->paginate(10);
+
+        $allUsers = DB::table('userinfos')
+        ->where('type', 4)
+        ->get();
+
+        return view('Admin.ManageOrg')
+        ->with('title', 'Manage Organisation | Admin')
+        ->with('allOrgs', $allOrgs)
+        ->with('allUsers', $allUsers);
+
+    }
+
+    public function PendingOrgAccept(Request $request,$id){
+        $orgId = base64_decode($id);
+        
+        $data=array();
+        $data['status']='1';
+
+        $update= DB::table('organizations')
+            ->where('id',$orgId)
+            ->update($data);
+
+        if ($update) {
+            return redirect()->back()->with([
+                'error' => false,
+                'message' => 'Active successfully.'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'error' => true,
+                'message' => 'Something went wrong.'
+            ]);
+        }
+
+    }
+
+    public function PendingOrgDelete(Request $request,$id){
+        $orgId = base64_decode($id);
+        
+        $removed=DB::table('organizations')->where('id', $orgId)->delete();
+
+        if ($removed) {
+            return redirect()->back()->with([
+                'error' => false,
+                'message' => 'Delete successfully.'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'error' => true,
+                'message' => 'Something went wrong.'
+            ]);
         }
     }
 }

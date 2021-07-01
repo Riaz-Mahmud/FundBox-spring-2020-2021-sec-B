@@ -106,6 +106,7 @@
                                                             <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch{{ $key }}" value="0" onclick="statusUpdate('{{ $category->id }}', '{{ $key }}')">
                                                             <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
                                                         </div>
+                                                        <div data-toggle="modal" data-target="#editModal" class="badge badge-pill badge-info mb-1 round-cursor" onclick="edit('{{ $category->id }}','{{ $category->name }}')">Edit</div>
                                                         <div class="badge badge-pill badge-danger mb-1 round-cursor" onclick="deleteCat('{{ $category->id }}')">Delete</div>
                                                     </td>
                                                     @else
@@ -114,6 +115,7 @@
                                                             <input type="checkbox" class="custom-control-input" id="statusSwitch{{ $key }}" value="1" onclick="statusUpdate('{{ $category->id }}', '{{ $key }}')">
                                                             <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
                                                         </div>
+                                                        <div data-toggle="modal" data-target="#editModal" class="badge badge-pill badge-info mb-1 round-cursor" onclick="edit('{{ $category->id }}','{{ $category->name }}')">Edit</div>
                                                         <div class="badge badge-pill badge-danger mb-1 round-cursor" onclick="deleteCat('{{ $category->id }}')">Delete</div>
                                                     </td>
                                                     @endif
@@ -132,6 +134,44 @@
         </div>
     </div>
 
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ url('/admin/eventCategory/update') }}" enctype="multipart/form-data" method="POST">
+                @csrf
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Category</h4>
+                    </div>
+                    <div style="padding: 10px;">
+                        <div class="form-group row">
+                            <!-- <label class="col-sm-3 control-label">ID: </label> -->
+                            <div class="col-sm-8">
+                                <input type="hidden" class="form-control" id="edit_catId" placeholder="ID" name="edit_catId" required>
+                            </div>
+                        </div> 
+                        <!-- /form-group-->
+                        <div class="row">
+                            <label for="editName" class="col-sm-3 control-label">Select User </label>
+                            <label class="col-sm-1 control-label">: </label>
+                            <div class="col-sm-8">
+                            <input type="text" class="form-control" id="editCatName" name="editCatName" placeholder="Category" required>
+                            </div>
+                        </div> <!-- /form-group-->
+                    </div>
+                    <div class="modal-footer editBrandFooter">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+                        <button type="submit" class="btn btn-success" id="editBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+                    </div>
+                <!-- /modal-footer -->
+                </form>
+                <!-- /.form -->
+            </div>
+            <!-- /modal-content -->
+        </div>
+        <!-- /modal-dailog -->
+    </div>
+
     <!-- END: Content-->
 
     <div class="sidenav-overlay"></div>
@@ -141,7 +181,12 @@
 
     @include('Layout.scripts')
 
-    <script>  
+    <script>
+
+        function edit(Id, name) {
+            $('#edit_catId').val(Id)
+            $('#editCatName').val(name)
+        }
 
         function statusUpdate(cat_id, item) {
             var status = "";

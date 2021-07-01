@@ -7,7 +7,6 @@
     @include('Layout.SpMenu')
 
     <!-- BEGIN: Content-->
-    <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
@@ -58,68 +57,59 @@
                                                     <th>Image</th>
                                                     <th>Advertise Title</th>
                                                     <th>Post Date</th>
-                                                    <th>End Date</th>
                                                     <th>Status</th>
                                                     <th>Options</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            @foreach($allAdvertise as $key => $advertise)
                                                 <tr>
-                                                    <td>1</td>
+                                                    <td>{{$key+1}}</td>
                                                     <td>
-                                                        <div class="osahan-slider-item" style="background-color:#fff;">
-                                                            <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                        </div>
+                                                        @if($advertise->image)
+                                                            <?php if (file_exists("../public".$advertise->image)){ ?>
+                                                                    <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                        <img src="{{asset($advertise->image)}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                                    </div>
+                                                            <?php } else{ ?>
+                                                                    <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                        <img src="https://i.gifer.com/B0eS.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                                    </div>
+                                                            <?php } ?>
+                                                        @else
+                                                            <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                <img src="https://i.gifer.com/VuKc.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                            </div>
+                                                        @endif
                                                     </td>
                                                     <td>
-                                                        <b>Title-1</b>
+                                                        <b>{{ $advertise->title }}</b>
                                                     </td>
                                                     <td>
-                                                        21-June-2021
+                                                        {{ date("d M, Y",strtotime($advertise->created_at))}}
                                                     </td>
-                                                    <td>
-                                                        21-July-2021
-                                                    </td>
-                                                    
+                                                    @if($advertise->status == "1")
                                                     <td class="text-center" style="width: 5%">
                                                         <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch" value="0" onclick="statusUpdate()">
-                                                            <label class="custom-control-label" for=""></label>
+                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch{{ $key }}" value="0" onclick="statusUpdate('{{ $advertise->id }}', '{{ $key }}')">
+                                                            <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
                                                         </div>
                                                     </td>
+                                                    @else
+                                                    <td class="text-center" style="width: 5%">
+                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
+                                                            <input type="checkbox" class="custom-control-input" id="statusSwitch{{ $key }}" value="1" onclick="statusUpdate('{{ $advertise->id }}', '{{ $key }}')">
+                                                            <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
+                                                        </div>
+                                                    </td>
+                                                    @endif
                                                     <td>
-                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateEvent()">Edit</button>
-                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Delete</button>
+                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateSponsorship('{{ $advertise->id }}', '{{ $advertise->title }}')">Edit</button>
+                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteSponsorship('{{ $advertise->id }}')">Delete</button>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>2</td>
-                                                    <td>
-                                                        <div class="osahan-slider-item" style="background-color:#fff;">
-                                                            <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <b>Title-2</b>
-                                                    </td>
-                                                    <td>
-                                                        11-June-2021
-                                                    </td>
-                                                    <td>
-                                                        20-June-2021
-                                                    </td>
-                                                    
-                                                    <td class="text-center" style="width: 5%">
-                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch" value="0" onclick="statusUpdate()">
-                                                            <label class="custom-control-label" for=""></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateEvent()">Edit</button>
-                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Delete</button>
-                                                    </td>
-                                                </tr>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -137,7 +127,7 @@
     <div class="modal fade" id="updateModal" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form class="form-horizontal" id="editBrandForm" action="#" method="POST">
+                <form action="{{ url('/sp/addAdvertise/updateAddInfo') }}" enctype="multipart/form-data" method="POST">
                 @csrf
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -147,75 +137,24 @@
                         <div class="form-group row">
                             <!-- <label class="col-sm-3 control-label">ID: </label> -->
                             <div class="col-sm-8">
-                                <input type="hidden" class="form-control" id="editPromo_id" placeholder="ID" name="editPromo_id" required>
+                                <input type="hidden" class="form-control" id="editAddId" placeholder="ID" name="editAddId" required>
                             </div>
                         </div> 
                         <!-- /form-group-->
                         <div class="row">
-                            <label for="editPromoCode" class="col-sm-3 control-label">Code: </label>
+                            <label for="editTitle" class="col-sm-3 control-label">Title </label>
                             <label class="col-sm-1 control-label">: </label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="editPromoCode" placeholder="Code" name="editPromoCode" required>
+                                <input type="text" class="form-control" id="editTitle" placeholder="Title" name="editTitle" required>
                             </div>
                         </div> <!-- /form-group-->
-                        <div class="row" style="margin-top:5px">
-                            <label for="editPromoCount" class="col-sm-3 control-label">Count: </label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="editPromoCount" placeholder="Count" name="editPromoCount" required>
-                            </div>
-                        </div> <!-- /form-group-->
-                        <div class="row" style="margin-top:5px">
-                            <label for="editStartDate" class="col-sm-3 control-label">Start: </label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <input type="datetime-local" class="form-control" id="editStartDate" name="editStartDate" autocomplete="off" required>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:5px">
-                            <label for="editEndDate" class="col-sm-3 control-label">End: </label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <input type="datetime-local" class="form-control" id="editEndDate" placeholder="End Date" name="editEndDate" autocomplete="off" required>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:5px">
-                            <label for="editPromoCon" class="col-sm-3 control-label">Conditions: </label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <textarea class="form-control" name="editPromoCon" id="editPromoCon" rows="3" placeholder="Conditions" required></textarea>
-                                <!-- <input type="text" class="form-control" id="editPromoCon" placeholder="Conditions" name="editPromoCon" required> -->
-                            </div>
-                        </div> <!-- /form-group-->
-                        <div class="row" style="margin-top:5px">
-                            <label for="editAmount" class="col-sm-3 control-label">Discount Amount</label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="editAmount" placeholder="Discount Amount" name="editAmount" required>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:5px">
-                            <label for="editMinAmount" class="col-sm-3 control-label">Minimum Purchase Amount</label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="editMinAmount" placeholder="Minimum Purchase Amount" name="editMinAmount" required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label for="edit_promo_type" class="col-sm-3 control-label">Promo type</label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <fieldset class="form-group">
-                                    <select name="edit_promo_type" class="form-control" id="edit_promo_type" required>
-                                        <option disabled selected>Select Promo discount type</option>
-                                        <option value="1">Flat</option>
-                                        <option value="2">Percentage</option>
-                                                            
-                                    </select>
-                                </fieldset>
-                            </div>
-                            
-                        </div>
+                        <fieldset class="form-group">
+                                 <div class="custom-file">
+                                       <label class="custom-file-label mt-1" for="inputGroupFile02">Choose Advertise Banner</label>
+                                       <input type="file" class="custom-file-input" id="inputGroupFile02" name="editImage">
+                                </div>
+                         </fieldset>
+                        
                     </div>
                     <div class="modal-footer editBrandFooter">
                         <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
@@ -238,31 +177,79 @@
 
     @include('Layout.scripts')
 
-    <script>  
-        function updateEvent() {
-        }
+ <script>
 
-        function statusUpdate("code", 1) {
-            var status = "";
-            if ($("#statusSwitch" + item).val() == "1") {
-                status = "1";
-                $("#statusSwitch" + item).val("0");
+function updateSponsorship(AddId, AddTitle){
+    $('#editAddId').val(AddId)
+    $('#editTitle').val(AddTitle)
+}
+
+function statusUpdate(id, item) {
+    var status = "";
+    if ($("#statusSwitch" + item).val() == "1") {
+        status = "1";
+        $("#statusSwitch" + item).val("0");
+    } else {
+        status = "0";
+        $("#statusSwitch" + item).val("1");
+    }
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ url('/sp/addAdvertise/updateStatus') }}",
+        type: "POST",
+        data: {
+            id: id,
+            status: status
+        },
+        success: function(result) {
+            if (!result.error) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: result.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             } else {
-                status = "0";
-                $("#statusSwitch" + item).val("1");
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'danger',
+                    title: result.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             }
+        }
+    });
+}
+function deleteSponsorship(id) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            
+            document.getElementById('deleteBtn').innerText = 'Loading..';
+            var status = "0";
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "#",
+                url: "{{ url('/sp/addAdvertise/delete') }}",
                 type: "POST",
                 data: {
-                    promo_id: promo_id,
-                    promo_status: status
+                    id: id
                 },
                 success: function(result) {
                     if (!result.error) {
+                        document.getElementById('deleteBtn').innerText = 'Done';
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
@@ -270,7 +257,9 @@
                             showConfirmButton: false,
                             timer: 1500
                         })
+                        location.reload();
                     } else {
+                        document.getElementById('deleteBtn').innerText = 'Error';
                         Swal.fire({
                             position: 'top-end',
                             icon: 'danger',
@@ -278,63 +267,13 @@
                             showConfirmButton: false,
                             timer: 1500
                         })
+                        location.reload();
                     }
                 }
             });
         }
-
-        function deleteEvent() {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    
-                    document.getElementById('deleteBtn').innerText = 'Loading..';
-                    var status = "0";
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        url: "#",
-                        type: "POST",
-                        data: {
-                            promo_id: promo_id,
-                            promo_status: status
-                        },
-                        success: function(result) {
-                            if (!result.error) {
-                                document.getElementById('deleteBtn').innerText = 'Done';
-                                Swal.fire({
-                                    position: 'top-end',
-                                    icon: 'success',
-                                    title: result.message,
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
-                                location.reload();
-                            } else {
-                                document.getElementById('deleteBtn').innerText = 'Error';
-                                Swal.fire({
-                                    position: 'top-end',
-                                    icon: 'danger',
-                                    title: result.message,
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
-                                location.reload();
-                            }
-                        }
-                    });
-                }
-            })
-        }
-    </script>
-
+    })
+}
+</script>
 </body>
 @endsection

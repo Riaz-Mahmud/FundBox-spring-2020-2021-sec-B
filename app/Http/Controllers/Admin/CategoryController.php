@@ -130,4 +130,42 @@ class CategoryController extends Controller
             }
         }
     }
+    public function Update(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'edit_catId' => 'required',
+            'editCatName' => 'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with([
+                'error' => true,
+                'message' => 'Required data missing.'
+            ]);
+            
+        } else {
+            $id = $request->input('edit_catId');
+
+            $data=array();
+            $data['name']=$request->input('editCatName');
+            
+
+            $update= DB::table('event_categorys')
+                            ->where('id',$id)
+                            ->update($data);
+
+                            
+            if ($update) {
+                return redirect()->back()->with([
+                    'error' => false,
+                    'message' => 'Edit successfully.'
+                ]);
+            } else {
+                return redirect()->back()->with([
+                    'error' => true,
+                    'message' => 'Something went wrong.'
+                ]);
+            }
+        }
+    }
 }

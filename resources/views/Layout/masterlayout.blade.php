@@ -15,6 +15,39 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet"><!--Footer-->
     <link rel="stylesheet" href="{{ asset('/Pages/Home/Footer/css/ionicons.min.css') }}"><!--Footer-->
     <link rel="stylesheet" href="{{ asset('/Pages/Home/Footer/css/style.css') }}"><!--Footer-->
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/60da32e465b7290ac6385f6c/1f9a5djrb';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
   </head>
   <body>
 @section('header')
@@ -32,9 +65,9 @@
         <div class="container">
           <div class="row">
             <div class="col-12">
-              <a href="#" class=""><span class="mr-2  icon-envelope-open-o"></span> <span class="d-none d-md-inline-block">info@yourdomain.com</span></a>
+              <a href="#" class=""><span class="mr-2  icon-envelope-open-o"></span> <span class="d-none d-md-inline-block">info@fundbox.com</span></a>
               <span class="mx-md-2 d-inline-block"></span>
-              <a href="#" class=""><span class="mr-2  icon-phone"></span> <span class="d-none d-md-inline-block">1+ (234) 5678 9101</span></a>
+              <a href="#" class=""><span class="mr-2  icon-phone"></span> <span class="d-none d-md-inline-block">+880 1776 364781</span></a>
 
 
               <div class="float-right">
@@ -68,23 +101,46 @@
                 <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
                   <li><a href="/" class="nav-link">Home</a></li>
                   <li class="has-children">
-                    <a href="#about-section" class="nav-link">Our Team</a>
+                    <a href="#about-section" class="nav-link">Category</a>
                       <ul class="dropdown arrow-top">
-                        <li><a href="/Ourteam/Organization" class="nav-link">Organization</a></li>
-                        <li><a href="/Ourteam/Volunteers" class="nav-link">Our Volunteers</a></li>
+                      @foreach($allCategory as $category)
+                        <li><a href="{{ URL::to('/category/'.base64_encode($category->id)) }}" class="nav-link">{{$category->name}}</a></li>
+                      @endforeach
                       </ul>
                   </li>
+                  <li><a href="/Ourteam/Organization" class="nav-link">Organization</a></li>
                   <li><a href="/events" class="nav-link">Events</a></li>
-                  <li><a href="/about" class="nav-link">About Us</a></li>
+                  <!-- <li><a href="/about" class="nav-link">About Us</a></li> -->
                   <li><a href="/contact" class="nav-link">Contact</a></li>
                   <li><a href="/FAQ" class="nav-link">FAQ</a></li>
-                  <li><a href="/SignIn" class="nav-link">Sign in</a></li>
-                  <li><a href="/SignUp"><button type="button" class="btn btn-outline-success">Start Donation</button></a></li>
 
-                      
+                  
+                  @if(session()->has('username'))
+                    <li class="has-children">
+                      <a href="#about-section" class="nav-link">Profile</a>
+                        <ul class="dropdown arrow-top">
+                          @if(session()->get('user_type')==1)
+                            <li><a href="/admin/dashboard" class="nav-link">Dashboard</a></li>
+                          @elseif(session()->get('user_type')==2)
+                            <li><a href="/org/dashboard" class="nav-link">Dashboard</a></li>
+                          @elseif(session()->get('user_type')==3)
+                            <li><a href="/sp/dashboard" class="nav-link">Dashboard</a></li>
+                          @elseif(session()->get('user_type')==4)
+                            <li><a href="/user/dashboard" class="nav-link">Dashboard</a></li>
+                          @endif
+                          <li><a href="/logout" class="nav-link">Sign Out</a></li>              
+                        </ul>
+                    </li>
+                  @else
+                  <li><a href="/SignIn" class="nav-link">Sign in</a></li>
+                  @endif
+                  @if(session()->has('username'))
+                  <li><a href="/events"><button type="button" class="btn btn-outline-success">Start Donation</button></a></li>
+                  @else
+                  <li><a href="/SignIn"><button type="button" class="btn btn-outline-success">Start Donation</button></a></li>
+                  @endif
                 </ul>
               </nav>
-
             </div>
 
             <div class="toggle-button d-inline-block d-lg-none"><a href="#" class="site-menu-toggle py-5 js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>

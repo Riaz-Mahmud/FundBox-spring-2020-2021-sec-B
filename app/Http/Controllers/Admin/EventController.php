@@ -228,5 +228,279 @@ class EventController extends Controller
         ->with('allCategory', $allCategory);
 
     }
+
+    public function ManageAdminEvent(Request $request){
+
+        $allEvents = DB::table('events')
+        ->where('isAdminEvent', 1)
+        ->paginate(10);
+
+        return view('Admin.manageAdminEvent')
+        ->with('title', 'Manage Admin Event | Admin')
+        ->with('allEvents', $allEvents);
+
+    }
+
+    public function ManageAdminEventUpdateStatus(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'status' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Required data missing.'
+            ]);
+        } else {
+            $id = $request->input('id');
+            
+            $data=array();
+            $data['status']=$request->input('status');
+
+            $update= DB::table('events')
+                            ->where('id',$id)
+                            ->update($data);
+
+            if ($update) {
+                return response()->json([
+                    'error' => false,
+                    'message' => 'Update successfully.'
+                ]);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Something went wrong.'
+                ]);
+            }
+        }
+    }
+
+    public function ManageAdminEventDelete(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Required data missing.'
+            ]);
+        } else {
+            $id = $request->input('id');
+
+            $removed=DB::table('events')->where('id', $id)->delete();
+
+            if ($removed) {
+                return response()->json([
+                    'error' => false,
+                    'message' => 'Delete successfully.'
+                ]);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Something went wrong.'
+                ]);
+            }
+        }
+    }
+
+    public function ManagePendingEvent(Request $request){
+
+        $allEvents = DB::table('events')
+        ->where('status', 2)
+        ->where('isAdminEvent', 0)
+        ->paginate(10);
+
+        return view('Admin.managePendingEvent')
+        ->with('title', 'Manage Pending Event | Admin')
+        ->with('allEvents', $allEvents);
+
+    }
+
+    public function ManagePendingEventAccept(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Required data missing.'
+            ]);
+        } else {
+            $id = $request->input('id');
+            
+            $data=array();
+            $data['status']='1';
+
+            $update= DB::table('events')
+                            ->where('id',$id)
+                            ->update($data);
+
+            if ($update) {
+                return response()->json([
+                    'error' => false,
+                    'message' => 'Update successfully.'
+                ]);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Something went wrong.'
+                ]);
+            }
+        }
+    }
+
+    public function ManagePendingEventDelete(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Required data missing.'
+            ]);
+        } else {
+            $id = $request->input('id');
+
+            $removed=DB::table('events')->where('id', $id)->delete();
+
+            if ($removed) {
+                return response()->json([
+                    'error' => false,
+                    'message' => 'Delete successfully.'
+                ]);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Something went wrong.'
+                ]);
+            }
+        }
+    }
+
+    public function ManageAcceptedEvent(Request $request){
+
+        $allEvents = DB::table('events')
+        ->where('isAdminEvent', 0)
+        ->where('status', 1)
+        ->orWhere('status', 0)
+        ->paginate(10);
+
+        return view('Admin.manageAcceptedEvent')
+        ->with('title', 'Manage Accepted Event | Admin')
+        ->with('allEvents', $allEvents);
+
+    }
+
+    public function ManageAcceptedEventUpdateStatus(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'status' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Required data missing.'
+            ]);
+        } else {
+            $id = $request->input('id');
+            
+            $data=array();
+            $data['status']=$request->input('status');
+
+            $update= DB::table('events')
+                            ->where('id',$id)
+                            ->update($data);
+
+            if ($update) {
+                return response()->json([
+                    'error' => false,
+                    'message' => 'Update successfully.'
+                ]);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Something went wrong.'
+                ]);
+            }
+        }
+    }
+
+    public function VolunteerList(Request $request){
+
+        $allVolunteers = DB::table('event_volunteers')
+        ->leftJoin('events', 'event_volunteers.eventId', '=', 'events.id')
+        ->select('event_volunteers.*', 'events.event_name')
+        ->orderBy('id','DESC')
+        ->paginate(10);
+
+        return view('Admin.volunteerList')
+        ->with('title', 'Volunteer List | Admin')
+        ->with('eventName', "All Event")
+        ->with('allVolunteers', $allVolunteers);
+
+    }
+
+    public function TransitionList(Request $request){
+
+        $allTransitions = DB::table('event_trans_lists')
+        ->leftJoin('events', 'event_trans_lists.eventId', '=', 'events.id')
+        ->leftJoin('userinfos', 'event_trans_lists.user_id', '=', 'userinfos.id')
+        ->select('event_trans_lists.*', 'events.event_name','userinfos.name')
+        ->orderBy('id','DESC')
+        ->paginate(10);
+
+
+        return view('Admin.transitionList')
+        ->with('title', 'Transition List | Admin')
+        ->with('eventName', "All Event")
+        ->with('allTransitions', $allTransitions);
+
+    }
+
+    public function ManageAcceptedEventFundResponse(Request $request,$id){
+        $eventId = base64_decode($id);
+
+        $allTransitions = DB::table('event_trans_lists')
+        ->leftJoin('events', 'event_trans_lists.eventId', '=', 'events.id')
+        ->leftJoin('userinfos', 'event_trans_lists.user_id', '=', 'userinfos.id')
+        ->select('event_trans_lists.*', 'events.event_name','userinfos.name')
+        ->where('events.id',$eventId)
+        ->paginate(10);
+
+        $eventName =  DB::table('events')->where('id',$eventId)->first();
+
+        return view('Admin.transitionList')
+        ->with('title', 'Transition List | Admin')
+        ->with('eventName', "Event Name: ".$eventName->event_name)
+        ->with('allTransitions', $allTransitions);
+
+    }
+
+    public function ManageAcceptedEventVolunteerResponse(Request $request,$id){
+        $eventId = base64_decode($id);
+        $eventName =  DB::table('events')->where('id',$eventId)->first();
+
+        $allVolunteers = DB::table('event_volunteers')
+        ->leftJoin('events', 'event_volunteers.eventId', '=', 'events.id')
+        ->select('event_volunteers.*', 'events.event_name')
+        ->where('events.id',$eventId)
+        ->paginate(10);
+
+        return view('Admin.volunteerList')
+        ->with('title', 'Volunteer List | Admin')
+        ->with('eventName', "Event Name: ".$eventName->event_name)
+        ->with('allVolunteers', $allVolunteers);
+
+    }
     
 }

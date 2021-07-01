@@ -83,8 +83,8 @@
                                                 @endif</td> 
                                                  <td>{{$user->event_name}}</td>
                                                   <td>{{$user->details}}</td>
-                                                  <td><a href="/org/edit/{{$user->id}}"> Edit </a></td>
-                                                    <td><a href="/org/delete/{{$user->id}}"> Delete </a></td>
+                                                  <td><a href="/org/edit/{{$user->id}}/{{$user->eventType}}"> Edit </a></td>
+                                                    <td><a href="/org/delete/{{$user->id}}/{{$user->eventType}}"> Delete </a></td>
                                                 </tr>   
                                                 @endforeach
                                                 
