@@ -31,24 +31,26 @@ class GoogleController extends Controller
     public function handleGoogleCallback(Request $request)
     {
         try {
-    
-            $user = Socialite::driver('google')->user();
-            
+                
+            try {
+                $user = Socialite::driver('google')->user();
+            } catch (InvalidStateException $e) {
+                $user = Socialite::driver('google')->stateless()->user();
+            }
+
             $finduser = User::where('google_id', $user->id)->first();
      
             if($finduser){
      
                 Auth::login($finduser);
-                // dd($newUser);
-                // $request->session()->put('user_id', $finduser->id);
-                // $request->session()->put('username', $finduser->username);
-                // $request->session()->put('full_name', $finduser->name);
-                // $request->session()->put('user_type', $finduser->type);
-                // $request->session()->put('user_email', $finduser->email);
-                // $request->session()->put('user_image', $finduser->image);
-                // $request->session()->put('admin_is_super_admin', $finduser->is_super_admin);
-    
-                // dd(session()->get('username'));
+                dd($newUser);
+                $request->session()->put('user_id', $finduser->id);
+                $request->session()->put('username', $finduser->username);
+                $request->session()->put('full_name', $finduser->name);
+                $request->session()->put('user_type', $finduser->type);
+                $request->session()->put('user_email', $finduser->email);
+                $request->session()->put('user_image', $finduser->image);
+                $request->session()->put('admin_is_super_admin', $finduser->is_super_admin);
 
                 return redirect('/');
      
@@ -65,14 +67,14 @@ class GoogleController extends Controller
                 ]);
     
                 Auth::login($newUser);
-                // dd($newUser);
-                // $request->session()->put('user_id', $newUser->id);
-                // $request->session()->put('username', $newUser->username);
-                // $request->session()->put('full_name', $newUser->name);
-                // $request->session()->put('user_type', $newUser->type);
-                // $request->session()->put('user_email', $newUser->email);
-                // $request->session()->put('user_image', $newUser->image);
-                // $request->session()->put('admin_is_super_admin', $newUser->is_super_admin);
+
+                $request->session()->put('user_id', $newUser->id);
+                $request->session()->put('username', $newUser->username);
+                $request->session()->put('full_name', $newUser->name);
+                $request->session()->put('user_type', $newUser->type);
+                $request->session()->put('user_email', $newUser->email);
+                $request->session()->put('user_image', $newUser->image);
+                $request->session()->put('admin_is_super_admin', $newUser->is_super_admin);
      
                 return redirect('/');
             }
