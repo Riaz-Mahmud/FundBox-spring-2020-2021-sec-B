@@ -19,14 +19,14 @@ class AccountController extends Controller
     //     ->with('title', 'All Advertise | Sponsor')
     //    ->with('allAdvertise', $allAdvertise);
 
-    $userId = $request->session()->get('id');
-    dd($userId);
+    $userInfo = $request->session()->get('id');
+   // dd($userId);
 
 
 
-        // return view('Sponsor.ManageAccount')
-        //         ->with('title', 'Manage Account | Sponsor')
-        //         ->with('userId', $userId);
+        return view('Sponsor.ManageAccount')
+                ->with('title', 'Manage Account | Sponsor')
+                ->with('userInfo', $userInfo);
 
     }
 
