@@ -15,14 +15,22 @@ class AdvertiseController extends Controller
 {
     public function Show(Request $request){
 
+       $userId = $request->session()->get('user_id');
+       $spId = DB::table('sponsors')
+        ->where('user_id',$userId)
+        ->where('status',1)
+        ->first();
+        //dd($spId);
+
        $allAdvertise = DB::table('sponsor_banners')
+        //->where('sponsor_Id', $spId)
         ->where('status', 1)
         ->get();
         // $allAdvertise = "test";
         // dd($allAdvertise);
         return view('Sponsor.ListofAdvertise')
         ->with('title', 'All Advertise | Sponsor')
-       ->with('allAdvertise', $allAdvertise);
+        ->with('allAdvertise', $allAdvertise);
 
     }
     public function CreateAdd(Request $request){
