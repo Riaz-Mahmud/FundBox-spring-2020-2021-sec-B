@@ -123,7 +123,7 @@
                         <div class="form-group row">
                             <!-- <label class="col-sm-3 control-label">ID: </label> -->
                             <div class="col-sm-8">
-                                <input type="hidden" class="form-control" id="orgId" placeholder="ID" name="orgId" required>
+                                <input type="text" class="form-control" id="orgId" placeholder="ID" name="orgId" required>
                             </div>
                         </div> 
                         <!-- /form-group-->
@@ -163,13 +163,13 @@
                                 <input type="text" class="form-control" id="editAmount" placeholder="Discount Amount" name="editAmount" required>
                             </div>
                         </div>
-                        <div class="row" style="margin-top:5px">
+                        <!-- <div class="row" style="margin-top:5px">
                             <label for="image" class="col-sm-3 control-label"> Sponsor Logo</label>
                             <label class="col-sm-1 control-label">: </label>
                             <div class="col-sm-8">
                                 <input type="file" class="form-control" id="image" placeholder="Discount Amount" name="image" required>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="modal-footer editBrandFooter">
                         <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>

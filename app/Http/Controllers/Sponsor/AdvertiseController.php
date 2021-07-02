@@ -89,59 +89,62 @@ class AdvertiseController extends Controller
 
     }
 
-    // public function UpdateAddInfo(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'editAddId' => 'required',
-    //         'editTitle' => 'required|min:5',
-    //         'editImage' => 'required'
-    //     ]);
+    public function UpdateAddInfo(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'editAddId' => 'required',
+            'editTitle' => 'required|min:5',
+            'editImage' => 'required'
+        ]);
 
-    //     if ($validator->fails()) {
-    //         return redirect()->back()->with([
-    //             'error' => true,
-    //             'message' => 'Required data missing.'
-    //         ]);
+        if ($validator->fails()) {
+            return redirect()->back()->with([
+                'error' => true,
+                'message' => 'Required data missing.'
+            ]);
             
-    //     } else {
+        } else {
 
-    //         $image = $request->file('editImage');
-    //         $image_name=$image->getClientOriginalName();
-    //         $image_ext=$image->getClientOriginalExtension();
-    //         $image_new_name =strtoupper(Str::random(6));
-    //         $image_full_name=$image_new_name.'.'.$image_ext;
-    //         $upload_path='images/Sponsor/';
-    //         $image_url=$upload_path.$image_full_name;
-    //         $success=$image->move($upload_path,$image_full_name);
-    //         $imageData='images/Sponsor/'.$image_full_name;
+            $image = $request->file('editImage');
+            $image_name=$image->getClientOriginalName();
+            $image_ext=$image->getClientOriginalExtension();
+            $image_new_name =strtoupper(Str::random(6));
+            $image_full_name=$image_new_name.'.'.$image_ext;
+            $upload_path='images/Sponsor/';
+            $image_url=$upload_path.$image_full_name;
+            $success=$image->move($upload_path,$image_full_name);
+            $imageData='images/Sponsor/'.$image_full_name;
 
-    //         $add_id = $request->input('editAddId');
+
+
+            $add_id = $request->input('editAddId');
+            //dd($imageData);
             
-    //         $data=array();
-    //         $data['title']=$request->input('editTitle');
-    //        // $data['image']=$imageData;
-    //         $data['status']='2';
+            $data=array();
+            $data['title']=$request->input('editTitle');
+            $data['image']=$imageData;
+            $data['status']='2';
             
 
-    //         $update= DB::table('sponsor_banners')
-    //                         ->where('id',add_id)
-    //                         ->update($data);
+            $update= DB::table('sponsor_banners')
+                            ->where('id',$add_id)
+                            ->update($data);
 
                             
-    //         if ($update) {
-    //             return redirect()->back()->with([
-    //                 'error' => false,
-    //                 'message' => 'Edit successfully.'
-    //             ]);
-    //         } else {
-    //             return redirect()->back()->with([
-    //                 'error' => true,
-    //                 'message' => 'Something went wrong.'
-    //             ]);
-    //         }
-    //     }
+            if ($update) {
+                return redirect()->back()->with([
+                    'error' => false,
+                    'message' => 'Edit successfully.'
+                ]);
+            } else {
+                return redirect()->back()->with([
+                    'error' => true,
+                    'message' => 'Something went wrong.'
+                ]);
+            }
+        }
         
-    // }
+    }
 
     public function UpdateStatus(Request $request)
     {

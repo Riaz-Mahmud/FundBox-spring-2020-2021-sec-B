@@ -153,6 +153,12 @@
                     <span class="menu-title" data-i18n="City Manager">Pending Request</span>
                 </a>
             </li>
+            <li class="nav-item @if(url('/sp/ongoingOrgList') == Request::url()) active @endif">
+                <a class="nav-hover" href="/sp/ongoingOrgList">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Ongoing Process</span>
+                </a>
+            </li>
 <!-- Organisation section End -->
 
 <!-- Account section Start -->
