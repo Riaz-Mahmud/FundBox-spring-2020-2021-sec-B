@@ -210,10 +210,8 @@ class RouteController extends Controller
         }
 
         $user_data['amount'] = $request->amount;
-        $user_data['paymentType'] =$request->cus_email;
+        $user_data['paymentType'] =$order_email->email;
         $user_data['status'] = '1';
-    
-            // dd($request->all());
         $insert_user = DB::table('event_trans_lists')->insert($user_data);
 
         echo "Transaction is Successful";
