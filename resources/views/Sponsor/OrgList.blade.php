@@ -112,7 +112,8 @@
     <div class="modal fade" id="updateModal" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
-            <form action="{{ url('/sp/applyInOrg') }}" enctype="multipart/form-data" method="POST">
+            
+            <form class="form-horizontal" id="editBrandForm" action="{{ url('/sp/applyInOrg') }}" method="POST">
                 @csrf
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
