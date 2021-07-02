@@ -83,8 +83,9 @@
                                                 @endif</td> 
                                                  <td>{{$user->event_name}}</td>
                                                   <td>{{$user->details}}</td>
-                                                  <td><a href="/org/edit/{{$user->id}}/{{$user->eventType}}"> Edit </a></td>
-                                                    <td><a href="/org/delete/{{$user->id}}/{{$user->eventType}}"> Delete </a></td>
+                                                  {{-- <td><a href="/org/edit/{{$user->id}}/{{$user->eventType}}"> Edit </a></td> --}}
+                                                   <td><button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateEvent('{{ $user->id }}', '{{ $user->event_name }}', '{{ $user->details }}', '{{ $user->venue }}')">Edit</button> </td>
+                                                  <td><a href="/org/delete/{{$user->id}}/{{$user->eventType}}"> Delete </a></td>
                                                 </tr>   
                                                 @endforeach
                                                 
@@ -105,7 +106,7 @@
     <div class="modal fade" id="updateModal" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form class="form-horizontal" id="editBrandForm" action="#" method="POST">
+                <form action ="{{url('/org/ManageVolunteerEvent/updateVolEvent')}}"class="form-horizontal" enctype="multipart/form-data" method="POST">
                 @csrf
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -115,74 +116,34 @@
                         <div class="form-group row">
                             <!-- <label class="col-sm-3 control-label">ID: </label> -->
                             <div class="col-sm-8">
-                                <input type="hidden" class="form-control" id="editPromo_id" placeholder="ID" name="editPromo_id" required>
+                                <input type="text" class="form-control" id="editId" placeholder="ID" name="editId" required>
                             </div>
                         </div> 
                         <!-- /form-group-->
+                        {{-- <div class="row"style="margin-top:5px" >
+                                <input type="text" class="form-control" id="editId" placeholder="Id" name="editId" required>
+                        </div> --}}
                         <div class="row">
-                            <label for="editPromoCode" class="col-sm-3 control-label">Code: </label>
+                            <label for="editName" class="col-sm-3 control-label">Name </label>
                             <label class="col-sm-1 control-label">: </label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="editPromoCode" placeholder="Code" name="editPromoCode" required>
+                                <input type="text" class="form-control" id="editName" placeholder="Name" name="editName" required>
+                            </div>
+                        </div>  <!-- /form-group-->
+                        <div class="row" style="margin-top:5px">
+                            <label for="eventDetails" class="col-sm-3 control-label">Details: </label>
+                            <label class="col-sm-1 control-label">: </label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="eventDetails" id="eventDetails" rows="3" placeholder="Details" required></textarea>
+                                <!-- <input type="text" class="form-control" id="eventDetails" placeholder="Conditions" name="editPromoCon" required> -->
                             </div>
                         </div> <!-- /form-group-->
                         <div class="row" style="margin-top:5px">
-                            <label for="editPromoCount" class="col-sm-3 control-label">Count: </label>
+                            <label for="editVenue" class="col-sm-3 control-label">Venue</label>
                             <label class="col-sm-1 control-label">: </label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="editPromoCount" placeholder="Count" name="editPromoCount" required>
+                                <input type="text" class="form-control" id="editVenue" placeholder="Venue" name="editVenue" required>
                             </div>
-                        </div> <!-- /form-group-->
-                        <div class="row" style="margin-top:5px">
-                            <label for="editStartDate" class="col-sm-3 control-label">Start: </label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <input type="datetime-local" class="form-control" id="editStartDate" name="editStartDate" autocomplete="off" required>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:5px">
-                            <label for="editEndDate" class="col-sm-3 control-label">End: </label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <input type="datetime-local" class="form-control" id="editEndDate" placeholder="End Date" name="editEndDate" autocomplete="off" required>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:5px">
-                            <label for="editPromoCon" class="col-sm-3 control-label">Conditions: </label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <textarea class="form-control" name="editPromoCon" id="editPromoCon" rows="3" placeholder="Conditions" required></textarea>
-                                <!-- <input type="text" class="form-control" id="editPromoCon" placeholder="Conditions" name="editPromoCon" required> -->
-                            </div>
-                        </div> <!-- /form-group-->
-                        <div class="row" style="margin-top:5px">
-                            <label for="editAmount" class="col-sm-3 control-label">Discount Amount</label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="editAmount" placeholder="Discount Amount" name="editAmount" required>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:5px">
-                            <label for="editMinAmount" class="col-sm-3 control-label">Minimum Purchase Amount</label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="editMinAmount" placeholder="Minimum Purchase Amount" name="editMinAmount" required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label for="edit_promo_type" class="col-sm-3 control-label">Promo type</label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <fieldset class="form-group">
-                                    <select name="edit_promo_type" class="form-control" id="edit_promo_type" required>
-                                        <option disabled selected>Select Promo discount type</option>
-                                        <option value="1">Flat</option>
-                                        <option value="2">Percentage</option>
-                                                            
-                                    </select>
-                                </fieldset>
-                            </div>
-                            
                         </div>
                     </div>
                     <div class="modal-footer editBrandFooter">
@@ -207,7 +168,11 @@
     @include('Layout.scripts')
 
     <script>  
-        function updateEvent() {
+        function updateEvent($id,$name,$details,$venue) {
+            $('#editId').val(id)
+            $('#editName').val(name)
+            $('#eventDetails').val(details)
+            $('#editVenue').val(venue)
         }
 
         function statusUpdate("code", 1) {

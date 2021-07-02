@@ -66,15 +66,18 @@
                                             <td>{{$Req->id}}</td>
                                             
                                             <td>
-                                                <b>{{$Req->eventId}}</b>
+                                                <b>{{$Req->event_name}}</b>
                                             </td>
                                             <td>
-                                                <b>{{$Req->user_id}}</b>
+                                                <b>{{$Req->name}}</b>
                                             </td>
                                             <td>
                                                 <b>{{$Req->amount}}</b>
                                             </td>
-                                            
+                                            <td>
+                                                <a href="{{route('org.refund',$Req->id)}}" class="btn btn-danger">Refund money</a>
+                                                
+                                            </td>
                                             
                                             
                                         </tr>

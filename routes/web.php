@@ -150,12 +150,15 @@ Route::group(['middleware'=>['sess']] , function(){
             //*****************EDIT EVENTS******************* */
             Route::get('/org/edit/{id}/{type}', 'Org\OrganizationHomeController@edit');
             Route::Post('/org/edit/{id}/{type}', 'Org\OrganizationHomeController@update');
+            Route::Post('/org/edit/statusUpdate','Org\OrganizationHomeController@updatestatus');
+            
             //*****************DELETE EVENTS******************* */
             Route::get('/org/delete/{id}/{type}', 'Org\OrganizationHomeController@delete');
             Route::get('/org/destroy/{id}/{type}', 'Org\OrganizationHomeController@destroy');
+            
 
             //***************** EVENT Transactions******************* */
-            Route::get('/org/eventTransaction', 'Org\OrganizationHomeController@eventTransaction');
+            Route::get('/org/eventTransaction', 'Org\OrganizationHomeController@eventTransaction')->name('org.transaction');
             //*****************CREATE VOLUNTEER EVENTS******************* */
             Route::get('/org/createVolunteerEvent', function () {
                 return view('Organization.CreateVolunteerEvent')
@@ -166,6 +169,8 @@ Route::group(['middleware'=>['sess']] , function(){
             Route::Post('/org/createVolunteerEvent', 'Org\OrganizationHomeController@createVolunteerEvent');
             //*****************EDIT  Volunteer EVENTS******************* */
             Route::get('/org/ManageVolunteerEvent', 'Org\OrganizationHomeController@indexVolunteer')->name('org.volunteereventList');
+             Route::post('/org/ManageVolunteerEvent/updateVolEvent', 'Org\OrganizationHomeController@updateVolEvent');
+
 
             Route::get('/org/SponsorRequest','Org\OrganizationHomeController@reqsponsor' )->name('org.req');
             Route::get('/org/SponsorRequest/{id}','Org\OrganizationHomeController@approvesponsor' )->name('org.approve');
@@ -174,7 +179,7 @@ Route::group(['middleware'=>['sess']] , function(){
             Route::get('/org/RenewSponsor','Org\OrganizationHomeController@renewsponsor' )->name('org.renewsponsorlist');
             Route::get('/org/RenewSponsor/{id}','Org\OrganizationHomeController@renew' )->name('org.renew');
             Route::get('/org/SponsorTransaction','Org\OrganizationHomeController@sponsorTransaction' )->name('org.sponsorTransaction');
-            
+            Route::get('/org/refund/{id}','Org\OrganizationHomeController@RefundMoney' )->name('org.refund');
 
     });
 });
