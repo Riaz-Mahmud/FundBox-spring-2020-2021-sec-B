@@ -66,7 +66,7 @@
                                             @foreach($sponsorOrgList as $key => $spList)
                                                 <tbody>
                                                     <tr>
-                                                        <td>{{$key+1}}</td>
+                                                        <td><b>{{$key+1}}</b></td>
                                                         <td>
                                                         @if($spList->sponsorLogo )
                                                             <div class="osahan-slider-item" style="background-color:#fff;">
