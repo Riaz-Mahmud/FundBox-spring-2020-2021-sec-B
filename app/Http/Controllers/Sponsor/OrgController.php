@@ -36,4 +36,16 @@ class OrgController extends Controller
             ->with('sponsorOrgList', $sponsorOrgList);
 
     }
+    public function pendingOrgList(Request $request){
+
+        $pendingOrgList = DB::table('spo_to_org_proposals')
+         ->where('status',0)
+         ->get();
+         //dd($orgList);
+
+         return view('Sponsor.PendingOrgList')
+            ->with('title', 'Pending Org Request | Sponsor')
+            ->with('allPendingOrgList', $pendingOrgList);
+
+    }
 }
