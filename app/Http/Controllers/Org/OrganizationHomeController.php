@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use App\Event;
 use App\spo_to_org_proposal;
+use App\event_trans_list;
 
 class OrganizationHomeController extends Controller
 {
@@ -112,6 +113,7 @@ public function update(Request $req, $id,$type){
     
     
 }
+
 Public function delete($id)
 {   
     $Event = Event::find($id);
@@ -274,13 +276,112 @@ public function VolunteerList(Request $req){
                 ->with('title', ' Volunteer List | Organization');
 }
 public function eventTransaction(Request $req){
-     $transaction = DB::table('event_trans_lists')
-                        ->where('org_Id',$req->session()->get('org_id'))
-                        ->where('status','1')->get();
+    //  $transaction = DB::table('event_trans_lists')
+    //                     ->where('org_Id',$req->session()->get('org_id'))
+    //                     ->where('status','1')->get();
     
+     $transaction = DB::table('event_trans_lists')
+    ->leftJoin('events','event_trans_lists.eventId','=' , 'events.id')
+    ->leftJoin('userinfos', 'event_trans_lists.user_id', '=', 'userinfos.id')
+    ->select('event_trans_lists.*', 'events.event_name','userinfos.name')
+    ->where('org_Id',$req->session()->get('org_id'))
+    ->where('events.status','1')
+    ->where('events.eventType','1')
+    ->where('event_trans_lists.status','1')
+    ->get();     
+
+
     return view('Organization.TransitionEventList')
                 ->with('Transaction',$transaction)
                 ->with('title', ' Event Transactions | Organization');
+}
+public function updateVolEvent(Request $req){
+    $validator = Validator::make($req->all(), [
+            'editId' => 'required',
+            'editName' => 'required|string',
+            'eventDetails' => 'required|min:10|max:50',
+            'editVenue' => 'required|min:3|max:15'
+            
+            
+
+            // $('#editId').val(id)
+            // $('#editName').val(name)
+            // $('#eventDetails').val(details)
+            // $('#editVenue').val(venue)
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->with([
+                'error' => true,
+                'message' => 'Required data missing.'
+            ]);
+            
+        } else{
+            $eventID = $req->input('editId');
+
+            $data=array();
+            $data['event_name']=$req->input('editName');
+            $data['details']=$req->input('eventDetails');
+            $data['venue']=$req->input('editVenue');
+
+            $update= DB::table('events')
+                            ->where('id',$eventID)
+                            ->update($data);
+            if ($update) {
+                return redirect()->back()->with([
+                    'error' => false,
+                    'message' => 'Edit successfully.'
+                ]);
+            } else {
+                return redirect()->back()->with([
+                    'error' => true,
+                    'message' => 'Something went wrong.'
+                ]);
+            }
+        }
+
+   
+}
+
+public function updatestatus(Request $req){
+     $validator = Validator::make($req->all(), [
+            'id' => 'required',
+            'status' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Required data missing.'
+            ]);
+        } else {
+            $id = $req->input('id');
+            
+            $data=array();
+            $data['status']=$req->input('status');
+
+            $update= DB::table('events')
+                            ->where('id',$id)
+                            ->update($data);
+
+            if ($update) {
+                return response()->json([
+                    'error' => false,
+                    'message' => 'Update successfully.'
+                ]);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Something went wrong.'
+                ]);
+            }
+        }
+
+}
+
+public function RefundMoney(Request $req,$id){
+    $refund = event_trans_list::find($id);
+    $refund->status = '2';
+    $refund->save();
+    return redirect()->route('org.transaction'); 
 }
 
 }
