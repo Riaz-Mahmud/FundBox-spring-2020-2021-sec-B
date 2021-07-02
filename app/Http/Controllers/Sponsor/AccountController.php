@@ -83,5 +83,17 @@ class AccountController extends Controller
             }
         }
     }
+    public function allTransactionList(Request $request){
+
+        $allTransactionList = DB::table('event_trans_lists')
+         ->where('status',1)
+         ->get();
+         //dd($orgList);
+
+        return view('Sponsor.TransactionList')
+            ->with('title', 'Transaction List | Sponsor');
+            ->with('allTransactionList', $allTransactionList);
+
+    }
 
 }
