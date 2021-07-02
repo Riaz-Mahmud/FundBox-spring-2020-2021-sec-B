@@ -76,7 +76,7 @@
                                                                 <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Event image">
                                                             </div>
                                                         @endif
-                                                    
+                                                     
                                                     </td>
                                                     <td>
                                                         <b>{{$orgList->name}}</b>

@@ -176,12 +176,12 @@
                     <span class="menu-title" data-i18n="City Manager">Transaction List</span>
                 </a>
             </li>
-            <!-- <li class="nav-item @if(url('/sp/payment') == Request::url()) active @endif">
+            <li class="nav-item @if(url('/sp/payment') == Request::url()) active @endif">
                 <a class="nav-hover" href="/sp/payment">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Payment</span>
                 </a>
-            </li> -->
+            </li>
             <li class="nav-item @if(url('/sp/siteTraffic') == Request::url()) active @endif">
                 <a class="nav-hover" href="/sp/siteTraffic">
                     <i class="bx bx-planet mr-50"></i>

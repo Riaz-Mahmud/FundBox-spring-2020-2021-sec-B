@@ -53,10 +53,15 @@ class OrgController extends Controller
         $ongoingOrgList = DB::table('spo_to_org_proposals')
          ->where('status',4)//2 means pending
          ->get();
+
+        $sponsorInfo = DB::table('sponsors')
+              ->where('user_id', $request->session()->get('user_id'))
+              ->first();
          //dd($orgList);
 
          return view('Sponsor.ProcessingOrgList')
             ->with('title', 'Pending Org Request | Sponsor')
+            ->with('sponsorInfo',$sponsorInfo)
             ->with('allOngoingOrgList', $ongoingOrgList);
 
     }

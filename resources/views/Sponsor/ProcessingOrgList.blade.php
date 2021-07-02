@@ -94,7 +94,7 @@
                                                             <b>{{$ongoingOrgList->amount}}</b>
                                                         </td>
                                                         <td>
-                                                            <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="payment()">Make a Payment</button>
+                                                            <a href="{{ URL::to('/example2/'.base64_encode($sponsorInfo->id).'/'.base64_encode($ongoingOrgList->org_Id).'/'.base64_encode(2)) }}" class="btn btn-info glow">Make a Payment</a>
                                                             
                                                         </td>
                                                     </tr>

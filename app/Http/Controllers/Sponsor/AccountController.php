@@ -27,7 +27,7 @@ class AccountController extends Controller
         ->first();
 
     
-        //dd ($UserInfo);
+        // dd ($UserInfo);
 
 
         return view('Sponsor.ManageAccount')
