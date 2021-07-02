@@ -175,13 +175,34 @@ class RouteController extends Controller
     public function success(Request $request)
     {
         // dd($request->session()->get('user_id'));cus_email
-        $user_data = array();
-        if($request->cus_email == "1"){
+
+        
+
+        
+
+        echo "Transaction is Successful";
+
+        $tran_id = $request->input('tran_id');
+        $amount = $request->input('amount');
+        $currency = $request->input('currency');
+
+        $sslc = new SslCommerzNotification();
+
+        #Check order status in order tabel against the transaction id or order id.
+        $order_detials = DB::table('orders')
+            ->where('transaction_id', $tran_id)
+            ->select('transaction_id', 'status', 'currency', 'amount')->first();
+
+        $order_email = DB::table('orders')
+            ->where('transaction_id', $tran_id)->first();
+            $user_data = array();
+
+        if($order_email->email == "1"){
             $user_data['eventId'] = $request->value_a;
             $user_data['user_id'] = $request->value_c;
             $user_data['visibleType'] = $request->value_b;
             $user_data['org_id'] = $request->value_d;
-        }elseif($request->cus_email == "2"){
+        }elseif($order_email->email == "2"){
             $user_data['sponsor_id'] = $request->value_a;
             $user_data['user_id'] = $request->value_c;
             $user_data['visibleType'] = "1";
@@ -191,8 +212,8 @@ class RouteController extends Controller
         $user_data['amount'] = $request->amount;
         $user_data['paymentType'] =$request->cus_email;
         $user_data['status'] = '1';
-
-        // dd($request->all());
+    
+            // dd($request->all());
         $insert_user = DB::table('event_trans_lists')->insert($user_data);
 
         echo "Transaction is Successful";
