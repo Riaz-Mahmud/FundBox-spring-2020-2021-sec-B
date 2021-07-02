@@ -43,17 +43,41 @@ class GoogleController extends Controller
             $finduser = User::where('google_id', $user->id)->first();
      
             if($finduser){
-     
-                Auth::login($finduser);
-                $request->session()->put('user_id', $finduser->id);
-                $request->session()->put('username', $finduser->username);
-                $request->session()->put('full_name', $finduser->name);
-                $request->session()->put('user_type', $finduser->type);
-                $request->session()->put('user_email', $finduser->email);
-                $request->session()->put('user_image', $finduser->image);
-                $request->session()->put('admin_is_super_admin', $finduser->is_super_admin);
 
-                return redirect('/');
+                if($finduser->status==1){
+
+                    Auth::login($finduser);
+                    $request->session()->put('user_id', $finduser->id);
+                    $request->session()->put('username', $finduser->username);
+                    $request->session()->put('full_name', $finduser->name);
+                    $request->session()->put('user_type', $finduser->type);
+                    $request->session()->put('user_email', $finduser->email);
+                    $request->session()->put('user_image', $finduser->image);
+                    $request->session()->put('admin_is_super_admin', $finduser->is_super_admin);
+
+                    if($finduser->type == 1){
+                        return redirect('/admin/dashboard');
+                    }elseif($user->type == 2){
+                        return redirect('/org/dashboard');
+                    }elseif($user->type == 3){
+                        return redirect('/sp/dashboard');
+                    }elseif($user->type == 4){
+                        return redirect('/');
+                    }else{
+                        return redirect('/SignIn')->with([
+                            'error' => true,
+                            'message' => 'Something going wrong'
+                        ]);
+                    }
+
+                }else{
+                    return redirect('/SignIn')->with([
+                        'error' => true,
+                        'message' => 'Your Account has been Deactivated'
+                    ]);
+                }
+     
+                
      
             }else{
                 $newUser = User::create([
