@@ -22,7 +22,7 @@
                 
                     <div class="row">
                     @foreach ($organizationEvents as $organizationEvent)
-                   
+                      @if($organizationEvent['eventType']==1)
                         <div class="col-lg-3 col-sm-6 col-12 dashboard-users-danger">
                             <div class="card text-center">
                                 <div class="card-content">
@@ -33,11 +33,12 @@
                                         </div>
                                         <h5 class="card-title">{{$organizationEvent['event_name']}}</h5>
                                         <p class="card-text">{{$organizationEvent['details']}}</p>
-                                        @if($organizationEvent['eventType']==1)
-                                            <a href="/user/donation" class="btn btn-primary btn-sm">Donate</a>
-                                        @else
-                                            <a href="{{route('User.applyVolunteerEvent')}}" class="btn btn-primary btn-sm">Apply</a>
-                                        @endif
+                                      
+                                        <a href="{{ URL::to('/example2/'.base64_encode($organizationEvent->id).'/'.base64_encode($organizationEvent->orgId)) }}" class="btn btn-primary">Donate Now</a>
+                                       
+                                       <br><br>  
+                                            
+                                       
 
                                         <a href="/user/review/{{$organizationEvent['id']}}" class="btn btn-primary btn-sm">Review</a>
                                         <a href="/user/report/{{$organizationEvent['id']}}" class="btn btn-primary btn-sm">Report</a>
@@ -46,7 +47,7 @@
                                 </div>
                             </div>
                         </div>
-                    
+                        @endif
                     @endforeach
                     </div>
                 </section>
