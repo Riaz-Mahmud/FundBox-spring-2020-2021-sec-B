@@ -67,20 +67,15 @@
                                                     <td>{{$key+1}}</td>
                                                     <td>
                                                         @if($advertise->image)
-                                                            <?php if (file_exists("../public".$advertise->image)){ ?>
-                                                                    <div class="osahan-slider-item" style="background-color:#fff;">
-                                                                        <img src="{{asset($advertise->image)}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                                    </div>
-                                                            <?php } else{ ?>
-                                                                    <div class="osahan-slider-item" style="background-color:#fff;">
-                                                                        <img src="https://i.gifer.com/B0eS.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                                    </div>
-                                                            <?php } ?>
+                                                            <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                <img src="{{asset( $advertise->image )}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Event image">
+                                                            </div>
                                                         @else
                                                             <div class="osahan-slider-item" style="background-color:#fff;">
-                                                                <img src="https://i.gifer.com/VuKc.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                                <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Event image">
                                                             </div>
                                                         @endif
+                                                    
                                                     </td>
                                                     <td>
                                                         <b>{{ $advertise->title }}</b>

@@ -49,6 +49,9 @@ Route::group(['middleware'=>['sess']] , function(){
             return view('Admin.createAdmin')->with('title', 'Create Admin | Admin');
         });
         Route::post('/admin/createAdmin','Admin\UserController@CreateAdmin');
+        Route::get('/admin/ManageProfile','Admin\UserController@ManageProfile');
+        Route::post('/admin/ManageProfile','Admin\UserController@ManageProfileUpdate');
+        Route::post('/admin/ManageProfile/deactivated','Admin\UserController@ManageProfileDeactivated');
 
         Route::get('/admin/manageAdmin','Admin\UserController@ManageAdmin');
         Route::post('/admin/manageAdmin/updateStatus', 'Admin\UserController@UpdateStatus');
@@ -209,9 +212,10 @@ Route::group(['middleware'=>['sess']] , function(){
                 Route::get('/manageAccount','Sponsor\AccountController@accountPageShow');
                 Route::get('/applyOrg','Sponsor\OrgController@orgList');
                 Route::post('/applyInOrg','Sponsor\OrgController@applyInOrg');
+                Route::post('/UpdateAppliedInOrg','Sponsor\OrgController@UpdateAppliedInOrg');
                 Route::get('/sponsoredOrgList','Sponsor\OrgController@sponsoredOrgList');
                 Route::get('/pendingOrgList','Sponsor\OrgController@pendingOrgList');
-                Route::get('/pendingOrgList','Sponsor\OrgController@pendingOrgList');
+                Route::get('/ongoingOrgList','Sponsor\OrgController@ongoingOrgList');
             
                 Route::get('/payment', function () {
                     return view('Sponsor.Payment')

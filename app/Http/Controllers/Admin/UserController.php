@@ -15,9 +15,10 @@ class UserController extends Controller
 {
 
     private function isLoggedIn(Request $request){
-        if ($request->session()->has('USER_LOGGED_IN') && $request->session()->get('USER_LOGGED_IN')) {
+        if ($request->session()->has('user_type') && $request->session()->get('user_type')) {
             return true;
         } else {
+            
             return false;
         }
         return true;
@@ -241,6 +242,115 @@ class UserController extends Controller
             }
         }
         
+    }
+
+    public function ManageProfile(Request $request){
+
+        $UserInfo = DB::table('userinfos')
+        ->where('id',$request->session()->get('user_id'))
+        ->where('type', 1)
+        ->first();
+
+        return view('Admin.ManageAccount')
+        ->with('title', 'Create Admin | Admin')
+        ->with('UserInfo', $UserInfo);
+    }
+
+    public function ManageProfileUpdate(Request $request)
+    {
+        if ($this->isLoggedIn($request)) {
+            $validator = Validator::make($request->all(), [
+                'username' => 'required',
+                'email' => 'required',
+                'name' => 'required',
+                'phone' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->with([
+                    'error' => true,
+                    'message' => 'Required data missing.'
+                ]);
+            } else {
+                $data=array();
+                $data['name']=$request->input('name');
+                $data['phone']=$request->input('phone');
+
+
+                if($request->password !=""){
+                    if($request->password == $request->con_pass){
+                        $data['password']=md5($request->password);
+                    }
+                }
+
+                $userAvailable= DB::table('userinfos')
+                ->where('id',$request->session()->get('user_id'))
+                ->where('username',$request->input('username'))
+                ->where('email',$request->input('email'))
+                ->first();
+                // dd($request->all());
+                if($userAvailable){
+                    
+                    if($request->update_image !=""){
+                        $image = $request->file('update_image');
+                        $image_name=$image->getClientOriginalName();
+                        $image_ext=$image->getClientOriginalExtension();
+                        $image_new_name =strtoupper(Str::random(6));
+                        $image_full_name=$image_new_name.'.'.$image_ext;
+                        $upload_path='images/admin/';
+                        $image_url=$upload_path.$image_full_name;
+                        $success=$image->move($upload_path,$image_full_name);
+                        $imageData='/images/admin/'.$image_full_name;
+
+                        $data['image']=$imageData;
+                    }
+
+                    $data=DB::table('userinfos')->where('id',$request->session()->get('user_id'))->update($data);
+                    
+                    if($data==null){
+                        return redirect()->back()->with([
+                            'error' => true,
+                            'message' => 'Something went wrong.'
+                        ]);
+                    }
+                    else{
+                        return redirect()->back()->with([
+                            'error' => false,
+                            'message' => 'Update successfully.'
+                        ]);
+                    } 
+
+                }else{
+                    return redirect('/logout');
+                }
+            }
+        } else {
+            return redirect('/SignIn');
+        }
+    }
+
+    public function ManageProfileDeactivated(Request $request)
+    {
+        if ($this->isLoggedIn($request)) {
+
+            $data=array();
+            $data['status']='0';
+
+            $update= DB::table('userinfos')
+                ->where('id',$request->session()->get('user_id'))
+                ->update($data);
+
+            if ($update) {
+                return redirect('/logout');
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Something went wrong.'
+                ]);
+            }
+        }else{
+            return redirect(url('/SignIn'));
+        }
     }
     
 }

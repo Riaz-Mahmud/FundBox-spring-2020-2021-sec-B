@@ -54,7 +54,7 @@
                                             <h1 class="container p-3 mb-2 bg-secondary text-white">All Transition List</h1>
                                             <h5 class="">{{$eventName}}</h5>
 
-                                            <table class="table table-success table-striped">
+                                            <table class="table">
                                                 <thead>
                                                     <tr>
                                                         <th>SL</th>
