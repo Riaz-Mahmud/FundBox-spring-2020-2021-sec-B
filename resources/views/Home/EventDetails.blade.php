@@ -43,7 +43,7 @@
                         
                         @if(session()->has('username'))
                             @if($Events->eventType == "1")
-                                <a href="{{ URL::to('/example2/'.base64_encode($Events->id).'/'.base64_encode($Events->orgId)) }}" class="btn btn-primary">Donate Now</a>
+                                <a href="{{ URL::to('/example2/'.base64_encode($Events->id).'/'.base64_encode($Events->orgId).'/'.base64_encode(1)) }}" class="btn btn-primary">Donate Now</a>
                             @elseif($Events->eventType == "2")
                                 <a href="#" class="btn btn-primary">Apply Now</a>
                             @endif
@@ -70,7 +70,7 @@
                 <br>
                 @if(session()->has('username'))
                     @if($Events->eventType == "1")
-                    <a style="width: 80%;" href="{{ URL::to('/example2/'.base64_encode($Events->id).'/'.base64_encode($Events->orgId)) }}" class="btn btn-primary">Donate Now</a>
+                    <a style="width: 80%;" href="{{ URL::to('/example2/'.base64_encode($Events->id).'/'.base64_encode($Events->orgId).'/'.base64_encode(1)) }}" class="btn btn-primary">Donate Now</a>
                     @elseif($Events->eventType == "2")
                     <a href="#" style="width: 80%;" class="btn btn-primary">Apply Now</a>
                     @endif
