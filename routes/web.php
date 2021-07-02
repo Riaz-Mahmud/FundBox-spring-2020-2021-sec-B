@@ -49,6 +49,9 @@ Route::group(['middleware'=>['sess']] , function(){
             return view('Admin.createAdmin')->with('title', 'Create Admin | Admin');
         });
         Route::post('/admin/createAdmin','Admin\UserController@CreateAdmin');
+        Route::get('/admin/ManageProfile','Admin\UserController@ManageProfile');
+        Route::post('/admin/ManageProfile','Admin\UserController@ManageProfileUpdate');
+        Route::post('/admin/ManageProfile/deactivated','Admin\UserController@ManageProfileDeactivated');
 
         Route::get('/admin/manageAdmin','Admin\UserController@ManageAdmin');
         Route::post('/admin/manageAdmin/updateStatus', 'Admin\UserController@UpdateStatus');
