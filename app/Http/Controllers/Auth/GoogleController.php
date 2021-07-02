@@ -55,13 +55,14 @@ class GoogleController extends Controller
                     $request->session()->put('user_image', $finduser->image);
                     $request->session()->put('admin_is_super_admin', $finduser->is_super_admin);
 
+
                     if($finduser->type == 1){
                         return redirect('/admin/dashboard');
-                    }elseif($user->type == 2){
+                    }elseif($finduser->type == 2){
                         return redirect('/org/dashboard');
-                    }elseif($user->type == 3){
+                    }elseif($finduser->type == 3){
                         return redirect('/sp/dashboard');
-                    }elseif($user->type == 4){
+                    }elseif($finduser->type == 4){
                         return redirect('/');
                     }else{
                         return redirect('/SignIn')->with([

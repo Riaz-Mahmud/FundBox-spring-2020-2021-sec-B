@@ -16,17 +16,19 @@ class RouteController extends Controller
         
     }
 
-    public function exampleHostedCheckout(Request $request,$id,$orgId)
+    public function exampleHostedCheckout(Request $request,$id,$orgId,$type)
     {
         $userid= $request->session()->get('user_id');
         $eventId = base64_decode($id);
         $orgId = base64_decode($orgId);
+        $type = base64_decode($type);
         $Event = DB::table('events')
         ->where('id', $eventId)->first();
 
         return view('exampleHosted')
         ->with('Event', $Event)
         ->with('orgId', $orgId)
+        ->with('type', $type)
         ->with('userid',$userid);
     }
 
@@ -43,7 +45,7 @@ class RouteController extends Controller
         
         # CUSTOMER INFORMATION
         $post_data['cus_name'] = $request->customer_name;
-        $post_data['cus_email'] = $request->userId;
+        $post_data['cus_email'] = $request->type;
         $post_data['cus_add1'] = 'Customer Address';
         $post_data['cus_add2'] = "";
         $post_data['cus_city'] = "";
@@ -172,13 +174,21 @@ class RouteController extends Controller
 
     public function success(Request $request)
     {
-        // dd($request->session()->get('user_id'));
+        // dd($request->session()->get('user_id'));cus_email
         $user_data = array();
-        $user_data['eventId'] = $request->value_a;
-        $user_data['user_id'] = $request->value_c;
+        if($request->card_type == "1"){
+            $user_data['eventId'] = $request->value_a;
+            $user_data['user_id'] = $request->value_c;
+            $user_data['visibleType'] = $request->value_b;
+            $user_data['org_id'] = $request->value_d;
+        }elseif($request->card_type == "2"){
+            $user_data['sponsor_id'] = $request->value_a;
+            $user_data['user_id'] = $request->value_c;
+            $user_data['visibleType'] = "1";
+            $user_data['org_id'] = $request->value_d;
+        }
+
         $user_data['amount'] = $request->amount;
-        $user_data['visibleType'] = $request->value_b;
-        $user_data['org_id'] = $request->value_d;
         if($request->card_type == "BKASH-BKash"){
             $user_data['paymentType'] ='1';
         }elseif($request->card_type == "NAGAD-Nagad"){
