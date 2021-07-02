@@ -207,6 +207,8 @@ Route::group(['middleware'=>['sess']] , function(){
                 Route::post('/addAdvertise/delete','Sponsor\AdvertiseController@AddvetiseDelete');
                 Route::post('/manageAccount/delete','Sponsor\AccountController@deleteAccount');
                 Route::get('/manageAccount','Sponsor\AccountController@accountPageShow');
+                Route::get('/applyOrg','Sponsor\OrgController@orgList');
+                Route::get('/sponsoredOrgList','Sponsor\OrgController@sponsoredOrgList');
             
                 Route::get('/payment', function () {
                     return view('Sponsor.Payment')
@@ -219,14 +221,6 @@ Route::group(['middleware'=>['sess']] , function(){
                 Route::get('/siteTraffic', function () {
                     return view('Sponsor.SiteTraffic')
                             ->with('title', 'Site Traffic | Sponsor');
-                });
-                Route::get('/applyOrg', function () {
-                    return view('Sponsor.OrgList')
-                            ->with('title', 'Apply Org | Sponsor');
-                });
-                Route::get('/sponsoredOrgList', function () {
-                    return view('Sponsor.SponsoredorgList')
-                            ->with('title', 'Sponsored Org List | Sponsor');
                 });
                 Route::get('/pendingOrgList', function () {
                     return view('Sponsor.PendingOrgList')

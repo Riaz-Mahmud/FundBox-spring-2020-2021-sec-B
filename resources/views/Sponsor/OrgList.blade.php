@@ -56,84 +56,45 @@
                                                     <th style="width:5%;">SN</th>
                                                     <th>Image</th>
                                                     <th>Organisation Name</th>
+                                                    <th>Contact Number</th>
+                                                    <th>Address</th>
                                                     <th>Event Type</th>
-                                                    <th>Status</th>
                                                     <th>Options</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            @foreach($allOrgList as $key => $orgList)
                                                 <tr>
-                                                    <td>1</td>
+                                                    <td>{{$key+1}}</td>
                                                     <td>
-                                                        <div class="osahan-slider-item" style="background-color:#fff;">
-                                                            <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                        </div>
+                                                        @if($orgList->image)
+                                                            <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                <img src="{{asset( $orgList->image )}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Event image">
+                                                            </div>
+                                                        @else
+                                                            <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Event image">
+                                                            </div>
+                                                        @endif
+                                                    
                                                     </td>
                                                     <td>
-                                                        <b>Event Name 1</b>
+                                                        <b>{{$orgList->name}}</b>
                                                     </td>
                                                     <td>
-                                                        Blood Donation
-                                                    </td>
-                                                    <td class="text-center" style="width: 5%">
-                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch" value="0" onclick="statusUpdate()">
-                                                            <label class="custom-control-label" for=""></label>
-                                                        </div>
+                                                        <b>{{$orgList->phone}}</b>
                                                     </td>
                                                     <td>
-                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-success glow" onclick="updateEvent()">Apply</button>
+                                                        <b>{{$orgList->address}}</b>
+                                                    </td>
+                                                    <td>
+                                                        {{$orgList->details}}
+                                                    </td>
+                                                    <td>
+                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-success glow" onclick="apply()">Apply</button>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>
-                                                        <div class="osahan-slider-item" style="background-color:#fff;">
-                                                            <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <b>Event Name 1</b>
-                                                    </td>
-                                                    <td>
-                                                        Blood Donation
-                                                    </td>
-                                                    <td class="text-center" style="width: 5%">
-                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch" value="0" onclick="statusUpdate()">
-                                                            <label class="custom-control-label" for=""></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-success glow" onclick="updateEvent()">Apply</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>
-                                                        <div class="osahan-slider-item" style="background-color:#fff;">
-                                                            <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <b>Event Name 1</b>
-                                                    </td>
-                                                    <td>
-                                                        Blood Donation
-                                                    </td>
-                                                    <td class="text-center" style="width: 5%">
-                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch" value="0" onclick="statusUpdate()">
-                                                            <label class="custom-control-label" for=""></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-success glow" onclick="updateEvent()">Apply</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -256,7 +217,7 @@
         function updateEvent() {
         }
 
-        function statusUpdate("code", 1) {
+        function apply("code", 1) {
             var status = "";
             if ($("#statusSwitch" + item).val() == "1") {
                 status = "1";

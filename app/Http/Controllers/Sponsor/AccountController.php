@@ -19,14 +19,20 @@ class AccountController extends Controller
     //     ->with('title', 'All Advertise | Sponsor')
     //    ->with('allAdvertise', $allAdvertise);
 
-    $userInfo = $request->session()->get('id');
+    $userId = $request->session()->get('user_id');
    // dd($userId);
 
+   $UserInfo = DB::table('userinfos')
+        ->where('id', $userId)
+        ->first();
+
+    
+        //dd ($UserInfo);
 
 
         return view('Sponsor.ManageAccount')
                 ->with('title', 'Manage Account | Sponsor')
-                ->with('userInfo', $userInfo);
+                ->with('userInfo', $UserInfo);
 
     }
 
@@ -45,12 +51,30 @@ class AccountController extends Controller
             $id = $request->input('id');
 
             $removed=DB::table('userinfos')->where('id', $id)->delete();
+            
 
             if ($removed) {
-                return response()->json([
-                    'error' => false,
-                    'message' => 'Delete successfully.'
-                ]);
+
+                $spId = DB::table('sponsors')
+                ->where('user_id',$id)
+                 ->first();
+
+                
+
+                $data=array();
+                $data['status']='3';
+
+                $update= DB::table('sponsor_banners')
+                            ->where('sponsor_Id',$spId->id)
+                            ->update($data);
+
+                $removed1=DB::table('sponsors')->where('user_id', $id)->delete();
+
+                return redirect('/logout');
+                // return response()->json([
+                //     'error' => false,
+                //     'message' => 'Delete successfully.'
+                // ]);
             } else {
                 return response()->json([
                     'error' => true,
