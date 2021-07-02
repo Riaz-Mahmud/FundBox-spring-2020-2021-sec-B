@@ -23,7 +23,8 @@ class CreateOrdersTable extends Migration
             $table->string('status')->nullable();
             $table->string('transaction_id')->nullable();
             $table->string('currency')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable()->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
 

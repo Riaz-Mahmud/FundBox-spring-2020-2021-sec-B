@@ -5,30 +5,52 @@
   <title>{{ $title }} | FundBox</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="author" content="">
 
     <link rel="stylesheet" href="{{ asset('/Pages/Home/Header/fonts/icomoon/style.css') }}"><!--Header-->
     <link rel="stylesheet" href="{{ asset('/Pages/Home/Header/css/owl.carousel.min.css') }}"><!--Header-->
     <link rel="stylesheet" href="{{ asset('/Pages/Home/Header/css/bootstrap.min.css') }}"><!--Header-->
     <link rel="stylesheet" href="{{ asset('/Pages/Home/Header/css/style.css') }}"><!--Header-->
-    
-    
+
+    <!-- Slick Slider -->
+    <link rel="stylesheet" type="text/css" href="{{asset('vendors/slick/slick.min.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('vendors/slick/slick-theme.min.css')}}"/>
+    <link href="{{asset('vendors/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet"><!--Footer-->
     <link rel="stylesheet" href="{{ asset('/Pages/Home/Footer/css/ionicons.min.css') }}"><!--Footer-->
     <link rel="stylesheet" href="{{ asset('/Pages/Home/Footer/css/style.css') }}"><!--Footer-->
-
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+    <script>
+           var jq351 = jQuery.noConflict();
+       </script>
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/60da32e465b7290ac6385f6c/1f9a5djrb';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
+      var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+      (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/60da32e465b7290ac6385f6c/1f9a5djrb';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+      })();
     </script>
     <!--End of Tawk.to Script-->
+
+    <!--jquery 1.8.3-->
+    <script src="https://code.jquery.com/jquery-1.8.3.min.js" integrity="sha256-YcbK69I5IXQftf/mYD8WY0/KmEDCv1asggHpJk1trM8=" crossorigin="anonymous"></script>
+       <script>
+           var jq183 = jQuery.noConflict();
+       </script>
+      <!--jquery 3.5.1-->
+      <script src="{{asset('js/jquery.min.js')}}"></script>
+       <script>
+           var jq351 = jQuery.noConflict();
+       </script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -221,15 +243,54 @@
         </div>
 			</div>
 		</footer>
+
+    <div class="modal fade" id="loginAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <form class="" method="post">
+                  @csrf
+                  <div class="modal-body">
+                      <div class="form-row">
+
+                          <img src="{{asset('error_bgWhite.gif')}}" style="width:150px; margin:auto;"/>
+                      </div>
+                      <div align="center">
+                          <h3 class="modal-title" id="exampleModalLabel">Please Login First!!</h3>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
 @show
 
+  
 
 <!--start footer js-->
+
+<script>
+  jQuery(document).ready(function(){
+
+    jQuery(".loginAlert").click(function(e){
+        e.preventDefault();
+        jQuery('#loginAlert').modal('show');
+        setTimeout(function() {jQuery('#loginAlert').modal('hide');}, 2000);
+    });
+
+  });
+</script>
 
 <script src="{{ asset('/Pages/Home/Footer/js/jquery.min.js') }}"></script>
 <script src="{{ asset('/Pages/Home/Footer/js/popper.js') }}"></script>
 <script src="{{ asset('/Pages/Home/Footer/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('/Pages/Home/Footer/js/main.js') }}"></script>
+
+<script src="{{asset('/vendors/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('/vendors/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- slick Slider JS-->
+<script type="text/javascript" src="{{asset('vendors/slick/slick.min.js')}}"></script>
+<!-- Sidebar JS-->
+<script src="{{asset('js/osahan.js')}}"></script>
 
 <!--start footer js-->
 

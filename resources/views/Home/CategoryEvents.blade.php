@@ -12,6 +12,7 @@
                 <h2 class="text-center" style="margin:30px 0px;">Fund Events</h2>
                 <div class="row">
                 @foreach($allEvents as $key => $events)
+                <a href="{{ URL::to('/EventDetails/'.base64_encode($events->id)) }}" class="text-dark">
                     <div class="col-4">
                         <div class="card" style="width: 20rem;margin-top:10px;">
                             @if($events->image)
@@ -30,10 +31,15 @@
                                     <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
                                 </div> -->
                                 <h6 style="margin-top:10px;">Need ৳ {{$events->targetMoney}}</h6>
+                                @if(session()->has('username'))
                                 <a href="{{ URL::to('/example2/'.base64_encode($events->id).'/'.base64_encode($events->orgId)) }}" class="btn btn-primary">Donate Now</a>
+                                @else
+                                <a href="#" class="btn btn-primary loginAlert" aria-hidden="true" onclick="" style="color: white;">Donate Now</a>
+                                @endif
                             </div>
                         </div>
                     </div>
+                    </a>
                     @endforeach
                     <div class="col-md-12 col-12 overflow-auto">
                         {!! $allEvents->links() !!}
@@ -51,6 +57,7 @@
                 <h2 class="text-center" style="margin:30px 0px;">Volunteer Events</h2>
                 <div class="row">
                 @foreach($volEvents as $key => $vEvents)
+                <a href="{{ URL::to('/EventDetails/'.base64_encode($vEvents->id)) }}" class="text-dark">
                     <div class="col-4">
                         <div class="card" style="width: 20rem;margin-top:10px;">
                             @if($vEvents->image)
@@ -69,6 +76,7 @@
                             </div>
                         </div>
                     </div>
+                    </a>
                     @endforeach
                 </div>
             </div>

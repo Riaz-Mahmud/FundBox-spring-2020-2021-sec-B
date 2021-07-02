@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="{{ asset('/css/pages/signin&signup.css') }}"><!--Header-->
 </head>
 <body>
+
+<nav aria-label="breadcrumb" class="breadcrumb">
+	<div class="">
+		<a href="{{URL::to('/')}}" class="text-success">Back Home</a></li>
+	</div>
+</nav>
 <div class="card-content">
     <div class="card-body">
 		<div class="alert alert-success alert-dismissible mb-2" role="alert">
@@ -21,6 +27,7 @@
 	</div>
 </div>
 <br>
+
 <div class="container" id="container">
 	
 	<div class="form-container sign-up-container">
@@ -35,10 +42,20 @@
 			<input type="password" name="signup_password" placeholder="Password" required/>
 			<input type="password" name="signup_con_password" placeholder="Confirm Password" required/>
 
-			<button type="submit">Sign Up</button>
+			<button type="submit">Sign Up</button><br>
+			<div class="col s12 m6 offset-m3 center-align">
+				<a class="oauth-container btn darken-4 white black-text" href="{{ url('auth/google') }}" style="text-transform:none">
+					<div class="left col-md-6">
+						<img width="20px"  alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+					</div>
+					SignUp with Google
+				</a>
+			</div>
 		</form>
 	</div>
+	
 	<div class="form-container sign-in-container">
+		
 		<form action="/SignIn" method="POST">
 		@csrf
 			<h1>Sign in</h1>
@@ -48,9 +65,24 @@
 
 			<a href="#">Forgot your password?</a>
 			<button type="submit">Sign In</button>
+
+			<br>
+			<div class="col s12 m6 offset-m3 center-align">
+				<a class="oauth-container btn darken-4 white black-text" href="{{ url('auth/google') }}" style="text-transform:none">
+					<div class="left col-md-6">
+						<img width="20px"  alt="Google sign-in" 
+							src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+					</div>
+					Login with Google
+				</a>
+			</div>
+			<!-- <a href="{{ url('auth/google') }}" style="margin-top: 20px;" class="btn btn-lg btn-success btn-block">
+					<strong>Login With Google</strong>
+				</a> -->
 			
 		</form>	
 	</div>
+	
 	<div class="overlay-container">
 		<div class="overlay">
 			<div class="overlay-panel overlay-left">
@@ -65,20 +97,23 @@
 			</div>
 		</div>
 	</div>
+
+	
 </div>
-<script>
-	const signUpButton = document.getElementById('signUp');
-const signInButton = document.getElementById('signIn');
-const container = document.getElementById('container');
+	<script>
+		const signUpButton = document.getElementById('signUp');
+		const signInButton = document.getElementById('signIn');
+		const container = document.getElementById('container');
 
-signUpButton.addEventListener('click', () => {
-	container.classList.add("right-panel-active");
-});
+		signUpButton.addEventListener('click', () => {
+			container.classList.add("right-panel-active");
+		});
 
-signInButton.addEventListener('click', () => {
-	container.classList.remove("right-panel-active");
-});
-</script>
+		signInButton.addEventListener('click', () => {
+			container.classList.remove("right-panel-active");
+		});
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 </footer>
 </body>
 </html>

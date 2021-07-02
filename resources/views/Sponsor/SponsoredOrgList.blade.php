@@ -55,87 +55,52 @@
                                                 <tr>
                                                     <th style="width:5%;">SN</th>
                                                     <th>Image</th>
-                                                    <th>Organisation Name</th>
-                                                    <th>Organisation Type</th>
-                                                    <th>Status</th>
+                                                    <th>Title</th>
+                                                    <th>Details</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
+                                                    <th>Amount</th>
                                                     <th>Options</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>
-                                                        <div class="osahan-slider-item" style="background-color:#fff;">
-                                                            <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <b>Organisation  1</b>
-                                                    </td>
-                                                    <td>
-                                                        Blood Donation
-                                                    </td>
-                                                    <td class="text-center" style="width: 5%">
-                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch" value="0" onclick="statusUpdate()">
-                                                            <label class="custom-control-label" for=""></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateEvent()">Edit</button>
-                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Delete</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>
-                                                        <div class="osahan-slider-item" style="background-color:#fff;">
-                                                            <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <b>Organisation  2</b>
-                                                    </td>
-                                                    <td>
-                                                        Medical
-                                                    </td>
-                                                    <td class="text-center" style="width: 5%">
-                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch" value="0" onclick="statusUpdate()">
-                                                            <label class="custom-control-label" for=""></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateEvent()">Edit</button>
-                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Delete</button>
-                                                    </td>
-                                                </tr>
-
-                                                 <tr>
-                                                    <td>2</td>
-                                                    <td>
-                                                        <div class="osahan-slider-item" style="background-color:#fff;">
-                                                            <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <b>Organisation  3</b>
-                                                    </td>
-                                                    <td>
-                                                        Soical
-                                                    </td>
-                                                    <td class="text-center" style="width: 5%">
-                                                        <div class="custom-control custom-switch custom-control-inline mb-1">
-                                                            <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch" value="0" onclick="statusUpdate()">
-                                                            <label class="custom-control-label" for=""></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateEvent()">Details</button>
-                                                        <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Delete</button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
+                                            @foreach($sponsorOrgList as $key => $spList)
+                                                <tbody>
+                                                    <tr>
+                                                        <td><b>{{$key+1}}</b></td>
+                                                        <td>
+                                                        @if($spList->sponsorLogo )
+                                                            <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                <img src="{{asset( $spList->sponsorLogo  )}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Event image">
+                                                            </div>
+                                                        @else
+                                                            <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                <img src="{{asset('/images/pages/loading.gif')}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Event image">
+                                                            </div>
+                                                        @endif
+                                                        </td>
+                                                        <td>
+                                                            <b>{{$spList->title}}</b>
+                                                        </td>
+                                                        <td>
+                                                            <b>{{$spList->details}}</b>
+                                                        </td>
+                                                        <td>
+                                                            <b>{{$spList->startDate}}</b>
+                                                        </td>
+                                                        <td>
+                                                            <b>{{$spList->endDate}}</b>
+                                                        </td>
+                                                        <td>
+                                                            <b>{{$spList->amount}}</b>
+                                                        </td>
+                                                        <td>
+                                                            <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateEvent()">Edit</button>
+                                                            <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Delete</button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                </tbody>
+                                            @endforeach
                                         </table>
                                     </div>
                                     <!-- datatable ends -->

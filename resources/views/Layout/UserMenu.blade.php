@@ -129,35 +129,19 @@
                     <span class="menu-title" data-i18n="City Manager">Donation</span>
                 </a>
             </li>
-
-            <li class="nav-item @if(url('/user/report') == Request::url()) active @endif">
-                <a class="nav-hover" href="/user/report">
+            <li class="nav-item @if(url('/user/reportReply') == Request::url()) active @endif">
+                <a class="nav-hover" href="/user/reportReply">
                     <i class="bx bxs-city mr-50"></i>
-                    <span class="menu-title" data-i18n="City Manager">Report</span>
+                    <span class="menu-title" data-i18n="City Manager">Replies of your Reports</span>
                 </a>
             </li>
 
-            <li class="nav-item @if(url('/user/review') == Request::url()) active @endif">
-                <a class="nav-hover" href="{{ url('/user/review') }}">
-                    <i class="bx bxs-city mr-50"></i>
-                    <span class="menu-title" data-i18n="City Manager">Review</span>
-                </a>
-            </li>
+           
 
             <li class="nav-item @if(url('/user/events') == Request::url()) active @endif">
                 <a class="nav-hover" href="{{ url('/user/events') }}">
                     <i class="bx bxs-city mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Events</span>
-                </a>
-            </li>
-            
-           
-
-            <li class=" navigation-header"><span>Volunteer Event</span></li>
-            <li class="nav-item ">
-                <a class="nav-hover" href="{{ url('/user/volunteerEventList') }}">
-                    <i class="bx bx-planet mr-50"></i>
-                    <span class="menu-title" data-i18n="City Manager">VolunteerEventList</span>
                 </a>
             </li>
             <li class="nav-item ">
@@ -166,6 +150,11 @@
                     <span class="menu-title" data-i18n="City Manager">YourAppliedVoluteerEvents</span>
                 </a>
             </li>
+           
+
+
+           
+           
         
 
         </ul>

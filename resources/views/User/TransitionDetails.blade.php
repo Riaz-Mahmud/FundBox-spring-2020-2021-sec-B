@@ -21,23 +21,33 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Transition Serial No.</th>
-                                <th>Organization Serial </th>
-                                <th>Organization Name</th>
+                                <th>Event Id</th>
                                 <th>Amount</th>
+                                <th>Visible Type</th>
+                                <th>Payment Type</th>
+                                <th>Status</th>
                                 <th>Date</th>
                             
                             </tr>
                             </thead>
                             <tbody>
+
+
+
+                            @foreach ($transitionList as $transition)
+
+                            @if($transition->user_id == $user_id)
                             <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>A organization</td>
-                                <td>1000</td>
-                                <td>01-01-2021</td>
-                            
+                                <td>{{$transition->eventId}}</td>
+                                <td>{{$transition->amount}}</td>
+                                <td>{{$transition->visibleType}}</td>
+                                <td>{{$transition->paymentType}}</td>
+                                <td>{{$transition->status}}</td>
+                                <td>{{$transition->created_at}}</td>
+                                
                             </tr>
+                            @endif 
+                            @endforeach
                             </tbody>
                         </table>
                 </section>

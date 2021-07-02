@@ -19,53 +19,36 @@
                             <hr>
                         </div>
                     </div>
-
+                
                     <div class="row">
-                        <div class="col-10 mt-1 mb-2">
-                        <input type="text" class="form-control" id="inputAddress" placeholder="Search event here...">
-                        </div>
-
-                        <div class="col-2 mt-1 mb-2">
-                        <button type="submit" class="btn btn-outline-success">Search</button>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12 mt-1 mb-2">
-                        <form >
-                            <select class="form-select form-control" aria-label="Default select example">
-                                <option selected>Category</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            
-                        
-                        </from>
-                                                
-                        </div>
-                    </div>
-
-
                     @foreach ($organizationEvents as $organizationEvent)
-                    <div class="row">
+                   
                         <div class="col-lg-3 col-sm-6 col-12 dashboard-users-danger">
                             <div class="card text-center">
                                 <div class="card-content">
-                                <img src="https://image.shutterstock.com/image-vector/events-colorful-typography-banner-600w-1356206768.jpg" class="card-img-top" alt="...">
+                                <img src="{{$organizationEvent['image']}}" class="card-img-top" alt="...">
                                     <div class="card-body py-1">
                                         <div class="badge-circle badge-circle-lg badge-circle-light-warning mx-auto mb-50">
                                             <i class="bx bx-receipt font-medium-5"></i>
                                         </div>
                                         <h5 class="card-title">{{$organizationEvent['event_name']}}</h5>
                                         <p class="card-text">{{$organizationEvent['details']}}</p>
-                                        <a href="/user/donation" class="btn btn-primary">Donate</a>
+                                        @if($organizationEvent['eventType']==1)
+                                            <a href="/user/donation" class="btn btn-primary btn-sm">Donate</a>
+                                        @else
+                                            <a href="{{route('User.applyVolunteerEvent')}}" class="btn btn-primary btn-sm">Apply</a>
+                                        @endif
+
+                                        <a href="/user/review/{{$organizationEvent['id']}}" class="btn btn-primary btn-sm">Review</a>
+                                        <a href="/user/report/{{$organizationEvent['id']}}" class="btn btn-primary btn-sm">Report</a>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    
                     @endforeach
+                    </div>
                 </section>
                 
               

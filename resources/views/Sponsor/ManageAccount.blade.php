@@ -50,7 +50,7 @@
                                 <div class="card-body">
                                     <!-- datatable start -->
                                     <div class="">
-                                    <form action="{{ url('/serverMaintenance/update') }}" enctype="multipart/form-data" method="POST">
+                                    <form action="#" enctype="multipart/form-data" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-lg-12">
@@ -73,27 +73,26 @@
                                             
                                             <div class="col-12 col-sm-12" style="margin-bottom:10px">
                                                 <p>Name</p>
-                                                <input type="text" class="form-control" value="User Name" name="sm_text" placeholder="Text">
+                                                <input type="text" class="form-control" value="{{$userInfo -> name}}" name="sm_text" placeholder="Text">
                                             </div>
                                             <div class="col-12 col-sm-12" style="margin-bottom:10px">
                                                 <p>Email</p>
-                                                <input type="text" class="form-control" value="user@gmail.com" name="sm_text" placeholder="Text">
+                                                <input type="text" class="form-control" value="{{$userInfo -> email}}" name="sm_text" placeholder="Text">
                                             </div>
                                             <div class="col-12 col-sm-12" style="margin-bottom:10px">
                                                 <p>Phone</p>
-                                                <input type="text" class="form-control" value="0171111111" name="sm_text" placeholder="Text">
+                                                <input type="text" class="form-control" value="{{$userInfo -> name}}" name="sm_text" placeholder="Text">
                                             </div>
                                             
                                             <div class="col-12 col-sm-12" style="margin-top: 10px">
                                                 <button type="submit" class="btn btn-block btn-success glow">Update Profile</button>
                                             </div>
                                             <div class="col-12 col-sm-12" style="margin-top: 10px">
-                                            <button type="submit" class="btn btn-block btn-danger glow">Delete Account</button>
-
                                             </div>
                                         </div>
-                                    </form>                                
-                                
+                                    </form>  
+   
+                                    <button type="submit" id="deleteBtn" class="btn btn-block btn-danger glow" style="margin-top: 3px"  onclick="deleteAccount('{{ $userInfo->id }}')">Delete</button>                           
                                     </div>
                                     <!-- datatable ends -->
                                 </div>
@@ -115,5 +114,59 @@
     @include('Layout.footer')
 
     @include('Layout.scripts')
+    <script>
+
+function deleteAccount(id) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            
+            document.getElementById('deleteBtn').innerText = 'Loading..';
+            var status = "0";
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ url('/sp/manageAccount/delete') }}",
+                type: "POST",
+                data: {
+                    id: id
+                },
+                success: function(result) {
+                    if (!result.error) {
+                        document.getElementById('deleteBtn').innerText = 'Done';
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: result.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        location.reload('/');
+                    } else {
+                        document.getElementById('deleteBtn').innerText = 'Error';
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'danger',
+                            title: result.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        location.reload();
+                    }
+                }
+            });
+        }
+    })
+}
+    </script>
+
 </body>
 @endsection

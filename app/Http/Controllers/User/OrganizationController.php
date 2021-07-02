@@ -23,7 +23,7 @@ class OrganizationController extends Controller
 
         $follow = Org_follow:: all();
 
-
+ 
         return view('User.OrganizationDetails')->with('organization', $user)
                                                ->with('followedOrganizations', $follow)
                                                ->with('title', 'Organization Details');
@@ -43,28 +43,28 @@ class OrganizationController extends Controller
        
     
     }
+
+   
+
+
     public function organizationFollow(Request $req, $id){
 
 
 
+        $organization = Organization::find($id);
 
+        $user_id = $req->session()->get('user_id');
 
-        $user = Organization::find($id);
-
-        $req->session()->put('userId',1);
-        $userId = $req->session()->get('userId');
-
-        // $req->session()->put('Id',2);
-        // $Id = $req->session()->get('Id');
+        
 
 
 
-        $organization = new Org_follow;
-        // $organization->id =$Id ;
-        $organization->org_id = $user->user_id;
-        $organization->user_id = $userId;
-        $organization->status = $user->status;
-        $organization->save();
+        $followOrganization = new Org_follow;
+       
+        $followOrganization->org_id = $organization->user_id;
+        $followOrganization->user_id = $user_id;
+        $followOrganization->status = $organization->status;
+        $followOrganization->save();
 
         
         return redirect()->route('Organization.followedOrganization');
