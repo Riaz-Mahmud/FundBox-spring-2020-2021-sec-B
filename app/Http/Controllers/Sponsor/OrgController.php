@@ -50,17 +50,20 @@ class OrgController extends Controller
     }
     public function applyInOrg(Request $request){
 
-        $userId = $request->session()->get('user_id');
+        $spId = $request->session()->get('user_id');
+        //dd($spId);
 
-        $sp = DB::table('sponsors')
-        ->where('user_id',$userId)
-        ->where('status',1)
-        ->first();
 
         $validator = Validator::make($request->all(), [
-            'advertise_title' => 'required|min:5',
+            'title' => 'required|min:5',
+            'editStartDate' => 'required',
+            'editEndDate' => 'required',
+            'details' => 'required',
+            'amount' => 'required',
+            'orgId' => 'required',
             'image' => 'required'
         ]);
+        //dd($validator);
 
         if ($validator->fails()) {
             return redirect()->back()->with([
@@ -81,17 +84,22 @@ class OrgController extends Controller
 
             
             $data=array();
-            $data['title']=$request->advertise_title;
+            $data['title']=$request->title;
+            $data['startDate']=$request->editStartDate;
+            $data['endDate']=$request->editEndDate;
+            $data['details']=$request->details;
+            $data['amount']=$request->amount;
+            $data['orgId']=$request->amount;
             $data['image']=$imageData;
-            $data['sponsor_Id']=$sp->id;
-            $data['status']='2';
+            $data['sponsor_Id']=$spId;
+            $data['status']='0';
 
-            $insert = DB::table('sponsor_banners')->insert($data);
+            $insert = DB::table('spo_to_org_proposals')->insert($data);
 
             if($insert){
                 return redirect()->back()->with([
                     'error' => false,
-                    'message' => 'Create Successfully'
+                    'message' => 'Applied Successfully'
                 ]);
             }else{
                 return redirect()->back()->with([
