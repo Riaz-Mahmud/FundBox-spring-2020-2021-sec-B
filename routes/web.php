@@ -208,7 +208,9 @@ Route::group(['middleware'=>['sess']] , function(){
                 Route::post('/manageAccount/delete','Sponsor\AccountController@deleteAccount');
                 Route::get('/manageAccount','Sponsor\AccountController@accountPageShow');
                 Route::get('/applyOrg','Sponsor\OrgController@orgList');
+                Route::post('/applyInOrg','Sponsor\OrgController@applyInOrg');
                 Route::get('/sponsoredOrgList','Sponsor\OrgController@sponsoredOrgList');
+                Route::get('/pendingOrgList','Sponsor\OrgController@pendingOrgList');
                 Route::get('/pendingOrgList','Sponsor\OrgController@pendingOrgList');
             
                 Route::get('/payment', function () {
