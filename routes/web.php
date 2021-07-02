@@ -125,6 +125,7 @@ Route::group(['middleware'=>['sess']] , function(){
         Route::get('/admin/eventExvelExport', 'Admin\UsersController@EventExvelExport');
         Route::get('/admin/eventPDFExport', 'Admin\UsersController@EventCSVExport');
         Route::get('/admin/eventCSVExport', 'Admin\UsersController@EventPDFExport');
+        
 
 
         Route::get('/admin/manageVolEvent', function () {
@@ -188,6 +189,10 @@ Route::group(['middleware'=>['sess']] , function(){
             Route::get('/org/SponsorTransaction','Org\OrganizationHomeController@sponsorTransaction' )->name('org.sponsorTransaction');
             Route::get('/org/refund/{id}','Org\OrganizationHomeController@RefundMoney' )->name('org.refund');
 
+            //**************excel */
+
+            Route::get('/org/eventTransactionPDFExport', 'Admin\UsersController@orgTransactionPDFExport')->name('org.transactionspdf');
+            Route::get('/org/eventTransactionExcelExport', 'Admin\UsersController@orgTransactionexcelExport')->name('org.transactionsexcel');
     });
 });
 

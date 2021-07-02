@@ -67,10 +67,10 @@
                                         <td>{{$Req->id}}</td>
                                         
                                         <td>
-                                            <b>{{$Req->eventId}}</b>
+                                            <b>{{$Req->event_name}}</b>
                                         </td>
                                         <td>
-                                            <b>{{$Req->user_name}}</b>
+                                            <b>{{$Req->name}}</b>
                                         </td>
                                         <td>
                                             <b>{{$Req->phone}}</b>

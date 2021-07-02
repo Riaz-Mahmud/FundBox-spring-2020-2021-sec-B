@@ -82,6 +82,14 @@
                                             
                                         </tr>
                                                  @endforeach
+                                           <td>
+                                                <a href="{{route('org.transactionspdf')}}" class="btn btn-success"> Download PDF</a>   
+                                                
+                                            </td>
+                                               <td>
+                                                <a href="{{route('org.transactionsexcel')}}" class="btn btn-success"> Download excel</a>   
+                                                
+                                            </td>
                                             </tbody>
                                         </table>
                                     </div>

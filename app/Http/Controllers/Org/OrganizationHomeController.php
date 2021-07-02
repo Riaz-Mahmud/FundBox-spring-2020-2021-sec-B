@@ -254,10 +254,11 @@ public function sponsorTransaction(Request $req){
     // $transaction = DB::table('sponsor_trans_lists')
     //                     ->where('org_Id',$req->session()->get('org_id'))
     //                     ->where('status','0')->get();
-    $transaction = DB::table('sponsor_trans_lists')
-    ->leftJoin('sponsors','sponsor_trans_lists.sponsor_id','=' , 'sponsors.id')
-    ->select('sponsor_trans_lists.*', 'sponsors.name')
+    $transaction = DB::table('event_trans_lists')
+    ->leftJoin('sponsors','event_trans_lists.sponsor_id','=' , 'sponsors.id')
+    ->select('event_trans_lists.*', 'sponsors.name')
     ->where('org_Id',$req->session()->get('org_id'))
+    ->where('paymentType','2')
     ->get();                    
     
 
@@ -268,8 +269,11 @@ public function sponsorTransaction(Request $req){
 }
 public function VolunteerList(Request $req){
      $vol = DB::table('event_volunteers')
-                        ->where('org_Id',$req->session()->get('org_id'))
-                        ->where('status','1')->get();
+    ->leftJoin('events','event_volunteers.eventId','=' , 'events.id')
+    ->leftJoin('userinfos', 'event_volunteers.user_id', '=', 'userinfos.id')
+    ->select('event_volunteers.*', 'events.event_name','userinfos.name')
+     ->where('org_Id',$req->session()->get('org_id'))
+    ->where('event_volunteers.status','1')->get();
     
     return view('Organization.VolunteerList')
                 ->with('vol',$vol)
@@ -288,6 +292,7 @@ public function eventTransaction(Request $req){
     ->where('events.status','1')
     ->where('events.eventType','1')
     ->where('event_trans_lists.status','1')
+    ->where('paymentType','1')
     ->get();     
 
 
@@ -379,7 +384,7 @@ public function updatestatus(Request $req){
 
 public function RefundMoney(Request $req,$id){
     $refund = event_trans_list::find($id);
-    $refund->status = '2';
+    $refund->status = '6';
     $refund->save();
     return redirect()->route('org.transaction'); 
 }

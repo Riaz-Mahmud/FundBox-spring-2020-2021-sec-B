@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use App\Exports\eventTransaction;
 use App\Exports\UsersExport;
 use App\Exports\EventExport;
 use App\Http\Controllers\Controller;
@@ -46,4 +46,15 @@ class UsersController extends Controller
         return Excel::download(new EventExport, 'allEvents.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
 
     }
+      public function orgTransactionPDFExport()
+    {  
+        return Excel::download(new eventTransaction, 'alltransactions.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+
+    }
+    public function orgTransactionexcelExport()
+    {  
+        return Excel::download(new eventTransaction, 'alltransaction.xlsx');
+
+    }
+    
 }
