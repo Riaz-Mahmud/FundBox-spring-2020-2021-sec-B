@@ -22,11 +22,11 @@ class RouteController extends Controller
         $eventId = base64_decode($id);
         $orgId = base64_decode($orgId);
         $type = base64_decode($type);
-        $Event = DB::table('events')
-        ->where('id', $eventId)->first();
+        // $Event = DB::table('events')
+        // ->where('id', $eventId)->first();
 
         return view('exampleHosted')
-        ->with('Event', $Event)
+        ->with('Event', $eventId)
         ->with('orgId', $orgId)
         ->with('type', $type)
         ->with('userid',$userid);
