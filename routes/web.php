@@ -49,6 +49,9 @@ Route::group(['middleware'=>['sess']] , function(){
             return view('Admin.createAdmin')->with('title', 'Create Admin | Admin');
         });
         Route::post('/admin/createAdmin','Admin\UserController@CreateAdmin');
+        Route::get('/admin/ManageProfile','Admin\UserController@ManageProfile');
+        Route::post('/admin/ManageProfile','Admin\UserController@ManageProfileUpdate');
+        Route::post('/admin/ManageProfile/deactivated','Admin\UserController@ManageProfileDeactivated');
 
         Route::get('/admin/manageAdmin','Admin\UserController@ManageAdmin');
         Route::post('/admin/manageAdmin/updateStatus', 'Admin\UserController@UpdateStatus');
@@ -154,12 +157,15 @@ Route::group(['middleware'=>['sess']] , function(){
             //*****************EDIT EVENTS******************* */
             Route::get('/org/edit/{id}/{type}', 'Org\OrganizationHomeController@edit');
             Route::Post('/org/edit/{id}/{type}', 'Org\OrganizationHomeController@update');
+            Route::Post('/org/edit/statusUpdate','Org\OrganizationHomeController@updatestatus');
+            
             //*****************DELETE EVENTS******************* */
             Route::get('/org/delete/{id}/{type}', 'Org\OrganizationHomeController@delete');
             Route::get('/org/destroy/{id}/{type}', 'Org\OrganizationHomeController@destroy');
+            
 
             //***************** EVENT Transactions******************* */
-            Route::get('/org/eventTransaction', 'Org\OrganizationHomeController@eventTransaction');
+            Route::get('/org/eventTransaction', 'Org\OrganizationHomeController@eventTransaction')->name('org.transaction');
             //*****************CREATE VOLUNTEER EVENTS******************* */
             Route::get('/org/createVolunteerEvent', function () {
                 return view('Organization.CreateVolunteerEvent')
@@ -170,6 +176,8 @@ Route::group(['middleware'=>['sess']] , function(){
             Route::Post('/org/createVolunteerEvent', 'Org\OrganizationHomeController@createVolunteerEvent');
             //*****************EDIT  Volunteer EVENTS******************* */
             Route::get('/org/ManageVolunteerEvent', 'Org\OrganizationHomeController@indexVolunteer')->name('org.volunteereventList');
+             Route::post('/org/ManageVolunteerEvent/updateVolEvent', 'Org\OrganizationHomeController@updateVolEvent');
+
 
             Route::get('/org/SponsorRequest','Org\OrganizationHomeController@reqsponsor' )->name('org.req');
             Route::get('/org/SponsorRequest/{id}','Org\OrganizationHomeController@approvesponsor' )->name('org.approve');
@@ -178,7 +186,7 @@ Route::group(['middleware'=>['sess']] , function(){
             Route::get('/org/RenewSponsor','Org\OrganizationHomeController@renewsponsor' )->name('org.renewsponsorlist');
             Route::get('/org/RenewSponsor/{id}','Org\OrganizationHomeController@renew' )->name('org.renew');
             Route::get('/org/SponsorTransaction','Org\OrganizationHomeController@sponsorTransaction' )->name('org.sponsorTransaction');
-            
+            Route::get('/org/refund/{id}','Org\OrganizationHomeController@RefundMoney' )->name('org.refund');
 
     });
 });
@@ -207,7 +215,12 @@ Route::group(['middleware'=>['sess']] , function(){
                 Route::post('/addAdvertise/delete','Sponsor\AdvertiseController@AddvetiseDelete');
                 Route::post('/manageAccount/delete','Sponsor\AccountController@deleteAccount');
                 Route::get('/manageAccount','Sponsor\AccountController@accountPageShow');
-    
+                Route::get('/applyOrg','Sponsor\OrgController@orgList');
+                Route::post('/applyInOrg','Sponsor\OrgController@applyInOrg');
+                Route::post('/UpdateAppliedInOrg','Sponsor\OrgController@UpdateAppliedInOrg');
+                Route::get('/sponsoredOrgList','Sponsor\OrgController@sponsoredOrgList');
+                Route::get('/pendingOrgList','Sponsor\OrgController@pendingOrgList');
+                Route::get('/ongoingOrgList','Sponsor\OrgController@ongoingOrgList');
             
                 Route::get('/payment', function () {
                     return view('Sponsor.Payment')
@@ -220,18 +233,6 @@ Route::group(['middleware'=>['sess']] , function(){
                 Route::get('/siteTraffic', function () {
                     return view('Sponsor.SiteTraffic')
                             ->with('title', 'Site Traffic | Sponsor');
-                });
-                Route::get('/applyOrg', function () {
-                    return view('Sponsor.OrgList')
-                            ->with('title', 'Apply Org | Sponsor');
-                });
-                Route::get('/sponsoredOrgList', function () {
-                    return view('Sponsor.SponsoredorgList')
-                            ->with('title', 'Sponsored Org List | Sponsor');
-                });
-                Route::get('/pendingOrgList', function () {
-                    return view('Sponsor.PendingOrgList')
-                            ->with('title', 'Pending Org Request | Sponsor');
                 });
                 Route::get('/updateSponsorship', function () {
                     return view('Sponsor.UpdateSponsorship')
@@ -359,7 +360,7 @@ Route::group(['middleware'=>['sess']] , function(){
 
 // SSLCOMMERZ Start
 Route::get('/example1', 'RouteController@exampleEasyCheckout');
-Route::get('/example2/{id}/{orgId}', 'RouteController@exampleHostedCheckout');
+Route::get('/example2/{id}/{orgId}/{type}', 'RouteController@exampleHostedCheckout');
 
 Route::post('/pay', 'RouteController@index');
 Route::post('/pay-via-ajax', 'RouteController@payViaAjax');

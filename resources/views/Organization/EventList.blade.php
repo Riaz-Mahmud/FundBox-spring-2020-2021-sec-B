@@ -62,7 +62,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach ($EventList as $user) 
+                                            @foreach ($EventList as $key => $user) 
                                             <tr>
                                                 <td>{{$user->id}}</td>
                                                 <td> @if($user->image)
@@ -83,6 +83,21 @@
                                                     <td>{{$user->event_name}}</td>
                                                     <td>{{$user->targetMoney}}$</td>
                                                     <td>{{$user->eventType}}</td>
+                                                     @if($user->status == "1")
+                                                        <td class="text-center" style="width: 5%">
+                                                            <div class="custom-control custom-switch custom-control-inline mb-1">
+                                                                <input type="checkbox" class="custom-control-input" checked="" id="statusSwitch{{ $key }}" value="0" onclick="statusUpdate('{{ $user->id }}', '{{ $key }}')">
+                                                                <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
+                                                            </div>
+                                                        </td>
+                                                        @else
+                                                        <td class="text-center" style="width: 5%">
+                                                            <div class="custom-control custom-switch custom-control-inline mb-1">
+                                                                <input type="checkbox" class="custom-control-input" id="statusSwitch{{ $key }}" value="1" onclick="statusUpdate('{{ $user->id }}', '{{ $key }}')">
+                                                                <label class="custom-control-label" for="statusSwitch{{ $key }}"></label>
+                                                            </div>
+                                                        </td>
+                                                        @endif
                                                     <td> <button type="submit" data-toggle="modal" data-target="#detailseModal" class="btn btn-info glow" onclick="viewDetiils('{{ $user->event_name }}', '{{ $user->details }}')">Details</button></td>
                                                     <td><a href="/org/edit/{{$user->id}}/{{$user->eventType}}"> Edit </a></td>
                                                     <td><a href="/org/delete/{{$user->id}}/{{$user->eventType}}"> Delete </a></td>
@@ -154,6 +169,47 @@
             $('#eventName').val(name)
             $('#editDetails').val(details)
         }
+                function statusUpdate(event_id, item) {
+            var status = "";
+            if ($("#statusSwitch" + item).val() == "1") {
+                status = "1";
+                $("#statusSwitch" + item).val("0");
+            } else {
+                status = "0";
+                $("#statusSwitch" + item).val("1");
+            }
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ url('/org/edit/statusUpdate') }}",
+                type: "POST",
+                data: {
+                    id: event_id,
+                    status: status
+                },
+                success: function(result) {
+                    if (!result.error) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: result.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    } else {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'danger',
+                            title: result.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                }
+            });
+        }
+
        
     </script>
 

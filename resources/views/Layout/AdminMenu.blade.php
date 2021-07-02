@@ -231,8 +231,8 @@
             </li>
 
             <li class=" navigation-header"><span>Account</span></li>
-            <li class="nav-item ">
-                <a class="nav-hover" href="#">
+            <li class="nav-item @if(url('/admin/ManageProfile') == Request::url()) active @endif">
+                <a class="nav-hover" href="/admin/ManageProfile">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Manage Account</span>
                 </a>

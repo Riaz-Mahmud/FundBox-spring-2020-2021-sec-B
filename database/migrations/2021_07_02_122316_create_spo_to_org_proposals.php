@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdersTable extends Migration
+class CreateSpoToOrgProposals extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('spo_to_org_proposals', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('amount')->nullable();
-            $table->string('address')->nullable();
-            $table->string('status')->nullable();
-            $table->string('transaction_id')->nullable();
-            $table->string('currency')->nullable();
+            $table->integer('sponsor_Id');
+            $table->integer('org_Id');
+            $table->text('title');
+            $table->text('details');
+            $table->text('sponsorLogo')->nullable();
+            $table->text('startDate');
+            $table->text('endDate');
+            $table->integer('amount');
+            $table->integer('status');
             $table->timestamp('created_at')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable()->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
@@ -35,6 +36,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('spo_to_org_proposals');
     }
 }

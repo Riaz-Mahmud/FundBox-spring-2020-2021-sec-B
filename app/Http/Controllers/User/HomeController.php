@@ -16,7 +16,7 @@ class HomeController extends Controller
     public function Index(Request $request){
 
         $ip = $this->getIp();
-        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $checkIp=DB::table('site_unique_traficip')->where('user_ip',$ip)->get();
         $getLastCount = DB::table('sitealltrafic')->first();
         $data=array();
         $data['count']=$getLastCount->count+1;
@@ -25,7 +25,7 @@ class HomeController extends Controller
             $data1=array();
             $data1['user_ip']=$ip;
             
-            DB::table('site_unique_traficIp')->insert($data1);
+            DB::table('site_unique_traficip')->insert($data1);
         }
 
         $allCategory = DB::table('event_categorys')->where('status',1)->get();
@@ -63,7 +63,7 @@ class HomeController extends Controller
     public function contact(Request $request){
 
         $ip = $this->getIp();
-        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $checkIp=DB::table('site_unique_traficip')->where('user_ip',$ip)->get();
         $getLastCount = DB::table('sitealltrafic')->first();
         $data=array();
         $data['count']=$getLastCount->count+1;
@@ -72,7 +72,7 @@ class HomeController extends Controller
             $data1=array();
             $data1['user_ip']=$ip;
             
-            DB::table('site_unique_traficIp')->insert($data1);
+            DB::table('site_unique_traficip')->insert($data1);
         }
 
         $allCategory = DB::table('event_categorys')->where('status',1)->get();
@@ -87,7 +87,7 @@ class HomeController extends Controller
     public function joinOrg(Request $request){
 
         $ip = $this->getIp();
-        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $checkIp=DB::table('site_unique_traficip')->where('user_ip',$ip)->get();
         $getLastCount = DB::table('sitealltrafic')->first();
         $data=array();
         $data['count']=$getLastCount->count+1;
@@ -96,7 +96,7 @@ class HomeController extends Controller
             $data1=array();
             $data1['user_ip']=$ip;
             
-            DB::table('site_unique_traficIp')->insert($data1);
+            DB::table('site_unique_traficip')->insert($data1);
         }
 
         $allCategory = DB::table('event_categorys')->where('status',1)->get();
@@ -111,7 +111,7 @@ class HomeController extends Controller
     public function FAQ(Request $request){
 
         $ip = $this->getIp();
-        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $checkIp=DB::table('site_unique_traficip')->where('user_ip',$ip)->get();
         $getLastCount = DB::table('sitealltrafic')->first();
         $data=array();
         $data['count']=$getLastCount->count+1;
@@ -120,7 +120,7 @@ class HomeController extends Controller
             $data1=array();
             $data1['user_ip']=$ip;
             
-            DB::table('site_unique_traficIp')->insert($data1);
+            DB::table('site_unique_traficip')->insert($data1);
         }
 
         $allCategory = DB::table('event_categorys')->where('status',1)->get();
@@ -135,7 +135,7 @@ class HomeController extends Controller
     public function about(Request $request){
 
         $ip = $this->getIp();
-        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $checkIp=DB::table('site_unique_traficip')->where('user_ip',$ip)->get();
         $getLastCount = DB::table('sitealltrafic')->first();
         $data=array();
         $data['count']=$getLastCount->count+1;
@@ -144,7 +144,7 @@ class HomeController extends Controller
             $data1=array();
             $data1['user_ip']=$ip;
             
-            DB::table('site_unique_traficIp')->insert($data1);
+            DB::table('site_unique_traficip')->insert($data1);
         }
 
         $allCategory = DB::table('event_categorys')->where('status',1)->get();
@@ -159,7 +159,7 @@ class HomeController extends Controller
     public function EventDetails(Request $request,$id){
 
         $ip = $this->getIp();
-        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $checkIp=DB::table('site_unique_traficip')->where('user_ip',$ip)->get();
         $getLastCount = DB::table('sitealltrafic')->first();
         $data=array();
         $data['count']=$getLastCount->count+1;
@@ -168,7 +168,7 @@ class HomeController extends Controller
             $data1=array();
             $data1['user_ip']=$ip;
             
-            DB::table('site_unique_traficIp')->insert($data1);
+            DB::table('site_unique_traficip')->insert($data1);
         }
         $id = base64_decode($id);
         $allCategory = DB::table('event_categorys')->where('status',1)->get();
@@ -211,7 +211,7 @@ class HomeController extends Controller
     public function Events(Request $request){
 
         $ip = $this->getIp();
-        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $checkIp=DB::table('site_unique_traficip')->where('user_ip',$ip)->get();
         $getLastCount = DB::table('sitealltrafic')->first();
         $data=array();
         $data['count']=$getLastCount->count+1;
@@ -220,7 +220,7 @@ class HomeController extends Controller
             $data1=array();
             $data1['user_ip']=$ip;
             
-            DB::table('site_unique_traficIp')->insert($data1);
+            DB::table('site_unique_traficip')->insert($data1);
         }
 
         $allCategory = DB::table('event_categorys')->where('status',1)->get();
@@ -259,7 +259,7 @@ class HomeController extends Controller
     public function CategoryEvent(Request $request,$cat_id){
 
         $ip = $this->getIp();
-        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $checkIp=DB::table('site_unique_traficip')->where('user_ip',$ip)->get();
         $getLastCount = DB::table('sitealltrafic')->first();
         $data=array();
         $data['count']=$getLastCount->count+1;
@@ -268,7 +268,7 @@ class HomeController extends Controller
             $data1=array();
             $data1['user_ip']=$ip;
             
-            DB::table('site_unique_traficIp')->insert($data1);
+            DB::table('site_unique_traficip')->insert($data1);
         }
 
         $cat_id = base64_decode($cat_id);
@@ -300,7 +300,7 @@ class HomeController extends Controller
     public function Organization(Request $request){
 
         $ip = $this->getIp();
-        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $checkIp=DB::table('site_unique_traficip')->where('user_ip',$ip)->get();
         $getLastCount = DB::table('sitealltrafic')->first();
         $data=array();
         $data['count']=$getLastCount->count+1;
@@ -309,7 +309,7 @@ class HomeController extends Controller
             $data1=array();
             $data1['user_ip']=$ip;
             
-            DB::table('site_unique_traficIp')->insert($data1);
+            DB::table('site_unique_traficip')->insert($data1);
         }
 
         $allCategory = DB::table('event_categorys')->where('status',1)->get();
@@ -379,7 +379,7 @@ class HomeController extends Controller
     public function joinSponsor(Request $request){
 
         $ip = $this->getIp();
-        $checkIp=DB::table('site_unique_traficIp')->where('user_ip',$ip)->get();
+        $checkIp=DB::table('site_unique_traficip')->where('user_ip',$ip)->get();
         $getLastCount = DB::table('sitealltrafic')->first();
         $data=array();
         $data['count']=$getLastCount->count+1;
@@ -388,7 +388,7 @@ class HomeController extends Controller
             $data1=array();
             $data1['user_ip']=$ip;
             
-            DB::table('site_unique_traficIp')->insert($data1);
+            DB::table('site_unique_traficip')->insert($data1);
         }
 
         $allCategory = DB::table('event_categorys')->where('status',1)->get();

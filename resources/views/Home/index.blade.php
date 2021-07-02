@@ -19,6 +19,7 @@
                 <h2 class="text-center" style="margin:30px 0px;">Feature Events</h2>
                 <div class="row">
                 @foreach($featureEvents as $key => $feaEvent)
+                <a href="{{ URL::to('/EventDetails/'.base64_encode($feaEvent->id)) }}" class="text-dark">
                     <div class="col-4">
                         <div class="card" style="width: 20rem;">
                             @if($feaEvent->image)
@@ -41,6 +42,7 @@
                             </div>
                         </div>
                     </div>
+                    </a>
                 @endforeach
                     
                 </div>
@@ -100,6 +102,7 @@
                 <h2 class="text-center" style="margin:30px 0px;">Ongoing Events</h2>
                 <div class="row">
                 @foreach($ongoingEvents as $key => $ongEvents)
+                <a href="{{ URL::to('/EventDetails/'.base64_encode($ongEvents->id)) }}" class="text-dark">
                     <div class="col-4">
                         <div class="card" style="width: 20rem;">
                             @if($ongEvents->image)
@@ -115,7 +118,7 @@
                                 <h5 class="card-title" style="height: 80px;overflow: hidden;text-overflow: ellipsis;">{{$ongEvents->event_name}}</h5>
                                 <p class="card-text" style="height: 80px;width: 200px;overflow: hidden;text-overflow: ellipsis;">{{$ongEvents->details}}</p>
                                 @if(session()->has('username'))
-                                <a href="{{ URL::to('/example2/'.base64_encode($ongEvents->id).'/'.base64_encode($ongEvents->orgId)) }}" class="btn btn-primary">Donate Now</a>
+                                <a href="{{ URL::to('/example2/'.base64_encode($ongEvents->id).'/'.base64_encode($ongEvents->orgId).'/'.base64_encode(2)) }}" class="btn btn-primary">Donate Now</a>
                                 @else
                                 <a class="btn btn-primary loginAlert" aria-hidden="true" onclick="" style="color: white;">Donate Now</a>
                                 @endif
@@ -128,6 +131,7 @@
                             </div>
                         </div>
                     </div>
+                    </a>
                 @endforeach
                 </div>
             </div>
