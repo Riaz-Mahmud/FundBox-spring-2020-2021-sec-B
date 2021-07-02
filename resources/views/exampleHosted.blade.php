@@ -44,6 +44,7 @@
                 <input type="hidden" value="{{ $Event->id }}" name="eventId" />
                 <input type="hidden" value="{{ $userid }}" name="userId" />
                 <input type="hidden" value="{{ $orgId }}" name="orgId" />
+                <input type="hidden" value="{{ $type }}" name="type" />
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="firstName">Full name</label>
