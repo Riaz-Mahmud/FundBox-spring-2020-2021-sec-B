@@ -354,7 +354,7 @@ Route::group(['middleware'=>['sess']] , function(){
 
 // SSLCOMMERZ Start
 Route::get('/example1', 'RouteController@exampleEasyCheckout');
-Route::get('/example2/{id}/{orgId}', 'RouteController@exampleHostedCheckout');
+Route::get('/example2/{id}/{orgId}/{type}', 'RouteController@exampleHostedCheckout');
 
 Route::post('/pay', 'RouteController@index');
 Route::post('/pay-via-ajax', 'RouteController@payViaAjax');

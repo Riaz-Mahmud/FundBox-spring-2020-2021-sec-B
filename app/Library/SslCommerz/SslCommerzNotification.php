@@ -450,7 +450,8 @@ class SslCommerzNotification extends AbstractSslCommerz
         $this->data['value_b'] = (isset($info['value_b'])) ? $info['value_b'] : null; // value_b [ string (255)	- Extra parameter to pass your meta data if it is needed. Not mandatory]
         $this->data['value_c'] = (isset($info['value_c'])) ? $info['value_c'] : null; // value_c [ string (255)	- Extra parameter to pass your meta data if it is needed. Not mandatory]
         $this->data['value_d'] = (isset($info['value_d'])) ? $info['value_d'] : null; // value_d [ string (255)	- Extra parameter to pass your meta data if it is needed. Not mandatory]
-
+        $this->data['value_e'] = (isset($info['value_e'])) ? $info['value_e'] : null; // value_e [ string (255)	- Extra parameter to pass your meta data if it is needed. Not mandatory]
+        // dd($info);
         return $this->data;
     }
 }
