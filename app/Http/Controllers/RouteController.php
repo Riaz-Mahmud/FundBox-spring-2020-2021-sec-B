@@ -176,12 +176,12 @@ class RouteController extends Controller
     {
         // dd($request->session()->get('user_id'));cus_email
         $user_data = array();
-        if($request->card_type == "1"){
+        if($request->cus_email == "1"){
             $user_data['eventId'] = $request->value_a;
             $user_data['user_id'] = $request->value_c;
             $user_data['visibleType'] = $request->value_b;
             $user_data['org_id'] = $request->value_d;
-        }elseif($request->card_type == "2"){
+        }elseif($request->cus_email == "2"){
             $user_data['sponsor_id'] = $request->value_a;
             $user_data['user_id'] = $request->value_c;
             $user_data['visibleType'] = "1";
@@ -189,13 +189,7 @@ class RouteController extends Controller
         }
 
         $user_data['amount'] = $request->amount;
-        if($request->card_type == "BKASH-BKash"){
-            $user_data['paymentType'] ='1';
-        }elseif($request->card_type == "NAGAD-Nagad"){
-            $user_data['paymentType'] ='2';
-        }elseif($request->card_type == "DBBLMOBILEB-Dbbl Mobile Banking"){
-            $user_data['paymentType'] ='3';
-        }
+        $user_data['paymentType'] =$request->cus_email;
         $user_data['status'] = '1';
 
         // dd($request->all());
