@@ -209,9 +209,10 @@ Route::group(['middleware'=>['sess']] , function(){
                 Route::get('/manageAccount','Sponsor\AccountController@accountPageShow');
                 Route::get('/applyOrg','Sponsor\OrgController@orgList');
                 Route::post('/applyInOrg','Sponsor\OrgController@applyInOrg');
+                Route::post('/UpdateAppliedInOrg','Sponsor\OrgController@UpdateAppliedInOrg');
                 Route::get('/sponsoredOrgList','Sponsor\OrgController@sponsoredOrgList');
                 Route::get('/pendingOrgList','Sponsor\OrgController@pendingOrgList');
-                Route::get('/pendingOrgList','Sponsor\OrgController@pendingOrgList');
+                Route::get('/ongoingOrgList','Sponsor\OrgController@ongoingOrgList');
             
                 Route::get('/payment', function () {
                     return view('Sponsor.Payment')
