@@ -23,7 +23,7 @@ class OrganizationController extends Controller
 
         $follow = Org_follow:: all();
 
- 
+        
         return view('User.OrganizationDetails')->with('organization', $user)
                                                ->with('followedOrganizations', $follow)
                                                ->with('title', 'Organization Details');

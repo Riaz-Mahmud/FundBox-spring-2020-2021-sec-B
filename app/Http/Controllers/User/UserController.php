@@ -9,21 +9,98 @@ use Illuminate\Support\Facades\DB;
 use App\Report;
 use App\Event;
 use App\Review;
+use App\Event_trans_list;
+use App\User;
 use App\Event_volunteer;
 use App\Http\Requests\ReportRequest;
+use App\Http\Requests\EditProfileRequest;
+use PDF;
 
 class UserController extends Controller
 {
+    public function generateInvoice(Request $req, $id){
+
+       $user_id = $req->session()->get('user_id');
+       $user_email = $req->session()->get('user_email');
+       $user_name = $req->session()->get('full_name');
+       
+      
+       $transition = Event_trans_list::where('id',$id)->first();
+
+       $data = [
+        'transition' =>  $transition,
+        'user_email' =>  $user_email,
+        'user_name' =>  $user_name,
+        'user_id' =>  $user_id,
+       
+        
+    ];
+    $pdf = PDF::loadView('User.Invoice', $data);
+
+    return $pdf->download('fundbox.pdf');
+      
+       
+       
+    
+    }
     public function transitionDetails(Request $req){
         
         $transitionList = DB::table('event_trans_lists')->get();
-        //$req->session()->put('user_id',16);
+        
         $user_id = $req->session()->get('user_id');
+
+       
        
         return view('User.TransitionDetails')->with('transitionList',  $transitionList)
-                                               ->with('user_id', $user_id)
+                                               ->with('user_id',  $user_id)
                                                ->with('title', 'Transition List');
        
+    
+    }
+    public function editProfile(Request $req){
+        
+        return view('User.EditProfile')->with('title', 'Edit Profile');
+       
+    
+       
+    
+    }
+    public function editProfileGetData(Request $req){
+        
+        return User::all();
+       
+    
+    }
+    public function editProfileStoreData(EditProfileRequest $req){
+        
+        $user = new User;
+      
+        $user->name =$req->edited_name; ;
+        $user->username  =$req->edited_username;
+        $user->password = $req->edited_password;
+        $user->email =$req->edited_email;
+        $user->phone =$req->edited_phone;
+        $user->save();
+
+        return ['success'=>true,'message'=>'Updated Successfully'];
+ 
+       
+    
+    }
+    public function editProfileUpdateData(EditProfileRequest $req){
+
+        $user_id = $req->session()->get('user_id');
+
+        $user = User::find($user_id);
+
+        $user->name =$req->edited_name; ;
+        $user->username  =$req->edited_username;
+        $user->password = $req->edited_password;
+        $user->email =$req->edited_email;
+        $user->phone =$req->edited_phone;
+        $user->save();
+        
+        return ['success'=>true,'message'=>'Updated Successfully'];
     
     }
     public function applyVolunteerEvent(Request $req){

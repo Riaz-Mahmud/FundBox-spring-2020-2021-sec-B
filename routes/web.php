@@ -341,10 +341,16 @@ Route::group(['middleware'=>['sess']] , function(){
         Route::get('/user/yourAppliedVolunteerEvents','User\UserController@yourAppliedVolunteerEvents')->name('User.yourAppliedVolunteerEvents');  
         Route::get('/user/cancleVolunteerEvent/{id}','User\UserController@cancleVolunteerEvent')->name('User.cancleVolunteerEvent');  
         Route::post('/user/CategoryWiseEvent','User\EventController@CategoryWiseEvent')->name('User.CategoryWiseEvent');  
+        Route::get('/user/generateInvoice/{id}','User\UserController@generateInvoice')->name('User.generateInvoice');  
         
 
+     ///
 
-
+     
+     Route::get('/user/editProfile','User\UserController@editProfile')->name('User.editProfile');  
+     Route::get('/user/editProfile/getData','User\UserController@editProfileGetData')->name('User.editProfileGetData');  
+     Route::post('/user/editProfile/storeData','User\UserController@editProfileStoreData')->name('User.editProfileStoreData');  
+     Route::post('/user/editProfile/updateData','User\UserController@editProfileUpdateData')->name('User.editProfileUpdateData');  
 
 
 

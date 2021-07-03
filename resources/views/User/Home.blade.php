@@ -21,7 +21,7 @@
                     <div class="row">
                    
                     @foreach ($Events as $Event)
-                   
+                    @if($Event['eventType']==1)
                         <div class="col-lg-3 col-sm-6 col-12 dashboard-users-danger">
                             <div class="card text-center">
                                 <div class="card-content">
@@ -33,11 +33,13 @@
                                         <h5 class="card-title">{{$Event['event_name']}}</h5>
                                         <p class="card-text">{{$Event['details']}}</p>
                                         
-                                         @if($Event['eventType']==1)
-                                            <a href="/user/donation" class="btn btn-primary btn-sm">Donate</a>
-                                        @else
-                                            <a href="{{route('User.applyVolunteerEvent')}}" class="btn btn-primary btn-sm">Apply</a>
-                                        @endif
+                                       
+                                        <a href="{{ URL::to('/example2/'.base64_encode($Event->id).'/'.base64_encode($Event->orgId)) }}" class="btn btn-primary">Donate Now</a>
+                                       
+                                       <br><br>  
+                                       
+                                          
+                                       
 
                                         <a href="/user/review/{{$Event['id']}}" class="btn btn-primary btn-sm">Review</a>
                                         <a href="/user/report/{{$Event['id']}}" class="btn btn-primary btn-sm">Report</a>
@@ -47,7 +49,7 @@
                                 </div>
                             </div>
                         </div>
-                   
+                        @endif
                     @endforeach
                        
                     </div>

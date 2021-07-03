@@ -9,26 +9,7 @@
                         <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon bx bx-menu"></i></a></li>
                     </ul>
                     <ul class="nav navbar-nav bookmark-icons">
-                        <li class="nav-item d-none d-lg-block">
-                            <a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Email">
-                                <i class="ficon bx bx-envelope"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item d-none d-lg-block">
-                            <a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Chat">
-                                <i class="ficon bx bx-chat"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item d-none d-lg-block">
-                            <a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Todo">
-                                <i class="ficon bx bx-check-circle"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item d-none d-lg-block">
-                            <a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Calendar">
-                                <i class="ficon bx bx-calendar-alt"></i>
-                            </a>
-                        </li>
+                       
                     </ul>
                 </div>
                 <ul class="nav navbar-nav float-right">
@@ -40,24 +21,18 @@
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <div class="user-nav d-sm-flex d-none">
-                                <span class="user-name">USER_NAME</span>
-                                <span class="user-status text-muted">USER_EMAIL</span>
+                                <span class="user-name">{{session('username')}}</span>
+                                <span class="user-status text-muted">USER ID: {{session('user_id')}}</span>
                             </div>
                             <span>
                                 <img class="round" src="{{ url('https://cdn0.iconfinder.com/data/icons/some-avatars/200/girlbrownhairsute-512.png') }}" alt="avatar" height="40" width="40">
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right pb-0">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="/user/editProfile">
                                 <i class="bx bx-user mr-50"></i> Edit Profile</a>
-                            <a class="dropdown-item" href="#">
-                                <i class="bx bx-envelope mr-50"></i> My Inbox</a>
-                            <a class="dropdown-item" href="#">
-                                <i class="bx bx-check-square mr-50"></i> Task</a>
-                            <a class="dropdown-item" href="#">
-                                <i class="bx bx-message mr-50"></i> Chats</a>
-                            <div class="dropdown-divider mb-0"></div>
-                            <a class="dropdown-item" href="#">
+                
+                            <a class="dropdown-item" href="/logout">
                                 <i class="bx bx-power-off mr-50"></i> Logout</a>
                         </div>
                     </li>
@@ -123,12 +98,7 @@
                 </a>
             </li>
 
-            <li class="nav-item @if(url('/user/donation') == Request::url()) active @endif">
-                <a class="nav-hover" href="/user/donation">
-                    <i class="bx bxs-city mr-50"></i>
-                    <span class="menu-title" data-i18n="City Manager">Donation</span>
-                </a>
-            </li>
+            
             <li class="nav-item @if(url('/user/reportReply') == Request::url()) active @endif">
                 <a class="nav-hover" href="/user/reportReply">
                     <i class="bx bxs-city mr-50"></i>

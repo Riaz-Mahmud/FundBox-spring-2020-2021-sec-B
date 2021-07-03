@@ -27,6 +27,7 @@
                                 <th>Payment Type</th>
                                 <th>Status</th>
                                 <th>Date</th>
+                                <th> </th>
                             
                             </tr>
                             </thead>
@@ -44,6 +45,7 @@
                                 <td>{{$transition->paymentType}}</td>
                                 <td>{{$transition->status}}</td>
                                 <td>{{$transition->created_at}}</td>
+                                <td><a href = "/user/generateInvoice/{{$transition->id}}" class="btn btn-success float-right py-0">Generate pdf</a></td>
                                 
                             </tr>
                             @endif 
