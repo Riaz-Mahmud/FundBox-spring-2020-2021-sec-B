@@ -27,7 +27,7 @@
         </div>
     </div>
     @endif
-</d>
+</div>
 <div class="event" style="background-color:#F2F4F4;">
     <div class="container" >
         <div class="row" style="padding-top: 20px;padding-bottom:10px;">
@@ -54,13 +54,20 @@
                 <div class="p-4 bg-white rounded shadow-sm" >
                     <div class="pt-0">
                     <h2 class="font-weight-bold">{{$Events->event_name}}</h2>
-                    <p class="font-weight-light text-dark m-0 d-flex align-items-center">
+                   
                         @if($Events->eventType == "1")
-                            Target Money : <b class="h6 text-dark m-0"> BDT {{$Events->targetMoney}} </b>
+                            <p class="font-weight-light text-dark m-0 d-flex align-items-center">
+                            Target Money : <b class="h6 text-dark m-0"> BDT {{ $Events->targetMoney }} </b>
+                            </p>
+                            <p class="font-weight-light text-dark m-0 d-flex align-items-center">
+                            Collect Money: <b class="h6 text-dark m-0"> BDT {{ $totalCollect }} </b>
+                            </p>
                         @elseif($Events->eventType == "2")
+                        <p class="font-weight-light text-dark m-0 d-flex align-items-center">
                             Vanue : <b class="h6 text-dark m-0"> {{$Events->venue}} </b>
+                            </p>
                         @endif
-                    </p>
+                    
                     </div>
                     
                     <div class="details">
