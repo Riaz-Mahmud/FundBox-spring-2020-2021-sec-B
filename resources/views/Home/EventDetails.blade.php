@@ -1,5 +1,33 @@
 @extends('Layout.masterlayout')
 @section('content')
+<div class="users-list-filter">
+    @if(session()->has('error') && !session()->get('error'))
+    <div class="alert alert-success alert-dismissible mb-2" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <div class="d-flex align-items-center">
+            <i class="bx bx-like"></i>
+            <span>
+                {{ session()->get('message') }}
+            </span>
+        </div>
+    </div>
+    @endif
+    @if(session()->has('error') && session()->get('error'))
+    <div class="alert alert-danger alert-dismissible mb-2" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <div class="d-flex align-items-center">
+            <i class="bx bx-error"></i>
+            <span>
+                {{ session()->get('message') }}
+            </span>
+        </div>
+    </div>
+    @endif
+</d>
 <div class="event" style="background-color:#F2F4F4;">
     <div class="container" >
         <div class="row" style="padding-top: 20px;padding-bottom:10px;">
@@ -43,9 +71,9 @@
                         
                         @if(session()->has('username'))
                             @if($Events->eventType == "1")
-                                <a href="{{ URL::to('/example2/'.base64_encode($Events->id).'/'.base64_encode($Events->orgId)) }}" class="btn btn-primary">Donate Now</a>
+                                <a href="{{ URL::to('/example2/'.base64_encode($Events->id).'/'.base64_encode($Events->orgId).'/'.base64_encode(1)) }}" class="btn btn-primary">Donate Now</a>
                             @elseif($Events->eventType == "2")
-                                <a href="#" class="btn btn-primary">Apply Now</a>
+                                <a href="{{ URL::to('/applyForVolunteer/'.$Events->id) }}" class="btn btn-primary">Apply Now</a>
                             @endif
                         @else
                             @if($Events->eventType == "1")
@@ -64,15 +92,15 @@
                 <div class="mb-3">
                 
                     <div class="osahan-slider-item">
-                    <p style="font-size: 18px;text-align: justify;color: black;">{{$Events->details}}</p>
+                    <p style="font-size: 18px;text-align: justify;color: black;">{!!nl2br(str_replace(" ", " &nbsp;", $Events->details))!!}</p>
                     </div>
                 </div>
                 <br>
                 @if(session()->has('username'))
                     @if($Events->eventType == "1")
-                    <a style="width: 80%;" href="{{ URL::to('/example2/'.base64_encode($Events->id).'/'.base64_encode($Events->orgId)) }}" class="btn btn-primary">Donate Now</a>
+                    <a style="width: 80%;" href="{{ URL::to('/example2/'.base64_encode($Events->id).'/'.base64_encode($Events->orgId).'/'.base64_encode(1)) }}" class="btn btn-primary">Donate Now</a>
                     @elseif($Events->eventType == "2")
-                    <a href="#" style="width: 80%;" class="btn btn-primary">Apply Now</a>
+                    <a href="{{ URL::to('/applyForVolunteer/'.$Events->id) }}" style="width: 80%;" class="btn btn-primary">Apply Now</a>
                     @endif
                 @else
                     @if($Events->eventType == "1")

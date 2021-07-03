@@ -82,7 +82,7 @@
                                                     @endif
                                                     </td>
                                                     <td>
-                                                        <b>{{$banner->title}}</b><br>
+                                                        <b>{{$banner->name}}</b><br>
                                                     </td>
                                                     @if($banner->status == "1")
                                                     <td class="text-center" style="width: 5%">

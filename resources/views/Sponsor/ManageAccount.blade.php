@@ -72,16 +72,16 @@
                                             </div>
                                             
                                             <div class="col-12 col-sm-12" style="margin-bottom:10px">
-                                                <p>Name</p>
-                                                <input type="text" class="form-control" value="{{$userInfo -> name}}" name="sm_text" placeholder="Text">
+                                                <p>Username</p>
+                                                <input type="text" class="form-control" value="{{$userInfo ->username}}" name="sm_text" placeholder="Text">
                                             </div>
                                             <div class="col-12 col-sm-12" style="margin-bottom:10px">
                                                 <p>Email</p>
-                                                <input type="text" class="form-control" value="{{$userInfo -> email}}" name="sm_text" placeholder="Text">
+                                                <input type="text" class="form-control" value="{{$userInfo ->email}}" name="sm_text" placeholder="Text">
                                             </div>
                                             <div class="col-12 col-sm-12" style="margin-bottom:10px">
-                                                <p>Phone</p>
-                                                <input type="text" class="form-control" value="{{$userInfo -> name}}" name="sm_text" placeholder="Text">
+                                                <p>Name</p>
+                                                <input type="text" class="form-control" value="{{$userInfo ->name}}" name="sm_text" placeholder="Text">
                                             </div>
                                             
                                             <div class="col-12 col-sm-12" style="margin-top: 10px">

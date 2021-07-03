@@ -16,17 +16,19 @@ class RouteController extends Controller
         
     }
 
-    public function exampleHostedCheckout(Request $request,$id,$orgId)
+    public function exampleHostedCheckout(Request $request,$id,$orgId,$type)
     {
         $userid= $request->session()->get('user_id');
         $eventId = base64_decode($id);
         $orgId = base64_decode($orgId);
-        $Event = DB::table('events')
-        ->where('id', $eventId)->first();
+        $type = base64_decode($type);
+        // $Event = DB::table('events')
+        // ->where('id', $eventId)->first();
 
         return view('exampleHosted')
-        ->with('Event', $Event)
+        ->with('Event', $eventId)
         ->with('orgId', $orgId)
+        ->with('type', $type)
         ->with('userid',$userid);
     }
 
@@ -43,7 +45,7 @@ class RouteController extends Controller
         
         # CUSTOMER INFORMATION
         $post_data['cus_name'] = $request->customer_name;
-        $post_data['cus_email'] = $request->userId;
+        $post_data['cus_email'] = $request->type;
         $post_data['cus_add1'] = 'Customer Address';
         $post_data['cus_add2'] = "";
         $post_data['cus_city'] = "";
@@ -172,24 +174,60 @@ class RouteController extends Controller
 
     public function success(Request $request)
     {
-        // dd($request->session()->get('user_id'));
-        $user_data = array();
-        $user_data['eventId'] = $request->value_a;
-        $user_data['user_id'] = $request->value_c;
-        $user_data['amount'] = $request->amount;
-        $user_data['visibleType'] = $request->value_b;
-        $user_data['org_id'] = $request->value_d;
-        if($request->card_type == "BKASH-BKash"){
-            $user_data['paymentType'] ='1';
-        }elseif($request->card_type == "NAGAD-Nagad"){
-            $user_data['paymentType'] ='2';
-        }elseif($request->card_type == "DBBLMOBILEB-Dbbl Mobile Banking"){
-            $user_data['paymentType'] ='3';
-        }
-        $user_data['status'] = '1';
+        // dd($request->session()->get('user_id'));cus_email
 
-        // dd($request->all());
-        $insert_user = DB::table('event_trans_lists')->insert($user_data);
+        
+
+        
+
+        echo "Transaction is Successful";
+
+        $tran_id = $request->input('tran_id');
+        $amount = $request->input('amount');
+        $currency = $request->input('currency');
+
+        $sslc = new SslCommerzNotification();
+
+        #Check order status in order tabel against the transaction id or order id.
+        $order_detials = DB::table('orders')
+            ->where('transaction_id', $tran_id)
+            ->select('transaction_id', 'status', 'currency', 'amount')->first();
+
+        $order_email = DB::table('orders')
+            ->where('transaction_id', $tran_id)->first();
+            
+
+        if($order_email->email == "1"){
+            $user_data = array();
+            $user_data['eventId'] = $request->value_a;
+            $user_data['user_id'] = $request->value_c;
+            $user_data['visibleType'] = $request->value_b;
+            $user_data['org_id'] = $request->value_d;
+            $user_data['amount'] = $request->amount;
+            $user_data['paymentType'] =$order_email->email;
+            $user_data['status'] = '1';
+            $insert_user = DB::table('event_trans_lists')->insert($user_data);
+        }elseif($order_email->email == "2"){
+            $user_data = array();
+            $user_data['sponsor_id'] = $request->value_a;
+            $user_data['user_id'] = $request->value_c;
+            $user_data['visibleType'] = "1";
+            $user_data['org_id'] = $request->value_d;
+            $user_data['amount'] = $request->amount;
+            $user_data['paymentType'] =$order_email->email;
+            $user_data['status'] = '1';
+            $insert_user = DB::table('event_trans_lists')->insert($user_data);
+        }elseif($order_email->email == "4"){
+            $user_data1 = array();
+            $user_data1['status'] ='6';
+            
+            $udpatedStatus= DB::table('event_trans_lists')
+            ->where('id',$request->value_a)
+            ->update($user_data1);
+            
+            // dd($user_data1);
+        }
+
 
         echo "Transaction is Successful";
 

@@ -28,7 +28,7 @@ Route::get('/joinOrg','User\HomeController@joinOrg');
 Route::post('/joinOrg','User\HomeController@ApplyForOrgAccount');
 Route::get('/joinSponsor','User\HomeController@joinSponsor');
 Route::post('/joinSponsor','User\HomeController@ApplyForSponsor');
-
+Route::get('/applyForVolunteer/{id}','User\HomeController@applyForVolun');
 
 Route::post('/SignIn','LoginController@Login');
 Route::get('/SignIn','LoginController@LoginIndex');
@@ -157,12 +157,15 @@ Route::group(['middleware'=>['sess']] , function(){
             //*****************EDIT EVENTS******************* */
             Route::get('/org/edit/{id}/{type}', 'Org\OrganizationHomeController@edit');
             Route::Post('/org/edit/{id}/{type}', 'Org\OrganizationHomeController@update');
+            Route::Post('/org/edit/statusUpdate','Org\OrganizationHomeController@updatestatus');
+            
             //*****************DELETE EVENTS******************* */
             Route::get('/org/delete/{id}/{type}', 'Org\OrganizationHomeController@delete');
             Route::get('/org/destroy/{id}/{type}', 'Org\OrganizationHomeController@destroy');
+            
 
             //***************** EVENT Transactions******************* */
-            Route::get('/org/eventTransaction', 'Org\OrganizationHomeController@eventTransaction');
+            Route::get('/org/eventTransaction', 'Org\OrganizationHomeController@eventTransaction')->name('org.transaction');
             //*****************CREATE VOLUNTEER EVENTS******************* */
             Route::get('/org/createVolunteerEvent', function () {
                 return view('Organization.CreateVolunteerEvent')
@@ -173,6 +176,8 @@ Route::group(['middleware'=>['sess']] , function(){
             Route::Post('/org/createVolunteerEvent', 'Org\OrganizationHomeController@createVolunteerEvent');
             //*****************EDIT  Volunteer EVENTS******************* */
             Route::get('/org/ManageVolunteerEvent', 'Org\OrganizationHomeController@indexVolunteer')->name('org.volunteereventList');
+             Route::post('/org/ManageVolunteerEvent/updateVolEvent', 'Org\OrganizationHomeController@updateVolEvent');
+
 
             Route::get('/org/SponsorRequest','Org\OrganizationHomeController@reqsponsor' )->name('org.req');
             Route::get('/org/SponsorRequest/{id}','Org\OrganizationHomeController@approvesponsor' )->name('org.approve');
@@ -181,7 +186,7 @@ Route::group(['middleware'=>['sess']] , function(){
             Route::get('/org/RenewSponsor','Org\OrganizationHomeController@renewsponsor' )->name('org.renewsponsorlist');
             Route::get('/org/RenewSponsor/{id}','Org\OrganizationHomeController@renew' )->name('org.renew');
             Route::get('/org/SponsorTransaction','Org\OrganizationHomeController@sponsorTransaction' )->name('org.sponsorTransaction');
-            
+            Route::get('/org/refund/{id}','Org\OrganizationHomeController@RefundMoney' )->name('org.refund');
 
     });
 });
@@ -210,6 +215,7 @@ Route::group(['middleware'=>['sess']] , function(){
                 Route::post('/addAdvertise/delete','Sponsor\AdvertiseController@AddvetiseDelete');
                 Route::post('/manageAccount/delete','Sponsor\AccountController@deleteAccount');
                 Route::get('/manageAccount','Sponsor\AccountController@accountPageShow');
+                Route::get('/allTransactionList','Sponsor\AccountController@allTransactionList');
                 Route::get('/applyOrg','Sponsor\OrgController@orgList');
                 Route::post('/applyInOrg','Sponsor\OrgController@applyInOrg');
                 Route::post('/UpdateAppliedInOrg','Sponsor\OrgController@UpdateAppliedInOrg');
@@ -349,7 +355,7 @@ Route::group(['middleware'=>['sess']] , function(){
 
 // SSLCOMMERZ Start
 Route::get('/example1', 'RouteController@exampleEasyCheckout');
-Route::get('/example2/{id}/{orgId}', 'RouteController@exampleHostedCheckout');
+Route::get('/example2/{id}/{orgId}/{type}', 'RouteController@exampleHostedCheckout');
 
 Route::post('/pay', 'RouteController@index');
 Route::post('/pay-via-ajax', 'RouteController@payViaAjax');

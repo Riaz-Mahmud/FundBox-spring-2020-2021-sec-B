@@ -37,13 +37,13 @@
 
     <div class="row">
         <div class="col-md-8 order-md-1" style="margin: auto;width: 50%;">
-            <h5 class="mb-3">Event Name: {{$Event->event_name}}</h5><br>
             <h4 class="mb-3">Billing address</h4>
             <form action="{{ url('/pay') }}" method="POST" class="needs-validation">
                 <input type="hidden" value="{{ csrf_token() }}" name="_token" />
-                <input type="hidden" value="{{ $Event->id }}" name="eventId" />
+                <input type="hidden" value="{{ $Event }}" name="eventId" />
                 <input type="hidden" value="{{ $userid }}" name="userId" />
                 <input type="hidden" value="{{ $orgId }}" name="orgId" />
+                <input type="hidden" value="{{ $type }}" name="type" />
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="firstName">Full name</label>
