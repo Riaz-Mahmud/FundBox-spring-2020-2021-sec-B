@@ -94,8 +94,7 @@
                                                             <b>{{$pendingOrgList->amount}}</b>
                                                         </td>
                                                         <td>
-                                                            <button type="submit" data-toggle="modal" data-target="#updateModal" class="btn btn-info glow" onclick="updateEvent()">Edit</button>
-                                                            <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Cancel</button>
+                                                         <button type="submit" id="deleteBtn" class="btn btn-danger glow" style="margin-top: 3px"  onclick="deleteEvent()">Cancel</button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -112,103 +111,6 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form class="form-horizontal" id="editBrandForm" action="#" method="POST">
-                @csrf
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"><i class="fa fa-edit"></i> Edit</h4>
-                    </div>
-                    <div style="padding: 10px;">
-                        <div class="form-group row">
-                            <!-- <label class="col-sm-3 control-label">ID: </label> -->
-                            <div class="col-sm-8">
-                                <input type="hidden" class="form-control" id="editPromo_id" placeholder="ID" name="editPromo_id" required>
-                            </div>
-                        </div> 
-                        <!-- /form-group-->
-                        <div class="row">
-                            <label for="editPromoCode" class="col-sm-3 control-label">Code: </label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="editPromoCode" placeholder="Code" name="editPromoCode" required>
-                            </div>
-                        </div> <!-- /form-group-->
-                        <div class="row" style="margin-top:5px">
-                            <label for="editPromoCount" class="col-sm-3 control-label">Count: </label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="editPromoCount" placeholder="Count" name="editPromoCount" required>
-                            </div>
-                        </div> <!-- /form-group-->
-                        <div class="row" style="margin-top:5px">
-                            <label for="editStartDate" class="col-sm-3 control-label">Start: </label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <input type="datetime-local" class="form-control" id="editStartDate" name="editStartDate" autocomplete="off" required>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:5px">
-                            <label for="editEndDate" class="col-sm-3 control-label">End: </label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <input type="datetime-local" class="form-control" id="editEndDate" placeholder="End Date" name="editEndDate" autocomplete="off" required>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:5px">
-                            <label for="editPromoCon" class="col-sm-3 control-label">Conditions: </label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <textarea class="form-control" name="editPromoCon" id="editPromoCon" rows="3" placeholder="Conditions" required></textarea>
-                                <!-- <input type="text" class="form-control" id="editPromoCon" placeholder="Conditions" name="editPromoCon" required> -->
-                            </div>
-                        </div> <!-- /form-group-->
-                        <div class="row" style="margin-top:5px">
-                            <label for="editAmount" class="col-sm-3 control-label">Discount Amount</label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="editAmount" placeholder="Discount Amount" name="editAmount" required>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:5px">
-                            <label for="editMinAmount" class="col-sm-3 control-label">Minimum Purchase Amount</label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="editMinAmount" placeholder="Minimum Purchase Amount" name="editMinAmount" required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label for="edit_promo_type" class="col-sm-3 control-label">Promo type</label>
-                            <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                                <fieldset class="form-group">
-                                    <select name="edit_promo_type" class="form-control" id="edit_promo_type" required>
-                                        <option disabled selected>Select Promo discount type</option>
-                                        <option value="1">Flat</option>
-                                        <option value="2">Percentage</option>
-                                                            
-                                    </select>
-                                </fieldset>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="modal-footer editBrandFooter">
-                        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-                        <button type="submit" class="btn btn-success" id="editBrandBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
-                    </div>
-                <!-- /modal-footer -->
-                </form>
-                <!-- /.form -->
-            </div>
-            <!-- /modal-content -->
-        </div>
-        <!-- /modal-dailog -->
-    </div>
-    <!-- END: Content-->
 
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
