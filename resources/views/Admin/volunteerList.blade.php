@@ -51,55 +51,57 @@
                                     <form action="#" enctype="multipart/form-data" method="POST">
                                         @csrf
                                         <div class="row">
-                                            <h1 class="container p-3 mb-2 bg-secondary text-white">All Volunteer List</h1>
+                                            <h1 class="container">All Volunteer List</h1>
                                             <h5>{{$eventName}}</h5>
-                                            <table class="table table-success table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th>SL</th>
-                                                        <th>User Image</th>
-                                                        <th>User name </th>
-                                                        <th>Phone</th>
-                                                        <th>Status</th>
-                                                        <th>Event Name</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($allVolunteers as $key => $volunteer)
-                                                    <tr>
-                                                        <td>{{$key+1}}</td>
-                                                        <td>
-                                                            @if($volunteer->image)
-                                                                <?php if (file_exists("../public".$volunteer->image)){ ?>
-                                                                    <div class="osahan-slider-item" >
-                                                                        <img src="{{asset($volunteer->image)}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                                    </div>
-                                                                    <?php } else{ ?>
+                                            <div class="table-responsive">
+                                                <table id="seven-item-datatable" class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>SL</th>
+                                                            <th>User Image</th>
+                                                            <th>User name </th>
+                                                            <th>Phone</th>
+                                                            <th>Status</th>
+                                                            <th>Event Name</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($allVolunteers as $key => $volunteer)
+                                                        <tr>
+                                                            <td>{{$key+1}}</td>
+                                                            <td>
+                                                                @if($volunteer->image)
+                                                                    <?php if (file_exists("../public".$volunteer->image)){ ?>
+                                                                        <div class="osahan-slider-item" >
+                                                                            <img src="{{asset($volunteer->image)}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                                        </div>
+                                                                        <?php } else{ ?>
+                                                                        <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                            <img src="https://i.gifer.com/B0eS.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                                        </div>
+                                                                    <?php } ?>
+                                                                @else
                                                                     <div class="osahan-slider-item" style="background-color:#fff;">
-                                                                        <img src="https://i.gifer.com/B0eS.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                                        <img src="https://i.gifer.com/VuKc.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
                                                                     </div>
-                                                                <?php } ?>
+                                                                @endif
+                                                            </td>
+                                                            <td>{{$volunteer->user_name}}</td>
+                                                            <td>{{$volunteer->phone}}</td>
+                                                            @if($volunteer->status==1)
+                                                                <td>Active</td>
                                                             @else
-                                                                <div class="osahan-slider-item" style="background-color:#fff;">
-                                                                    <img src="https://i.gifer.com/VuKc.gif" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                                </div>
+                                                            <td>Deleted</td>
                                                             @endif
-                                                        </td>
-                                                        <td>{{$volunteer->user_name}}</td>
-                                                        <td>{{$volunteer->phone}}</td>
-                                                        @if($volunteer->status==1)
-                                                            <td>Active</td>
-                                                        @else
-                                                        <td>Deleted</td>
-                                                        @endif
-                                                        <td>{{$volunteer->event_name}}</td>
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                                <div class="col-md-12 col-12 overflow-auto">
-                                                    {!! $allVolunteers->links() !!}
-                                                </div>
-                                            </table>
+                                                            <td>{{$volunteer->event_name}}</td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                    <div class="col-md-12 col-12 overflow-auto">
+                                                        {!! $allVolunteers->links() !!}
+                                                    </div>
+                                                </table>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

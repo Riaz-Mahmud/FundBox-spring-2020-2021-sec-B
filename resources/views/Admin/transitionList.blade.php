@@ -51,54 +51,67 @@
                                     <form action="#" enctype="multipart/form-data" method="POST">
                                         @csrf
                                         <div class="row">
-                                            <h1 class="container p-3 mb-2 bg-secondary text-white">All Transition List</h1>
+                                            <h1 class="container">All Transition List</h1>
                                             <h5 class="">{{$eventName}}</h5>
-
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>SL</th>
-                                                        <th>Event Name</th>
-                                                        <th>User Name</th>
-                                                        <th>Amount</th>
-                                                        <th>Others</th>
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($allTransitions as $key => $trans)
-                                                    <tr>
-                                                        <td>{{$key+1}}</td>
-                                                        <td>
-                                                            {{$trans->event_name}}
-                                                        </td>
-                                                        <td>{{$trans->name}}</td>
-                                                        <td>{{$trans->amount}}</td>
-                                                        <td>
-                                                            @if($trans->visibleType == 1)
-                                                                <small> <b>Visible Type: </b> Show</small><br>
-                                                            @elseif($trans->visibleType == 2)
-                                                                <small> <b>Visible Type: </b> Hide</small><br>
-                                                            @endif
-                                                            <small> <b>Date: </b> {{ date("d M, Y",strtotime($trans->created_at))}}</small><br>
-                                                        </td>
-                                                        <td>
-                                                            @if($trans->status == 1)
-                                                                <small> <b>Active</b></small><br>
-                                                            @elseif($trans->status == 2)
-                                                                <small> <b> Refund </b></small><br>
-                                                            @elseif($trans->status == 0)
-                                                                <small> <b> Cancel </b></small><br>
-                                                            @endif
-                                                        </td>
-                                                        
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                                <div class="col-md-12 col-12 overflow-auto">
-                                                    {!! $allTransitions->links() !!}
-                                                </div>
-                                            </table>
+                                            <div class="table-responsive">
+                                                <table id="seven-item-datatable" class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>SL</th>
+                                                            <th>Event Name</th>
+                                                            <th>User Name</th>
+                                                            <th>Amount</th>
+                                                            <th>Others</th>
+                                                            <th>Status</th>
+                                                            <th>Refund</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($allTransitions as $key => $trans)
+                                                        <tr>
+                                                            <td>{{$key+1}}</td>
+                                                            <td>
+                                                                {{$trans->event_name}}
+                                                            </td>
+                                                            <td>{{$trans->name}}</td>
+                                                            <td>{{$trans->amount}}</td>
+                                                            <td>
+                                                                @if($trans->visibleType == 1)
+                                                                    <small> <b>Visible Type: </b> Show</small><br>
+                                                                @elseif($trans->visibleType == 2)
+                                                                    <small> <b>Visible Type: </b> Hide</small><br>
+                                                                @endif
+                                                                <small> <b>Date: </b> {{ date("d M, Y",strtotime($trans->created_at))}}</small><br>
+                                                            </td>
+                                                            <td>
+                                                                @if($trans->status == 1)
+                                                                    <small style="color:blue"> <b>Active</b></small><br>
+                                                                @elseif($trans->status == 5)
+                                                                    <small style="color:red"> <b> Waiting for Refund </b></small><br>
+                                                                @elseif($trans->status == 6)
+                                                                    <small style="color:green"> <b> Refund Done </b></small><br>
+                                                                @elseif($trans->status == 0)
+                                                                    <small > <b> Cancel </b></small><br>
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if($trans->status == 5)
+                                                                <a href="{{ URL::to('/example2/'.base64_encode($trans->id).'/'.base64_encode(0).'/'.base64_encode(4)) }}" class="btn btn-danger">Refund</a>
+                                                                @elseif($trans->status == 6)
+                                                                <a class="btn btn-success" style="color:white">Refund Done</a>
+                                                                @else
+                                                                <a class="btn btn-primary" style="color:white">Not applied</a>
+                                                                @endif
+                                                            </td>
+                                                            
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                    <div class="col-md-12 col-12 overflow-auto">
+                                                        {!! $allTransitions->links() !!}
+                                                    </div>
+                                                </table>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

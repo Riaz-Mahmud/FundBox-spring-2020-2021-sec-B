@@ -28,7 +28,7 @@ Route::get('/joinOrg','User\HomeController@joinOrg');
 Route::post('/joinOrg','User\HomeController@ApplyForOrgAccount');
 Route::get('/joinSponsor','User\HomeController@joinSponsor');
 Route::post('/joinSponsor','User\HomeController@ApplyForSponsor');
-
+Route::get('/applyForVolunteer/{id}','User\HomeController@applyForVolun');
 
 Route::post('/SignIn','LoginController@Login');
 Route::get('/SignIn','LoginController@LoginIndex');

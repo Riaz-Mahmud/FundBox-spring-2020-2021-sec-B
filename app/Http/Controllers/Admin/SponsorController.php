@@ -16,10 +16,13 @@ class SponsorController extends Controller
     public function Index(Request $request){
 
         $pendingSponsor = DB::table('userinfos')
-        ->where('type', 3)
-        ->where('status',2)
+        ->leftJoin('sponsors', 'userinfos.id', '=', 'sponsors.user_id')
+        ->select('userinfos.*', 'sponsors.name AS spoName','sponsors.image AS spoImage','sponsors.startDate','sponsors.endDate','sponsors.details','sponsors.amount')
+        ->where('userinfos.type', 3)
+        ->where('userinfos.status',2)
         ->get();
 
+        // dd($pendingSponsor);
         return view('Admin.SponsorPending')
         ->with('title', 'Pending Sponsor | Admin')
         ->with('pendingSponsor', $pendingSponsor);
@@ -93,9 +96,16 @@ class SponsorController extends Controller
 
     public function ManageIndex(Request $request){
 
+        // $allSponsor = DB::table('userinfos')
+        // ->where('type', 3)
+        // ->where(function($q) {$q->where('status',0)->orwhere('status',1);})
+        // ->paginate(10);
+
         $allSponsor = DB::table('userinfos')
-        ->where('type', 3)
-        ->where(function($q) {$q->where('status',0)->orwhere('status',1);})
+        ->leftJoin('sponsors', 'userinfos.id', '=', 'sponsors.user_id')
+        ->select('userinfos.*', 'sponsors.name AS spoName','sponsors.image AS spoImage','sponsors.startDate','sponsors.endDate','sponsors.details','sponsors.amount')
+        ->where('userinfos.type', 3)
+        ->where(function($q) {$q->where('userinfos.status',0)->orwhere('userinfos.status',1);})
         ->paginate(10);
 
         return view('Admin.SponsorManage')
@@ -174,7 +184,7 @@ class SponsorController extends Controller
 
         $SponsorBanner = DB::table('sponsor_banners')
         ->leftJoin('sponsors', 'sponsor_banners.sponsor_Id', '=', 'sponsors.id')
-        ->select('sponsor_banners.*','sponsors.title')
+        ->select('sponsor_banners.*','sponsors.name')
         ->orderBy('sponsor_banners.id','DESC')
         ->paginate(10);
 

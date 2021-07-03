@@ -21,28 +21,32 @@
                 @foreach($featureEvents as $key => $feaEvent)
                 <a href="{{ URL::to('/EventDetails/'.base64_encode($feaEvent->id)) }}" class="text-dark">
                     <div class="col-4">
-                        <div class="card" style="width: 20rem;">
+                        <div class="card" style="width: 20rem;margin-top:10px;">
                             @if($feaEvent->image)
-                            <?php if (file_exists("../public".$feaEvent->image)){ ?>
-                                <img class="card-img-top" style="height:13.4rem;" src="{{asset($feaEvent->image)}}" alt="Card image cap">
-                            <?php } else{ ?>
-                                <img class="card-img-top" style="height:13.4rem;" src="{{asset('/B0eS.gif')}}" alt="Card image cap">
-                            <?php } ?>
+                                <?php if (file_exists("../public".$feaEvent->image)){ ?>
+                                    <img class="card-img-top" style="height:13.4rem;" src="{{asset($feaEvent->image)}}" alt="Card image cap">
+                                <?php } else{ ?>
+                                    <img class="card-img-top" style="height:13.4rem;" src="{{asset('/B0eS.gif')}}" alt="Card image cap">
+                                <?php } ?>
                             @else
-                            <img class="card-img-top" style="height:13.4rem;" src="{{asset('/B0eS.gif')}}" alt="Card image cap">
+                                <img class="card-img-top" style="height:13.4rem;" src="{{asset('/B0eS.gif')}}" alt="Card image cap">
                             @endif
-                            <div class="card-body">
-                                <h5 class="card-title" style="height: 80px;overflow: hidden;text-overflow: ellipsis;">{{$feaEvent->event_name}}</h5>
-                                <p class="card-text" style="height: 80px;width: 200px;overflow: hidden;text-overflow: ellipsis;">{{$feaEvent->details}}</p>
+                            <div class="card-body" style="text-align: center;">
+                                <h5 class="card-title" style="overflow: hidden;text-overflow: ellipsis;">{{$feaEvent->event_name}}</h5>
+                                <p class="card-text" style="height: 80px;width: 250px;overflow: hidden;text-overflow: ellipsis;">{{$feaEvent->details}}</p>
+                                <!-- <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
+                                </div> -->
+                                <h6 style="margin-top:10px;">Need ৳ {{$feaEvent->targetMoney}}</h6>
                                 @if(session()->has('username'))
-                                <a href="{{ URL::to('/example2/'.base64_encode($feaEvent->id).'/'.base64_encode($feaEvent->orgId).'/'.base64_encode(1)) }}" class="btn btn-primary">Donate Now</a>
+                                <a href="{{ URL::to('/example2/'.base64_encode($feaEvent->id).'/'.base64_encode($feaEvent->orgId)) }}" class="btn btn-primary">Donate Now</a>
                                 @else
-                                <a class="btn btn-primary loginAlert" aria-hidden="true" onclick="" style="color: white;">Donate Now</a>
+                                <a href="#" class="btn btn-primary loginAlert" aria-hidden="true" onclick="" style="color: white;">Donate Now</a>
                                 @endif
                             </div>
                         </div>
                     </div>
-                    </a>
+                </a>
                 @endforeach
                     
                 </div>
@@ -104,34 +108,32 @@
                 @foreach($ongoingEvents as $key => $ongEvents)
                 <a href="{{ URL::to('/EventDetails/'.base64_encode($ongEvents->id)) }}" class="text-dark">
                     <div class="col-4">
-                        <div class="card" style="width: 20rem;">
+                        <div class="card" style="width: 20rem;margin-top:10px;">
                             @if($ongEvents->image)
-                            <?php if (file_exists("../public".$ongEvents->image)){ ?>
-                                <img class="card-img-top" style="height:13.4rem;" src="{{asset($ongEvents->image)}}" alt="Card image cap">
-                            <?php } else{ ?>
-                                <img class="card-img-top" style="height:13.4rem;" src="{{asset('/B0eS.gif')}}" alt="Card image cap">
-                            <?php } ?>
+                                <?php if (file_exists("../public".$ongEvents->image)){ ?>
+                                    <img class="card-img-top" style="height:13.4rem;" src="{{asset($ongEvents->image)}}" alt="Card image cap">
+                                <?php } else{ ?>
+                                    <img class="card-img-top" style="height:13.4rem;" src="{{asset('/B0eS.gif')}}" alt="Card image cap">
+                                <?php } ?>
                             @else
-                            <img class="card-img-top" style="height:13.4rem;" src="{{asset('/B0eS.gif')}}" alt="Card image cap">
+                                <img class="card-img-top" style="height:13.4rem;" src="{{asset('/B0eS.gif')}}" alt="Card image cap">
                             @endif
-                            <div class="card-body">
-                                <h5 class="card-title" style="height: 80px;overflow: hidden;text-overflow: ellipsis;">{{$ongEvents->event_name}}</h5>
-                                <p class="card-text" style="height: 80px;width: 200px;overflow: hidden;text-overflow: ellipsis;">{{$ongEvents->details}}</p>
-                                @if(session()->has('username'))
-                                <a href="{{ URL::to('/example2/'.base64_encode($ongEvents->id).'/'.base64_encode($ongEvents->orgId).'/'.base64_encode(1)) }}" class="btn btn-primary">Donate Now</a>
-                                @else
-                                <a class="btn btn-primary loginAlert" aria-hidden="true" onclick="" style="color: white;">Donate Now</a>
-                                @endif
-                                <!-- <h5 class="card-title">Save Nuhash</h5>
-                                <p class="card-text">A blood donation occurs when a person voluntarily has blood drawn and used for transfusions and/or made into biopharmaceutical medications by a process called fractionation</p>
-                                <div class="progress">
+                            <div class="card-body" style="text-align: center;">
+                                <h5 class="card-title" style="overflow: hidden;text-overflow: ellipsis;">{{$ongEvents->event_name}}</h5>
+                                <p class="card-text" style="height: 80px;width: 250px;overflow: hidden;text-overflow: ellipsis;">{{$ongEvents->details}}</p>
+                                <!-- <div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
-                                </div>
-                                <h6 style="margin-top:10px;"> <b>৳ 6000 raised</b> of ৳ 10000</h6> -->
+                                </div> -->
+                                <h6 style="margin-top:10px;">Need ৳ {{$ongEvents->targetMoney}}</h6>
+                                @if(session()->has('username'))
+                                <a href="{{ URL::to('/example2/'.base64_encode($ongEvents->id).'/'.base64_encode($ongEvents->orgId)) }}" class="btn btn-primary">Donate Now</a>
+                                @else
+                                <a href="#" class="btn btn-primary loginAlert" aria-hidden="true" onclick="" style="color: white;">Donate Now</a>
+                                @endif
                             </div>
                         </div>
                     </div>
-                    </a>
+                </a>
                 @endforeach
                 </div>
             </div>

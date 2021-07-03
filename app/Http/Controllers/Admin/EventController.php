@@ -456,6 +456,7 @@ class EventController extends Controller
         ->leftJoin('events', 'event_trans_lists.eventId', '=', 'events.id')
         ->leftJoin('userinfos', 'event_trans_lists.user_id', '=', 'userinfos.id')
         ->select('event_trans_lists.*', 'events.event_name','userinfos.name')
+        ->where('paymentType',1)
         ->orderBy('id','DESC')
         ->paginate(10);
 
@@ -475,6 +476,7 @@ class EventController extends Controller
         ->leftJoin('userinfos', 'event_trans_lists.user_id', '=', 'userinfos.id')
         ->select('event_trans_lists.*', 'events.event_name','userinfos.name')
         ->where('events.id',$eventId)
+        ->where('paymentType',1)
         ->paginate(10);
 
         $eventName =  DB::table('events')->where('id',$eventId)->first();

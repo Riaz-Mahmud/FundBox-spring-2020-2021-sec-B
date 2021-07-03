@@ -16,7 +16,7 @@ class CreateSponsors extends Migration
         Schema::create('sponsors', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('type')->nullable();
-            $table->text('title');
+            $table->text('name');
             $table->text('details');
             $table->text('startDate');
             $table->text('endDate');

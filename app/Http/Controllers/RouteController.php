@@ -195,24 +195,39 @@ class RouteController extends Controller
 
         $order_email = DB::table('orders')
             ->where('transaction_id', $tran_id)->first();
-            $user_data = array();
+            
 
         if($order_email->email == "1"){
+            $user_data = array();
             $user_data['eventId'] = $request->value_a;
             $user_data['user_id'] = $request->value_c;
             $user_data['visibleType'] = $request->value_b;
             $user_data['org_id'] = $request->value_d;
+            $user_data['amount'] = $request->amount;
+            $user_data['paymentType'] =$order_email->email;
+            $user_data['status'] = '1';
+            $insert_user = DB::table('event_trans_lists')->insert($user_data);
         }elseif($order_email->email == "2"){
+            $user_data = array();
             $user_data['sponsor_id'] = $request->value_a;
             $user_data['user_id'] = $request->value_c;
             $user_data['visibleType'] = "1";
             $user_data['org_id'] = $request->value_d;
+            $user_data['amount'] = $request->amount;
+            $user_data['paymentType'] =$order_email->email;
+            $user_data['status'] = '1';
+            $insert_user = DB::table('event_trans_lists')->insert($user_data);
+        }elseif($order_email->email == "4"){
+            $user_data1 = array();
+            $user_data1['status'] ='6';
+            
+            $udpatedStatus= DB::table('event_trans_lists')
+            ->where('id',$request->value_a)
+            ->update($user_data1);
+            
+            // dd($user_data1);
         }
 
-        $user_data['amount'] = $request->amount;
-        $user_data['paymentType'] =$order_email->email;
-        $user_data['status'] = '1';
-        $insert_user = DB::table('event_trans_lists')->insert($user_data);
 
         echo "Transaction is Successful";
 
