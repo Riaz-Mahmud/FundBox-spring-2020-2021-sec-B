@@ -109,20 +109,20 @@
 <!-- Advertise section End -->
 
 <!-- Sponsored section Start -->
-            <li class=" navigation-header"><span>Sponsorship</span></li>
+            <li class=" navigation-header"><span>Event</span></li>
 
-            <li class="nav-item @if(url('/sp/updateSponsorship') == Request::url()) active @endif">
+            <!-- <li class="nav-item @if(url('/sp/updateSponsorship') == Request::url()) active @endif">
                 <a class="nav-hover" href="/sp/updateSponsorship">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Update Sponsorship</span>
                 </a>
-            </li>
-            <li class="nav-item @if(url('/sp/sponsoredEvents') == Request::url()) active @endif">
+            </li> -->
+            <!-- <li class="nav-item @if(url('/sp/sponsoredEvents') == Request::url()) active @endif">
                 <a class="nav-hover" href="/sp/sponsoredEvents">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Sponsored Events</span>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item @if(url('/sp/allEvents') == Request::url()) active @endif">
                 <a class="nav-hover" href="/events">
                     <i class="bx bx-planet mr-50"></i>
@@ -216,12 +216,12 @@
                     <span class="menu-title" data-i18n="City Manager">Transaction List</span>
                 </a>
             </li>
-            <li class="nav-item @if(url('/sp/siteTraffic') == Request::url()) active @endif">
+            <!-- <li class="nav-item @if(url('/sp/siteTraffic') == Request::url()) active @endif">
                 <a class="nav-hover" href="/sp/siteTraffic">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Site Traffic</span>
                 </a>
-            </li>
+            </li> -->
 <!-- Account section Start -->
         </ul>
     </div>
