@@ -56,39 +56,41 @@
                                             <table class="table table-success table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th>Events</th>
-                                                        <th>Organisation</th>
-                                                        <th>Donated </th>
+                                                        <th>Sl</th>
+                                                        <th>Type</th>
+                                                        <th>Name</th>
+                                                        <th>Details</th>
                                                         <th>Donated amount</th>
                                                     </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>Event 1</td>
-                                                        <td>ORG 1</td>
-                                                        <td>723</td>
-                                                        <td>13566$</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Event 2</td>
-                                                        <td>ORG 2</td>
-                                                        <td>256</td>
-                                                        <td>5000$</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Event 3</td>
-                                                        <td>ORG 3</td>
-                                                        <td>290</td>
-                                                        <td>9056$</td>
-                                                    </tr>
+                                                </thead>
+                                                    @foreach($allTransactionList as $key => $transactionList)
+                                                        <tbody>
                                                             <tr>
-                                                        <td>Event 4</td>
-                                                        <td>ORG 4</td>
-                                                        <td>123</td>
-                                                        <td>6980$</td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
+                                                                <td>{{$key+1}}</td>
+                                                                <td>
+                                                                @if($transactionList->paymentType == 1)
+                                                                        <b>Event</b>
+                                                                @elseif($transactionList->paymentType == 2)
+                                                                        <b>Organisation</b>
+                                                                @elseif($transactionList->paymentType == 3)
+                                                                        <b>Fundbox</b>
+                                                                @endif
+
+                                                                </td>
+                                                                <td>{{$transactionList->event_name}}</td>
+                                                                </td>
+                                                                <td>
+                                                                    @if($transactionList->visibleType == 1)
+                                                                        <small> <b>Visible Type: </b> Show</small><br>
+                                                                    @elseif($transactionList->visibleType == 2)
+                                                                        <small> <b>Visible Type: </b> Hide</small><br>
+                                                                    @endif
+                                                                    <small> <b>Date: </b> {{ date("d M, Y",strtotime($transactionList->created_at))}}</small><br>
+                                                                </td>
+                                                                <td>{{$transactionList->amount}}</td>
+                                                            </tr>
+                                                    @endforeach
+                                            </table>
                                         </div>
                                     </form>
                                 </div>

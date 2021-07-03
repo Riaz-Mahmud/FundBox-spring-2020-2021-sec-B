@@ -50,38 +50,64 @@
                                 <div class="card-body">
                                     <!-- datatable start -->
                                     <div class="">
-                                    <form action="#" enctype="multipart/form-data" method="POST">
+                                    <form action="{{ url('/sp/updateAccount') }}" enctype="multipart/form-data" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-lg-12">
                                                 <input type="text" name="sm_id" value="1" hidden>
                                             </div>
                                             <div class="col-12 col-sm-12 col-lg-12">
+
+                                                        @if($userInfo->image)
+                                                            <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                <img src="{{asset( $userInfo->image )}}" style="width:100%;height:150px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                            </div>
+                                                        @else
+                                                            <div class="osahan-slider-item" style="background-color:#fff;">
+                                                                <img src="{{ url('/images/avatar/avatar.png') }}" style="width:100%;height:150px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                            </div>
+                                                        @endif
                                                     
-                                                        <div class="osahan-slider-item" style="background-color:#fff;">
+                                                        <!-- <div class="osahan-slider-item" style="background-color:#fff;">
                                                             <img src="{{ url('/images/avatar/avatar.png') }}" style="width:100%;height:150px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
-                                                        </div>
+                                                        </div> -->
                                             </div>
                                             <div class="col-12 col-sm-12" style="margin-top:10px">
                                                 <fieldset class="form-group">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="sm_image">
+                                                        <input type="file" class="custom-file-input" value="{{$spInfo ->image}}" id="inputGroupFile02" name="image">
                                                         <label class="custom-file-label" for="inputGroupFile02">Choose image</label>
                                                     </div>
                                                 </fieldset>
                                             </div>
                                             
                                             <div class="col-12 col-sm-12" style="margin-bottom:10px">
-                                                <p>Username</p>
-                                                <input type="text" class="form-control" value="{{$userInfo ->username}}" name="sm_text" placeholder="Text">
+                                                <p>Title</p>
+                                                <input type="text" class="form-control" value="{{$spInfo ->title}}" name="title" placeholder="Text">
                                             </div>
                                             <div class="col-12 col-sm-12" style="margin-bottom:10px">
                                                 <p>Email</p>
-                                                <input type="text" class="form-control" value="{{$userInfo ->email}}" name="sm_text" placeholder="Text">
+                                                <input type="text" class="form-control" value="{{$userInfo ->email}}" name="Email" placeholder="Text" readonly>
+                                            </div>
+                                            <div class="col-12 col-sm-12" style="margin-bottom:10px">
+                                                <p>Phone Number</p>
+                                                <input type="text" class="form-control" value="{{$userInfo ->phone}}" name="Phone" placeholder="Text" >
                                             </div>
                                             <div class="col-12 col-sm-12" style="margin-bottom:10px">
                                                 <p>Name</p>
-                                                <input type="text" class="form-control" value="{{$userInfo ->name}}" name="sm_text" placeholder="Text">
+                                                <input type="text" class="form-control" value="{{$userInfo ->name}}" name="name" placeholder="Text">
+                                            </div>
+                                            <div class="col-12 col-sm-12" style="margin-bottom:10px">
+                                                <p>Details</p>
+                                                <input type="text" class="form-control" value="{{$spInfo ->details}}" name="details" placeholder="Text">
+                                            </div>
+                                            <div class="col-12 col-sm-12" style="margin-bottom:10px">
+                                                <p>First Donated Amonunt</p>
+                                                <input type="text" class="form-control" value="{{$spInfo ->amount}}" name="sm_text" placeholder="Text" readonly>
+                                            </div>
+                                            <div class="col-12 col-sm-12" style="margin-bottom:10px">
+                                                <p>Sponsor Start Date</p>
+                                                <input type="text" class="form-control" value="{{ date('d-M-Y', strtotime($spInfo->created_at )) }}" name="sm_text" placeholder="Text" readonly>
                                             </div>
                                             
                                             <div class="col-12 col-sm-12" style="margin-top: 10px">
@@ -92,7 +118,7 @@
                                         </div>
                                     </form>  
    
-                                    <button type="submit" id="deleteBtn" class="btn btn-block btn-danger glow" style="margin-top: 3px"  onclick="deleteAccount('{{ $userInfo->id }}')">Delete</button>                           
+                                    <button type="submit" id="deleteBtn" class="btn btn-block btn-danger glow" style="margin-top: 3px"  onclick="deleteAccount('{{ $userInfo->id }}')">Delete</button>                          
                                     </div>
                                     <!-- datatable ends -->
                                 </div>

@@ -177,39 +177,45 @@
                 </a>
             </li> -->
 
-            <li class=" navigation-header"><span>Event</span></li>
+            <!-- <li class=" navigation-header"><span>Event</span></li>
             <li class="nav-item has-sub">
                 <a href="#">
                     <i class="bx bxs-package mr-50"></i>
                     <span class="menu-title" data-i18n="Area Coverage">Transaction List</span>
                 </a>
                 <ul class="menu-content">
-                    <li class="nav-item @if(url('/admin/createAdminEvent') == Request::url()) active @endif">
+                    <li class="nav-item @if(url('/sp/allTransactionList') == Request::url()) active @endif">
                         <a class="nav-hover" href="/admin/createAdminEvent">
                             <i class="bx bxs-navigation mr-50"></i>
                             <span class="menu-title" data-i18n="Category Manager">All Transaction</span>
                         </a>
                     </li>
-                    <li class="nav-item @if(url('/admin/createOrgEvent') == Request::url()) active @endif">
+                    <li class="nav-item @if(url('/sp/orgTransactionList') == Request::url()) active @endif">
                         <a class="nav-hover" href="/admin/createOrgEvent">
                             <i class="bx bxs-navigation mr-50"></i>
                             <span class="menu-title" data-i18n="Category Manager">Sponsor transaction</span>
                         </a>
                     </li>
-                    <li class="nav-item @if(url('/admin/createVolunteerEvent') == Request::url()) active @endif">
+                    <li class="nav-item @if(url('/sp/eventTransactionList') == Request::url()) active @endif">
                         <a class="nav-hover" href="/admin/createVolunteerEvent">
                             <i class="bx bxs-navigation mr-50"></i>
                             <span class="menu-title" data-i18n="City Manager">Event Transaction</span>
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
             <!-- <li class="nav-item @if(url('/sp/payment') == Request::url()) active @endif">
                 <a class="nav-hover" href="/sp/payment">
                     <i class="bx bx-planet mr-50"></i>
                     <span class="menu-title" data-i18n="City Manager">Payment</span>
                 </a>
             </li> -->
+            <li class="nav-item @if(url('/sp/allTransactionList') == Request::url()) active @endif">
+                <a class="nav-hover" href="/sp/allTransactionList">
+                    <i class="bx bx-planet mr-50"></i>
+                    <span class="menu-title" data-i18n="City Manager">Transaction List</span>
+                </a>
+            </li>
             <li class="nav-item @if(url('/sp/siteTraffic') == Request::url()) active @endif">
                 <a class="nav-hover" href="/sp/siteTraffic">
                     <i class="bx bx-planet mr-50"></i>

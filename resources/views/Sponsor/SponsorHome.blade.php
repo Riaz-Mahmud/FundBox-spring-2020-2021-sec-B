@@ -21,19 +21,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 col-sm-6 col-12 dashboard-users-danger">
+                        <!-- <div class="col-lg-3 col-sm-6 col-12 dashboard-users-danger">
                             <div class="card text-center">
                                 <div class="card-content">
                                     <div class="card-body py-1">
                                         <div class="badge-circle badge-circle-lg badge-circle-light-warning mx-auto mb-50">
                                             <i class="bx bx-receipt font-medium-5"></i>
                                         </div>
-                                        <div class="text-muted line-ellipsis">Total Orders</div>
+                                        <div class="text-muted line-ellipsis">Total Advertise</div>
                                         <h3 class="mb-0">0.00</h3>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-lg-3 col-sm-6 col-12 dashboard-users-warning">
                             <div class="card text-center">
                                 <div class="card-content">
@@ -41,13 +41,13 @@
                                         <div class="badge-circle badge-circle-lg badge-circle-light-primary mx-auto mb-50">
                                             <i class="bx bxs-error font-medium-5"></i>
                                         </div>
-                                        <div class="text-muted line-ellipsis">Pending Orders</div>
-                                        <h3 class="mb-0">0.00</h3>
+                                        <div class="text-muted line-ellipsis">Site Visitor</div>
+                                        <h3 class="mb-0">{{$totalSiteVisit}}</h3>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-sm-6 col-12 dashboard-users-warning">
+                        <!-- <div class="col-lg-3 col-sm-6 col-12 dashboard-users-warning">
                             <div class="card text-center">
                                 <div class="card-content">
                                     <div class="card-body py-1">
@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </section>
                 <section id="widgets-Statistics">
                     <div class="row">
@@ -90,8 +90,8 @@
                                         <div class="badge-circle badge-circle-lg badge-circle-light-warning mx-auto mb-50">
                                             <i class="bx bx-receipt font-medium-5"></i>
                                         </div>
-                                        <div class="text-muted line-ellipsis">Total Order Amount</div>
-                                        <h3 class="mb-0">৳ 0.00</h3>
+                                        <div class="text-muted line-ellipsis">Total Donated Ammount</div>
+                                        <h3 class="mb-0">৳ {{$totalMoneyCollect}}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                         <div class="badge-circle badge-circle-lg badge-circle-light-primary mx-auto mb-50">
                                             <i class="bx bxs-error font-medium-5"></i>
                                         </div>
-                                        <div class="text-muted line-ellipsis">Pending Orders</div>
+                                        <div class="text-muted line-ellipsis">Donate to Fundbox</div>
                                         <h3 class="mb-0">৳ 0.00</h3>
                                     </div>
                                 </div>
@@ -116,13 +116,13 @@
                                         <div class="badge-circle badge-circle-lg badge-circle-light-success mx-auto mb-50">
                                             <i class="bx bxs-smiley-happy font-medium-5"></i>
                                         </div>
-                                        <div class="text-muted line-ellipsis">Delivered Order Amount</div>
+                                        <div class="text-muted line-ellipsis">Donate to event</div>
                                         <h3 class="mb-0">৳ 0.00</h3>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-sm-6 col-12 dashboard-users-warning">
+                        <!-- <div class="col-lg-3 col-sm-6 col-12 dashboard-users-warning">
                             <div class="card text-center">
                                 <div class="card-content">
                                     <div class="card-body py-1">
@@ -134,10 +134,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </section>
-                <section id="widgets-Statistics">
+                <!-- <section id="widgets-Statistics">
                     <div class="row">
                         <div class="col-12 mt-1 mb-2">
                             <h4>Statistics</h4>
@@ -172,7 +172,7 @@
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> -->
             </div>
         </div>
     </div>

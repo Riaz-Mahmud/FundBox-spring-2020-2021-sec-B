@@ -198,24 +198,23 @@ Route::group(['middleware'=>['sess']] , function(){
 
                 // Route::post('/allAdvertise','Sponsor\AdvertiseController@CreateAdvertise');
                 Route::get('/allAdvertise','Sponsor\AdvertiseController@Show');
+                Route::get('/dashboard','Sponsor\AccountController@dashboard');
 
-                Route::get('/dashboard', function () {
-                    return view('Sponsor.sponsorHome')
-                            ->with('title', 'Home | Sponsor')
-                            ->with('date', date('d-M-Y'));
-                });
-    
                 Route::get('/addAdvertise', function () {
                     return view('Sponsor.addAdvertise')
                             ->with('title', 'Advertise Add | Sponsor');
                 });
+
                 Route::post('/addAdvertise','Sponsor\AdvertiseController@CreateAdd');
                 Route::post('/addAdvertise/updateAddInfo', 'Sponsor\AdvertiseController@UpdateAddInfo');
                 Route::post('/addAdvertise/updateStatus','Sponsor\AdvertiseController@UpdateStatus');
                 Route::post('/addAdvertise/delete','Sponsor\AdvertiseController@AddvetiseDelete');
                 Route::post('/manageAccount/delete','Sponsor\AccountController@deleteAccount');
+                Route::post('/updateAccount','Sponsor\AccountController@updateAccount');
                 Route::get('/manageAccount','Sponsor\AccountController@accountPageShow');
-                Route::get('/allTransactionList','Sponsor\AccountController@allTransactionList');
+                Route::get('/allTransactionList','Sponsor\AccountController@allTransactionList');//all transaction list
+                // Route::get('/orgTransactionList','Sponsor\AccountController@orgTransactionList');//org transaction list
+                // Route::get('/eventTransactionList','Sponsor\AccountController@eventTransactionList');//event transaction list
                 Route::get('/applyOrg','Sponsor\OrgController@orgList');
                 Route::post('/applyInOrg','Sponsor\OrgController@applyInOrg');
                 Route::post('/UpdateAppliedInOrg','Sponsor\OrgController@UpdateAppliedInOrg');
@@ -223,18 +222,14 @@ Route::group(['middleware'=>['sess']] , function(){
                 Route::get('/pendingOrgList','Sponsor\OrgController@pendingOrgList');
                 Route::get('/ongoingOrgList','Sponsor\OrgController@ongoingOrgList');
             
-                Route::get('/payment', function () {
-                    return view('Sponsor.Payment')
-                            ->with('title', 'Payment | Sponsor');
-                });
-                Route::get('/transactionList', function () {
-                    return view('Sponsor.TransactionList')
-                            ->with('title', 'Transaction List | Sponsor');
-                });
-                Route::get('/siteTraffic', function () {
-                    return view('Sponsor.SiteTraffic')
-                            ->with('title', 'Site Traffic | Sponsor');
-                });
+                // Route::get('/payment', function () {
+                //     return view('Sponsor.Payment')
+                //             ->with('title', 'Payment | Sponsor');
+                // });
+                // Route::get('/siteTraffic', function () {
+                //     return view('Sponsor.SiteTraffic')
+                //             ->with('title', 'Site Traffic | Sponsor');
+                // });
                 Route::get('/updateSponsorship', function () {
                     return view('Sponsor.UpdateSponsorship')
                             ->with('title', 'Update | Sponsor');
