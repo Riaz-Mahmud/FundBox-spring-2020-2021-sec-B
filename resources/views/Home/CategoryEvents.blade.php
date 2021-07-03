@@ -72,7 +72,7 @@
                             <div class="card-body" style="text-align: center;">
                                 <h5 class="card-title" style="height: 80px;overflow: hidden;text-overflow: ellipsis;">{{$events->event_name}}</h5>
                                 <p class="card-text" style="height: 80px;width: 250px;overflow: hidden;text-overflow: ellipsis;">{{$events->details}}</p>
-                                <a href="#" class="btn btn-primary">Apply</a>
+                                <a href="{{ URL::to('/applyForVolunteer/'.$vEvents->id) }}" class="btn btn-primary">Apply Now</a>
                             </div>
                         </div>
                     </div>

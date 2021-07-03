@@ -57,6 +57,7 @@
                                                     <th>Image</th>
                                                     <th style="width:30%;">Name</th>
                                                     <th style="width:30%;">Others</th>
+                                                    <th style="width:30%;">Details</th>
                                                     <th>Status</th>
                                                     <th>Options</th>
                                                 </tr>
@@ -66,10 +67,10 @@
                                                 <tr>
                                                     <td>{{1+$key}}</td>
                                                     <td>
-                                                    @if($sponsor->image)
-                                                        <?php if (file_exists("../public".$sponsor->image)){ ?>
+                                                    @if($sponsor->spoImage)
+                                                        <?php if (file_exists("../public".$sponsor->spoImage)){ ?>
                                                             <div class="osahan-slider-item" style="background-color:#fff;">
-                                                                <img src="{{asset($sponsor->image)}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                                                                <img src="{{asset($sponsor->spoImage)}}" style="height:100px;box-shadow:none !important;object-fit:contain;" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
                                                             </div>
                                                             <?php } else{ ?>
                                                             <div class="osahan-slider-item" style="background-color:#fff;">
@@ -83,12 +84,20 @@
                                                     @endif
                                                     </td>
                                                     <td>
-                                                        <b>{{$sponsor->name}}</b><br>
-                                                        <small> <b>username: </b> {{ $sponsor->username }}</small><br>
+                                                        <b>Sponsor: {{$sponsor->spoName}}</b><br>
+                                                        <small> <b>user Name: </b> {{ $sponsor->name }}</small><br>
+                                                        <small> <b>Usename: </b> {{ $sponsor->username }}</small><br>
                                                     </td>
                                                     <td>
-                                                        <small> <b>Contact: </b> {{ $sponsor->phone }}</small><br>
                                                         <small> <b>Email: </b> {{ $sponsor->email }}</small><br>
+                                                        <small> <b>Phone: </b> {{ $sponsor->phone }}</small><br>
+                                                        <small> <b>Amout: </b> {{ $sponsor->amount }}</small><br>
+                                                        <small> <b>Start: </b> {{ date("d M, Y",strtotime($sponsor->startDate))}}</small><br>
+                                                        <small> <b>End: </b> {{ date("d M, Y",strtotime($sponsor->endDate))}}</small><br>
+                                                        
+                                                    </td>
+                                                    <td>
+                                                        <small>{{$sponsor->details}}</small>
                                                     </td>
                                                     @if($sponsor->status == "1")
                                                     <td class="text-center" style="width: 5%">
